@@ -1,2 +1,6 @@
 # Ignore compiled version
 multigm_build/*
+
+# Ignore .data Packages
+multigm/main.data
+gamemodes/Lobby/lobby.data
