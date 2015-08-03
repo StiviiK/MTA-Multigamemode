@@ -3,4 +3,5 @@ multigm_build/*
 
 # Ignore .data Packages
 multigm/main.data
-gamemodes/Lobby/lobby.data
+multigm/gamemodes/Lobby/lobby.data
+multigm/update/update.rpf

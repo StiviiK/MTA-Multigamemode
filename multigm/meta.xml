@@ -19,7 +19,7 @@
 			<script src="shared/classes/TimedPulse.lua" type="shared"/>
 			
 		<!-- Updater -->
-			<script src="update/Updater.lua" type="server"/>
+			<!--script src="update/Updater.lua" type="server"/>
 
 
 		<!-- Server -->
