@@ -11,13 +11,14 @@
 			<script src="shared/classes/Singleton.lua" type="shared"/>
 			<script src="shared/classes/MTAElement.lua" type="shared"/>
 			<script src="shared/classes/Package.lua" type="shared"/>
+			<script src="shared/classes/Hook.lua" type="shared"/>
 			<script src="shared/Cache.lua" type="shared"/>
 
 			<script src="shared/constants.lua" type="shared"/>
 			<script src="shared/async.lua" type="shared"/>
 			<script src="shared/debug.lua" type="shared"/>
 			<script src="shared/classes/TimedPulse.lua" type="shared"/>
-			
+
 		<!-- Updater -->
 			<!--script src="update/Updater.lua" type="server"/>
 
@@ -42,6 +43,7 @@
 
 			<!-- Client -->
 			<script src="client/constants.lua" type="client"/>
+			<script src="client/utils.lua" type="client"/>
 			<script src="client/classes/Core.lua" type="client"/>
 			<script src="client/classes/Provider.lua" type="client"/>
 			<script src="client/classes/Player.lua" type="client"/>
@@ -49,8 +51,10 @@
 			<script src="client/classes/Debugging.lua" type="client"/>
 			<script src="client/classes/Gamemode/GamemodeManager.lua" type="client"/>
 			<script src="client/classes/Gamemode/Gamemode.lua" type="client"/>
+			<script src="client/classes/Gamemode/GamemodePedManager.lua" type="client"/>#
+			<script src="client/classes/Gamemode/GamemodePed.lua" type="client"/>
+			<script src="client/classes/GUI/GUICursor.lua" type="client"/>
 			<script src="client/classes/GUI/Font.lua" type="client"/>
-
 			<script src="client/classes/GUI/GUIForms/LoadingBar.lua" type="client"/>
 
 	    <script src="client/Main.lua" type="client"/>

@@ -11,8 +11,10 @@ function Core:constructor()
 		Debugging:new()
 	end
 
+	GUICursor:new()
 	Provider:new()
 	GamemodeManager:new()
+	GamemodePedManager:new()
 
 	-- Reqeust main.data
 	Provider:getSingleton():requestFile("main.data", bind(Core.ready, self))
