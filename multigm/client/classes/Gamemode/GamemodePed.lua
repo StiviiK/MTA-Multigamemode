@@ -10,6 +10,9 @@ function GamemodePed:constructor(model, position, rotation, dimension, gamemode)
 
   self.m_Ped = Ped.create(self.m_Model, self.m_Position)
   self.m_Ped:setDimension(self.m_Dimension)
+  self.m_Ped:setRotation(self.m_Rotation)
+
+  self.m_Ped:setFrozen(true)
 end
 
 function GamemodePed:destructor()
@@ -26,4 +29,13 @@ function GamemodePed:getPosition()
   return self.m_Position
 end
 
-GamemodePed:new(0, Vector3(0, 0, 3), 0, PRIVATE_DIMENSION_SERVER, GamemodeManager.getFromId(1))
+function GamemodePed:dispatchClick(info)
+  outputTable(info)
+end
+
+--[[
+GamemodePed:new(0, Vector3(0, 0, 3), Vector3(0, 0, 0), PRIVATE_DIMENSION_SERVER, GamemodeManager.getFromId(1))
+GamemodePed:new(134, Vector3(0, 3, 3), Vector3(0, 0, 0), PRIVATE_DIMENSION_SERVER, GamemodeManager.getFromId(1))
+GamemodePed:new(12, Vector3(3, 3, 3), Vector3(0, 0, 0), PRIVATE_DIMENSION_SERVER, GamemodeManager.getFromId(1))
+GamemodePed:new(126, Vector3(3, 0, 3), Vector3(0, 0, 0), PRIVATE_DIMENSION_SERVER, GamemodeManager.getFromId(1))
+]]

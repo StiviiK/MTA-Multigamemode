@@ -77,6 +77,7 @@
 			<file src="files/images/GUI/download.png"/>
 			<file src="files/fonts/Betm-Regular.otf"/>
 			<file src="files/fonts/Betmicua-Regular.otf"/>
+			<transferfile src="files/images/GUI/Mouse.png" />
 			<transferfile src="files/images/skins/0.jpg" />
 			<transferfile src="files/images/skins/1.jpg" />
 			<transferfile src="files/images/skins/2.jpg" />

@@ -29,4 +29,8 @@ function Core:afterLogin()
 end
 
 function Core:destructor()
+	delete(GUICursor:getSingleton())
+	delete(Provider:getSingleton())
+	delete(GamemodeManager:getSingleton())
+	delete(GamemodePedManager:getSingleton())
 end
