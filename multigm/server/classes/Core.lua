@@ -9,7 +9,7 @@ function Core:constructor ()
   -- Important Data
   self.ms_StartTime = getRealTime().timestamp
   self.ms_StartTick = getTickCount()
-  
+
 
   if USE_REMOTE_API then
     -- Instantiate API
@@ -49,13 +49,13 @@ function Core:constructor ()
     outputDebug(("Generating Package for %s..."):format(name:upperFirst()))
 
     local files = {}
-	local xml = xmlLoadFile("meta.xml")
-	for k, v in pairs(xmlNodeGetChildren(xml)) do
-		if xmlNodeGetName(v) == "transferfile" then
-			files[#files+1] = xmlNodeGetAttribute(v, "src")
-		end
-	end
-	
+    local xml = xmlLoadFile(("%s/meta.xml"):format(path))
+    for k, v in pairs(xmlNodeGetChildren(xml)) do
+      if xmlNodeGetName(v) == "transferfile" then
+        files[#files+1] = xmlNodeGetAttribute(v, "src")
+      end
+    end
+
     -- Create Data Package and offer it (On-Demand)
     local fileName = ("%s%s.data"):format(path, name)
     Package.save(fileName, files)

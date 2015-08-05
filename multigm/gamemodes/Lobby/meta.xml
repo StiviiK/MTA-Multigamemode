@@ -1,6 +1,2 @@
 <meta>
-	<transferfile src="gamemodes/Lobby/server/constants.lua"/>
-	<transferfile src="gamemodes/Lobby/server/Main.lua"/>
-	<transferfile src="gamemodes/Lobby/client/constants.lua"/>
-	<transferfile src="gamemodes/Lobby/client/Main.lua"/>
 </meta>

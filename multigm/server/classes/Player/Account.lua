@@ -2,35 +2,35 @@ Account = inherit(Object)
 Account.Map = {}
 
 function Account.login(player, username, password, hashed)
-  if player:getAccount() then return false end
-	if (not username or not password) and not pwhash then return false end
+    if player:getAccount() then return false end
+  	if (not username or not password) and not pwhash then return false end
 
-  local row = sql:asyncQueryFetchSingle("SELECT Id, Salt FROM ??_account WHERE Name = ? ", sql:getPrefix(), username)
-  if not row or not row.Id then
-		-- Error: Invalid username
-		return false
-	end
+    local row = sql:asyncQueryFetchSingle("SELECT Id, Salt FROM ??_account WHERE Name = ? ", sql:getPrefix(), username)
+    if not row or not row.Id then
+  		-- Error: Invalid username
+  		return false
+  	end
 
-  if not hashed then
-		pwhash = sha256(row.Salt..password)
-	end
+    if not hashed then
+  		pwhash = sha256(row.Salt..password)
+  	end
 
-  local row = sql:asyncQueryFetchSingle("SELECT Id, Name FROM ??_account WHERE Id = ? AND Password = ?;", sql:getPrefix(), row.Id, pwhash)
-  if not row or not row.Id then
-  	-- Error: Wrong Password
-  	return false
-  end
+    local row = sql:asyncQueryFetchSingle("SELECT Id, Name FROM ??_account WHERE Id = ? AND Password = ?;", sql:getPrefix(), row.Id, pwhash)
+    if not row or not row.Id then
+    	-- Error: Wrong Password
+    	return false
+    end
 
-  if DatabasePlayer.getFromId(row.Id) then
-  	-- Error: Already in use
-  	return false
-	end
+    if DatabasePlayer.getFromId(row.Id) then
+      -- Error: Already in use
+    	return false
+  	end
 
-  -- Update last serial and last login
-	sql:queryExec("UPDATE ??_account SET LastSerial = ?, LastLogin = NOW() WHERE Id = ?", sql:getPrefix(), player:getSerial(), row.Id)
+    -- Update last serial and last login
+  	sql:queryExec("UPDATE ??_account SET LastSerial = ?, LastLogin = NOW() WHERE Id = ?", sql:getPrefix(), player:getSerial(), row.Id)
 
-  player.m_Account = Account:new(row.Id, row.Name, player, false)
-  player:loadCharacter()
+    player.m_Account = Account:new(row.Id, row.Name, player, false)
+    player:loadCharacter()
 end
 addEvent("accountlogin", true)
 addEventHandler("accountlogin", root, function(...) Async.create(Account.login)(client, ...) end)
@@ -50,12 +50,12 @@ function Account.getFromId(id)
 end
 
 function Account:constructor(id, username, player, guest)
-	-- Account Information
-	self.m_Id = id
-	self.m_Username = username
-	self.m_Player = player
-	player.m_IsGuest = guest;
-	player.m_Id = self.m_Id
+  -- Account Information
+  self.m_Id = id
+  self.m_Username = username
+  self.m_Player = player
+  player.m_IsGuest = guest;
+  player.m_Id = self.m_Id
 
   Account.Map[self.m_Id] = self
 end
@@ -66,7 +66,7 @@ function Account:destructor()
 end
 
 function Account:getId()
-	return self.m_Id;
+  return self.m_Id;
 end
 
 function Account:getPlayer()

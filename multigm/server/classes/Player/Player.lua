@@ -28,7 +28,7 @@ function Player:loadCharacter()
   -- load stuff from DB
   if not self:isGuest() then
     self:load()
-  end  
+  end
 
   -- Load element related stuff
   self:setHealth(self.m_Health)
