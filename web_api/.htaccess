@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteRule ^api API.php? [NC,L,QSA]
+RewriteRule ^api/ API.php? [NC,L,QSA]
