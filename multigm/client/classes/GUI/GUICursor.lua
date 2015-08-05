@@ -27,6 +27,10 @@ function GUICursor:constructor()
   )
 
   addEventHandler("onClientRender", root, bind(GUICursor.drawThis, self))
+
+  bindKey("b", "down", function()
+    showCursor(not isCursorShowing())
+  end)
 end
 
 function GUICursor:destructor()
@@ -37,10 +41,10 @@ end
 function GUICursor:drawThis()
   if self.m_drawCursor then
     local cx, cy = getCursorPosition()
-				if cx then
-					cx, cy = cx * screenX, cy * screenY
-					dxDrawImage(cx-18/2, cy-32/2, 24, 24, "files/images/GUI/Mouse.png", 0, 0, 0, tocolor(255, 255, 255, 255), true)
-				end
+    if cx then
+      cx, cy = cx * screenX, cy * screenY
+      dxDrawImage(cx-18/2, cy-32/2, 24, 24, "files/images/GUI/Mouse.png", 0, 0, 0, tocolor(255, 255, 255, 255), true)
+    end
   end
 end
 

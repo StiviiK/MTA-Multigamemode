@@ -30,12 +30,11 @@ function GamemodePed:getPosition()
 end
 
 function GamemodePed:dispatchClick(info)
+  outputDebug(self:getId())
   outputTable(info)
 end
 
---[[
 GamemodePed:new(0, Vector3(0, 0, 3), Vector3(0, 0, 0), PRIVATE_DIMENSION_SERVER, GamemodeManager.getFromId(1))
 GamemodePed:new(134, Vector3(0, 3, 3), Vector3(0, 0, 0), PRIVATE_DIMENSION_SERVER, GamemodeManager.getFromId(1))
 GamemodePed:new(12, Vector3(3, 3, 3), Vector3(0, 0, 0), PRIVATE_DIMENSION_SERVER, GamemodeManager.getFromId(1))
 GamemodePed:new(126, Vector3(3, 0, 3), Vector3(0, 0, 0), PRIVATE_DIMENSION_SERVER, GamemodeManager.getFromId(1))
-]]

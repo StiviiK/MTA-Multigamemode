@@ -56,6 +56,7 @@ function DatabasePlayer:load()
 		return false
 	end
 
+	-- Set non element related stuff (otherwise just save it)
   self:setMoney(row.Money)
 end
 

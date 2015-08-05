@@ -12,7 +12,7 @@ function GameRooms:virtaul_destructor()
   self.m_Rooms = nil
 end
 
-function GameRooms:newRoom(name)
+function GameRooms:addRoom(name)
   local Id = #self.m_Rooms + 1
   self.m_Rooms[Id] = {id = Id, name = name, players = {}}
 
@@ -29,10 +29,10 @@ function GameRooms:removeRoom(Id)
   end
 end
 
-function GameRooms:addPlayer()
+function GameRooms:addPlayerToRoom()
   -- Todo
 end
 
-function GameRooms:removePlayer()
+function GameRooms:removePlayerFromRoom()
   -- Todo
 end

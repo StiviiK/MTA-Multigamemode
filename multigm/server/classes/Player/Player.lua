@@ -26,11 +26,14 @@ function Player:loadCharacter()
 	self:setName(self:getAccount():getName())
 
   -- load stuff from DB
-  self:load()
+  if not self:isGuest() then
+    self:load()
+  end  
 
   -- Load element related stuff
   self:setHealth(self.m_Health)
   self:setArmor(self.m_Armor)
+  self:setSkin(self.m_Skin)
   self.m_Health, self.m_Armor = nil
 
   -- unfreeze the player

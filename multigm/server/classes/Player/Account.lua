@@ -2,34 +2,34 @@ Account = inherit(Object)
 Account.Map = {}
 
 function Account.login(player, username, password, hashed)
-  if player:getAccount() then return false, "already loggedin" end
-	if (not username or not password) and not pwhash then return false, "Now data?" end
+  if player:getAccount() then return false end
+	if (not username or not password) and not pwhash then return false end
 
   local row = sql:asyncQueryFetchSingle("SELECT Id, Salt FROM ??_account WHERE Name = ? ", sql:getPrefix(), username)
   if not row or not row.Id then
 		-- Error: Invalid username
-		return false, "invalid username"
+		return false
 	end
 
   if not hashed then
 		pwhash = sha256(row.Salt..password)
 	end
 
-  local row = sql:asyncQueryFetchSingle("SELECT Id FROM ??_account WHERE Id = ? AND Password = ?;", sql:getPrefix(), row.Id, pwhash)
+  local row = sql:asyncQueryFetchSingle("SELECT Id, Name FROM ??_account WHERE Id = ? AND Password = ?;", sql:getPrefix(), row.Id, pwhash)
   if not row or not row.Id then
   	-- Error: Wrong Password
-  	return false, "wrong password"
+  	return false
   end
 
   if DatabasePlayer.getFromId(row.Id) then
   	-- Error: Already in use
-  	return false, "already in use"
+  	return false
 	end
 
   -- Update last serial and last login
 	sql:queryExec("UPDATE ??_account SET LastSerial = ?, LastLogin = NOW() WHERE Id = ?", sql:getPrefix(), player:getSerial(), row.Id)
 
-  player.m_Account = Account:new(row.Id, username, player, false)
+  player.m_Account = Account:new(row.Id, row.Name, player, false)
   player:loadCharacter()
 end
 addEvent("accountlogin", true)
@@ -39,6 +39,8 @@ function Account.register()
 end
 
 function Account.guest(player)
+  if player:getAccount() then return false end
+
   player.m_Account = Account:new(0, getRandomUniqueNick(), player, true)
   player:loadCharacter()
 end
