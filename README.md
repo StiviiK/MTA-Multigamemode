@@ -12,6 +12,7 @@ Upcoming features:
   - [x] uses the LUA-Classlib (by sbx320)
   - [ ] Lobby-System (OpenWorld-Lobby)
   - [x] Easy implementation of Gamemodes
+  - [ ] Auto-Updater
   - [ ] Other features comming soon...
 
 ## Developers
