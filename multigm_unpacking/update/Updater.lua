@@ -4,13 +4,13 @@ function Updater.check()
     local files = {"meta.xml"}
     local xml = xmlLoadFile("meta.xml")
     for k, v in pairs(xmlNodeGetChildren(xml)) do
-        if xmlNodeGetName(v) == "script" or xmlNodeGetName(v) == "file" or xmlNodeGetName(v) == "transferfile" or xmlNodeGetName(v) == "metafile" then
+        if xmlNodeGetName(v) == "script" or xmlNodeGetName(v) == "file" or xmlNodeGetName(v) == "transferfile" then
 			files[#files+1] = xmlNodeGetAttribute(v, "src")
 		end
 	end
        
     -- Create Data Package and offer it (On-Demand)
-    Package.save("update/update.rpf", files)
+    Package.save("update.rpf", files)
 end
  
 function Updater.download()
@@ -26,4 +26,8 @@ function Updater.unpack(file)
 	restartResource(getThisResource())
 end
 
-Updater.check()
+addEventHandler("onResourceStart", resourceRoot,
+	function()
+		delay(Updater.unpack, "update/update.rpf")
+	end
+)

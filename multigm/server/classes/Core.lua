@@ -43,7 +43,7 @@ function Core:constructor ()
   -- Generate Download-Package
   local gamemodes = {
     ["main"] = "";
-    ["lobby"] = "gamemodes/Lobby/";
+    ["lobby"] = "gamemodes/Lobby";
   }
   for name, path in pairs(gamemodes) do
     outputDebug(("Generating Package for %s..."):format(name:upperFirst()))
@@ -57,13 +57,18 @@ function Core:constructor ()
     end
 
     -- Create Data Package and offer it (On-Demand)
-    local fileName = ("%s%s.data"):format(path, name)
+    local fileName = ("%s/%s.data"):format(path, name)
     Package.save(fileName, files)
     Provider:getSingleton():offerFile(fileName, PROVIDER_ON_DEMAND)
   end
 end
 
 function Core:destructor ()
+  if DEBUG then
+    delete(Debugging:getSingleton())
+  end
+
+  delete(GamemodeManager:getSingleton())
   delete(PlayerManager:getSingleton())
   delete(sql)
 end
@@ -77,7 +82,7 @@ function Core:onInternalError(error)
 end
 
 function Core:setAPIStatements()
-  if (not self.ms_API) or (not instanceof(self.ms_API, API)) then return end
+  if (not self.ms_API) or (not instanceof(self.ms_API, API, true)) then return end
   local api = self.ms_API
 
   -- Set APIStatements

@@ -1,4 +1,3 @@
--- Extends MTA-Player class
 Player = inherit(MTAElement)
 inherit(DatabasePlayer, Player)
 registerElementClass("player", Player)

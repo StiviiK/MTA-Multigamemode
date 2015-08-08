@@ -20,7 +20,7 @@
 			<script src="shared/classes/TimedPulse.lua" type="shared"/>
 
 		<!-- Updater -->
-			<!--script src="update/Updater.lua" type="server"/>
+			<script src="update/Updater.lua" type="server"/>
 
 
 		<!-- Server -->
@@ -60,6 +60,9 @@
 	    <script src="client/Main.lua" type="client"/>
 
 	<!-- Lobby -->
+		<!-- Meta -->
+			<metafile src="gamemodes/Lobby/meta.xml"/>
+	
 		<!-- Shared -->
 			<script src="gamemodes/Lobby/constants.lua" type="shared"/>
 
