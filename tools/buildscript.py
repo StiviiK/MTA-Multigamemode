@@ -12,7 +12,7 @@ if platform.system() == "Windows":
 rootdir = "multigm/"
 outdir = "multigm_build/"
 
-# Build vrp_build structure
+# Build structure
 def rm_r(path):
     if os.path.isdir(path):
         shutil.rmtree(path)
@@ -21,6 +21,11 @@ def rm_r(path):
 rm_r(outdir)
 os.mkdir(outdir)
 shutil.copytree(rootdir+"files", outdir+"files")
+
+# Copy meta file
+os.mkdir(outdir+"gamemodes")
+os.mkdir(outdir+"gamemodes/Lobby")
+shutil.copyfile(rootdir+"gamemodes/Lobby/meta.xml", outdir+"gamemodes/Lobby/meta.xml")
 
 # Get files
 files = {}
