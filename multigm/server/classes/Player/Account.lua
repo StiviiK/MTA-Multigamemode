@@ -54,9 +54,9 @@ function Account:constructor(id, username, player, guest)
   self.m_Id = id
   self.m_Username = username
   self.m_Player = player
+  self.m_Session = Session:new(player, player:isGuest())
   player.m_IsGuest = guest;
   player.m_Id = self.m_Id
-  player.m_Session = PlayerSession:new(player, player:isGuest())
 
   Account.Map[self.m_Id] = self
 end
@@ -65,8 +65,8 @@ function Account:destructor()
   Account.Map[self.m_Id] = nil
   self.m_Player.m_Account = nil
 
-  delete(player.m_Session)
-  player.m_Session = nil
+  delete(self.m_Session)
+  self.m_Session = nil
 end
 
 function Account:getId()

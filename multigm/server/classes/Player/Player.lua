@@ -14,8 +14,11 @@ function Player:constructor()
 end
 
 function Player:destructor()
-  --self:save()
-  Async.create(DatabasePlayer.save)(self) -- Call asyncronous (to avoid lags if the mysql server is slow)
+  self:save()
+
+  if self:isLoggedIn() then
+    delete(self.m_Account)
+  end  
 end
 
 function Player:loadCharacter()

@@ -1,6 +1,6 @@
-PlayerSession = inherit(Object)
+Session = inherit(Object)
 
-function PlayerSession:constructor(player, isGuest)
+function Session:constructor(player, isGuest)
   local isGuest = isGuest
   if not isGuest then isGuest = false end
   player.m_Session = self
@@ -13,35 +13,35 @@ function PlayerSession:constructor(player, isGuest)
   self:setId(sql:lastInsertId())
 end
 
-function PlayerSession:destructor()
+function Session:destructor()
   sql:queryExec("UPDATE ??_sessions SET `sEnd` = ?, `Valid` = '0' WHERE `Id` = ?;", sql:getPrefix(), getRealTime().timestamp, self:getId())
 end
 
-function PlayerSession:setId(Id)
+function Session:setId(Id)
   self.m_Id = Id
 end
 
-function PlayerSession:getId()
+function Session:getId()
   return self.m_Id
 end
 
-function PlayerSession:setToken(token)
+function Session:setToken(token)
   self.m_Token = token
 end
 
-function PlayerSession:getToken()
+function Session:getToken()
   return self.m_Token
 end
 
-function PlayerSession:setPlayerInfo(info)
+function Session:setPlayerInfo(info)
   self.m_PlayerInfo = info
 end
 
-function PlayerSession:getPlayerInfo()
+function Session:getPlayerInfo()
   return self.m_PlayerInfo
 end
 
-function PlayerSession:updatePlayerInfo(autoUpdate)
+function Session:updatePlayerInfo(autoUpdate)
   if autoUpdate == nil then autoUpdate = true end
 
   self:setPlayerInfo({

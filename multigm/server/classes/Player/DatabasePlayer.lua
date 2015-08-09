@@ -63,7 +63,7 @@ end
 function DatabasePlayer:save()
 	if self:isGuest() then
 		return false
-	end
+	end	
 
   return sql:queryExec("UPDATE ??_character SET Money=? WHERE Id=?;", sql:getPrefix(), self.m_Money, self:getId())
 end
