@@ -54,9 +54,11 @@ function Account:constructor(id, username, player, guest)
   self.m_Id = id
   self.m_Username = username
   self.m_Player = player
-  self.m_Session = Session:new(player, player:isGuest())
-  player.m_IsGuest = guest;
-  player.m_Id = self.m_Id
+  player.m_Account = self
+  player.m_IsGuest = guest
+  player.m_Id = self:getId()
+
+  self.m_Session = Session:new(player)
 
   Account.Map[self.m_Id] = self
 end
@@ -79,4 +81,8 @@ end
 
 function Account:getName()
   return self.m_Username
+end
+
+function Account:getSession()
+  return self.m_Session
 end

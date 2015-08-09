@@ -11,6 +11,7 @@ function Player:constructor()
   self.m_SyncListener = {}
 	self.m_PublicSync = {}
 	self.m_PublicSyncUpdate = {}
+  self.m_JoinTime = getRealTime().timestamp
 end
 
 function Player:destructor()
@@ -18,7 +19,7 @@ function Player:destructor()
 
   if self:isLoggedIn() then
     delete(self.m_Account)
-  end  
+  end
 end
 
 function Player:loadCharacter()

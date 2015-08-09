@@ -1,16 +1,12 @@
 Session = inherit(Object)
 
-function Session:constructor(player, isGuest)
-  local isGuest = isGuest
-  if not isGuest then isGuest = false end
-  player.m_Session = self
-
+function Session:constructor(player)
   self.m_Player = player
   self:setToken(hash("sha256", ("%s%s%s"):format(player:getName(), getRealTime().timestamp, player:getIP())))
-  self:updatePlayerInfo(false)
 
-  sql:queryExec("INSERT INTO ??_sessions (`Id`, `Name`, `Token`, `IP`, `Serial`, `Valid`, `sStart`, `sEnd`, `PlayerInfo`) VALUES (NULL, ?, ?, ?, ?, '1', ?, '0', ?);", sql:getPrefix(), player:getName(), self:getToken(), player:getIP(), player:getSerial(), getRealTime().timestamp, toJSON(self:getPlayerInfo()))
+  sql:queryExec("INSERT INTO ??_sessions (`Id`, `Name`, `Token`, `IP`, `Serial`, `Valid`, `sStart`, `sEnd`) VALUES (NULL, ?, ?, ?, ?, '1', ?, '0');", sql:getPrefix(), player:getName(), self:getToken(), player:getIP(), player:getSerial(), getRealTime().timestamp)
   self:setId(sql:lastInsertId())
+  self:updatePlayerInfo()
 end
 
 function Session:destructor()
@@ -41,11 +37,10 @@ function Session:getPlayerInfo()
   return self.m_PlayerInfo
 end
 
-function Session:updatePlayerInfo(autoUpdate)
-  if autoUpdate == nil then autoUpdate = true end
-
+function Session:updatePlayerInfo()
   self:setPlayerInfo({
     ["username"] = self.m_Player:getName();
+    ["accountname"] = self.m_Player:getAccount():getName();
     ["lastUpdate"] = getRealTime().timestamp;
     ["guestSession"] = self.m_Player:isGuest();
     ["gamemode"] = self.m_Player:getGamemode() and self.m_Player:getGamemode():getId() or 0;
@@ -56,9 +51,8 @@ function Session:updatePlayerInfo(autoUpdate)
     ["interior"] = self.m_Player:getInterior();
     ["dimension"] = self.m_Player:getDimension();
     ["skin"] = self.m_Player:getSkin();
+    ["onlineSince"] = self.m_Player.m_JoinTime;
   })
 
-  if autoUpdate then
-    sql:queryExec("UPDATE ??_sessions SET `PlayerInfo` = ? WHERE `Id` = ?;", sql:getPrefix(), toJSON(self:getPlayerInfo()), self:getId())
-  end
+  sql:queryExec("UPDATE ??_sessions SET `PlayerInfo` = ? WHERE `Id` = ?;", sql:getPrefix(), toJSON(self:getPlayerInfo(), true), self:getId())
 end
