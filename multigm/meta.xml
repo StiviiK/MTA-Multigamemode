@@ -36,6 +36,7 @@
 			<script src="server/classes/Player/Player.lua" type="server"/>
 			<script src="server/classes/Player/PlayerManager.lua" type="server"/>
 			<script src="server/classes/Player/Account.lua" type="server"/>
+			<script src="server/classes/Player/Session.lua" type="server"/>
 			<script src="server/classes/Gamemode/GamemodeManager.lua" type="server"/>
 			<script src="server/classes/Gamemode/Gamemode.lua" type="server"/>
 
@@ -62,7 +63,7 @@
 	<!-- Lobby -->
 		<!-- Meta -->
 			<metafile src="gamemodes/Lobby/meta.xml"/>
-	
+
 		<!-- Shared -->
 			<script src="gamemodes/Lobby/constants.lua" type="shared"/>
 

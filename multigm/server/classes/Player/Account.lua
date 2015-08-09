@@ -56,6 +56,7 @@ function Account:constructor(id, username, player, guest)
   self.m_Player = player
   player.m_IsGuest = guest;
   player.m_Id = self.m_Id
+  player.m_Session = PlayerSession:new(player, player:isGuest())
 
   Account.Map[self.m_Id] = self
 end
@@ -63,6 +64,9 @@ end
 function Account:destructor()
   Account.Map[self.m_Id] = nil
   self.m_Player.m_Account = nil
+
+  delete(player.m_Session)
+  player.m_Session = nil
 end
 
 function Account:getId()
