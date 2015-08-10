@@ -15,5 +15,23 @@ Upcoming features:
   - [ ] Auto-Updater
   - [ ] Other features comming soon...
 
+## Scripting Informations
+#### Edit offline Players
+```lua
+local offlinePlayer, isOffline = DatabasePlayer.get(1) -- Get the offline Player with Id=1
+if isOffline then -- only load when he is offline
+  offlinePlayer:load() -- Load the Data
+end  
+
+-- Do your stuff
+print(offlinePlayer:getMoney()) --> our value from the Database
+offlinePlayer:setMoney(12) --> change money
+  
+-- delete the instance (also saving)
+if isOffline then -- only delete when he is offline (otherwise it will cause problems :P)
+  delete(offlinePlayer)
+end
+```
+
 ## Developers
   - Stefan K. - "StiviK"
