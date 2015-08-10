@@ -36,7 +36,7 @@ function DatabasePlayer:virtual_constructor()
   self.m_Skin     = 0
 	self.m_XP 	    = 0
   self.m_Money    = 0
-	self.m_Gamemode = nil
+	self.m_Gamemode = false
 end
 
 function DatabasePlayer:virtual_destructor()
@@ -63,7 +63,7 @@ end
 function DatabasePlayer:save()
 	if self:isGuest() then
 		return false
-	end	
+	end
 
   return sql:queryExec("UPDATE ??_character SET Money=? WHERE Id=?;", sql:getPrefix(), self.m_Money, self:getId())
 end

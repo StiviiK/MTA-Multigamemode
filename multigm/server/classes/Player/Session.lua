@@ -6,7 +6,7 @@ function Session:constructor(player)
 
   sql:queryExec("INSERT INTO ??_sessions (`Id`, `Name`, `Token`, `IP`, `Serial`, `Valid`, `sStart`, `sEnd`) VALUES (NULL, ?, ?, ?, ?, '1', ?, '0');", sql:getPrefix(), player:getName(), self:getToken(), player:getIP(), player:getSerial(), getRealTime().timestamp)
   self:setId(sql:lastInsertId())
-  self:updatePlayerInfo()
+  self:update()
 end
 
 function Session:destructor()
@@ -19,6 +19,10 @@ end
 
 function Session:getId()
   return self.m_Id
+end
+
+function Session:getPlayer()
+  return self.m_Player
 end
 
 function Session:setToken(token)
@@ -37,13 +41,13 @@ function Session:getPlayerInfo()
   return self.m_PlayerInfo
 end
 
-function Session:updatePlayerInfo()
+function Session:update()
   self:setPlayerInfo({
     ["username"] = self.m_Player:getName();
     ["accountname"] = self.m_Player:getAccount():getName();
     ["lastUpdate"] = getRealTime().timestamp;
     ["guestSession"] = self.m_Player:isGuest();
-    ["gamemode"] = self.m_Player:getGamemode() and self.m_Player:getGamemode():getId() or 0;
+    ["gamemode"] = (self.m_Player:getGamemode() and self.m_Player:getGamemode():getId()) or 0;
     ["health"] = self.m_Player:getHealth();
     ["armor"] = self.m_Player:getArmor();
     ["position"] = {x = self.m_Player:getPosition().x; y = self.m_Player:getPosition().y; z = self.m_Player:getPosition().z};
@@ -51,7 +55,7 @@ function Session:updatePlayerInfo()
     ["interior"] = self.m_Player:getInterior();
     ["dimension"] = self.m_Player:getDimension();
     ["skin"] = self.m_Player:getSkin();
-    ["onlineSince"] = self.m_Player.m_JoinTime;
+    ["onlineSince"] = self.m_Player:getJoinTime();
   })
 
   sql:queryExec("UPDATE ??_sessions SET `PlayerInfo` = ? WHERE `Id` = ?;", sql:getPrefix(), toJSON(self:getPlayerInfo(), true), self:getId())

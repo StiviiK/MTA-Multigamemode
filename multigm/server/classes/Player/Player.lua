@@ -15,7 +15,9 @@ function Player:constructor()
 end
 
 function Player:destructor()
-  self:save()
+  if not self:isGuest() then
+    self:save()
+  end
 
   if self:isLoggedIn() then
     delete(self.m_Account)
@@ -38,6 +40,9 @@ function Player:loadCharacter()
   self:setArmor(self.m_Armor)
   self:setSkin(self.m_Skin)
   self.m_Health, self.m_Armor = nil
+
+  -- Sync important stuff
+  self:setPrivateSync("joinTime", self:getJoinTime())
 
   -- unfreeze the player
   self:setFrozen(false)
@@ -123,6 +128,8 @@ function Player:isActive() return true end
 function Player:getAccount() return self.m_Account end
 function Player:isLoggedIn() return self.m_Id ~= -1	end
 function Player:getGamemode() return self.m_Gamemode end
+function Player:getJoinTime() return self.m_JoinTime end
+function Player:getSession() return (self:getAccount() and self:getAccount():getSession()) end
 
 -- Short setters
 function Player:setGamemode(instance) self.m_Gamemode = instance end

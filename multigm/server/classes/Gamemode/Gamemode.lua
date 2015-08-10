@@ -43,6 +43,9 @@ function Gamemode:addPlayer(player)
 
   -- trigger to the client
   player:triggerEvent("onPlayerGamemodeJoin", player, self:getId())
+
+  -- update the Session
+  player:getSession():update()
 end
 
 function Gamemode:removePlayer(player)
@@ -59,6 +62,9 @@ function Gamemode:removePlayer(player)
 
     -- trigger to the client
     player:triggerEvent("onPlayerGamemodeLeft", player, self:getId())
+
+    -- update the Session
+    player:getSession():update()
   end
 end
 

@@ -67,7 +67,7 @@ function Account:destructor()
   Account.Map[self.m_Id] = nil
   self.m_Player.m_Account = nil
 
-  delete(self.m_Session)
+  delete(self:getSession())
   self.m_Session = nil
 end
 
