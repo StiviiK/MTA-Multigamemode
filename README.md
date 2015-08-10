@@ -33,5 +33,25 @@ if isOffline then -- only delete when he is offline (otherwise it will cause pro
 end
 ```
 
+#### Creating a Gamemode
+gamemodes\Gamemode1\server\constants.lua
+```lua
+Gamemode1 = inherit(Gamemode)
+Gamemode1.ms_Settings = {}
+
+function Gamemode1:getSetting(key)
+  return self.ms_Settings[key]
+end
+```
+
+[server\classes\Gamemode\GamemodeManager.lua#L5](https://github.com/StiviiK/vMultigamemode/blob/develop/multigm/server/classes/Gamemode/GamemodeManager.lua#L5)
+```lua
+local Gamemodes = {
+  Lobby:new("Lobby", "This is the Lobby.")
+  Gamemode1:new("Gamemode1", "This is my Gamemode")
+}
+```
+On Clientside, it's the same way.
+
 ## Developers
   - Stefan K. - "StiviK"
