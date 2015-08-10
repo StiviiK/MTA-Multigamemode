@@ -6,7 +6,7 @@ Feel free to fork this repository and Support me, with my Work :)
   - [x] Completely OpenSource
   - [ ] First stable-build
 
-## Features 
+## Features
 Upcoming features:
   - [x] Completely ObjectOrientated
   - [x] uses the LUA-Classlib (by sbx320)
@@ -14,24 +14,6 @@ Upcoming features:
   - [x] Easy implementation of Gamemodes
   - [ ] Auto-Updater
   - [ ] Other features comming soon...
-
-## Scripting Informations
-#### Edit offline Players
-```lua
-local offlinePlayer, isOffline = DatabasePlayer.get(1) -- Get the offline Player with Id=1
-if isOffline then -- only load when he is offline
-  offlinePlayer:load() -- Load the Data
-end  
-
--- Do your stuff
-print(offlinePlayer:getMoney()) --> our value from the Database
-offlinePlayer:setMoney(12) --> change money
-  
--- delete the instance (also saving)
-if isOffline then -- only delete when he is offline (otherwise it will cause problems :P)
-  delete(offlinePlayer)
-end
-```
 
 #### Creating a Gamemode
 gamemodes\Gamemode1\server\constants.lua
