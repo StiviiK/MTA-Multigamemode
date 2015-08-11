@@ -5,3 +5,4 @@ multigm_build/*
 multigm/main.data
 multigm/gamemodes/Lobby/lobby.data
 multigm/update/update.rpf
+/multigm_localResources.lnk
