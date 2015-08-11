@@ -54,5 +54,5 @@ Important this is all Clientside!
 ```lua
 Provider:getSingleton():requestFile(PATH_TO_FILE, FUNCTION_ON_FINISH)
 ```
-This starts automatically the download (also it creates the downloadbar)
+This starts automatically the download (also it creates the downloadbar)  
 Important: The client cannot request data, which is not offered by the server!
