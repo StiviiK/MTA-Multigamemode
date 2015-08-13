@@ -28,7 +28,7 @@ end
 
 function DatabasePlayer:virtual_constructor()
   self.m_Account  = false
-  self.m_IsGuest  = true
+  self.m_IsGuest  = false
 	self.m_Locale   = "de"
 	self.m_Id       = -1
 	self.m_Health   = 100
@@ -36,7 +36,7 @@ function DatabasePlayer:virtual_constructor()
   self.m_Skin     = 0
 	self.m_XP 	    = 0
   self.m_Money    = 0
-	self.m_Gamemode = false
+	self.m_Gamemode = nil
 end
 
 function DatabasePlayer:virtual_destructor()
@@ -51,12 +51,15 @@ function DatabasePlayer:load()
   end
   DatabasePlayer.Map[self.m_Id] = self
 
-  local row = sql:queryFetchSingle("SELECT Money FROM ??_character WHERE Id = ?;", sql:getPrefix(), self:getId())
+  local row = sql:queryFetchSingle("SELECT Locale, Skin, XP, Money FROM ??_character WHERE Id = ?;", sql:getPrefix(), self:getId())
 	if not row then
 		return false
 	end
 
 	-- Set non element related stuff (otherwise just save it)
+	self:setLocale(row.Locale)
+	self:setXP(row.XP)
+	self:setSkin(row.Skin)
   self:setMoney(row.Money)
 end
 
@@ -65,7 +68,7 @@ function DatabasePlayer:save()
 		return false
 	end
 
-  return sql:queryExec("UPDATE ??_character SET Money=? WHERE Id=?;", sql:getPrefix(), self.m_Money, self:getId())
+  return sql:queryExec("UPDATE ??_character SET Locale=?, Skin=?, XP=?, Money=? WHERE Id=?;", sql:getPrefix(), self:getLocale(), self:getSkin(), self:getXP(), self:getMoney(), self:getId())
 end
 
 -- Short getters
@@ -74,7 +77,11 @@ function DatabasePlayer:isGuest() return self.m_IsGuest end
 function DatabasePlayer:getId() return self.m_Id end
 function DatabasePlayer:getSkin() return self.m_Skin end
 function DatabasePlayer:getMoney() return self.m_Money end
+function DatabasePlayer:getLocale() return self.m_Locale end
+function DatabasePlayer:getXP() return self.m_XP end
 
 -- Short setters
 function DatabasePlayer:setSkin(Id) self.m_Skin = Id if self:isActive() then self:setModel(self.m_Skin) end end
 function DatabasePlayer:setMoney(money) self.m_Money = money if self:isActive() then self:setPrivateSync("Money", self.m_Money) end end
+function DatabasePlayer:setLocale(locale) self.m_Locale = locale if self:isActive() then self:setPublicSync("Locale", self.m_Locale) end end
+function DatabasePlayer:setXP(XP) self.m_XP = xp if self:isActive() then self:setPrivateSync("XP", self.m_XP) end end

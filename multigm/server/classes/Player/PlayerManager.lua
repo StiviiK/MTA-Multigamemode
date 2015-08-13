@@ -27,8 +27,7 @@ function PlayerManager:updatePlayerSync()
 end
 
 function PlayerManager:playerConnect(name)
-	local player = getPlayerFromName(name)
-  enew(player, Player)
+  enew(getPlayerFromName(name), Player)
 end
 
 function PlayerManager:playerJoin()
@@ -42,5 +41,11 @@ end
 
 function PlayerManager:playerReady()
 	showChat(client, true)
-	outputChatBox("Download finished...", client)
+	self:spawnPlayer(client)
+end
+
+function PlayerManager:spawnPlayer(player)
+	player:setDimension(PRIVATE_DIMENSION_SERVER)
+	player:spawn(SPAWN_DEFAULT_POSITION, SPAWN_DEFAULT_ROTATION, SPAWN_DEFAULT_SKIN, SPAWN_DEFAULT_INTERIOR)
+	player:setFrozen(true)
 end
