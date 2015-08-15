@@ -15,11 +15,11 @@ function Player:constructor()
 end
 
 function Player:destructor()
-  if not self:isGuest() then
-    self:save()
-  end
-
   if self:isLoggedIn() then
+    if not self:isGuest() then
+      self:save()
+    end
+
     delete(self.m_Account)
   end
 end
