@@ -30,7 +30,7 @@ function GamemodePed:getPosition()
 end
 
 function GamemodePed:dispatchClick(info)
-  outputDebug(self:getId())
+  table.push(info, "Id", self:getId())
   outputTable(info)
 end
 

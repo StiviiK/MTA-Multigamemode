@@ -53,7 +53,7 @@ function GUICursor:onClick()
   for i, v in pairs(GamemodePedManager.Map) do
     if v.m_Ped == self.m_ClickInfo.element then
       v:dispatchClick(self.m_ClickInfo)
-      return
+      break
     end
   end
 end

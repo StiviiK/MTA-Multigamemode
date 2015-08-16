@@ -162,7 +162,24 @@ function string.upperFirst(self)
 	return ("%s%s"):format(self:sub(1, 1):upper(), self:sub(2, self:len()))
 end
 
- 
+
 function delay(f, ...)
 	setTimer(f, 50, 1, ...)
+end
+
+function table.push(self, ...)
+	local args = {...}
+	local index
+	local v
+	if #args == 1 then
+		index = #self + 1
+		v     = args[1]
+	else
+		index = args[1]
+		v     = args[2]
+	end
+
+	self[index] = v
+
+	return index
 end

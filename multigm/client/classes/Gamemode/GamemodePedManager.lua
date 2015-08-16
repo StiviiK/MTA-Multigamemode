@@ -15,10 +15,7 @@ function GamemodePedManager:destructor()
 end
 
 function GamemodePedManager:addRef(ref)
-  local Id = #GamemodePedManager.Map + 1
-  GamemodePedManager.Map[Id] = ref
-
-  return Id
+  return table.push(GamemodePedManager.Map, ref)
 end
 
 function GamemodePedManager:removeRef(ref)
