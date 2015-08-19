@@ -12,7 +12,7 @@ local lel = function ()
       counter = 0
 
       if withThread then
-        Thread:pause()
+        thisThread:pause()
       end
     end
   end
