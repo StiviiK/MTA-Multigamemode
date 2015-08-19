@@ -183,3 +183,12 @@ function table.push(self, ...)
 
 	return index
 end
+
+_coroutine_resume = coroutine.resume
+function coroutine.resume(...)
+	local state,result = _coroutine_resume(...)
+	if not state then
+		return outputDebugString(tostring(result), 1)	-- Output error message
+	end
+	return state,result
+end

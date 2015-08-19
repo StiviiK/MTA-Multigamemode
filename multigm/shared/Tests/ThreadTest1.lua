@@ -20,7 +20,7 @@ local lel = function (a, b, c)
   end
 end
 
-addCommandHandler("testThread", function (cmd, play, arg)
+addCommandHandler("Thread1", function (cmd, play, arg)
   if arg == "true" then
     withThread = true
   else

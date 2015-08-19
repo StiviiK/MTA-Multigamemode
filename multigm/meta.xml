@@ -19,7 +19,9 @@
 			<script src="shared/async.lua" type="shared"/>
 			<script src="shared/debug.lua" type="shared"/>
 			<script src="shared/classes/TimedPulse.lua" type="shared"/>
-			<script src="shared/Test.lua" type="server"/>
+
+			<script src="shared/Tests/ThreadTest1.lua" type="server"/>
+			<script src="shared/Tests/ThreadTest2.lua" type="server"/>
 
 		<!-- Updater -->
 			<script src="update/Updater.lua" type="server"/>
