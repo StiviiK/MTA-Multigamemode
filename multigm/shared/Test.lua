@@ -1,7 +1,9 @@
 local thisThread
 local withThread = false
 
-local lel = function ()
+local lel = function (a, b, c)
+  print(a, b, c)
+
   local counter = 0
   for i = 1, 100000 do
     print(i)
@@ -30,7 +32,7 @@ addCommandHandler("testThread", function (cmd, play, arg)
     local start = getTickCount()
 
     -- With Threads
-    thisThread = Thread:new(lel)
+    thisThread = Thread:new(lel, 1, 12, 23)
     --thisThread:setPiority(THREAD_PIORITY_HIGHEST)
     thisThread:start()
 
@@ -41,7 +43,7 @@ addCommandHandler("testThread", function (cmd, play, arg)
     local start = getTickCount()
 
     -- Without Threads
-    lel()
+    lel(1, 12, 23)
 
     outputDebug(("Server executed this after %sms."):format(getTickCount()-start))
     outputDebug("The Server cannot while running the loop, do other stuff.")
