@@ -41,8 +41,8 @@ function Thread:resume()
   return coroutine.resume(self:getThread())
 end
 
-function Thread:pause()
-  coroutine.yield()
+function Thread.pause()
+  return coroutine.yield()
 end
 
 function Thread:getStatus()
