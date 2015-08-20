@@ -212,6 +212,7 @@ function bind(func, ...)
 	if not func then
 		if DEBUG then
 			outputConsole(debug.traceback())
+			outputServerLog(debug.traceback())
 		end
 		error("Bad function pointer @ bind. See console for more details")
 	end
@@ -276,7 +277,7 @@ oop.prepareClass = function(name)
 			if not oop.elementInfo[self] and isElement(self) then
 				enew(self, oop.elementClasses[getElementType(self)] or {})
 			end
-			if oop.elementInfo[self][key] ~= nil  then
+			if oop.elementInfo[self] and oop.elementInfo[self][key] ~= nil  then
 				oop.handled = false
 				return oop.elementInfo[self][key]
 			end

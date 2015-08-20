@@ -7,11 +7,10 @@ Thread.Piority = {
   ["low"] = 500;
 }
 
-function Thread:constructor(func, ...)
+function Thread:constructor(func)
   self.m_Id = table.push(Thread.Map, self)
   self.m_Func = func
   self.m_Piority = THREAD_PIORITY_LOW
-  self.m_Args = {...}
   self.ms_Thread = false
   self.ms_Timer = false
 end
@@ -25,9 +24,9 @@ function Thread:destructor()
   end
 end
 
-function Thread:start()
+function Thread:start(...)
   self.ms_Thread = coroutine.create(self.m_Func)
-  self:resume(unpack(self.m_Args))
+  self:resume(...)
 
   self.ms_Timer = setTimer(function()
     if self:getStatus() == COROUTINE_STATUS_SUSPENDED then

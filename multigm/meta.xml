@@ -20,11 +20,8 @@
 			<script src="shared/debug.lua" type="shared"/>
 			<script src="shared/classes/TimedPulse.lua" type="shared"/>
 
-			<script src="shared/Tests/ThreadTest1.lua" type="server"/>
-			<script src="shared/Tests/ThreadTest2.lua" type="server"/>
-
 		<!-- Updater -->
-			<script src="update/Updater.lua" type="server"/>
+			<!-- script src="update/Updater.lua" type="server"/-->
 
 
 		<!-- Server -->
@@ -43,6 +40,8 @@
 			<script src="server/classes/Player/Session.lua" type="server"/>
 			<script src="server/classes/Gamemode/GamemodeManager.lua" type="server"/>
 			<script src="server/classes/Gamemode/Gamemode.lua" type="server"/>
+			<script src="server/classes/Environment/MapManager.lua" type="server"/>
+			<script src="server/classes/Environment/Map.lua" type="server"/>
 
 	    <script src="server/Main.lua" type="server"/>
 

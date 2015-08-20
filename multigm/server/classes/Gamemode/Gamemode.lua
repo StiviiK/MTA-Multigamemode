@@ -76,3 +76,4 @@ end
 
 -- Short getters
 function Gamemode:getName() return self.m_Name end
+function Gamemode:getDimension() return self.m_Dimension end
