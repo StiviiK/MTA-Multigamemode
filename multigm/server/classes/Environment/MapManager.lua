@@ -34,42 +34,38 @@ end
 function MapManager:loadMap(gamemode, name)
   if not self.m_LoadedMaps[name] then return end
   if not self.m_LoadedMaps[name].Parsed then
-    self:parseMapXML(gamemode, name)
+    self.m_LoadedMaps[name] = {Objects = MapManager.parseMapXML(name), Parsed = true}
   end
 
   return Map:new(gamemode, self.m_LoadedMaps[name].Objects)
 end
 
-function MapManager:parseMapXML(Gamemode, filePath)
+function MapManager.parseMapXML(filePath)
   if not fileExists(filePath) then return end
-  if not self.m_LoadedMaps[filePath] then return end
 
-  Objects = {}
+  local Objects = {}
   local xml = XML.load(filePath)
   for k in pairs(xml:getChildren()) do
     local child
     child = xml:findChild("object", k-1)
     if child then
-			local attributes = child:getAttributes()
-			table.insert(Objects, {
-				["model"] = attributes["model"],
-				["posX"] = attributes["posX"],
-				["posY"] = attributes["posY"],
-				["posZ"] = attributes["posZ"],
-				["rotX"] = attributes["rotX"],
-				["rotY"] = attributes["rotY"],
-				["rotZ"] = attributes["rotZ"],
-				["id"] = attributes["id"],
-				["collisions"] = (attributes["collisions"] == "true" and true) or (attributes["collisions"] == "false" and false),
-				["alpha"] = attributes["alpha"],
-				["doublesided"] = (attributes["doublesided"] == "true" and true) or (attributes["doublesided"] == "false" and false),
-				["scale"] = attributes["scale"],
-			})
-		end
+      local attributes = child:getAttributes()
+      table.insert(Objects, {
+        ["model"] = attributes["model"],
+        ["posX"] = attributes["posX"],
+        ["posY"] = attributes["posY"],
+        ["posZ"] = attributes["posZ"],
+        ["rotX"] = attributes["rotX"],
+        ["rotY"] = attributes["rotY"],
+        ["rotZ"] = attributes["rotZ"],
+        ["id"] = attributes["id"],
+        ["collisions"] = (attributes["collisions"] == "true" and true) or (attributes["collisions"] == "false" and false),
+        ["alpha"] = attributes["alpha"],
+        ["doublesided"] = (attributes["doublesided"] == "true" and true) or (attributes["doublesided"] == "false" and false),
+        ["scale"] = attributes["scale"],
+      })
+    end
   end
 
-  self.m_LoadedMaps[filePath] = {
-    Objects = Objects;
-    Parsed = true;
-  }
+  return Objects
 end

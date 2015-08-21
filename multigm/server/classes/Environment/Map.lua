@@ -5,9 +5,7 @@ function Map:constructor(gamemode, objects, int)
   self.m_Gamemode = gamemode
   self.m_LoadedObjects = objects
   self.m_CreatedObjects = {}
-  self.m_Dimension = gamemode:getDimension()
   self.m_Interior = int or 0
-  self.m_Loaded = false
   self.m_Thread = false
 end
 
@@ -25,10 +23,7 @@ function Map:load(piority)
   elseif piority == MAP_LOADING_NORMAL then
     self:getThread():setPiority(THREAD_PIORITY_HIGH)
   end
-
-  local startTime = getTickCount()
-  outputDebug(("[MapManager] Starting loading Map Id: %d... (%d Objects)"):format(self:getId(), #self.m_LoadedObjects))
-  self:getThread():start(piority, startTime)
+  self:getThread():start(piority)
 end
 
 function Map:unload()
@@ -36,10 +31,9 @@ function Map:unload()
   self.m_Thread = Thread:new(bind(Map.removeObjects, self))
   self:getThread():setPiority(THREAD_PIORITY_HIGHEST)
   self:getThread():start()
-  --self:removeObjects()
 end
 
-function Map:AsyncCreateObjects(piority, startTime)
+function Map:AsyncCreateObjects(piority)
   local tmpCounter
   if piority == MAP_LOADING_FAST then
     tmpCounter = 0
@@ -47,7 +41,7 @@ function Map:AsyncCreateObjects(piority, startTime)
 
   for i, v in ipairs(self.m_LoadedObjects) do
     local obj = createObject(v.model, Vector3(v.posX, v.posY, v.posZ), Vector3(v.rotX, v.rotY, v.rotZ))
-    obj:setDimension(self.m_Dimension)
+    obj:setDimension(self.m_Gamemode:getDimension())
     obj:setID(v.id)
     obj:setAlpha(v.alpha)
     obj:setDoubleSided(v.doublesided)
@@ -66,7 +60,6 @@ function Map:AsyncCreateObjects(piority, startTime)
     end
   end
 
-  outputDebug(("[MapManager] Finished loading Map Id: %d. (Took: %dms)"):format(self:getId(), getTickCount()-startTime))
   self.m_Thread = nil
 end
 
@@ -75,8 +68,10 @@ function Map:removeObjects()
     --outputDebug(("[MapManager] Removing Object for Map Id: %d (Id: %s)"):format(self:getId(), v:getID()))
 
     v:destroy()
-    --Thread.pause()
+    Thread.pause()
   end
+
+  self.m_Thread = nil
 end
 
 -- Short getters
