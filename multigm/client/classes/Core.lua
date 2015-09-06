@@ -11,8 +11,6 @@ function Core:constructor()
 		Debugging:new()
 	end
 
-	_ = function (string) return string end
-
 	Cursor = GUICursor:new()
 	Provider:new()
 	GamemodeManager:new()
@@ -31,6 +29,7 @@ function Core:afterLogin()
 end
 
 function Core:destructor()
+	delete(Cursor)
 	delete(Provider:getSingleton())
 	delete(GamemodeManager:getSingleton())
 	delete(GamemodePedManager:getSingleton())
