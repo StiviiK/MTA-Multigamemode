@@ -1,6 +1,7 @@
 -- ****************************************************************************
 -- *
--- *  PROJECT:     vRoleplay
+-- *  PROJECT:     vMultigamemode
+-- *  SOURCE FROM: vRoleplay (Jusonex + sbx320)
 -- *  FILE:        client/classes/DxElement.lua
 -- *  PURPOSE:     Dx element super class
 -- *

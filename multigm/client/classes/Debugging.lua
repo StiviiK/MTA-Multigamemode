@@ -1,3 +1,10 @@
+-- ****************************************************************************
+-- *
+-- *  PROJECT:     vMultigamemode
+-- *  FILE:        client/classes/Debugging.lua
+-- *  PURPOSE:     Clientside Debugging class
+-- *
+-- ****************************************************************************
 local CEF_DEBUG = false
 
 Debugging = inherit(Singleton)

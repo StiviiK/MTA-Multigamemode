@@ -1,6 +1,7 @@
 -- ****************************************************************************
 -- *
--- *  PROJECT:     vRoleplay
+-- *  PROJECT:     vMultigamemode
+-- *  SOURCE FROM: vRoleplay (Jusonex + sbx320)
 -- *  FILE:        client/classes/GUI/GUIMouseMenu.lua
 -- *  PURPOSE:     GUI label class
 -- *
@@ -11,7 +12,7 @@ function GUIMouseMenu:constructor(posX, posY, width, height, parent)
 	checkArgs("GUIMouseMenu:constructor", "number", "number", "number", "number")
 
 	GUIElement.constructor(self, posX, posY, width, height, parent)
-	
+
 	self.m_Items   = {}
 	self.m_Element = nil
 end
@@ -30,9 +31,9 @@ function GUIMouseMenu:addItem(text, callback)
 	else
 		item = GUIMouseMenuNoClickItem:new(0, 0 + #self.m_Items*35, self.m_Width, 35, text, self)
 	end
-	
+
 	table.insert(self.m_Items, item)
-	
+
 	return item
 end
 

@@ -1,6 +1,7 @@
 -- ****************************************************************************
 -- *
--- *  PROJECT:     vRoleplay
+-- *  PROJECT:     vMultigamemode
+-- *  SOURCE FROM: vRoleplay (Jusonex + sbx320)
 -- *  FILE:        client/classes/GUIElements/KarmaBar.lua
 -- *  PURPOSE:     Special progressbar which supports positive as well as negative values
 -- *
@@ -10,7 +11,7 @@ inherit(DxElement, KarmaBar)
 
 function KarmaBar:constructor()
 	GUIElement.constructor(self, screenWidth/2-(screenWidth*0.31)/2 / ASPECT_RATIO_MULTIPLIER, screenHeight*0.01, screenWidth*0.31 / ASPECT_RATIO_MULTIPLIER, screenHeight*0.03)
-	
+
 	self:setVisible(false)
 end
 

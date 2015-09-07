@@ -1,6 +1,7 @@
 -- ****************************************************************************
 -- *
--- *  PROJECT:     vRoleplay
+-- *  PROJECT:     vMultigamemode
+-- *  SOURCE FROM: vRoleplay (Jusonex + sbx320)
 -- *  FILE:        client/classes/CacheArea.lua
 -- *  PURPOSE:     Cached area class
 -- *

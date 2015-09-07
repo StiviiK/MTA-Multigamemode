@@ -1,6 +1,7 @@
 -- ****************************************************************************
 -- *
--- *  PROJECT:     vRoleplay
+-- *  PROJECT:     vMultigamemode
+-- *  SOURCE FROM: vRoleplay (Jusonex + sbx320)
 -- *  FILE:        client/classes/GUIElements/VRPFont.lua
 -- *  PURPOSE:     Not actually a GUI Element but useful for proper font sizes
 -- *

@@ -1,3 +1,10 @@
+-- ****************************************************************************
+-- *
+-- *  PROJECT:     vMultigamemode
+-- *  FILE:        client/classes/Provider.lua
+-- *  PURPOSE:     Clientside-Provider class
+-- *
+-- ****************************************************************************
 Provider = inherit(Singleton)
 
 function Provider:constructor()

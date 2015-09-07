@@ -1,6 +1,7 @@
 -- ****************************************************************************
 -- *
--- *  PROJECT:     vRoleplay
+-- *  PROJECT:     vMultigamemode
+-- *  SOURCE FROM: vRoleplay (Jusonex + sbx320)
 -- *  FILE:        client/classes/GUI/GUITabControl.lua
 -- *  PURPOSE:     GUI Tab Control
 -- *  NOTE:		   You can access individual tabs by using Tabpanel[Tabid]
@@ -12,7 +13,7 @@ GUITabControl = inherit(GUIElement)
 function GUITabControl:constructor(posX, posY, width, height, parent)
 	checkArgs("GUITabControl:constructor", "number", "number", "number", "number")
 	self.m_CurrentTab = false
-	
+
 	GUIElement.constructor(self, posX, posY, width, height, parent)
 end
 
@@ -22,11 +23,11 @@ function GUITabControl:setTab(id)
 	end
 	self[id]:setVisible(true)
 	self.m_CurrentTab = id
-	
+
 	if self.onTabChanged then
 		self.onTabChanged(id)
 	end
-	
+
 	return self
 end
 

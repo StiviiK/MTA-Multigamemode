@@ -1,6 +1,7 @@
 -- ****************************************************************************
 -- *
--- *  PROJECT:     vRoleplay
+-- *  PROJECT:     vMultigamemode
+-- *  SOURCE FROM: vRoleplay (Jusonex + sbx320)
 -- *  FILE:        client/classes/GUI/GUIInputControl.lua
 -- *  PURPOSE:     Static Class for handling text input for CGUIEdit ( + maybe later more )
 -- *

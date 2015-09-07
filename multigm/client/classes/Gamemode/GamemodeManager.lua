@@ -1,3 +1,10 @@
+-- ****************************************************************************
+-- *
+-- *  PROJECT:     vMultigamemode
+-- *  FILE:        client/classes/Gamemode/GamemodeManager.lua
+-- *  PURPOSE:     GamemodeManager class
+-- *
+-- ****************************************************************************
 GamemodeManager = inherit(Singleton)
 GamemodeManager.Map = {}
 

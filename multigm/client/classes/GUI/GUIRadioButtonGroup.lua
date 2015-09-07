@@ -1,6 +1,7 @@
 -- ****************************************************************************
 -- *
--- *  PROJECT:     vRoleplay
+-- *  PROJECT:     vMultigamemode
+-- *  SOURCE FROM: vRoleplay (Jusonex + sbx320)
 -- *  FILE:        client/classes/GUI/GUIRadioButtonGroup.lua
 -- *  PURPOSE:     GUI image class
 -- *
@@ -9,9 +10,9 @@ GUIRadioButtonGroup = inherit(GUIElement)
 
 function GUIRadioButtonGroup:constructor(posX, posY, width, height, parent)
 	--checkArgs("GUIRadioButtonGroup:constructor", "number", "number", "number", "number")
-	
+
 	GUIElement.constructor(self, posX, posY, width, height, parent)
-	
+
 	self.m_CheckedRadio = false
 end
 
@@ -26,6 +27,6 @@ function GUIRadioButtonGroup:setCheckedRadioButton(radio)
 		if radio ~= v then
 			v:setChecked(false)
 		end
-	end	
+	end
 	return self
 end

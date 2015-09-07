@@ -1,6 +1,7 @@
 -- ****************************************************************************
 -- *
--- *  PROJECT:     vRoleplay
+-- *  PROJECT:     vMultigamemode
+-- *  SOURCE FROM: vRoleplay (Jusonex + sbx320)
 -- *  FILE:        client/classes/GUI/abstract/GUIColorable.lua
 -- *  PURPOSE:     GUI colorable abstract super class
 -- *
@@ -19,7 +20,7 @@ function GUIColorable:setColor(color)
 	assert(type(color) == "number", "Bad argument @ GUIColorable.setColor")
 
 	self.m_Color = color
-	self:anyChange()	
+	self:anyChange()
 	return self
 end
 

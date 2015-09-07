@@ -1,6 +1,7 @@
 -- ****************************************************************************
 -- *
--- *  PROJECT:     vRoleplay
+-- *  PROJECT:     vMultigamemode
+-- *  SOURCE FROM: vRoleplay (Jusonex + sbx320)
 -- *  FILE:        client/classes/GUI/GUIScrollableText.lua
 -- *  PURPOSE:     GUI sscrollable text; Use it only if you have to
 -- *               It's necessary to manually add line breaks (atm)

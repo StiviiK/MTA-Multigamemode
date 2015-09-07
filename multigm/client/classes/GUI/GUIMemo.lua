@@ -1,6 +1,7 @@
 -- ****************************************************************************
 -- *
--- *  PROJECT:     vRoleplay
+-- *  PROJECT:     vMultigamemode
+-- *  SOURCE FROM: vRoleplay (Jusonex + sbx320)
 -- *  FILE:        client/classes/GUI/GUIMemo.lua
 -- *  PURPOSE:     GUI memo class
 -- *
@@ -41,4 +42,3 @@ end
 function GUIMemo:onInternalLeftClick()
 	GUIInputControl.setFocus(self)
 end
-

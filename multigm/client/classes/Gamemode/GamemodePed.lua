@@ -1,3 +1,10 @@
+-- ****************************************************************************
+-- *
+-- *  PROJECT:     vMultigamemode
+-- *  FILE:        client/classes/Gamemode/GamemodePed.lua
+-- *  PURPOSE:     Base GamemodePed class
+-- *
+-- ****************************************************************************
 GamemodePed = inherit(Object)
 
 function GamemodePed:constructor(model, position, rotation, dimension, gamemode)

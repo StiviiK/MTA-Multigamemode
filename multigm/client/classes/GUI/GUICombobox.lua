@@ -1,6 +1,7 @@
 -- ****************************************************************************
 -- *
--- *  PROJECT:     vRoleplay
+-- *  PROJECT:     vMultigamemode
+-- *  SOURCE FROM: vRoleplay (Jusonex + sbx320)
 -- *  FILE:        client/classes/GUI/GUICombobox.lua
 -- *  PURPOSE:     GUI combobox class
 -- *
@@ -10,15 +11,15 @@ local ITEM_HEIGHT = 30
 
 function GUICombobox:constructor(posX, posY, width, height, parent)
 	GUIElement.constructor(self, posX, posY, width, height, parent)
-	
+
 	self.m_Button = GUIButton:new(0, 0, width, height, "Drop down", self)
 	self.m_Button.onLeftClick = function() self.m_List:setVisible(not self.m_List:isVisible()) end
-	
+
 	self.m_List = GUIGridList:new(self.m_PosX, self.m_PosY, width, 200, self:getParent())
 	self.m_List.onSelectItem = function(item)
 		self.m_Button:setText(item:getColumnText(1))
-		self.m_List:setVisible(false) 
-		
+		self.m_List:setVisible(false)
+
 		if self.onSelectItem then self.onSelectItem(item) end
 	end
 	self.m_List:addColumn("", 1)

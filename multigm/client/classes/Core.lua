@@ -1,3 +1,10 @@
+-- ****************************************************************************
+-- *
+-- *  PROJECT:     vMultigamemode
+-- *  FILE:        client/classes/Core.lua
+-- *  PURPOSE:     Core class
+-- *
+-- ****************************************************************************
 Core = inherit(Object)
 
 function Core:constructor()

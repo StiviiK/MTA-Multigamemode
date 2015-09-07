@@ -43,6 +43,7 @@ function Player:loadCharacter()
 
   -- Sync important stuff
   self:setPrivateSync("joinTime", self:getJoinTime())
+  self:setPrivateSync("Id", self:getId())
 
   -- unfreeze the player
   self:setFrozen(false)

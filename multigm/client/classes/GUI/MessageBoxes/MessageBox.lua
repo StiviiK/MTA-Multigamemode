@@ -1,6 +1,7 @@
 -- ****************************************************************************
 -- *
--- *  PROJECT:     vRoleplay
+-- *  PROJECT:     vMultigamemode
+-- *  SOURCE FROM: vRoleplay (Jusonex + sbx320)
 -- *  FILE:        client/classes/GUI/MessageBoxs/MessageBox.lua
 -- *  PURPOSE:     Message box class
 -- *
@@ -21,7 +22,7 @@ function MessageBox:constructor(text, timeout)
 		end
 	else
 		timeout = 5000
-	end	
+	end
 	setTimer(function() delete(self) end, timeout, 1)
 	playSound(self:getSoundPath())
 

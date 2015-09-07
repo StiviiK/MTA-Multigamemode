@@ -1,4 +1,11 @@
--- Extends MTA-Player class
+-- ****************************************************************************
+-- *
+-- *  PROJECT:     vMultigamemode
+-- *  FILE:        client/classes/Player.lua
+-- *  PURPOSE:     Player class
+-- *  NOTE: This overwrites the base MTA-Player class!
+-- *
+-- ****************************************************************************
 Player = inherit(MTAElement)
 registerElementClass("player", Player)
 

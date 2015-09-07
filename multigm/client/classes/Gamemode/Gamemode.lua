@@ -1,3 +1,10 @@
+-- ****************************************************************************
+-- *
+-- *  PROJECT:     vMultigamemode
+-- *  FILE:        client/classes/Gamemode/Gamemode.lua
+-- *  PURPOSE:     Base Gamemode class
+-- *
+-- ****************************************************************************
 Gamemode = inherit(Object)
 
 -- pure virtual functions

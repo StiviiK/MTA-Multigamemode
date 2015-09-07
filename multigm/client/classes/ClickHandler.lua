@@ -1,6 +1,7 @@
 -- ****************************************************************************
 -- *
--- *  PROJECT:     vRoleplay
+-- *  PROJECT:     vMultigamemode
+-- *  SOURCE FROM: vRoleplay (Jusonex + sbx320)
 -- *  FILE:        client/classes/ClickHandler.lua
 -- *  PURPOSE:     Class that handles clicks on elements
 -- *
@@ -11,7 +12,6 @@ function ClickHandler:constructor()
 	self.m_OpenMenus = {}
 	self.m_Menu = {
 		player = PlayerMouseMenu;
-		vehicle = VehicleMouseMenu;
 	}
 	self.m_ClickInfo = false
 	self.m_DrawCursor = false
@@ -121,14 +121,18 @@ function ClickHandler:dispatchClick(clickInfo, trigger)
 	end
 
 	-- Phase 2: Check for Gamemode Peds
-	if getElementType(element) == "ped" then
-		for i, v in pairs(GamemodePedManager.Map) do
-			if v.m_Ped == element then
-				if trigger then
-					v:dispatchClick(clickInfo)
+	if elementType == "ped" then
+		if range <= 5 then
+			for i, v in pairs(GamemodePedManager.Map) do
+				if v.m_Ped == element then
+					if trigger then
+						v:dispatchClick(clickInfo)
+					end
+					return true
 				end
-				return true
 			end
+		else
+			return false
 		end
 	end
 
