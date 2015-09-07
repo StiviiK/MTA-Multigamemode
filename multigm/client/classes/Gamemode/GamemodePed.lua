@@ -20,11 +20,21 @@ function GamemodePed:constructor(model, position, rotation, dimension, gamemode)
   self.m_Ped:setRotation(self.m_Rotation)
 
   self.m_Ped:setFrozen(true)
+
+  if self.m_Gamemode.m_GamemodePeds then
+    table.insert(self.m_Gamemode.m_GamemodePeds, self.m_Id, self)
+  end
 end
 
 function GamemodePed:destructor()
   if isElement(self.m_Ped) then
     destroyElement(self.m_Ped)
+  end
+
+  GamemodePedManager:getSingleton():removeRef(self)
+
+  if self.m_Gamemode.m_GamemodePeds then
+    self.m_Gamemode.m_GamemodePeds[self:getId()] = nil
   end
 end
 
@@ -36,12 +46,14 @@ function GamemodePed:getPosition()
   return self.m_Position
 end
 
-function GamemodePed:dispatchClick(info)
-  table.push(info, "Id", self:getId())
-  outputTable(info)
+function GamemodePed:getRotation()
+  return self.m_Rotation
 end
 
-GamemodePed:new(0, Vector3(0, 0, 3), Vector3(0, 0, 0), PRIVATE_DIMENSION_SERVER, GamemodeManager.getFromId(1))
-GamemodePed:new(134, Vector3(0, 3, 3), Vector3(0, 0, 0), PRIVATE_DIMENSION_SERVER, GamemodeManager.getFromId(1))
-GamemodePed:new(12, Vector3(3, 3, 3), Vector3(0, 0, 0), PRIVATE_DIMENSION_SERVER, GamemodeManager.getFromId(1))
-GamemodePed:new(126, Vector3(3, 0, 3), Vector3(0, 0, 0), PRIVATE_DIMENSION_SERVER, GamemodeManager.getFromId(1))
+function GamemodePed:getGamemode()
+  return self.m_Gamemode
+end
+
+function GamemodePed:getModel()
+  return self.m_Model
+end

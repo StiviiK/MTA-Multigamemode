@@ -20,8 +20,8 @@ function Core:constructor()
 
 	Cursor = GUICursor:new()
 	Provider:new()
-	GamemodeManager:new()
 	GamemodePedManager:new()
+	GamemodeManager:new()
 
 	-- Reqeust main.data
 	Provider:getSingleton():requestFile("main.data", bind(Core.ready, self))

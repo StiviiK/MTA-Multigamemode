@@ -9,12 +9,13 @@ GamemodeManager = inherit(Singleton)
 GamemodeManager.Map = {}
 
 function GamemodeManager:constructor()
-  addRemoteEvents{"onPlayerGamemodeJoin", "onPlayerGamemodeLeft"}
+  addRemoteEvents{"onPlayerGamemodeJoin", "onPlayerGamemodeLeft", "onGamemodeDestruct"}
   addEventHandler("onPlayerGamemodeJoin", root, bind(GamemodeManager.Event_OnPlayerGamemodeJoin, self))
   addEventHandler("onPlayerGamemodeLeft", root, bind(GamemodeManager.Event_OnPlayerGamemodeLeft, self))
+  addEventHandler("onGamemodeDestruct", root, bind(GamemodeManager.Event_OnGamemodeDestruct, self))
 
   local Gamemodes = {
-    Lobby:new()
+    Lobby:new("Lobby")
   }
   for k, v in pairs(Gamemodes) do
     v:setId(k)
@@ -49,5 +50,11 @@ end
 function GamemodeManager:Event_OnPlayerGamemodeLeft(Id)
   if self.getFromId(Id) then
     self.getFromId(Id):onPlayerLeft(source)
+  end
+end
+
+function GamemodeManager:Event_OnGamemodeDestruct(Id)
+  if self.getFromId(Id) then
+    delete(self.getFromId(Id))
   end
 end

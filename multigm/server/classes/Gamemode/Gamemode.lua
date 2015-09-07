@@ -19,6 +19,8 @@ function Gamemode:virtual_destructor()
   for _, v in pairs(self.m_Players) do
     self:removePlayer(v)
   end
+
+  triggerClientEvent("onGamemodeDestruct", root, self:getId())
 end
 
 function Gamemode:setId(Id)
@@ -56,8 +58,8 @@ function Gamemode:removePlayer(player)
 
     if not isElement(player) then return end
     player:setGamemode(nil)
-    player:setDimension(PRIVATE_DIMENSION_SERVER)
     player:spawn(SPAWN_DEFAULT_POSITION, SPAWN_DEFAULT_ROTATION, player:getSkin(), SPAWN_DEFAULT_INTERIOR)
+    player:setDimension(PRIVATE_DIMENSION_SERVER)
     player:setFrozen(true)
 
     -- trigger to the client

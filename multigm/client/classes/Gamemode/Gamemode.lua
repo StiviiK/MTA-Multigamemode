@@ -13,11 +13,17 @@ Gamemode.destructor = pure_virtual
 Gamemode.onPlayerJoin = pure_virtual
 Gamemode.onPlayerLeft = pure_virtual
 
-function Gamemode:virtual_constructor()
+function Gamemode:virtual_constructor(name)
+  self.m_Name = name
+  self.m_GamemodePeds = {}
 end
 
 function Gamemode:virtual_destructor()
   GamemodeManager:getSingleton():removeRef(self)
+
+  for i, v in pairs(self.m_GamemodePeds) do
+    delete(v)
+  end
 end
 
 function Gamemode:setId(Id)
@@ -26,4 +32,8 @@ end
 
 function Gamemode:getId()
   return self.m_Id
+end
+
+function Gamemode:getName()
+  return self.m_Name
 end

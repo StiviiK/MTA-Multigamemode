@@ -2,6 +2,23 @@ PRIVATE_DIMENSION_SERVER = 65535 -- This dimension should not be used for playin
 PRIVATE_DIMENSION_CLIENT = 2 -- This dimension should be used for things which
 							 -- happen while the player is in PRIVATE_DIMENSION on the server
 
+-- RANKS
+RANK = {}
+RANK[-1] = "Banned"
+RANK[0] = "User"
+RANK[1] = "Supporter"
+RANK[2] = "Moderator"
+RANK[3] = "SuperModerator"
+RANK[4] = "Administrator"
+RANK[5] = "Developer"
+
+local r2 = {}
+for k, v in pairs(RANK) do
+	r2[k] = v
+	r2[v] = k
+end
+RANK = r2
+
 -- IMPORTANT CORE ERROR IDs
 ERROR_MYSQL_CONNECTION_FAILED = 1
 ERROR_MASTER_CON_FAILED = 2

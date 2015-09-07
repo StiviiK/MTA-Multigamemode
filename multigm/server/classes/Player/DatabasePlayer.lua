@@ -37,6 +37,7 @@ function DatabasePlayer:virtual_constructor()
 	self.m_XP 	    = 0
   self.m_Money    = 0
 	self.m_Gamemode = nil
+	self.m_Rank 		= 0
 end
 
 function DatabasePlayer:virtual_destructor()
@@ -51,7 +52,7 @@ function DatabasePlayer:load()
   end
   DatabasePlayer.Map[self.m_Id] = self
 
-  local row = sql:queryFetchSingle("SELECT Locale, Skin, XP, Money FROM ??_character WHERE Id = ?;", sql:getPrefix(), self:getId())
+  local row = sql:queryFetchSingle("SELECT Locale, Skin, XP, Money, Rank FROM ??_character WHERE Id = ?;", sql:getPrefix(), self:getId())
 	if not row then
 		return false
 	end
@@ -61,6 +62,7 @@ function DatabasePlayer:load()
 	self:setXP(row.XP)
 	self:setSkin(row.Skin)
   self:setMoney(row.Money)
+	self:setRank(row.Rank)
 end
 
 function DatabasePlayer:save()
@@ -68,7 +70,7 @@ function DatabasePlayer:save()
 		return false
 	end
 
-  return sql:queryExec("UPDATE ??_character SET Locale=?, Skin=?, XP=?, Money=? WHERE Id=?;", sql:getPrefix(), self:getLocale(), self:getSkin(), self:getXP(), self:getMoney(), self:getId())
+  return sql:queryExec("UPDATE ??_character SET Locale=?, Skin=?, XP=?, Money=?, Rank=? WHERE Id=?;", sql:getPrefix(), self:getLocale(), self:getSkin(), self:getXP(), self:getMoney(), self:getRank(), self:getId())
 end
 
 -- Short getters
@@ -79,9 +81,11 @@ function DatabasePlayer:getSkin() return self.m_Skin end
 function DatabasePlayer:getMoney() return self.m_Money end
 function DatabasePlayer:getLocale() return self.m_Locale end
 function DatabasePlayer:getXP() return self.m_XP end
+function DatabasePlayer:getRank() return self.m_Rank end
 
 -- Short setters
 function DatabasePlayer:setSkin(Id) self.m_Skin = Id if self:isActive() then self:setModel(self.m_Skin) end end
 function DatabasePlayer:setMoney(money) self.m_Money = money if self:isActive() then self:setPrivateSync("Money", self.m_Money) end end
 function DatabasePlayer:setLocale(locale) self.m_Locale = locale if self:isActive() then self:setPublicSync("Locale", self.m_Locale) end end
 function DatabasePlayer:setXP(XP) self.m_XP = xp if self:isActive() then self:setPrivateSync("XP", self.m_XP) end end
+function DatabasePlayer:setRank(rank) self.m_Rank = rank if self:isActive() then self:setPrivateSync("Rank", self.m_Rank) end end

@@ -126,7 +126,7 @@ function ClickHandler:dispatchClick(clickInfo, trigger)
 			for i, v in pairs(GamemodePedManager.Map) do
 				if v.m_Ped == element then
 					if trigger then
-						v:dispatchClick(clickInfo)
+						self:addMouseMenu(GamemodePedMouseMenu:new(clickInfo.absoluteX, clickInfo.absoluteY, v), element)
 					end
 					return true
 				end

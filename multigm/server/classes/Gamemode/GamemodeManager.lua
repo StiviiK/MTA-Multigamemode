@@ -9,6 +9,10 @@ function GamemodeManager:constructor()
     v:setId(k)
     self:addRef(v)
   end
+
+  -- Manager Events
+  addRemoteEvents{"Event_DisableGamemode"}
+  addEventHandler("Event_DisableGamemode", root, bind(self.Event_DisableGamemode, self))
 end
 
 function GamemodeManager:destructor()
@@ -27,4 +31,14 @@ end
 
 function GamemodeManager:removeRef(ref)
   GamemodeManager.Map[ref:getId()] = nil
+end
+
+function GamemodeManager:Event_DisableGamemode(Id)
+  if source:getRank() >= RANK.Developer then
+    delete(self.getFromId(Id))
+
+    source:triggerEvent("successBox", source, "Action completed successfully!")
+  else
+    source:triggerEvent("errorBox", source, "Permission denied.")
+  end
 end
