@@ -35,3 +35,7 @@ end
 addRemoteEvents{"PlayerPrivateSync", "PlayerPublicSync"}
 addEventHandler("PlayerPrivateSync", root, function(private) source:onUpdateSync(private, nil) end)
 addEventHandler("PlayerPublicSync", root, function(public) source:onUpdateSync(nil, public) end)
+
+-- Short getters
+function Player:getId() return self:getPrivateSync("Id") end
+function Player:isLoggedIn() return self:getId() ~= nil end

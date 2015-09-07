@@ -29,10 +29,5 @@ end
 function GamemodePedManager:drawThis()
   for i, v in pairs(GamemodePedManager.Map) do
     v.m_Ped:setHealth(1000)
-
-    local pX, pY, pZ = v.m_Ped:getBonePosition(8)
-    if isLineOfSightClear(getCamera():getPosition(), pX, pY, pZ + 0.5) then
-      local sX, sY = getScreenFromWorldPosition(pX, pY, pZ + 0.5)
-    end
   end
 end

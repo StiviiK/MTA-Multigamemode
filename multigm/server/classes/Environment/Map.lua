@@ -34,12 +34,8 @@ function Map:unload()
 end
 
 function Map:AsyncCreateObjects(piority)
-  local tmpCounter
-  if piority == MAP_LOADING_FAST then
-    tmpCounter = 0
-  end
-
-  for i, v in ipairs(self.m_LoadedObjects) do
+  for i = 1, #self.m_LoadedObjects, 1 do
+    local v = self.m_LoadedObjects[i]
     local obj = createObject(v.model, Vector3(v.posX, v.posY, v.posZ), Vector3(v.rotX, v.rotY, v.rotZ))
     obj:setDimension(self.m_Gamemode:getDimension())
     obj:setID(v.id)
@@ -50,9 +46,7 @@ function Map:AsyncCreateObjects(piority)
     table.insert(self.m_CreatedObjects, obj)
 
     if piority == MAP_LOADING_FAST then
-      tmpCounter = tmpCounter + 1
-      if tmpCounter == 500 then
-        tmpCounter = 0
+      if i%500 == 0 then
         Thread.pause()
       end
     elseif piority == MAP_LOADING_NORMAL then

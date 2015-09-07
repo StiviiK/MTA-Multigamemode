@@ -112,52 +112,27 @@ function ClickHandler:dispatchClick(clickInfo, trigger)
 	if element == localPlayer then
 		if trigger then
 			if button == "left" then
-				SelfGUI:getSingleton():open()
+				--SelfGUI:getSingleton():open()
+				outputDebug("SelfGUI")
 			elseif button == "right" then
 			end
 		end
 		return true
 	end
 
-	-- Phase 2: Check for world items
-	if getElementData(element, "worlditem") then
-		if trigger then
-			if button == "left" then
-				triggerServerEvent("worldItemClick", element)
-			elseif button == "right" then
+	-- Phase 2: Check for Gamemode Peds
+	if getElementType(element) == "ped" then
+		for i, v in pairs(GamemodePedManager.Map) do
+			if v.m_Ped == element then
+				if trigger then
+					v:dispatchClick(clickInfo)
+				end
+				return true
 			end
 		end
-		return true
 	end
 
-	-- Phase 3: Check models
-	if self:checkModels(model, 1775, 1776, 1209) then
-		if trigger then
-			if button == "left" then
-				self:addMouseMenu(VendingMouseMenu:new(clickInfo.absoluteX, clickInfo.absoluteY, element), element)
-			end
-		end
-		return true
-	end
-	if model == 2942 and range <= 8 then
-		if trigger then
-			if button == "left" then
-				BankGUI:getSingleton():show()
-			elseif button == "right" then
-			end
-		end
-		return true
-	end
-	if model == 2922 or model == 2886 then -- Keypad
-		if trigger then
-			if button == "left" then
-				triggerServerEvent("keypadClick", element)
-			end
-		end
-		return true
-	end
-
-	-- Phase 4: Check element types
+	-- Phase 3: Check element types
 	if self.m_Menu[elementType] then
 		if trigger then
 			if button == "left" then
