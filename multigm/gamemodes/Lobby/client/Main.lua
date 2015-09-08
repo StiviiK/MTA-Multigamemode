@@ -4,11 +4,10 @@ function Lobby:constructor()
   addEventHandler("onLobbyStartDownload", root, bind(Lobby.onDownloadStart, self))
 
   -- Create Gamemode Peds
-  -- Gamemode Peds
-  GamemodePed:new(0, Vector3(0, 0, 3), Vector3(0, 0, 0), PRIVATE_DIMENSION_SERVER, self)
-  GamemodePed:new(134, Vector3(0, 3, 3), Vector3(0, 0, 0), PRIVATE_DIMENSION_SERVER, self)
-  GamemodePed:new(12, Vector3(3, 3, 3), Vector3(0, 0, 0), PRIVATE_DIMENSION_SERVER, self)
-  GamemodePed:new(126, Vector3(3, 0, 3), Vector3(0, 0, 0), PRIVATE_DIMENSION_SERVER, self)
+  GamemodePed:new(0, Vector3(1713.793, -1655.604, 20.222), Vector3(0, 0, -90), 12, 18, self)
+  GamemodePed:new(0, Vector3(1713.793, -1663.490, 20.222), Vector3(0, 0, -90), 12, 18, self)
+  GamemodePed:new(0, Vector3(1729.256, -1647.652, 20.222), Vector3(0, 0, 90), 12, 18, self)
+  GamemodePed:new(0, Vector3(1729.256, -1655.511, 20.222), Vector3(0, 0, 90), 12, 18, self)
 end
 
 function Lobby:destructor()
@@ -16,11 +15,9 @@ function Lobby:destructor()
 end
 
 function Lobby:onPlayerJoin()
-  source:setCollidableWith(root, false)
 end
 
 function Lobby:onPlayerLeft()
-  source:setCollidableWith(root, true)
 end
 
 function Lobby:onDownloadStart()

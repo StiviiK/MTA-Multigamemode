@@ -25,6 +25,8 @@ function GUIProgressBar:setProgress(progress)
 
 	self.m_Progress = progress
 	self:anyChange()
+
+	return self
 end
 
 function GUIProgressBar:getProgress()
@@ -33,10 +35,14 @@ end
 
 function GUIProgressBar:setForegroundColor(color)
 	self.m_ForegroundColor = color
+
+	return self
 end
 
 function GUIProgressBar:setBackgroundColor(color)
 	self.m_BackgroundColor = color
+
+	return self
 end
 
 function GUIProgressBar:drawThis()
@@ -58,5 +64,6 @@ function GUIProgressBar:setAlpha(alpha)
 	local r,g,b,a = fromcolor(self.m_BackgroundColor)
 	self.m_BackgroundColor = tocolor(r, g, b, alpha)
 
+	self:anyChange()
 	return self
 end

@@ -31,6 +31,7 @@ function GUIImage:setRotation(rotation, rotationCenterOffsetX, rotationCenterOff
 	self.m_RotationCenterOffsetX = rotationCenterOffsetX
 	self.m_RotationCenterOffsetY = rotationCenterOffsetY
 
+	self:anyChange()
 	return self
 end
 

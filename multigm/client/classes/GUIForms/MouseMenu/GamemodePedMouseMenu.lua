@@ -9,18 +9,17 @@ function GamemodePedMouseMenu:constructor(posX, posY, instance)
 
   self:addItem("Gamemode beitreten",
     function ()
-      outputChatBox("Not implemented!")
-      --triggerServerEvent("EVENT_MISSING", self:getElement(), instance:getGamemode():getId(), localPlayer)
+      triggerServerEvent("Event_JoinGamemode", localPlayer, instance:getGamemode():getId())
     end
   )
 
   if localPlayer:getRank() >= RANK.Administrator then
     self:addItem("Admin: Ped respawnen",
       function ()
-        local skin, pos, rot, gamemode = instance:getModel(), instance:getPosition(), instance:getRotation(), instance:getGamemode()
+        local skin, pos, rot, dimension, interior, gamemode = instance:getModel(), instance:getPosition(), instance:getRotation(), instance:getDimension(), instance:getInterior(), instance:getGamemode()
 
         delete(instance)
-        GamemodePed:new(skin, pos, rot, PRIVATE_DIMENSION_SERVER, gamemode)
+        GamemodePed:new(skin, pos, rot, dimension, interior, gamemode)
       end
     )
 

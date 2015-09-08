@@ -7,16 +7,18 @@
 -- ****************************************************************************
 GamemodePed = inherit(Object)
 
-function GamemodePed:constructor(model, position, rotation, dimension, gamemode)
+function GamemodePed:constructor(model, position, rotation, dimension, interior, gamemode)
   self.m_Id = GamemodePedManager:getSingleton():addRef(self)
   self.m_Model = model
   self.m_Position = position
   self.m_Rotation = rotation
   self.m_Dimension = dimension
+  self.m_Interior = interior
   self.m_Gamemode = gamemode
 
   self.m_Ped = Ped.create(self.m_Model, self.m_Position)
   self.m_Ped:setDimension(self.m_Dimension)
+  self.m_Ped:setInterior(self.m_Interior)
   self.m_Ped:setRotation(self.m_Rotation)
 
   self.m_Ped:setFrozen(true)
@@ -38,22 +40,11 @@ function GamemodePed:destructor()
   end
 end
 
-function GamemodePed:getId()
-  return self.m_Id
-end
-
-function GamemodePed:getPosition()
-  return self.m_Position
-end
-
-function GamemodePed:getRotation()
-  return self.m_Rotation
-end
-
-function GamemodePed:getGamemode()
-  return self.m_Gamemode
-end
-
-function GamemodePed:getModel()
-  return self.m_Model
-end
+-- Short getters
+function GamemodePed:getId() return self.m_Id end
+function GamemodePed:getPosition() return self.m_Position end
+function GamemodePed:getRotation() return self.m_Rotation end
+function GamemodePed:getGamemode() return self.m_Gamemode end
+function GamemodePed:getModel() return self.m_Model end
+function GamemodePed:getInterior() return self.m_Interior end
+function GamemodePed:getDimension() return self.m_Dimension end

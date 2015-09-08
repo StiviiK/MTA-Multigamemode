@@ -17,6 +17,6 @@ end
 
 function GUIRectangle:drawThis()
 	dxSetBlendMode("modulate_add")
-	dxDrawRectangle(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, self.m_Height, self.m_Color)
+		dxDrawRectangle(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, self.m_Height, self.m_Color)
 	dxSetBlendMode("blend")
 end

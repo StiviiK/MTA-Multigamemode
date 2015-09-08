@@ -10,7 +10,7 @@ function Gamemode:virtual_constructor(name, desc)
   self.m_Name = name or ""
   self.m_Description = desc or ""
   self.m_Players = {}
-  self.m_Dimension = math.random(1, 3555) -- TODO: Add dimension manager
+  self.m_Dimension = 12 -- TODO: Add dimension manager
 end
 
 function Gamemode:virtual_destructor()

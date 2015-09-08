@@ -114,7 +114,6 @@ end
 function Player:sendInitialSync()
 	triggerClientEvent(self, "PlayerPrivateSync", self, self.m_PrivateSync)
 
-	-- Todo: Pack data and send only 1 event
 	for k, player in pairs(getElementsByType("player")) do
 		triggerClientEvent(self, "PlayerPublicSync", player, player.m_PublicSync)
 	end
