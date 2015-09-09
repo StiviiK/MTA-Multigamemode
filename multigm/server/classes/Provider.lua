@@ -1,5 +1,5 @@
 Provider = inherit(Singleton)
-local DOWNLOAD_SPEED = 0.1 * 1024 * 1024
+local DOWNLOAD_SPEED = 0.01 * 1024 * 1024
 if DEBUG then
   --DOWNLOAD_SPEED = 1000000000
 end

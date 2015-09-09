@@ -22,7 +22,8 @@ end
 
 function Provider:requestFile(file, callback, callbackargs)
   if self.m_RequestedFiles[file] then return end
-  self.m_LoadingBar = LoadingBar:new("Starting Download...", callback, callbackargs)
+  --self.m_LoadingBar = LoadingBar:new("Starting Download...", callback, callbackargs)
+  self.m_LoadingBar = DownloadBar:new(callback, callbackargs)
   self.m_RequestedFiles[file] = true
 
 
@@ -45,7 +46,7 @@ function Provider:onFileDonwloadStart(Id, path, md5, size)
   end
 
   self.m_Files[Id] = {path = path, md5 = md5, size = size, loadingBar = self.m_LoadingBar}
-  self.m_Files[Id].loadingBar:setText(("Downloading '%s' (0 B/%s)"):format(path, sizeFormat(size)))
+  --self.m_Files[Id].loadingBar:setText(("Downloading '%s' (0 B/%s)"):format(path, sizeFormat(size)))
 end
 
 function Provider:onFileReceive(Id, data)
@@ -82,5 +83,9 @@ function Provider:onFileReceive(Id, data)
 end
 
 function Provider:onProgessUpdate(Id, status)
-  self.m_Files[Id].loadingBar:setText(("Downloading '%s' (%s/%s)"):format(self.m_Files[Id].path, sizeFormat(math.floor((self.m_Files[Id].size/100)*status.percentComplete)), sizeFormat(self.m_Files[Id].size)))
+  outputConsole(("Downloading '%s' (%s/%s)"):format(self.m_Files[Id].path, sizeFormat(math.floor((self.m_Files[Id].size/100)*status.percentComplete)), sizeFormat(self.m_Files[Id].size)))
+  --self.m_Files[Id].loadingBar:setText(("Downloading '%s' (%s/%s)"):format(self.m_Files[Id].path, sizeFormat(math.floor((self.m_Files[Id].size/100)*status.percentComplete)), sizeFormat(self.m_Files[Id].size)))
+  if DownloadGUI:isInstantiated() then
+    DownloadGUI:getSingleton():updateData(self.m_Files[Id], status)
+  end
 end
