@@ -7,31 +7,40 @@
 -- ****************************************************************************
 DownloadBar = inherit(GUIForm)
 
+local Progress = 0
 function DownloadBar:constructor(callback, callbackargs)
-  GUIForm.constructor(self, screenWidth - screenWidth*0.155, screenHeight - screenHeight*0.06, screenWidth*0.14, screenHeight*0.04)
+  GUIForm.constructor(self, screenWidth - screenWidth*0.175, screenHeight - screenHeight*0.13, screenWidth*0.16, screenHeight*0.11)
+  Cursor:hide()
 
-  self.m_Background = GUIRectangle:new(0, 0, self.m_Width, self.m_Height, tocolor(0, 0, 0, 225), self)
-  GUILabel:new(self.m_Width*0.02 + self.m_Height*0.75 + self.m_Height*0.25, self.m_Height - self.m_Height*0.8, self.m_Width*0.45, self.m_Height*0.75, "Downloading", self.m_Background):setFont(VRPFont(self.m_Height*0.7))
-  self.m_Label = GUILabel:new(self.m_Width*0.02 + self.m_Height*0.75 + self.m_Height*0.25 + self.m_Width*0.425, self.m_Height - self.m_Height*0.7, self.m_Width*0.6, self.m_Height*0.75, "(click for info)", self.m_Background):setFont(VRPFont(self.m_Height*0.55))
-  self.m_Label.onHover = function () self.m_Label:setColor(Color.LightBlue) end
-  self.m_Label.onUnhover = function () self.m_Label:setColor(Color.White) end
-  self.m_Label.onLeftClick = function () DownloadGUI:new() end
-  self.m_Image = GUIImage:new(self.m_Width*0.02, self.m_Height - self.m_Height*0.85, self.m_Height*0.75, self.m_Height*0.75, "files/images/GUI/download.png", self.m_Background)
+  self.m_Background = GUIRectangle:new(0, 0, self.m_Width, self.m_Height, tocolor(0, 0, 0, 150), self)
+  GUIRectangle:new(self.m_Width*0.02, self.m_Height*0.07, self.m_Width - self.m_Width*0.04, self.m_Height*0.2, Color.Grey, self.m_Background)
+  GUILabel:new(self.m_Width*0.02, self.m_Height*0.07, self.m_Width - self.m_Width*0.04, self.m_Height*0.2, "Downloading additional files...", self.m_Background)
+    :setAlignX("center")
+    :setAlignY("center")
+  self.m_ProgressBar = GUIProgressBar:new(self.m_Width*0.02, self.m_Height*0.3, self.m_Width - self.m_Width*0.04, self.m_Height - self.m_Height*0.59, self.m_Background)
+    :setForegroundColor(Color.Orange)
+    :setBackgroundColor(Color.Clear)
+  self.m_InfoLabel = GUILabel:new(self.m_Width*0.02, self.m_Height*0.3, self.m_Width - self.m_Width*0.04, self.m_Height - self.m_Height*0.59, "File: -\nSize: - / -", self.m_Background)
+    :setAlignX("center")
+    :setAlignY("center")
+    :setFont(VRPFont(self.m_Height*0.2))
+  GUIRectangle:new(self.m_Width*0.02, self.m_Height - self.m_Height*0.25, self.m_Width - self.m_Width*0.04, self.m_Height*0.2, Color.Grey, self.m_Background)
+  self.m_RemainingLabel = GUILabel:new(self.m_Width*0.02, self.m_Height - self.m_Height*0.25, self.m_Width - self.m_Width*0.04, self.m_Height*0.2, "Remaining: -", self.m_Background)
+    :setAlignX("center")
+    :setAlignY("center")
 
   self.m_Callback = callback
   self.m_CallbackArgs = callbackargs or {}
 end
 
-function DownloadBar:update()
-  self.m_Image:setRotation(getTickCount()*0.1)
+function DownloadBar:updateData(fileData, latentStatus)
+  self.m_ProgressBar:setProgress(latentStatus.percentComplete)
+  self.m_InfoLabel:setText(("File: %s\nSize: %s / %s"):format(fileData.path, sizeFormat(math.floor((fileData.size/100)*latentStatus.percentComplete)), sizeFormat(fileData.size)))
+  self.m_RemainingLabel:setText(("Remaining: ~%sms"):format(latentStatus.tickEnd))
 end
 
 function DownloadBar:destructor()
   GUIForm.destructor(self)
-
-  if DownloadGUI:isInstantiated() then
-    delete(DownloadGUI:getSingleton())
-  end
 
   if self.m_Callback then
     self.m_Callback(unpack(self.m_CallbackArgs))

@@ -57,9 +57,6 @@
 				<script src="client/classes/Gamemode/Gamemode.lua" type="client"/>
 				<script src="client/classes/Gamemode/GamemodePedManager.lua" type="client"/>
 				<script src="client/classes/Gamemode/GamemodePed.lua" type="client"/>
-				<script src="client/classes/GUI_old/GUICursor.lua" type="client"/>
-				<script src="client/classes/GUI_old/Font.lua" type="client"/>
-				<script src="client/classes/GUI_old/GUIForms/LoadingBar.lua" type="client"/>
 
 				<!-- GUI system -->
 				<script src="client/classes/ClickHandler.lua" type="client"/>
@@ -128,7 +125,6 @@
 
 				<!-- GUI Forms -->
 				<script src="client/classes/GUIForms/QuestionBox.lua" type="client"/>
-				<script src="client/classes/GUIForms/DownloadGUI.lua" type="client"/>
 				<script src="client/classes/GUIForms/DownloadBar.lua" type="client"/>
 
 					<!-- Mouse Menus -->

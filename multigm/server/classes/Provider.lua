@@ -1,8 +1,4 @@
 Provider = inherit(Singleton)
-local DOWNLOAD_SPEED = 0.01 * 1024 * 1024
-if DEBUG then
-  --DOWNLOAD_SPEED = 1000000000
-end
 
 function Provider:constructor()
   addRemoteEvents{"onClientRequestFile", "onClientDownlaodComplete"}
@@ -67,7 +63,7 @@ function Provider:onClientRequestFile(file, fileHash) -- this function can only 
   end
 
   local Id = #self.m_ActiveDL + 1
-  client:triggerLatentEvent("onFileReceive", DOWNLOAD_SPEED, resourceRoot, Id, self.m_FilesOnDemand[file].data)
+  client:triggerLatentEvent("onFileReceive", PROVIDER_DOWNLOAD_SPEED, resourceRoot, Id, self.m_FilesOnDemand[file].data)
 
 	self.m_ActiveDL[Id] = {
     player = client;
