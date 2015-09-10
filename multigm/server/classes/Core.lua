@@ -18,8 +18,6 @@ function Core:constructor ()
 
     -- Connect to the API(-Server)
     self.ms_API:call(self.ms_API:getStatement("onConnect"))
-
-    delete(self.ms_API)
   end
 
   if DEBUG then
@@ -76,6 +74,10 @@ function Core:destructor ()
   delete(MapManager:getSingleton())
   delete(PlayerManager:getSingleton())
   delete(sql)
+
+  if self.ms_API then
+    delete(self.ms_API)
+  end
 end
 
 function Core:onInternalError(error)
@@ -88,11 +90,32 @@ end
 
 function Core:setAPIStatements()
   if (not self.ms_API) or (not instanceof(self.ms_API, API, true)) then return end
-  local api = self.ms_API
 
   -- Set APIStatements
-  api:setStatement("onConnect", "parameter", {"method=connect"})
-  api:setStatement("onConnect", "callback", function () outputDebug("Connected") end)
-  api:setStatement("onDestruct", "parameter", {"method=disconnect"})
-  api:setStatement("onDestruct", "callback", function () outputDebug("Disconnected") end)
+  self.ms_API:setStatement("onConnect", "parameter", {"method=connect"})
+  self.ms_API:setStatement("onConnect", "callback",
+    function (returnJSON, errno)
+      if errno == 0 then
+        local result = fromJSON(returnJSON)
+        if result.status then
+          outputDebug("[API] Connected succesfully!")
+          --outputDebug(("[API] Using Token: %s"):format(result.result))
+
+          self.ms_API.m_SecurityToken = result.result
+        else
+          outputDebug(("[API] Failure. Server returned: %s"):format(result.message))
+        end
+      else
+        outputDebug(("AN INTERNAL API ERROR OCCURED! [Id: %s]"):format(tostring(errno)))
+        delete(self.ms_API)
+      end
+    end
+  )
+
+  self.ms_API:setStatement("onDestruct", "parameter", {"method=disconnect"})
+  self.ms_API:setStatement("onDestruct", "callback",
+    function ()
+      outputDebug("Disconnected")
+    end
+  )
 end
