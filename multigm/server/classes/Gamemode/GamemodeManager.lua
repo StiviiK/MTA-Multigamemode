@@ -36,8 +36,9 @@ end
 
 function GamemodeManager:Event_DisableGamemode(Id)
   if source:getRank() >= RANK.Developer then
-    delete(self.getFromId(Id))
+    outputDebug(("[GamemodeManager] %s forced Gamemode destruction! [Id: %d]"):format(source:getAccount():getName(), Id))
 
+    delete(self.getFromId(Id))
     source:triggerEvent("successBox", source, "Action completed successfully!")
   else
     source:triggerEvent("errorBox", source, "Permission denied.")

@@ -7,10 +7,8 @@
 -- ****************************************************************************
 DownloadBar = inherit(GUIForm)
 
-local Progress = 0
 function DownloadBar:constructor(callback, callbackargs)
-  GUIForm.constructor(self, screenWidth - screenWidth*0.175, screenHeight - screenHeight*0.13, screenWidth*0.16, screenHeight*0.11)
-  Cursor:hide()
+  GUIForm.constructor(self, screenWidth - screenWidth*0.175, screenHeight - screenHeight*0.13, screenWidth*0.16, screenHeight*0.11, false)
 
   self.m_Background = GUIRectangle:new(0, 0, self.m_Width, self.m_Height, tocolor(0, 0, 0, 150), self)
   GUIRectangle:new(self.m_Width*0.02, self.m_Height*0.07, self.m_Width - self.m_Width*0.04, self.m_Height*0.2, Color.Grey, self.m_Background)
@@ -25,7 +23,7 @@ function DownloadBar:constructor(callback, callbackargs)
     :setAlignY("center")
     :setFont(VRPFont(self.m_Height*0.2))
   GUIRectangle:new(self.m_Width*0.02, self.m_Height - self.m_Height*0.25, self.m_Width - self.m_Width*0.04, self.m_Height*0.2, Color.Grey, self.m_Background)
-  self.m_RemainingLabel = GUILabel:new(self.m_Width*0.02, self.m_Height - self.m_Height*0.25, self.m_Width - self.m_Width*0.04, self.m_Height*0.2, "Remaining: -", self.m_Background)
+  self.m_RemainingLabel = GUILabel:new(self.m_Width*0.02, self.m_Height - self.m_Height*0.25, self.m_Width - self.m_Width*0.04, self.m_Height*0.2, ("Remaining: - @ ~%s MB/s"):format(PROVIDER_DOWNLOAD_SPEED/1024/1024), self.m_Background)
     :setAlignX("center")
     :setAlignY("center")
 
@@ -36,7 +34,7 @@ end
 function DownloadBar:updateData(fileData, latentStatus)
   self.m_ProgressBar:setProgress(latentStatus.percentComplete)
   self.m_InfoLabel:setText(("File: %s\nSize: %s / %s"):format(fileData.path, sizeFormat(math.floor((fileData.size/100)*latentStatus.percentComplete)), sizeFormat(fileData.size)))
-  self.m_RemainingLabel:setText(("Remaining: ~%sms"):format(latentStatus.tickEnd))
+  self.m_RemainingLabel:setText(("Remaining: ~%ss @ ~%s MB/s"):format(latentStatus.tickEnd/1000, PROVIDER_DOWNLOAD_SPEED/1024/1024))
 end
 
 function DownloadBar:destructor()
