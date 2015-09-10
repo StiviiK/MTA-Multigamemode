@@ -44,14 +44,15 @@ function Core:constructor ()
 
   -- Generate Download-Package
   local gamemodes = {
-    ["main"] = "";
-    ["lobby"] = "gamemodes/Lobby/";
+    {"Main", "", "main.data"};
+    {"Lobby", "gamemodes/Lobby/", "lobby.data"};
+    {"Cops'n'Robbers", "gamemodes/CnR/", "cnr.data"};
   }
-  for name, path in pairs(gamemodes) do
-    outputDebug(("Generating Package for %s..."):format(name:upperFirst()))
+  for _, v in ipairs(gamemodes) do
+    outputDebug(("Generating Package for %s..."):format(v[1]))
 
     local files = {}
-    local xml = xmlLoadFile(("%smeta.xml"):format(path))
+    local xml = xmlLoadFile(("%smeta.xml"):format(v[2]))
     for k, v in pairs(xmlNodeGetChildren(xml)) do
       if xmlNodeGetName(v) == "transferfile" then
         files[#files+1] = xmlNodeGetAttribute(v, "src")
@@ -59,7 +60,7 @@ function Core:constructor ()
     end
 
     -- Create Data Package and offer it (On-Demand)
-    local fileName = ("%s%s.data"):format(path, name)
+    local fileName = ("%s%s"):format(v[2], v[3])
     Package.save(fileName, files)
     Provider:getSingleton():offerFile(fileName, PROVIDER_ON_DEMAND)
   end

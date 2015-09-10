@@ -42,6 +42,7 @@ function Gamemode:addPlayer(player)
 
   player:setGamemode(self)
   player:setDimension(self.m_Dimension)
+  player:setFrozen(false)
 
   -- trigger to the client
   player:triggerEvent("onPlayerGamemodeJoin", player, self:getId())
