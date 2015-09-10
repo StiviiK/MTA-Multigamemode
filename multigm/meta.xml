@@ -474,7 +474,11 @@
 			<transferfile src="files/images/MessageBoxes/Warning.png"/>
 			<transferfile src="files/images/MessageBoxes/Error.png"/>
 			<transferfile src="files/images/MessageBoxes/Success.png"/>
+
+			<!-- Header Images -->
 			<transferfile src="files/images/HeaderDefaultGamemode.png"/>
+			<transferfile src="gamemodes/Lobby/files/images/HeaderLobby.png" />
+			<transferfile src="gamemodes/CnR/files/images/HeaderCnR.png" />
 
 		<!-- Fonts -->
 			<file src="files/fonts/gtafont.ttf"/><!-- do not replace the file tag -->

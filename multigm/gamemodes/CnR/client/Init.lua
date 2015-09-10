@@ -1,6 +1,6 @@
 CopsnRobbers = inherit(Gamemode)
 CopsnRobbers.ms_Settings = {
-  HeaderPath = "gamemodes/CopsnRobbers/files/images/HeaderLobby.png"
+  HeaderPath = "gamemodes/CnR/files/images/HeaderCnR.png"
 }
 
 function CopsnRobbers:getSetting(key)
