@@ -21,6 +21,10 @@ function GamemodeManager:constructor()
   for k, v in pairs(Gamemodes) do
     v:setId(k)
     self:addRef(v)
+
+    if v.onGamemodesLoaded then
+      v:onGamemodesLoaded(#Gamemodes)
+    end
   end
 end
 

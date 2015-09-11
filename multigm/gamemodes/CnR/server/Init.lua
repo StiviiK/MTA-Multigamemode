@@ -5,7 +5,7 @@ CopsnRobbers.ms_Settings = {
     Rotation  = 223.45709228516;
     Interior = 18;
   };
-  DownloadPath = LOBBY_DOWNLOAD_FILE;
+  DownloadPath = CNR_DOWNLOAD_FILE;
 }
 
 function CopsnRobbers:getSetting(key)

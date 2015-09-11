@@ -23,32 +23,27 @@ if DEBUG then
 
 		bindKey("lshift", "down",
 			function()
-				if localPlayer:getRank() >= RANK.Moderator then
-					local vehicle = getPedOccupiedVehicle(localPlayer)
-					if vehicle then
-						local vx, vy, vz = getElementVelocity(vehicle)
-						setElementVelocity(vehicle, vx, vy, 0.3)
+				if localPlayer:isLoggedIn() then
+					if localPlayer:getRank() >= RANK.Moderator then
+						local vehicle = getPedOccupiedVehicle(localPlayer)
+						if vehicle then
+							local vx, vy, vz = getElementVelocity(vehicle)
+							setElementVelocity(vehicle, vx, vy, 0.3)
+						end
 					end
 				end
 			end
 		)
 		bindKey("lalt", "down",
 			function()
-				if localPlayer:getRank() >= RANK.Moderator then
-					local vehicle = getPedOccupiedVehicle(localPlayer)
-					if vehicle then
-						local vx, vy, vz = getElementVelocity(vehicle)
-						setElementVelocity(vehicle, vx*1.5, vy*1.5, vz)
+				if localPlayer:isLoggedIn() then
+					if localPlayer:getRank() >= RANK.Moderator then
+						local vehicle = getPedOccupiedVehicle(localPlayer)
+						if vehicle then
+							local vx, vy, vz = getElementVelocity(vehicle)
+							setElementVelocity(vehicle, vx*1.5, vy*1.5, vz)
+						end
 					end
-				end
-			end
-		)
-		bindKey("f5", "down",
-			function()
-				if MapGUI:isInstantiated() then
-					delete(MapGUI:getSingleton())
-				else
-					MapGUI:getSingleton(function(posX, posY) self:setpos("", posX, posY, 20) end)
 				end
 			end
 		)

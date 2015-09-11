@@ -7,6 +7,12 @@ function GamemodePedMouseMenu:constructor(posX, posY, instance)
       :format(instance:getGamemode():getName(), instance:getId()))
       :setTextColor(Color.Red)
 
+  self:addItem("Gamemode Infos",
+    function ()
+      GamemodeInfo:new(instance:getGamemode():getId())
+    end
+  )
+
   self:addItem("Gamemode beitreten",
     function ()
       triggerServerEvent("Event_JoinGamemode", localPlayer, instance:getGamemode():getId())
@@ -17,8 +23,8 @@ function GamemodePedMouseMenu:constructor(posX, posY, instance)
     self:addItem("Admin: Ped respawnen",
       function ()
         local skin, pos, rot, dimension, interior, gamemode = instance:getModel(), instance:getPosition(), instance:getRotation(), instance:getDimension(), instance:getInterior(), instance:getGamemode()
-
         delete(instance)
+
         GamemodePed:new(skin, pos, rot, dimension, interior, gamemode)
       end
     )
