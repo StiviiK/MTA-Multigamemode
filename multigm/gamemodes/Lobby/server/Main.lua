@@ -1,9 +1,6 @@
 function Lobby:constructor()
   addRemoteEvents{"onLobbyDownloadFinished"}
   addEventHandler("onLobbyDownloadFinished", root, bind(Lobby.onDownloadComplete, self))
-
-  -- Maps
-  MapManager:getSingleton():loadMap(self, "gamemodes/Lobby/files/maps/Test.map"):load(MAP_LOADING_FAST)
 end
 
 function Lobby:destructor()

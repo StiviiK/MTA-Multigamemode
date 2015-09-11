@@ -52,12 +52,8 @@ function MapManager.parseMapXML(filePath)
       local attributes = child:getAttributes()
       table.insert(Objects, {
         ["model"] = attributes["model"],
-        ["posX"] = attributes["posX"],
-        ["posY"] = attributes["posY"],
-        ["posZ"] = attributes["posZ"],
-        ["rotX"] = attributes["rotX"],
-        ["rotY"] = attributes["rotY"],
-        ["rotZ"] = attributes["rotZ"],
+        ["position"] = Vector3(attributes["posX"], attributes["posY"], attributes["posZ"]),
+        ["rotation"] = Vector3(attributes["rotX"], attributes["rotY"], attributes["rotZ"]),
         ["id"] = attributes["id"],
         ["collisions"] = (attributes["collisions"] == "true" and true) or (attributes["collisions"] == "false" and false),
         ["alpha"] = attributes["alpha"],

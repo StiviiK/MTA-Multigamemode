@@ -36,7 +36,7 @@ end
 function Map:AsyncCreateObjects(piority)
   for i = 1, #self.m_LoadedObjects, 1 do
     local v = self.m_LoadedObjects[i]
-    local obj = createObject(v.model, Vector3(v.posX, v.posY, v.posZ), Vector3(v.rotX, v.rotY, v.rotZ))
+    local obj = createObject(v.model, v.position, v.rotation)
     obj:setDimension(self.m_Gamemode:getDimension())
     obj:setID(v.id)
     obj:setAlpha(v.alpha)
@@ -46,11 +46,13 @@ function Map:AsyncCreateObjects(piority)
     table.insert(self.m_CreatedObjects, obj)
 
     if piority == MAP_LOADING_FAST then
-      if i%500 == 0 then
+      if i % MAP_STOP_FAST == 0 then
         Thread.pause()
       end
     elseif piority == MAP_LOADING_NORMAL then
-      Thread.pause()
+      if i % MAP_STOP_NORMAL == 0 then
+        Thread.pause()
+      end
     end
   end
 
@@ -58,11 +60,11 @@ function Map:AsyncCreateObjects(piority)
 end
 
 function Map:removeObjects()
-  for i, v in ipairs(self.m_CreatedObjects) do
-    --outputDebug(("[MapManager] Removing Object for Map Id: %d (Id: %s)"):format(self:getId(), v:getID()))
-
-    v:destroy()
-    Thread.pause()
+  for i = 1, #self.m_CreatedObjects, 1 do
+    self.m_CreatedObjects[i]:destroy()
+    if i % 500 == 0 then
+      Thread.pause()
+    end
   end
 
   self.m_Thread = nil

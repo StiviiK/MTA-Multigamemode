@@ -1,9 +1,9 @@
 CopsnRobbers = inherit(Gamemode)
 CopsnRobbers.ms_Settings = {
   Spawn = {
-    Position  = Vector3(1717.84912, -1651.28259, 20.23014);
-    Rotation  = 223.45709228516;
-    Interior = 18;
+    Position  = Vector3(0, 0, 3);
+    Rotation  = 0;
+    Interior = 0;
   };
   DownloadPath = CNR_DOWNLOAD_FILE;
 }

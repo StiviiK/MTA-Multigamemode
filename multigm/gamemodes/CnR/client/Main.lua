@@ -20,7 +20,7 @@ function CopsnRobbers:onPlayerLeft()
 end
 
 function CopsnRobbers:onDownloadStart()
-  Provider:getSingleton():requestFile(CNR_DOWNLOAD_FILE, bind(Lobby.onDownloadFinish, self))
+  Provider:getSingleton():requestFile(CNR_DOWNLOAD_FILE, bind(CopsnRobbers.onDownloadFinish, self))
 end
 
 function CopsnRobbers:onDownloadFinish()

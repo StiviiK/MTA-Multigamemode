@@ -13,6 +13,8 @@ function Thread:constructor(func)
   self.m_Piority = THREAD_PIORITY_LOW
   self.ms_Thread = false
   self.ms_Timer = false
+  self.m_Yields = 0
+  self.ms_StartTime = 0
 end
 
 function Thread:destructor()
@@ -26,11 +28,13 @@ end
 
 function Thread:start(...)
   self.ms_Thread = coroutine.create(self.m_Func)
+  self.ms_StartTime = getTickCount()
   self:resume(...)
 
   self.ms_Timer = setTimer(function()
     if self:getStatus() == COROUTINE_STATUS_SUSPENDED then
       self:resume()
+      self.m_Yields = self.m_Yields + 1
     elseif self:getStatus() == COROUTINE_STATUS_DEAD then
       delete(self)
     end
