@@ -1,4 +1,6 @@
 Lobby = inherit(Gamemode)
+inherit(GameRooms, Lobby)
+
 Lobby.ms_Settings = {
   Spawn = {
     Position  = Vector3(1717.84912, -1651.28259, 20.23014);

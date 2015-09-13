@@ -12,9 +12,13 @@ function GameRooms:virtaul_destructor()
   self.m_Rooms = nil
 end
 
-function GameRooms:addRoom(name)
-  local Id = #self.m_Rooms + 1
-  self.m_Rooms[Id] = {id = Id, name = name, players = {}}
+function GameRooms:getRoomFromId(Id)
+  return self.m_Rooms[Id]
+end
+
+function GameRooms:addRoom(name, maxplayers)
+  local Id = table.push(self.m_Rooms, {name = name, maxplayers = maxplayers or -1, players = {}})
+  self.m_Rooms[Id].id = Id
 
   return Id
 end
@@ -22,17 +26,17 @@ end
 function GameRooms:removeRoom(Id)
   if self.m_Rooms[Id] then
     for i, player in pairs(self.m_Rooms[Id].players) do
-      v:removePlayer(Id, player)
+      v:removeFromRoom(Id, player)
     end
 
     self.m_Rooms[Id] = nil
   end
 end
 
-function GameRooms:addPlayerToRoom()
+function GameRooms:addToRoom(Id, player)
   -- Todo
 end
 
-function GameRooms:removePlayerFromRoom()
+function GameRooms:removeFromRoom(Id, player)
   -- Todo
 end

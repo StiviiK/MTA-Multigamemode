@@ -40,6 +40,7 @@
 			<script src="server/classes/Player/Session.lua" type="server"/>
 			<script src="server/classes/Gamemode/GamemodeManager.lua" type="server"/>
 			<script src="server/classes/Gamemode/Gamemode.lua" type="server"/>
+			<script src="server/classes/Gamemode/GameRoom.lua" type="server"/>
 			<script src="server/classes/Environment/MapManager.lua" type="server"/>
 			<script src="server/classes/Environment/Map.lua" type="server"/>
 
