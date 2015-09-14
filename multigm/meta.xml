@@ -19,6 +19,8 @@
 			<script src="shared/async.lua" type="shared"/>
 			<script src="shared/debug.lua" type="shared"/>
 			<script src="shared/classes/TimedPulse.lua" type="shared"/>
+			<script src="shared/classes/POParser.lua" type="shared"/>
+			<script src="shared/classes/TranslationManager.lua" type="shared"/>
 
 		<!-- Updater -->
 			<!-- script src="update/Updater.lua" type="server"/-->
@@ -167,6 +169,9 @@
 
 
 	<!-- Files -->
+		<!-- Translation -->
+			<file src="files/translation/en/client.po"/>
+
 		<!-- Images -->
 			<file src="files/images/GUI/download.png"/>
 			<file src="files/fonts/Betm-Regular.otf"/>

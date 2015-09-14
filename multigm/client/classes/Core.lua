@@ -14,6 +14,10 @@ function Core:constructor()
 	-- Instantiate the localPlayer instance right now
 	enew(localPlayer, LocalPlayer)
 
+	-- Instantiate TranslationManager
+	TranslationManager:new()
+
+
   if DEBUG then
 		Debugging:new()
 	end

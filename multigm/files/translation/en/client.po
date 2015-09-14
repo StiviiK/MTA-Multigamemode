@@ -1,0 +1,52 @@
+# vMultigamemode Translation File
+# http://www.domain-missing.org
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-09-14 16:15+0000\n"
+"PO-Revision-Date: 2015-09-14 16:15+0000\n"
+"Last-Translator: none <none@no.mail>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua:0
+msgid "Gamemode: %s (Id: %s)"
+msgstr ""
+
+#: client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua:0
+msgid "Gamemode Infos"
+msgstr ""
+
+#: client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua:0
+msgid "Gamemode beitreten"
+msgstr ""
+
+#: client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua:0
+msgid "Admin: Ped respawnen"
+msgstr ""
+
+#: client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua:0
+msgid "Admin: Ped löschen"
+msgstr ""
+
+#: client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua:0
+msgid "Developer: Gamemode deaktivieren"
+msgstr ""
+
+#: client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua:0
+msgid "Möchtest du diesen Gamemode wirklich dauerhaft deaktivieren?\nDiese Aktion kann nicht rückgängig gemacht werden!"
+msgstr ""
+
+#: client/classes/GUIForms/QuestionBox.lua:0
+msgid "Frage"
+msgstr ""
+
+#: client/classes/GUIForms/QuestionBox.lua:0
+msgid "Ja"
+msgstr ""
+
+#: client/classes/GUIForms/QuestionBox.lua:0
+msgid "Nein"
+msgstr ""
+

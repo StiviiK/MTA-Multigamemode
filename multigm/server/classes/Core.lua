@@ -28,6 +28,9 @@ function Core:constructor ()
 	sql = MySQL:new(MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PW, MYSQL_DB, "")
 	sql:setPrefix("multigm")
 
+  -- Instantiate TranslationManager
+  TranslationManager:new()
+
   -- Register Maps
   MapManager:new()
   MapManager:getSingleton():registerMap("gamemodes/Lobby/files/maps/Test.map")

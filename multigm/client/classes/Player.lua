@@ -47,3 +47,4 @@ addEventHandler("PlayerPublicSync", root, function(public) source:onUpdateSync(n
 function Player:getId() return self:getPrivateSync("Id") end
 function Player:isLoggedIn() return self:getId() ~= nil end
 function Player:getRank() return self:getPrivateSync("Rank") end
+function Player:getLocale() return self:getPublicSync("Locale") end

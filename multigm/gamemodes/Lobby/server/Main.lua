@@ -7,9 +7,6 @@ function Lobby:constructor()
   self:addRoom("Lobby #2", 15)
   self:addRoom("Lobby #3", 15)
   self:addRoom("Lobby #4", 15)
-
-    -- Fallback Room
-    self:addRoom("Lobby - FALLBACK ROOM")
 end
 
 function Lobby:destructor()
