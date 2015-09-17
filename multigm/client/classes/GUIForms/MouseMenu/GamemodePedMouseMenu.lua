@@ -3,7 +3,7 @@ GamemodePedMouseMenu = inherit(GUIMouseMenu)
 function GamemodePedMouseMenu:constructor(posX, posY, instance)
   GUIMouseMenu.constructor(self, posX, posY, 330, 1)
 
-  self:addItem(_("Gamemode: %s (Id: %s)", instance:getGamemode():getName(), instance:getId()))
+  self:addItem(_("Gamemode: %s", instance:getGamemode():getName()))
       :setTextColor(Color.Red)
 
   self:addItem(_"Gamemode Infos",
@@ -31,12 +31,13 @@ function GamemodePedMouseMenu:constructor(posX, posY, instance)
     self:addItem(_"Admin: Ped löschen",
       function ()
         delete(instance)
+        Cursor:hide()
       end
     )
 
     self:addItem(_"Developer: Gamemode deaktivieren",
       function ()
-        QuestionBox:new(_"Möchtest du diesen Gamemode wirklich dauerhaft deaktivieren?\nDiese Aktion kann nicht rückgängig gemacht werden!",
+        QuestionBox:new(_"Möchtest du diesen Gamemode wirklich dauerhaft deaktivieren?".."\n".._"Diese Aktion kann nicht rückgängig gemacht werden!",
           function ()
             triggerServerEvent("Event_DisableGamemode", localPlayer, instance:getGamemode():getId())
           end

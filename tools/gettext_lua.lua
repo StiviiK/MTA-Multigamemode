@@ -78,4 +78,3 @@ end
 
 genpot("server")
 genpot("client")
-genpot("shared")

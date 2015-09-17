@@ -2,51 +2,59 @@
 # http://www.domain-missing.org
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-14 16:15+0000\n"
-"PO-Revision-Date: 2015-09-14 16:15+0000\n"
+"POT-Creation-Date: 2015-09-17 16:36+0000\n"
+"PO-Revision-Date: 2015-09-17 16:36+0000\n"
 "Last-Translator: none <none@no.mail>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: client/classes/GUIForms/GamemodeInfo.lua:0
+msgid "Gamemode beitreten"
+msgstr "Join Gamemode"
+
+#: client/classes/GUIForms/GamemodeInfo.lua:0
+msgid "Abbrechen"
+msgstr "Abort"
+
 #: client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua:0
-msgid "Gamemode: %s (Id: %s)"
-msgstr ""
+msgid "Gamemode: %s"
+msgstr "Gamemode: %s"
 
 #: client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua:0
 msgid "Gamemode Infos"
-msgstr ""
-
-#: client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua:0
-msgid "Gamemode beitreten"
-msgstr ""
+msgstr "Gamemode Info"
 
 #: client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua:0
 msgid "Admin: Ped respawnen"
-msgstr ""
+msgstr "Admin: Respawn Ped"
 
 #: client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua:0
 msgid "Admin: Ped löschen"
-msgstr ""
+msgstr "Admin: Delete Ped"
 
 #: client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua:0
 msgid "Developer: Gamemode deaktivieren"
-msgstr ""
+msgstr "Developer: Disable Gamemode"
 
 #: client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua:0
-msgid "Möchtest du diesen Gamemode wirklich dauerhaft deaktivieren?\nDiese Aktion kann nicht rückgängig gemacht werden!"
-msgstr ""
+msgid "Möchtest du diesen Gamemode wirklich dauerhaft deaktivieren?"
+msgstr "Do you really want to disable this Gamemode?"
+
+#: client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua:0
+msgid "Diese Aktion kann nicht rückgängig gemacht werden!"
+msgstr "This Action can not be undone!"
 
 #: client/classes/GUIForms/QuestionBox.lua:0
 msgid "Frage"
-msgstr ""
+msgstr "Question"
 
 #: client/classes/GUIForms/QuestionBox.lua:0
 msgid "Ja"
-msgstr ""
+msgstr "Yes"
 
 #: client/classes/GUIForms/QuestionBox.lua:0
 msgid "Nein"
-msgstr ""
+msgstr "No"
 

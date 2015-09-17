@@ -19,7 +19,7 @@ for root, dirs, files in os.walk("multigm"):
 			
 			file.close()
 
-print("======= Multigamemode: Script statistics =======")
+print("======= vMultigamemode: Script statistics =======")
 print("")
 print("Number of files:         " + str(fileCount))
 print("Number of scripts:       " + str(scriptFileCount))

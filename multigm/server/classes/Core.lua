@@ -86,7 +86,7 @@ end
 
 function Core:onInternalError(error)
   for i, v in pairs(getElementsByType("player")) do
-    v:kick("System - Core", ("An Internal Error occured! Error Id: %s"):format(error))
+    v:kick("System - Core", _("Ein interner Fehler is aufgetreten! Error Id: %s", v, error))
   end
 
   stopResource(getThisResource())

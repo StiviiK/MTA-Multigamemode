@@ -44,15 +44,15 @@ function GamemodeManager:Event_DisableGamemode(Id)
     outputDebug(("[GamemodeManager] %s forced Gamemode destruction! [Id: %d]"):format(source:getAccount():getName(), Id))
 
     delete(self.getFromId(Id))
-    source:triggerEvent("successBox", source, "Action completed successfully!")
+    source:triggerEvent("successBox", source, _("Aktion erfolgreich ausgeführt!", source))
   else
-    source:triggerEvent("errorBox", source, "Permission denied.")
+    source:triggerEvent("errorBox", source, _("Zugriff verweigert.", source))
   end
 end
 
 function GamemodeManager:Event_JoinGamemode(Id)
   if source:getGamemode() == self.getFromId(Id) then
-    source:triggerEvent("errorBox", source, "You are already in this Gamemode!")
+    source:triggerEvent("errorBox", source, _("Du bist bereits in diesem Gamemode!", source))
     return
   end
 
@@ -61,5 +61,5 @@ function GamemodeManager:Event_JoinGamemode(Id)
   end
 
   self.getFromId(Id):addPlayer(source)
-  source:triggerEvent("successBox", source, "Gamemode joined successfully!")
+  source:triggerEvent("successBox", source, _("Du bist dem Gamemode erfolgreich beigetreten!", source))
 end
