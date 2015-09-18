@@ -33,17 +33,18 @@ function Player:loadCharacter()
   -- load stuff from DB
   if not self:isGuest() then
     self:load()
+  else
+    self:loadGuest()
   end
 
   -- Load element related stuff
   self:setHealth(self.m_Health)
   self:setArmor(self.m_Armor)
-  self:setSkin(self.m_Skin)
   self.m_Health, self.m_Armor = nil
 
   -- Sync important stuff
-  self:setPrivateSync("joinTime", self:getJoinTime())
   self:setPrivateSync("Id", self:getId())
+  self:setPrivateSync("joinTime", self:getJoinTime())
 
   -- unfreeze the player
   self:setFrozen(false)

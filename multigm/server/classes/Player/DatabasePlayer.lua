@@ -29,7 +29,7 @@ end
 function DatabasePlayer:virtual_constructor()
   self.m_Account  = false
   self.m_IsGuest  = false
-	self.m_Locale   = "de"
+	self.m_Locale   = "en"
 	self.m_Id       = -1
 	self.m_Health   = 100
 	self.m_Armor    = 0
@@ -71,6 +71,14 @@ function DatabasePlayer:save()
 	end
 
   return sql:queryExec("UPDATE ??_character SET Locale=?, Skin=?, XP=?, Money=?, Rank=? WHERE Id=?;", sql:getPrefix(), self:getLocale(), self:getSkin(), self:getXP(), self:getMoney(), self:getRank(), self:getId())
+end
+
+function DatabasePlayer:loadGuest()
+	-- Reset data to Sync it
+	self:setLocale(self.m_Locale)
+	self:setXP(self.m_XP)
+	self:setMoney(self.m_Money)
+	self:setRank(self.m_Rank)
 end
 
 -- Short getters
