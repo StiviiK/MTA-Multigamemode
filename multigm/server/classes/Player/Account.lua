@@ -61,6 +61,7 @@ function Account:constructor(id, username, player, guest)
   self.m_Session = Session:new(player)
 
   Account.Map[self.m_Id] = self
+  DatabasePlayer.Map[player:getId()] = player
 end
 
 function Account:destructor()

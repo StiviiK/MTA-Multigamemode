@@ -1,11 +1,5 @@
 Thread = inherit(Object)
 Thread.Map = {}
-Thread.Piority = {
-  ["highest"] = 50;
-  ["high"] = 150;
-  ["middle"] = 250;
-  ["low"] = 500;
-}
 
 function Thread:constructor(func)
   self.m_Id = table.push(Thread.Map, self)
@@ -38,7 +32,7 @@ function Thread:start(...)
     elseif self:getStatus() == COROUTINE_STATUS_DEAD then
       delete(self)
     end
-  end, Thread.Piority[self:getPiority()], -1)
+  end, self:getPiority(), -1)
 end
 
 function Thread:resume(...)

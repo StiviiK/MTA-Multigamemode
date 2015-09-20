@@ -50,7 +50,6 @@ function DatabasePlayer:load()
   if self:isGuest() then
     return false
   end
-  DatabasePlayer.Map[self.m_Id] = self
 
   local row = sql:queryFetchSingle("SELECT Locale, Skin, XP, Money, Rank FROM ??_character WHERE Id = ?;", sql:getPrefix(), self:getId())
 	if not row then
@@ -69,7 +68,7 @@ function DatabasePlayer:save()
 	if self:isGuest() then
 		return false
 	end
-
+	
   return sql:queryExec("UPDATE ??_character SET Locale=?, Skin=?, XP=?, Money=?, Rank=? WHERE Id=?;", sql:getPrefix(), self:getLocale(), self:getSkin(), self:getXP(), self:getMoney(), self:getRank(), self:getId())
 end
 

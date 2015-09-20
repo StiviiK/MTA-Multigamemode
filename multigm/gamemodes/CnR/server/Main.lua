@@ -18,8 +18,5 @@ end
 
 function CopsnRobbers:onDownloadComplete()
   -- spawn the player
-  local spawn = self:getSetting("Spawn")
-  client:setPosition(spawn.Position)
-  client:setRotation(0, 0, spawn.Rotation)
-  client:setInterior(spawn.Interior)
+  client:setPosition( 4190.506, -1631.823, 636.10)
 end

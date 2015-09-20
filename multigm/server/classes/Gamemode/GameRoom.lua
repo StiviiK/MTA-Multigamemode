@@ -34,9 +34,15 @@ function GameRooms:removeRoom(Id)
 end
 
 function GameRooms:addToRoom(Id, player)
+  player.m_Room = Id
   -- Todo
 end
 
 function GameRooms:removeFromRoom(Id, player)
+  player.m_Room = nil
   -- Todo
+end
+
+function Player:getRoom()
+  return self.m_Room
 end
