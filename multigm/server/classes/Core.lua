@@ -67,6 +67,18 @@ function Core:constructor ()
     Package.save(fileName, files)
     Provider:getSingleton():offerFile(fileName, PROVIDER_ON_DEMAND)
   end
+
+  -- Check for Updates
+  if CHECK_FOR_UPDATES then
+    self.m_UpdateCheck = TimedPulse:new(1000*60*60)
+    self.m_UpdateCheck:registerHandler(function ()
+      fetchRemote(VERSION_URL, bind(self.onUpdateCheck, self))
+    end)
+    self.m_UpdateCheck:doPulse()
+  end
+
+  -- Update current GitHash
+  GIT_HASH = self:getVersion()
 end
 
 function Core:destructor ()
@@ -122,4 +134,30 @@ function Core:setAPIStatements()
       outputDebug("Disconnected")
     end
   )
+end
+
+function Core:getVersion()
+  if self.m_Version == nil then
+    local file = fileOpen("version.txt")
+    if file then
+      self.m_Version = file:read(file:getSize())
+      file:close()
+    else
+      self.m_Version = false
+    end
+  end
+  return self.m_Version
+end
+
+function Core:onUpdateCheck(response, errno)
+  if errno == 0 then
+    local version = fromJSON(response)
+    if version then
+      if self:getVersion() ~= version.."gj" then
+        outputServerLog("[Updater] A new commit for vMultigamemode has been pushed!")
+        outputServerLog("[Updater] Current Hash: "..self:getVersion():sub(1, 7).." | New Hash: "..version:sub(1, 7))
+        outputServerLog("[Updater] Download the new version at https://goo.gl/B5mmAV!")
+      end
+    end
+  end
 end

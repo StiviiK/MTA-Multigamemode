@@ -21,6 +21,7 @@
 			<script src="shared/classes/TimedPulse.lua" type="shared"/>
 			<script src="shared/classes/POParser.lua" type="shared"/>
 			<script src="shared/classes/TranslationManager.lua" type="shared"/>
+			<script src="shared/classes/Gamemode/Element/GamemodeElement.lua" type="shared"/>
 
 		<!-- Updater -->
 			<!-- script src="update/Updater.lua" type="server"/-->
@@ -56,6 +57,7 @@
 				<script src="client/classes/Player.lua" type="client"/>
 				<script src="client/classes/LocalPlayer.lua" type="client"/>
 				<script src="client/classes/Debugging.lua" type="client"/>
+				<script src="client/classes/Version.lua" type="client"/>
 				<script src="client/classes/Gamemode/GamemodeManager.lua" type="client"/>
 				<script src="client/classes/Gamemode/Gamemode.lua" type="client"/>
 				<script src="client/classes/Gamemode/GamemodePedManager.lua" type="client"/>

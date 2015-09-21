@@ -42,6 +42,8 @@ end
 function PlayerManager:playerReady()
 	showChat(client, true)
 	self:spawnPlayer(client)
+
+	client:triggerEvent("versionReceive", client, core:getVersion())
 end
 
 function PlayerManager:spawnPlayer(player)

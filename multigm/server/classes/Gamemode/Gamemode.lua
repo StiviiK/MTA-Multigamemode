@@ -1,4 +1,5 @@
 Gamemode = inherit(Object)
+inherit(GamemodeElement, Gamemode)
 
 -- pure virtual functions
 Gamemode.constructor = pure_virtual

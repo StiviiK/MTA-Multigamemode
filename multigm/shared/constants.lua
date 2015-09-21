@@ -2,6 +2,12 @@ PRIVATE_DIMENSION_SERVER = 65535 -- This dimension should not be used for playin
 PRIVATE_DIMENSION_CLIENT = 2 -- This dimension should be used for things which
 							 -- happen while the player is in PRIVATE_DIMENSION on the server
 
+-- VERSION
+PROJECT_NAME = "vMultigamemode"
+VERSION = "0.1"
+BUILD = "development"
+GIT_HASH = ""
+
 -- RANKS
 RANK = {}
 RANK[-1] = "Banned"

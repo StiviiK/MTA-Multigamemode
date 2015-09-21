@@ -6,6 +6,7 @@
 -- *
 -- ****************************************************************************
 Gamemode = inherit(Object)
+inherit(GamemodeElement, Gamemode)
 
 -- pure virtual functions
 Gamemode.constructor = pure_virtual
@@ -16,6 +17,8 @@ Gamemode.onPlayerLeft = pure_virtual
 function Gamemode:virtual_constructor(name)
   self.m_Name = name
   self.m_GamemodePeds = {}
+
+  self.m_RootElement = Element(("DummyRoot-%s"):format(self.m_Name))
 end
 
 function Gamemode:virtual_destructor()
@@ -34,6 +37,7 @@ function Gamemode:getId()
   return self.m_Id
 end
 
-function Gamemode:getName()
-  return self.m_Name
-end
+-- Short getters
+function Gamemode:getName() return self.m_Name end
+function Gamemode:getRootElement() return self.m_RootElement end
+function Gamemode:getRoot() return self:getRootElement() end
