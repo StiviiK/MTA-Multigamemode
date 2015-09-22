@@ -16,7 +16,7 @@ function GamemodePed:constructor(model, position, rotation, dimension, interior,
   self.m_Interior = interior
   self.m_Gamemode = gamemode
 
-  self.m_Ped = Ped.create(self.m_Model, self.m_Position)
+  self.m_Ped = self.m_Gamemode:createPed(self.m_Model, self.m_Position)
   self.m_Ped:setDimension(self.m_Dimension)
   self.m_Ped:setInterior(self.m_Interior)
   self.m_Ped:setRotation(self.m_Rotation)

@@ -22,6 +22,7 @@ function Core:constructor()
 		Debugging:new()
 	end
 
+	Version:new()
 	Cursor = GUICursor:new()
 	Provider:new()
 	GamemodePedManager:new()

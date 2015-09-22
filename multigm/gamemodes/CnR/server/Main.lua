@@ -18,5 +18,5 @@ end
 
 function CopsnRobbers:onDownloadComplete()
   -- spawn the player
-  client:setPosition( 4190.506, -1631.823, 636.10)
+  client:setPosition(4190.506, -1631.823, 636.10)
 end

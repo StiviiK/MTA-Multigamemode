@@ -17,8 +17,6 @@ Gamemode.onPlayerLeft = pure_virtual
 function Gamemode:virtual_constructor(name)
   self.m_Name = name
   self.m_GamemodePeds = {}
-
-  self.m_RootElement = Element(("DummyRoot-%s"):format(self.m_Name))
 end
 
 function Gamemode:virtual_destructor()
@@ -39,5 +37,3 @@ end
 
 -- Short getters
 function Gamemode:getName() return self.m_Name end
-function Gamemode:getRootElement() return self.m_RootElement end
-function Gamemode:getRoot() return self:getRootElement() end

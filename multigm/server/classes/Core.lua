@@ -153,7 +153,7 @@ function Core:onUpdateCheck(response, errno)
   if errno == 0 then
     local version = fromJSON(response)
     if version then
-      if self:getVersion() ~= version.."gj" then
+      if self:getVersion() ~= version then
         outputServerLog("[Updater] A new commit for vMultigamemode has been pushed!")
         outputServerLog("[Updater] Current Hash: "..self:getVersion():sub(1, 7).." | New Hash: "..version:sub(1, 7))
         outputServerLog("[Updater] Download the new version at https://goo.gl/B5mmAV!")
