@@ -1,19 +1,11 @@
 GamemodeElement = inherit(Object)
 
 function GamemodeElement:virtual_constructor()
-  outputDebug("GamemodeElement:virtual_constructor")
-
-  -- Todo: Find a better name
-  self.ms_RootElement = Element("root")
+  self.ms_RootElement = Root:new()
 end
 
 function GamemodeElement:virtual_destructor()
-  for i, v in pairs(self:getRoot():getChildren()) do
-    if isElement(v) then
-      destroyElement(v)
-    end
-  end
-  destroyElement(self.ms_RootElement)
+  delete(self.ms_RootElement)
 end
 
 -- Elements creation

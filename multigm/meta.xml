@@ -21,6 +21,7 @@
 			<script src="shared/classes/TimedPulse.lua" type="shared"/>
 			<script src="shared/classes/POParser.lua" type="shared"/>
 			<script src="shared/classes/TranslationManager.lua" type="shared"/>
+			<script src="shared/classes/Root.lua" type="shared"/>
 			<script src="shared/classes/Gamemode/Element/GamemodeElement.lua" type="shared"/>
 
 		<!-- Updater -->

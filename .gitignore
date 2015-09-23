@@ -7,3 +7,6 @@ multigm/gamemodes/Lobby/lobby.data
 multigm/gamemodes/CnR/cnr.data
 multigm/update/update.rpf
 multigm_local.lnk
+
+# Ignore Version file
+multigm/version.txt

@@ -24,7 +24,7 @@ function GamemodePed:constructor(model, position, rotation, dimension, interior,
   self.m_Ped:setFrozen(true)
 
   if self.m_Gamemode.m_GamemodePeds then
-    table.insert(self.m_Gamemode.m_GamemodePeds, self.m_Id, self)
+    table.insert(self:getGamemode().m_GamemodePeds, self.m_Id, self)
   end
 end
 
@@ -35,8 +35,8 @@ function GamemodePed:destructor()
 
   GamemodePedManager:getSingleton():removeRef(self)
 
-  if self.m_Gamemode.m_GamemodePeds then
-    self.m_Gamemode.m_GamemodePeds[self:getId()] = nil
+  if self:getGamemode().m_GamemodePeds then
+    self:getGamemode().m_GamemodePeds[self:getId()] = nil
   end
 end
 
