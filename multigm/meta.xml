@@ -170,7 +170,6 @@
 			<script src="gamemodes/CnR/client/Init.lua" type="client"/>
 			<script src="gamemodes/CnR/client/Main.lua" type="client"/>
 
-
 	<!-- Files -->
 		<!-- Translation -->
 			<file src="files/translation/en/client.po"/>

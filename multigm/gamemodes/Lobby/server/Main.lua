@@ -3,6 +3,9 @@ function Lobby:constructor()
   addRemoteEvents{"onLobbyDownloadFinished"}
   addEventHandler("onLobbyDownloadFinished", root, bind(Lobby.onDownloadComplete, self))
 
+  -- Load translation file
+  TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
+
   -- Create GameRooms
   self:addRoom("Lobby", -1)
 end

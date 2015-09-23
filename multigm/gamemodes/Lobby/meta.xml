@@ -1,2 +1,4 @@
 <meta>
+  <!-- Translation -->
+    <transferfile src="gamemodes/Lobby/files/translation/en/client.po"/>
 </meta>

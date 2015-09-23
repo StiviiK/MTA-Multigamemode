@@ -6,8 +6,12 @@ Lobby.ms_Settings = {
     Rotation  = 223.45709228516;
     Interior = 18;
   };
+  TranslationFile = "gamemodes/Lobby/files/translation/en/client.po";
 }
 
 function Lobby:getSetting(key)
   return self.ms_Settings[key]
 end
+
+-- Shorten function
+function Lobby:get(...) return self:getSetting(...) end

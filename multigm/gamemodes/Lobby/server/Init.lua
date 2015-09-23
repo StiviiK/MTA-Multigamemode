@@ -8,8 +8,12 @@ Lobby.ms_Settings = {
     Interior = 18;
   };
   DownloadPath = LOBBY_DOWNLOAD_FILE;
+  TranslationFile = "gamemodes/Lobby/files/translation/en/server.po";
 }
 
 function Lobby:getSetting(key)
   return self.ms_Settings[key]
 end
+
+-- Shorten function
+function Lobby:get(...) return self:getSetting(...) end

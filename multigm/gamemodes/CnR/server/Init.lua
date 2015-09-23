@@ -6,8 +6,12 @@ CopsnRobbers.ms_Settings = {
     Interior = 0;
   };
   DownloadPath = CNR_DOWNLOAD_FILE;
+  TranslationFile = "gamemodes/CnR/files/translation/en/server.po";
 }
 
 function CopsnRobbers:getSetting(key)
   return self.ms_Settings[key]
 end
+
+-- Shorten function
+function CopsnRobbers:get(...) return self:getSetting(...) end

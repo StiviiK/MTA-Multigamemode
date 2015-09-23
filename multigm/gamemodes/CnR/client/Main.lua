@@ -2,6 +2,9 @@ function CopsnRobbers:constructor()
   --outputDebug("Lobby:constructor")
   addRemoteEvents{"onCNRStartDownload"}
   addEventHandler("onCNRStartDownload", root, bind(CopsnRobbers.onDownloadStart, self))
+
+  -- Load translation file
+  TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
 end
 
 function CopsnRobbers:destructor()

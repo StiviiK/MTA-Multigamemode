@@ -1,6 +1,9 @@
 function CopsnRobbers:constructor()
   addRemoteEvents{"onCNRDownloadFinished"}
   addEventHandler("onCNRDownloadFinished", root, bind(CopsnRobbers.onDownloadComplete, self))
+  
+  -- Load translation file
+  TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
 
   -- Maps
   MapManager:getSingleton():loadMap(self, "gamemodes/Lobby/files/maps/Test.map"):load(MAP_LOADING_FAST)
