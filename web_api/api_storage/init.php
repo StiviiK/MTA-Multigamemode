@@ -9,4 +9,10 @@
     'message' => false,
     'ip'      => getClientIP(),
   );
+
+  //
+  $noToken = Array(
+    'connect' => true,
+    'update'  => true,
+ );
 ?>

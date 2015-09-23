@@ -1,5 +1,5 @@
 <?php
-	require("storage/init.php");
+	require("api_storage/init.php");
 
 	// Check for the requested method
 	if(!isset($_GET["method"]) or $_GET["method"] == "") {
@@ -10,11 +10,11 @@
 	}
 
 	// Set data
-	$file = "storage/server_{$_GET["method"]}.php";
+	$file = "api_storage/{$_GET["method"]}.php";
 	$return["method"] = $_GET["method"];
 
 	// Check for Security token
-	if(($_GET["method"] != "connect") and (!isset($_GET["token"]) or $_GET["token"] == "")) {
+	if(($noToken[$_GET["method"]] != true) and (!isset($_GET["token"]) or $_GET["token"] == "")) {
 		$return["message"] = "No valid token given!";
 
 		echo json_encode($return);

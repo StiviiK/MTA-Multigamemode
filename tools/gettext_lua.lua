@@ -63,18 +63,26 @@ function writePotHeader(pothandle)
 					"\"Content-Transfer-Encoding: 8bit\\n\"\n\n")
 end
 
-function genpot(name)
+function genpot(name, directory)
+	if not directory then
+		directory = name
+	end
+
 	local pot = io.open(name..".pot", "w")
 	writePotHeader(pot)
 	
 	-- change to main directory
 	lfs.chdir("../multigm")
-	processDirectory(name, pot)
+	processDirectory(directory, pot)
 	
 	-- go back to tools
 	lfs.chdir("../tools")
 	pot:close()
 end
 
-genpot("server")
-genpot("client")
+genpot("core-server", "server")
+genpot("core-client", "client")
+genpot("lobby-server", "gamemodes/Lobby/server")
+genpot("lobby-client", "gamemodes/Lobby/client")
+genpot("cnr-server", "gamemodes/CnR/server")
+genpot("cnr-client", "gamemodes/CnR/client")
