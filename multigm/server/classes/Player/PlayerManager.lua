@@ -5,10 +5,11 @@ function PlayerManager:constructor()
 	self.m_ReadyPlayers = {}
 
 	-- Register events
-	addRemoteEvents{"onPlayerReady"}
+	addRemoteEvents{"onPlayerReady", "Player_changeLanguage"}
   addEventHandler("onPlayerConnect", root, bind(PlayerManager.playerConnect, self))
   addEventHandler("onPlayerJoin", root, bind(PlayerManager.playerJoin, self))
 	addEventHandler("onPlayerReady", root, bind(PlayerManager.playerReady, self))
+	addEventHandler("Player_changeLanguage", root, bind(PlayerManager.Event_ChangeLocale, self))
 
 	self.m_SyncPulse = TimedPulse:new(500)
 	self.m_SyncPulse:registerHandler(bind(PlayerManager.updatePlayerSync, self))
@@ -49,4 +50,9 @@ end
 function PlayerManager:spawnPlayer(player)
 	player:spawn(SPAWN_DEFAULT_POSITION, SPAWN_DEFAULT_ROTATION, SPAWN_DEFAULT_SKIN, SPAWN_DEFAULT_INTERIOR)
 	player:setFrozen(true)
+end
+
+-- Events
+function PlayerManager:Event_ChangeLocale(locale)
+	source:setLocale(LOCALE[locale])
 end

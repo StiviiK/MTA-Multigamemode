@@ -34,7 +34,7 @@ function GUITabPanel:addTab(tabName)
 		end
 
 		tabButton:setColor(Color.Grey)
-		tabButton:setBackgroundColor(Color.LightBlue)
+		tabButton:setBackgroundColor(Color.Orange)
 	end
 
 	self[id] = GUIElement:new(0, 30, self.m_Width, self.m_Height-30, self)
@@ -44,7 +44,7 @@ function GUITabPanel:addTab(tabName)
 	else
 		self.m_CurrentTab = 1
 		tabButton:setColor(Color.Grey)
-		tabButton:setBackgroundColor(Color.LightBlue)
+		tabButton:setBackgroundColor(Color.Orange)
 	end
 
 	return self[id]

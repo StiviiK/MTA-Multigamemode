@@ -38,6 +38,11 @@ function Core:ready()
 end
 
 function Core:afterLogin()
+	-- Create bindings
+	SelfGUI:new()
+	SelfGUI:getSingleton():close()
+	addCommandHandler("self", function () SelfGUI:getSingleton():open() end)
+	bindKey("F2", "down", function() SelfGUI:getSingleton():toggle() end)
 end
 
 function Core:destructor()

@@ -133,6 +133,7 @@
 				<script src="client/classes/GUIForms/QuestionBox.lua" type="client"/>
 				<script src="client/classes/GUIForms/DownloadBar.lua" type="client"/>
 				<script src="client/classes/GUIForms/GamemodeInfo.lua" type="client"/>
+				<script src="client/classes/GUIForms/SelfGUI.lua" type="client"/>
 
 					<!-- Mouse Menus -->
 					<script src="client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua" type="client"/>

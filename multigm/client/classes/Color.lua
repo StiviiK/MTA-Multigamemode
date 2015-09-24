@@ -18,11 +18,12 @@ Color = {
 	Blue      = {0,     0, 255},
 	DarkBlue  = {0,    32,  63},
 	DarkBlueAlpha   = {0,32,  63, 200},
-    DarkLightBlue = {0, 50, 100, 255},
+  DarkLightBlue = {0, 50, 100, 255},
 	Brown     = {189, 109, 19},
 	BrownAlpha= {189, 109, 19, 180},
 	LightBlue = {6, 163, 212},
 	Orange    = {254, 138, 0},
+	LimeGreen    = {65, 163, 23},
 }
 
 AdminColor = {

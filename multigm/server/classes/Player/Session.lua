@@ -2,11 +2,13 @@ Session = inherit(Object)
 
 function Session:constructor(player)
   self.m_Player = player
-  self:setToken(hash("sha256", ("%s%s%s"):format(player:getName(), getRealTime().timestamp, player:getIP())))
+  self:setToken(hash("md5", ("%s%s%s"):format(player:getAccount():getName(), getRealTime().timestamp, player:getIP())))
 
   sql:queryExec("INSERT INTO ??_sessions (`Id`, `Name`, `Token`, `IP`, `Serial`, `Valid`, `sStart`, `sEnd`) VALUES (NULL, ?, ?, ?, ?, '1', ?, '0');", sql:getPrefix(), player:getName(), self:getToken(), player:getIP(), player:getSerial(), getRealTime().timestamp)
   self:setId(sql:lastInsertId())
   self:update()
+
+  self.m_Player:setPrivateSync("SessionToken", self:getToken())
 end
 
 function Session:destructor()
@@ -57,6 +59,7 @@ function Session:update()
     ["skin"] = self.m_Player:getSkin();
     ["onlineSince"] = self.m_Player:getJoinTime();
   })
+  self.m_Player:setPrivateSync("SessionInfo", self:getPlayerInfo())
 
   sql:queryExec("UPDATE ??_sessions SET `PlayerInfo` = ? WHERE `Id` = ?;", sql:getPrefix(), toJSON(self:getPlayerInfo(), true), self:getId())
 end

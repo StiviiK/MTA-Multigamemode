@@ -112,8 +112,7 @@ function ClickHandler:dispatchClick(clickInfo, trigger)
 	if element == localPlayer then
 		if trigger then
 			if button == "left" then
-				--SelfGUI:getSingleton():open()
-				outputDebug("SelfGUI")
+				SelfGUI:getSingleton():open()
 			elseif button == "right" then
 			end
 		end

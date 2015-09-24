@@ -25,6 +25,30 @@ for k, v in pairs(RANK) do
 end
 RANK = r2
 
+-- LANGUAGE CODES
+LOCALE = {}
+LOCALE[1] = "de"
+LOCALE[2] = "en"
+
+local r2 = {}
+for k, v in pairs(LOCALE) do
+	r2[k] = v
+	r2[v] = k
+end
+LOCALE = r2
+
+-- LANGUAGES
+LANG = {}
+LANG[1] = "Deutsch"
+LANG[2] = "Englisch"
+
+local r2 = {}
+for k, v in pairs(LANG) do
+	r2[k] = v
+	r2[v] = k
+end
+LANG = r2
+
 -- IMPORTANT CORE ERROR IDs
 ERROR_MYSQL_CONNECTION_FAILED = 1
 ERROR_MASTER_CON_FAILED = 2
