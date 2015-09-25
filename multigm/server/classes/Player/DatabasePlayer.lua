@@ -51,10 +51,12 @@ function DatabasePlayer:load()
     return false
   end
 
-  local row = sql:queryFetchSingle("SELECT Locale, Skin, XP, Money, Rank FROM ??_character WHERE Id = ?;", sql:getPrefix(), self:getId())
+  local row = sql:queryFetchSingle("SELECT Locale, Skin, XP, Money, Rank, PlayTime FROM ??_character WHERE Id = ?;", sql:getPrefix(), self:getId())
 	if not row then
 		return false
 	end
+
+	self.m_LastPlayTime = row.PlayTime
 
 	-- Set non element related stuff (otherwise just save it)
 	self:setLocale(row.Locale)
@@ -68,8 +70,8 @@ function DatabasePlayer:save()
 	if self:isGuest() then
 		return false
 	end
-	
-  return sql:queryExec("UPDATE ??_character SET Locale=?, Skin=?, XP=?, Money=?, Rank=? WHERE Id=?;", sql:getPrefix(), self:getLocale(), self:getSkin(), self:getXP(), self:getMoney(), self:getRank(), self:getId())
+
+  return sql:queryExec("UPDATE ??_character SET Locale=?, Skin=?, XP=?, Money=?, Rank=?, PlayTime=? WHERE Id=?;", sql:getPrefix(), self:getLocale(), self:getSkin(), self:getXP(), self:getMoney(), self:getRank(), self:getPlayTime(), self:getId())
 end
 
 function DatabasePlayer:loadGuest()
@@ -89,6 +91,8 @@ function DatabasePlayer:getMoney() return self.m_Money end
 function DatabasePlayer:getLocale() return self.m_Locale end
 function DatabasePlayer:getXP() return self.m_XP end
 function DatabasePlayer:getRank() return self.m_Rank end
+function DatabasePlayer:getLastPlayTime() return self.m_LastPlayTime or 0 end
+function Player:getPlayTime() return math.floor(self:getLastPlayTime() + (getTickCount() - self:getJoinTime())/1000/60) end
 
 -- Short setters
 function DatabasePlayer:setSkin(Id) self.m_Skin = Id if self:isActive() then self:setModel(self.m_Skin) end end

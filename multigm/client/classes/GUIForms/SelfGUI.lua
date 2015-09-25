@@ -18,7 +18,7 @@ function SelfGUI:constructor()
   -- Tabpanel
   self.m_TabPanel = GUITabPanel:new(0, 0, self.m_Width, self.m_Height, self)
   self.m_TabPanel.onTabChanged = bind(self.TabPanel_TabChanged, self)
-	self.m_CloseButton = GUILabel:new(self.m_Width-28, 0, 28, 28, "[x]", self):setFont(VRPFont(35))
+  self.m_CloseButton = GUILabel:new(self.m_Width-28, 0, 28, 28, "[x]", self):setFont(VRPFont(35))
   self.m_CloseButton.onLeftClick = function() self:close() end
   self.m_CloseButton.onHover = function () self.m_CloseButton:setColor(Color.Orange) end
   self.m_CloseButton.onUnhover = function () self.m_CloseButton:setColor(Color.White) end
@@ -27,6 +27,19 @@ function SelfGUI:constructor()
   local tabGeneral = self.m_TabPanel:addTab(_"Allgemein")
   self.m_TabGeneral = tabGeneral
   GUILabel:new(self.m_Width*0.02, self.m_Height*0.016, self.m_Width*0.265, self.m_Height*0.12, _"Allgemein", tabGeneral)
+  GUILabel:new(self.m_Width*0.02, self.m_Height*0.12, self.m_Width*0.8, self.m_Height*0.07, _"Account", tabGeneral)
+  GUILabel:new(self.m_Width*0.02, self.m_Height*0.19, self.m_Width*0.25, self.m_Height*0.06, _"Name:", tabGeneral)
+  GUILabel:new(self.m_Width*0.02, self.m_Height*0.25, self.m_Width*0.25, self.m_Height*0.06, _"Spielzeit:", tabGeneral)
+  GUILabel:new(self.m_Width*0.02, self.m_Height*0.31, self.m_Width*0.25, self.m_Height*0.06, _"Rang:", tabGeneral)
+  GUILabel:new(self.m_Width*0.3, self.m_Height*0.19, self.m_Width*0.4, self.m_Height*0.06, getPlayerName(localPlayer), tabGeneral)
+  self.m_PlayTimeLabel = GUILabel:new(self.m_Width*0.3, self.m_Height*0.25, self.m_Width*0.4, self.m_Height*0.06, _("%s Stunde(n) %s Minute(n)", 0, 0), tabGeneral)
+  self.m_RankLabel = GUILabel:new(self.m_Width*0.3, self.m_Height*0.31, self.m_Width*0.4, self.m_Height*0.06, _(RANK[localPlayer:getRank()]), tabGeneral)
+  localPlayer:setPrivateSyncChangeHandler("Rank", function (rank) self.m_RankLabel:setText(_(RANK[rank])) end)
+  GUILabel:new(self.m_Width*0.02, self.m_Height*0.38, self.m_Width*0.8, self.m_Height*0.07, _"Gamemode", tabGeneral)
+  GUILabel:new(self.m_Width*0.02, self.m_Height*0.45, self.m_Width*0.25, self.m_Height*0.06, _"Name:", tabGeneral)
+  GUILabel:new(self.m_Width*0.02, self.m_Height*0.51, self.m_Width*0.25, self.m_Height*0.06, _"Spieler:", tabGeneral)
+  self.m_GamemodeNameLabel = GUILabel:new(self.m_Width*0.3, self.m_Height*0.45, self.m_Width*0.4, self.m_Height*0.06, localPlayer:getGamemode() and localPlayer:getGamemode():getName() or "Unkown", tabGeneral)
+  self.m_GamemodePlayersLabel = GUILabel:new(self.m_Width*0.3, self.m_Height*0.51, self.m_Width*0.4, self.m_Height*0.06, "0 / -1", tabGeneral)
 
   -- Statistics
   local tabStatistics = self.m_TabPanel:addTab(_"Statistiken")
@@ -38,7 +51,7 @@ function SelfGUI:constructor()
   self.m_TabSession = tabSession
   GUILabel:new(self.m_Width*0.02, self.m_Height*0.016, self.m_Width*0.2, self.m_Height*0.12, _"Sitzung", tabSession)
   self.m_TokenLabel = GUILabel:new(self.m_Width*0.02, self.m_Height*0.12, self.m_Width*0.672, self.m_Height*0.06, "", tabSession)
-	self.m_TokenCopyLabel = GUILabel:new(self.m_Width*0.02, self.m_Height*0.12, self.m_Width*0.125, self.m_Height*0.06, _"(kopieren)", tabSession):setColor(Color.Orange)
+  self.m_TokenCopyLabel = GUILabel:new(self.m_Width*0.02, self.m_Height*0.12, self.m_Width*0.125, self.m_Height*0.06, _"(kopieren)", tabSession):setColor(Color.Orange)
   self.m_TokenCopyLabel.onLeftClick = function()
     if setClipboard(localPlayer:getPrivateSync("SessionToken")) then
       InfoBox:new(_"Token wurde erfolgreich kopiert!")
@@ -46,8 +59,8 @@ function SelfGUI:constructor()
       ErrorBox:new(_"Token konnte nicht kopiert werden!")
     end
   end
-	self.m_TokenCopyLabel.onHover = function () self.m_TokenCopyLabel:setColor(Color.White) end
-	self.m_TokenCopyLabel.onUnhover = function () self.m_TokenCopyLabel:setColor(Color.Orange) end
+  self.m_TokenCopyLabel.onHover = function () self.m_TokenCopyLabel:setColor(Color.White) end
+  self.m_TokenCopyLabel.onUnhover = function () self.m_TokenCopyLabel:setColor(Color.Orange) end
   self.m_SessionGrid = GUIGridList:new(self.m_Width*0.02, self.m_Height*0.2, self.m_Width*0.525, self.m_Height*0.71, tabSession)
   self.m_SessionGrid:addColumn(_"Index", 0.5)
   self.m_SessionGrid:addColumn(_"Wert", 0.5)
@@ -96,6 +109,10 @@ function SelfGUI:onShow()
   local token = localPlayer:getPrivateSync("SessionToken")
   self.m_TokenLabel:setText(_("Token: %s", token))
   self.m_TokenCopyLabel:setPosition(self.m_Width*0.02 + dxGetTextWidth(_("Token: %s", token), self.m_TokenLabel:getFontSize(), self.m_TokenLabel:getFont()) + 10, self.m_Height*0.12)
+
+  -- PlayTime
+  local hours, minutes = math.floor(localPlayer:getPlayTime()/60), (localPlayer:getPlayTime() - math.floor(localPlayer:getPlayTime()/60)*60)
+  self.m_PlayTimeLabel:setText(_("%s Stunde(n) %s Minute(n)", hours, minutes))
 end
 
 function SelfGUI:TabPanel_TabChanged(tabId)

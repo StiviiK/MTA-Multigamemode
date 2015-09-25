@@ -134,3 +134,19 @@ msgstr "An internal Error occured!"
 #: client/classes/GUIForms/SelfGUI.lua:0
 msgid "Du kannst deine Session nur alle 5 Minuten manuell updaten!"
 msgstr "You can update your session only every 5 minutes manually!"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Account:"
+msgstr "Account:"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Spielzeit:"
+msgstr "Playtime:"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "%s Stunde(n) %s Minute(n)"
+msgstr "%s Hour(s) %s Minute(s)"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Rang:"
+msgstr "Rank: "

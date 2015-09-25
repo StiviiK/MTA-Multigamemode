@@ -57,9 +57,10 @@ function Session:update()
     ["interior"] = self.m_Player:getInterior();
     ["dimension"] = self.m_Player:getDimension();
     ["skin"] = self.m_Player:getSkin();
-    ["onlineSince"] = self.m_Player:getJoinTime();
+    ["onlineSince"] = getRealTime().timestamp - (getTickCount() - self.m_Player:getJoinTime());
     ["locale"] = self.m_Player:getLocale();
-  })
+    ["playTime"] = self.m_Player:getPlayTime();
+})
   self.m_Player:setPrivateSync("SessionInfo", self:getPlayerInfo())
 
   sql:queryExec("UPDATE ??_sessions SET `PlayerInfo` = ? WHERE `Id` = ?;", sql:getPrefix(), toJSON(self:getPlayerInfo(), true), self:getId())

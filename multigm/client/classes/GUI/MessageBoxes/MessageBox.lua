@@ -42,7 +42,7 @@ end
 function MessageBox:drawThis()
 	-- Draw background
 	dxDrawRectangle(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, self.m_Height, tocolor(0, 0, 0, 150))
-	dxDrawRectangle(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, 5, Color.DarkLightBlue)
+	dxDrawRectangle(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, 5, Color.Orange)
 
 	-- Draw icon
 	dxDrawImage(self.m_AbsoluteX + 10, self.m_AbsoluteY + self.m_Height/2 - 80/2, 85, 85, self:getImagePath())

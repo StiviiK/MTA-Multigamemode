@@ -11,7 +11,7 @@ function Player:constructor()
   self.m_SyncListener = {}
 	self.m_PublicSync = {}
 	self.m_PublicSyncUpdate = {}
-  self.m_JoinTime = getRealTime().timestamp
+  self.m_JoinTime = getTickCount()
 end
 
 function Player:destructor()
@@ -45,6 +45,7 @@ function Player:loadCharacter()
   -- Sync important stuff
   self:setPrivateSync("Id", self:getId())
   self:setPrivateSync("joinTime", self:getJoinTime())
+  self:setPrivateSync("LastPlayTime", self.m_LastPlayTime)
 
   -- unfreeze the player
   self:setFrozen(false)

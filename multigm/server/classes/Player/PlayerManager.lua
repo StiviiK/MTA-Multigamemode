@@ -56,6 +56,7 @@ end
 -- Events
 function PlayerManager:Event_ChangeLocale(locale)
 	source:setLocale(LOCALE[locale])
+	source:getAccount():getSession():update()
 end
 
 function PlayerManager:Event_UpdatePlayerSession()

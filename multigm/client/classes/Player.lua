@@ -14,6 +14,9 @@ function Player:virtual_constructor()
 	self.m_PrivateSync = {}
 	self.m_PrivateSyncChangeHandler = {}
 	self.m_PublicSyncChangeHandler = {}
+
+	self.m_JoinTime = getTickCount()
+	self.m_Gamemode = nil
 end
 
 function Player:getPublicSync(key)
@@ -52,8 +55,13 @@ addRemoteEvents{"PlayerPrivateSync", "PlayerPublicSync"}
 addEventHandler("PlayerPrivateSync", root, function(private) source:onUpdateSync(private, nil) end)
 addEventHandler("PlayerPublicSync", root, function(public) source:onUpdateSync(nil, public) end)
 
+-- Short setters
+function Player:setGamemode(gamemode) self.m_Gamemode = gamemode end
+
 -- Short getters
 function Player:getId() return self:getPrivateSync("Id") end
 function Player:isLoggedIn() return self:getId() ~= nil end
 function Player:getRank() return self:getPrivateSync("Rank") end
 function Player:getLocale() return self:getPublicSync("Locale") end
+function Player:getPlayTime() return math.floor(self:getPrivateSync("LastPlayTime") + (getTickCount() - self.m_JoinTime)/1000/60) end
+function Player:getGamemode() return self.m_Gamemode end
