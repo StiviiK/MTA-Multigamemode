@@ -16,9 +16,9 @@ function VRPButton:constructor(posX, posY, width, height, text, barOnTop, parent
 	GUIRectangle.constructor(self, posX, posY, width, height, tocolor(0x23, 0x23, 0x23, 230), parent)
 
 	if barOnTop then
-		self.m_Bar = GUIRectangle:new(0, 0, width, height*0.075, tocolor(0x3F, 0x7F, 0xBF, 255), self)
+		self.m_Bar = GUIRectangle:new(0, 0, width, height*0.075, Color.Orange, self)
 	else
-		self.m_Bar = GUIRectangle:new(0, height-height*0.075, width, height*0.075, tocolor(0x3F, 0x7F, 0xBF, 255), self)
+		self.m_Bar = GUIRectangle:new(0, height-height*0.075, width, height*0.075, Color.Orange, self)
 	end
 	self.m_Label = GUILabel:new(0, height*0.05, width, height*0.9, text, self)
 		:setAlign("center", "center")
@@ -27,7 +27,7 @@ function VRPButton:constructor(posX, posY, width, height, text, barOnTop, parent
 	self.m_BarAnimation = false
 	self.m_TextAnimation = false
 	self.m_IsDark = false
-	self.m_BarColor = tocolor(0x3F, 0x7F, 0xBF, 255)
+	self.m_BarColor = Color.Orange --tocolor(0x3F, 0x7F, 0xBF, 255)
 	self.m_Enabled = true
 
 	self.onInternalHover = function() self.m_Bar:setColor(Color.White) end

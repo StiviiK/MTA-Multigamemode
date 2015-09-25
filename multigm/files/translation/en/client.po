@@ -111,3 +111,26 @@ msgstr "English"
 msgid "Speichern"
 msgstr "Save"
 
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Index"
+msgstr "Index"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Wert"
+msgstr "Value"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Session deaktivieren"
+msgstr "Disable Session"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Session updaten"
+msgstr "Update Session"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Es ist ein interner Fehler aufgetreten!"
+msgstr "An internal Error occured!"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Du kannst deine Session nur alle 5 Minuten manuell updaten!"
+msgstr "You can update your session only every 5 minutes manually!"

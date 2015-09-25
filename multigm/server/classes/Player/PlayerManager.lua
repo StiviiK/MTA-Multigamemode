@@ -5,11 +5,12 @@ function PlayerManager:constructor()
 	self.m_ReadyPlayers = {}
 
 	-- Register events
-	addRemoteEvents{"onPlayerReady", "Player_changeLanguage"}
+	addRemoteEvents{"onPlayerReady", "Player_changeLanguage", "Event_UpdatePlayerSession"}
   addEventHandler("onPlayerConnect", root, bind(PlayerManager.playerConnect, self))
   addEventHandler("onPlayerJoin", root, bind(PlayerManager.playerJoin, self))
 	addEventHandler("onPlayerReady", root, bind(PlayerManager.playerReady, self))
 	addEventHandler("Player_changeLanguage", root, bind(PlayerManager.Event_ChangeLocale, self))
+	addEventHandler("Event_UpdatePlayerSession", root, bind(PlayerManager.Event_UpdatePlayerSession, self))
 
 	self.m_SyncPulse = TimedPulse:new(500)
 	self.m_SyncPulse:registerHandler(bind(PlayerManager.updatePlayerSync, self))
@@ -55,4 +56,13 @@ end
 -- Events
 function PlayerManager:Event_ChangeLocale(locale)
 	source:setLocale(LOCALE[locale])
+end
+
+function PlayerManager:Event_UpdatePlayerSession()
+	if source:getRank() >= RANK.Developer then
+		source:getAccount():getSession():update()
+		source:triggerEvent("successBox", source, _("Deine Session wurde erfolgreich geupdatet!", source))
+	else
+		source:triggerEvent("errorBox", source, _("Zugriff verweigert.", source))
+	end
 end

@@ -58,6 +58,7 @@ function Session:update()
     ["dimension"] = self.m_Player:getDimension();
     ["skin"] = self.m_Player:getSkin();
     ["onlineSince"] = self.m_Player:getJoinTime();
+    ["locale"] = self.m_Player:getLocale();
   })
   self.m_Player:setPrivateSync("SessionInfo", self:getPlayerInfo())
 

@@ -135,5 +135,5 @@ function GUIGridList:drawThis()
 		dxDrawText(column.text, self.m_AbsoluteX + currentXPos + 4, self.m_AbsoluteY + 1, self.m_AbsoluteX + currentXPos + column.width*self.m_Width, self.m_AbsoluteY + 10, Color.White, 1, VRPFont(28))
 		currentXPos = currentXPos + column.width*self.m_Width + 5
 	end
-	dxDrawRectangle(self.m_AbsoluteX, self.m_AbsoluteY + ITEM_HEIGHT - 2, self.m_Width, 2, Color.LightBlue) -- tocolor(255, 255, 255, 150)
+	dxDrawRectangle(self.m_AbsoluteX, self.m_AbsoluteY + ITEM_HEIGHT - 2, self.m_Width, 2, Color.Orange) -- tocolor(255, 255, 255, 150)
 end

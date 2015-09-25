@@ -29,3 +29,8 @@ msgstr "You are already in this Gamemode!"
 #: server/classes/Gamemode/GamemodeManager.lua:0
 msgid "Du bist dem Gamemode erfolgreich beigetreten!"
 msgstr "You joinde the Gamemdoe successfully!"
+
+#: server/classes/Player/PlayerManager.lua:0
+msgid "Deine Session wurde erfolgreich geupdatet!"
+msgstr "Your session has been updated successfully!"
+

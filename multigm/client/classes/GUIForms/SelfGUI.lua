@@ -19,7 +19,7 @@ function SelfGUI:constructor()
   self.m_TabPanel = GUITabPanel:new(0, 0, self.m_Width, self.m_Height, self)
   self.m_TabPanel.onTabChanged = bind(self.TabPanel_TabChanged, self)
 	self.m_CloseButton = GUILabel:new(self.m_Width-28, 0, 28, 28, "[x]", self):setFont(VRPFont(35))
-	self.m_CloseButton.onLeftClick = function() self:close() end
+  self.m_CloseButton.onLeftClick = function() self:close() end
   self.m_CloseButton.onHover = function () self.m_CloseButton:setColor(Color.Orange) end
   self.m_CloseButton.onUnhover = function () self.m_CloseButton:setColor(Color.White) end
 
@@ -48,7 +48,29 @@ function SelfGUI:constructor()
   end
 	self.m_TokenCopyLabel.onHover = function () self.m_TokenCopyLabel:setColor(Color.White) end
 	self.m_TokenCopyLabel.onUnhover = function () self.m_TokenCopyLabel:setColor(Color.Orange) end
+  self.m_SessionGrid = GUIGridList:new(self.m_Width*0.02, self.m_Height*0.2, self.m_Width*0.525, self.m_Height*0.71, tabSession)
+  self.m_SessionGrid:addColumn(_"Index", 0.5)
+  self.m_SessionGrid:addColumn(_"Wert", 0.5)
+  localPlayer:setPrivateSyncChangeHandler("SessionInfo", bind(self.Session_updateInfo, self))
+  self.m_DisableSessionButton = VRPButton:new(self.m_Width*0.6, self.m_Height*0.84, self.m_Width*0.35, self.m_Height*0.07, _"Session deaktivieren", true, tabSession)
+  self.m_DisableSessionButton:setEnabled(false)
+  self.m_UpdateSessionButton = VRPButton:new(self.m_Width*0.6, self.m_Height*0.75, self.m_Width*0.35, self.m_Height*0.07, _"Session updaten", true, tabSession)
+  self.m_UpdateSessionButton.lastUpdate = 0
+  self.m_UpdateSessionButton.onLeftClick = function ()
+    if (getTickCount() - self.m_UpdateSessionButton.lastUpdate) >= 1000*60*5 then
+      if triggerServerEvent("Event_UpdatePlayerSession", localPlayer) then
+        self.m_UpdateSessionButton.lastUpdate = getTickCount()
+      else
+        ErrorBox:new(_"Es ist ein interner Fehler aufgetreten!")
+      end
+    else
+      ErrorBox:new(_"Du kannst deine Session nur alle 5 Minuten manuell updaten!")
+    end
+  end
+  GUILabel:new(self.m_Width*0.6, self.m_Height*0.2, self.m_Width*0.35, self.m_Height*0.525, LOREM_IPSUM:sub(1, 296), tabSession)
+    :setFont(VRPFont((self.m_Height*0.525)/10))
 
+  -- Points
   local tabPoints = self.m_TabPanel:addTab(_"Punkte")
   self.m_TabPoints = tabPoints
   GUILabel:new(self.m_Width*0.02, self.m_Height*0.016, self.m_Width*0.185, self.m_Height*0.12, _"Punkte", tabPoints)
@@ -77,5 +99,20 @@ function SelfGUI:onShow()
 end
 
 function SelfGUI:TabPanel_TabChanged(tabId)
+  if tabId == self.m_TabSession.TabIndex then
+    self:Session_updateInfo()
+  end
+end
 
+function SelfGUI:Session_updateInfo()
+  self.m_SessionGrid:clear()
+  for i, v in pairs(localPlayer:getPrivateSync("SessionInfo")) do
+    if type(v) ~= "table" then
+      self.m_SessionGrid:addItem(i:upperFirst(), tostring(v))
+    else
+      for i2, v in pairs(v) do
+        self.m_SessionGrid:addItem(i:upperFirst().."."..i2, tostring(v))
+      end
+    end
+  end
 end
