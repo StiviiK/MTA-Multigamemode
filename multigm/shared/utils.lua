@@ -192,3 +192,14 @@ function coroutine.resume(...)
 	end
 	return state,result
 end
+
+function math.getPlainInfoFromEuler(position, rotation, size)
+	-- Build entity matrix and calculate the normal
+	local mat = Matrix(position, rotation)
+	local normal = mat.forward
+
+	local startpos = position
+	local endpos = mat:transformPosition(size)
+
+	return startpos, endpos, normal
+end

@@ -15,9 +15,11 @@ end
 
 function Lobby:onPlayerJoin(player)
   player:triggerEvent("onLobbyStartDownload", player)
+  player:setAlpha(200)
 end
 
 function Lobby:onPlayerLeft(player)
+  player:setAlpha(255)
 end
 
 function Lobby:onDownloadComplete()

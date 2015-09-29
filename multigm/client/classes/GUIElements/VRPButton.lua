@@ -13,7 +13,7 @@ VRPButton = inherit(GUIRectangle)
 function VRPButton:constructor(posX, posY, width, height, text, barOnTop, parent)
 	checkArgs("VRPButton:constructor", "number", "number", "number", "number", "string")
 
-	GUIRectangle.constructor(self, posX, posY, width, height, tocolor(0x23, 0x23, 0x23, 230), parent)
+	GUIRectangle.constructor(self, posX, posY, width, height, Color.Grey, parent)
 
 	if barOnTop then
 		self.m_Bar = GUIRectangle:new(0, 0, width, height*0.075, Color.Orange, self)
@@ -126,7 +126,7 @@ function VRPButton:setEnabled(state)
 		self.m_Label:setColor(tocolor(100, 100, 100))
 	end
 
-	--self:anyChange()
+	return self
 end
 
 function VRPButton:isEnabled()

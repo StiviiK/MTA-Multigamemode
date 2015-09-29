@@ -131,6 +131,7 @@
 
 				<!-- GUI Forms -->
 				<script src="client/classes/GUIForms/QuestionBox.lua" type="client"/>
+				<script src="client/classes/GUIForms/PasswordBox.lua" type="client"/>
 				<script src="client/classes/GUIForms/DownloadBar.lua" type="client"/>
 				<script src="client/classes/GUIForms/GamemodeInfo.lua" type="client"/>
 				<script src="client/classes/GUIForms/SelfGUI.lua" type="client"/>

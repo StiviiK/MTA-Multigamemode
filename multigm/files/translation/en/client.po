@@ -150,3 +150,66 @@ msgstr "%s Hour(s) %s Minute(s)"
 #: client/classes/GUIForms/SelfGUI.lua:0
 msgid "Rang:"
 msgstr "Rank: "
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Account"
+msgstr "Account"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Name:"
+msgstr "Name:"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Account-Typ:"
+msgstr "Account-Type:"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Passwort:"
+msgstr "Password:"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "E-Mail:"
+msgstr "Mail:"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "(Achtung: Hier können schwerwiegende Änderungen vorgenommen werden!)"
+msgstr "(Warning: Major changes can be made here!) "
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Freunde"
+msgstr "Friends"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Name"
+msgstr "Name"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Gamemode"
+msgstr "Gamemode"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Status"
+msgstr "Status"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Freund hinzufügen"
+msgstr "Add Friend"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Freund löschen"
+msgstr "Remove Friend"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Freundesliste löschen"
+msgstr "Delete Friendslist"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "uID: %s"
+msgstr "uID: %s "
+
+
+
+
+#: DUE AN BUG - LEAVE THIS AT THE LAST LINE
+msgid ""
+msgstr ""

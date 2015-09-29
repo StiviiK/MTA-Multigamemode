@@ -51,11 +51,12 @@ function DatabasePlayer:load()
     return false
   end
 
-  local row = sql:queryFetchSingle("SELECT Locale, Skin, XP, Money, Rank, PlayTime FROM ??_character WHERE Id = ?;", sql:getPrefix(), self:getId())
+  local row = sql:queryFetchSingle("SELECT Locale, Skin, XP, Money, Rank, PlayTime, FriendId FROM ??_character WHERE Id = ?;", sql:getPrefix(), self:getId())
 	if not row then
 		return false
 	end
 
+	--
 	self.m_LastPlayTime = row.PlayTime
 
 	-- Set non element related stuff (otherwise just save it)
@@ -64,6 +65,7 @@ function DatabasePlayer:load()
 	self:setSkin(row.Skin)
   self:setMoney(row.Money)
 	self:setRank(row.Rank)
+	self:setFriendId(row.FriendId)
 end
 
 function DatabasePlayer:save()
@@ -92,7 +94,8 @@ function DatabasePlayer:getLocale() return self.m_Locale end
 function DatabasePlayer:getXP() return self.m_XP end
 function DatabasePlayer:getRank() return self.m_Rank end
 function DatabasePlayer:getLastPlayTime() return self.m_LastPlayTime or 0 end
-function Player:getPlayTime() return math.floor(self:getLastPlayTime() + (getTickCount() - self:getJoinTime())/1000/60) end
+function DatabasePlayer:getPlayTime() return math.floor(self:getLastPlayTime() + (getTickCount() - self:getJoinTime())/1000/60) end
+function DatabasePlayer:getFriendId() return self.m_FriendId end
 
 -- Short setters
 function DatabasePlayer:setSkin(Id) self.m_Skin = Id if self:isActive() then self:setModel(self.m_Skin) end end
@@ -100,3 +103,4 @@ function DatabasePlayer:setMoney(money) self.m_Money = money if self:isActive() 
 function DatabasePlayer:setLocale(locale) self.m_Locale = locale if self:isActive() then self:setPublicSync("Locale", self.m_Locale) end end
 function DatabasePlayer:setXP(XP) self.m_XP = xp if self:isActive() then self:setPrivateSync("XP", self.m_XP) end end
 function DatabasePlayer:setRank(rank) self.m_Rank = rank if self:isActive() then self:setPrivateSync("Rank", self.m_Rank) end end
+function DatabasePlayer:setFriendId(Id) self.m_FriendId = Id if self:isActive() then self:setPrivateSync("FriendId", self.m_FriendId) end end

@@ -50,7 +50,6 @@ function GamemodeManager:Event_OnPlayerGamemodeJoin(Id)
   local gamemode = self.getFromId(Id)
   if gamemode then
     gamemode:onPlayerJoin(source)
-    source:setGamemode(gamemode)
   end
 end
 
@@ -58,7 +57,6 @@ function GamemodeManager:Event_OnPlayerGamemodeLeft(Id)
   local gamemode = self.getFromId(Id)
   if gamemode then
     gamemode:onPlayerLeft(source)
-    source:setGamemode(nil)
   end
 end
 
@@ -66,12 +64,5 @@ function GamemodeManager:Event_OnGamemodeDestruct(Id)
   local gamemode = self.getFromId(Id)
   if gamemode then
     delete(gamemode)
-
-    -- TODO: TEMPFIX!!!
-    for i, v in pairs(getElementsByType("player")) do
-      if v:getGamemode() == gamemode then
-        v:setGamemode(nil)
-      end
-    end
   end
 end

@@ -8,20 +8,17 @@
 -- ****************************************************************************
 
 if DEBUG then
+	GUIDebugging = inherit(Object)
 
-GUIDebugging = inherit(Object)
-
-function GUIDebugging.constructor()
-	addEventHandler("onClientRender", root, GUIDebugging.draw)
-end
-
-function GUIDebugging.draw()
-	local cursorX, cursorY = getCursorPosition()
-	if cursorX then
-		cursorX, cursorY = cursorX*screenWidth, cursorY*screenHeight
-		dxDrawText("X: "..math.floor(cursorX).." Y: "..math.floor(cursorY), screenWidth-200, 10, nil, nil, Color.White, 2)
+	function GUIDebugging.constructor()
+		addEventHandler("onClientRender", root, GUIDebugging.draw)
 	end
-end
 
-
+	function GUIDebugging.draw()
+		local cursorX, cursorY = getCursorPosition()
+		if cursorX then
+			cursorX, cursorY = cursorX*screenWidth, cursorY*screenHeight
+			dxDrawText("X: "..math.floor(cursorX).." Y: "..math.floor(cursorY), screenWidth-200, 10, nil, nil, Color.White, 2)
+		end
+	end
 end
