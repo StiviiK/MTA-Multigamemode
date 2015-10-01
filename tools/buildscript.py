@@ -22,10 +22,16 @@ rm_r(outdir)
 os.mkdir(outdir)
 shutil.copytree(rootdir+"files", outdir+"files")
 
-# Copy meta file
+# Copy Important Data
+shutil.copyfile(rootdir+"Version.txt", outdir+"Version.txt")
+
 os.mkdir(outdir+"gamemodes")
 os.mkdir(outdir+"gamemodes/Lobby")
+os.mkdir(outdir+"gamemodes/CnR")
+shutil.copytree(rootdir+"gamemodes/Lobby/files", outdir+"gamemodes/Lobby/files")
+shutil.copytree(rootdir+"gamemodes/CnR/files", outdir+"gamemodes/CnR/files")
 shutil.copyfile(rootdir+"gamemodes/Lobby/meta.xml", outdir+"gamemodes/Lobby/meta.xml")
+shutil.copyfile(rootdir+"gamemodes/CnR/meta.xml", outdir+"gamemodes/CnR/meta.xml")
 
 # Get files
 files = {}
