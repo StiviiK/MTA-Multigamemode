@@ -203,3 +203,13 @@ function math.getPlainInfoFromEuler(position, rotation, size)
 
 	return startpos, endpos, normal
 end
+
+function unpackVector(vector)
+	if vector.x and vector.y and vector.z and vector.w then
+		return vector.x, vector.y, vector.z, vector.w
+	elseif vector.x and vector.y and vector.z then
+		return vector.x, vector.y, vector.z
+	elseif vector.x and vector.y then
+		return vector.x, vector.y
+	end
+end

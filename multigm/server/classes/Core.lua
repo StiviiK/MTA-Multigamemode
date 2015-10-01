@@ -36,6 +36,7 @@ function Core:constructor ()
   MapManager:getSingleton():registerMap("gamemodes/Lobby/files/maps/Test.map")
 
 	-- Instantiate classes
+  AntiCheat:new()
   Provider:new()
   PlayerManager:new()
   GamemodeManager:new()
@@ -89,6 +90,9 @@ function Core:destructor ()
   delete(GamemodeManager:getSingleton())
   delete(MapManager:getSingleton())
   delete(PlayerManager:getSingleton())
+
+  -- Delete this at last position
+  delete(AntiCheat:getSingleton())
   delete(sql)
 
   if self.ms_API then

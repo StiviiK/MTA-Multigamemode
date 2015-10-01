@@ -22,6 +22,7 @@ function Core:constructor()
 		Debugging:new()
 	end
 
+	AntiCheat:new()
 	Version:new()
 	Cursor = GUICursor:new()
 	Provider:new()
@@ -39,8 +40,7 @@ end
 
 function Core:afterLogin()
 	-- Create bindings
-	SelfGUI:new()
-	SelfGUI:getSingleton():close()
+	SelfGUI:new():close()
 	addCommandHandler("self", function () SelfGUI:getSingleton():open() end)
 	bindKey("F2", "down", function() SelfGUI:getSingleton():toggle() end)
 end
@@ -50,4 +50,7 @@ function Core:destructor()
 	delete(Provider:getSingleton())
 	delete(GamemodeManager:getSingleton())
 	delete(GamemodePedManager:getSingleton())
+
+	-- Delete this at last position
+	delete(AntiCheat:getSingleton())
 end
