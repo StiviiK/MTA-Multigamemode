@@ -85,7 +85,6 @@ self.RadioChannel = tonumber(Channel)
 		self:PlayRadioChannel ()
 	end
 
-outputChatBox("Channel:"..self.RadioChannel)
 end
 
 function CarRadio:ShutStandarRadioOff ()
@@ -134,7 +133,7 @@ addEventHandler("onClientVehicleStartExit", getRootElement(),
 
 
 
---------------Radio_Visual---------------
+--------------Radio_Visual--------------- 
 
 
 function CarRadio:render()
