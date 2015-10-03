@@ -16,4 +16,6 @@ Upcoming features:
   - [ ] Other features comming soon...
 
 ## Developers
-  - Stefan K. - "StiviK"
+  - StiviK - vMultigamemode
+  - Piccolo - Cops'n'Robbers
+  - PLASMA[GER] - Cops'n'Robbers
