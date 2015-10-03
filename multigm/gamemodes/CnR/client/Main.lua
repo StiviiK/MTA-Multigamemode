@@ -1,9 +1,24 @@
+lp = getLocalPlayer()
+
+function outputMyPosition()
+local x,y,z = getElementPosition(lp)
+local rx,ry,rz = getElementRotation(lp)
+outputChatBox("--Position: "..x..","..y..","..z)
+outputChatBox("--Rotation: "..rx..","..ry..","..rz)
+end
+addCommandHandler("omp",outputMyPosition)
+
+-----------------------------------------------
+
+
+
+
 function CopsnRobbers:constructor()
   --outputDebug("Lobby:constructor")
   addRemoteEvents{"onCNRStartDownload"}
   addEventHandler("onCNRStartDownload", root, bind(CopsnRobbers.onDownloadStart, self))
-
-  -- Load translation file
+  
+   -- Load translation file
   TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
 end
 
@@ -17,9 +32,20 @@ function CopsnRobbers:onGamemodesLoaded(numLoadedGamemodes)
 end
 
 function CopsnRobbers:onPlayerJoin()
+self:CreatePlayerBlip()
+--FractionSelectionMenu:new()
+HudComponentVisible(true)
+end
+
+function CopsnRobbers:CreatePlayerBlip()
+if lp == source then return end
+ source.MapBlip = createBlip( 0, 0, 0 )
+ source.MapBlip:setDimension(CNR_DIM)
 end
 
 function CopsnRobbers:onPlayerLeft()
+ source.MapBlip:destroy()
+ HudComponentVisible(false)
 end
 
 function CopsnRobbers:onDownloadStart()
@@ -28,4 +54,11 @@ end
 
 function CopsnRobbers:onDownloadFinish()
   triggerServerEvent("onCNRDownloadFinished", localPlayer)
+end
+
+
+function HudComponentVisible(State)
+
+setPlayerHudComponentVisible (  "all", State )
+
 end

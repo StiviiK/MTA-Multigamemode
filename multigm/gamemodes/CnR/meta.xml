@@ -1,4 +1,10 @@
 <meta>
-  <!-- Translation -->
-    <transferfile src="gamemodes/CnR/files/translation/en/client.po"/>
+  <!-- COL files -->
+    <transferfile src="gamemodes/CnR/files/col/EntranceMarker.col"/>
+
+  <!-- DFF files -->
+    <transferfile src="gamemodes/CnR/files/dff/EntranceMarker.dff"/>
+
+  <!-- TXD files -->
+    <transferfile src="gamemodes/CnR/files/txd/EntranceMarker.txd"/>
 </meta>

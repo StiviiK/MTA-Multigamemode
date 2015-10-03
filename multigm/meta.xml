@@ -157,20 +157,36 @@
 			<script src="gamemodes/Lobby/client/Init.lua" type="client"/>
 			<script src="gamemodes/Lobby/client/Main.lua" type="client"/>
 
-	<!-- Cops'n'Robbers -->
-		<!-- Meta -->
-			<metafile src="gamemodes/CnR/meta.xml"/>
+			<!-- Cops'n'Robbers -->
+				<!-- Meta -->
+					<metafile src="gamemodes/CnR/meta.xml"/>
 
-		<!-- Shared -->
-			<script src="gamemodes/CnR/constants.lua" type="shared"/>
+				<!-- Shared -->
+					<script src="gamemodes/CnR/constants.lua" type="shared"/>
 
-		<!-- Server -->
-			<script src="gamemodes/CnR/server/Init.lua" type="server"/>
-			<script src="gamemodes/CnR/server/Main.lua" type="server"/>
+				<!-- Server -->
+					<script src="gamemodes/CnR/server/Init.lua" type="server"/>
+					<script src="gamemodes/CnR/server/Main.lua" type="server"/>
+					<script src="gamemodes/CnR/server/PlayerBlip.lua" type="server"/>
+					<script src="gamemodes/CnR/server/ArrestSystem.lua" type="server"/>
+					<script src="gamemodes/CnR/server/Fraktion_Car.lua" type="server"/>
+					<script src="gamemodes/CnR/server/Death.lua" type="server"/>
+					<script src="gamemodes/CnR/server/WantedSystem.lua" type="server"/>
 
-		<!-- Client -->
-			<script src="gamemodes/CnR/client/Init.lua" type="client"/>
-			<script src="gamemodes/CnR/client/Main.lua" type="client"/>
+					<script src="gamemodes/CnR/Usefull/TeleportMaker/server.lua" type="server"/>
+					<script src="gamemodes/CnR/Usefull/TeleportMaker/TeleportsListe.lua" type="server"/>
+					<script src="gamemodes/CnR/Usefull/SchankenMaker/SchrankenCreater.lua" type="server"/>
+					<script src="gamemodes/CnR/Usefull/GateMaker/GateCreater.lua" type="server"/>
+				<!-- Client -->
+					<script src="gamemodes/CnR/client/Init.lua" type="client"/>
+					<script src="gamemodes/CnR/client/Main.lua" type="client"/>
+					<script src="gamemodes/CnR/client/FractionSelection_c.lua" type="client"/>
+					<script src="gamemodes/CnR/client/Car_Radio.lua" type="client"/>
+
+					<script src="gamemodes/CnR/Usefull/TeleportMaker/client.lua" type="client"/>
+
+					<script src="gamemodes/CnR/Usefull/Minimap/minimap_c.lua" type="client"/>
+					<file src="gamemodes/CnR/Usefull/Minimap/gtamap.png"/>
 
 	<!-- Files -->
 		<!-- Translation -->

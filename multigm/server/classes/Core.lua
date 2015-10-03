@@ -33,7 +33,8 @@ function Core:constructor ()
 
   -- Register Maps
   MapManager:new()
-  MapManager:getSingleton():registerMap("gamemodes/Lobby/files/maps/Test.map")
+  --MapManager:getSingleton():registerMap("gamemodes/Lobby/files/maps/Test.map")
+  MapManager:getSingleton():registerMap("gamemodes/CnR/files/maps/LSPolice.map")
 
 	-- Instantiate classes
   Provider:new()
