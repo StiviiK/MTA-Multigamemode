@@ -28,18 +28,18 @@ self.CheckTimer = setTimer(bind(ArrestSystem.CheckTime,self),1000,-1)
 end
 
 function ArrestSystem:StopTimer()
-	if isTimer(self.CheckTimer) then 
+	if isTimer(self.CheckTimer) then
 		outputChatBox("ArrestSystem:StopTimer")
 		killTimer(self.CheckTimer)
 	end
 end
-outputDebugString("ArrestSystem andern -- getRootElement().getAllByType(...)")
+--outputDebugString("ArrestSystem andern -- getRootElement().getAllByType(...)")
 function ArrestSystem:CheckTime()
 	if #self.ArrestetPlayers > 0 then
-		
-		
-		local AllPlayer = getRootElement().getAllByType("player")
-		for theKey,thePlayer in ipairs(AllPlayer) do 
+
+
+		local AllPlayer = self:getRoot():getAllByType("player")
+		for theKey,thePlayer in ipairs(AllPlayer) do
 		local PlayerArrestTime = self.ArrestetPlayers[thePlayer]["ArrestTime"]
 			if PlayerArrestTime <= 0 then
 				self:SetPlayerFree(thePlayer)
@@ -56,8 +56,8 @@ end
 function ArrestSystem:onHitArrestMarker(hitElement, matchingDimension)
 	if matchingDimension and hitElement:getType() == "vehicle" then
 		local occupants = getVehicleOccupants(hitElement) or {}
-		
-		for seat, occupant in pairs(occupants) do 
+
+		for seat, occupant in pairs(occupants) do
 			if (occupant and getElementType(occupant) == "player") then
                 if occupant:GetPlayerWanteds() > 0  then
 					occupant:removeFromVehicle()

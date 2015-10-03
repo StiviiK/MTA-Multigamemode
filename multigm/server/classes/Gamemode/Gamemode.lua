@@ -44,6 +44,7 @@ function Gamemode:addPlayer(player)
   player:setGamemode(self)
   player:setDimension(self.m_Dimension)
   player:setFrozen(false)
+  player:setParent(self:getRoot())
 
   -- trigger to the client
   player:triggerEvent("onPlayerGamemodeJoin", player, self:getId())
@@ -63,6 +64,7 @@ function Gamemode:removePlayer(player)
     player:spawn(SPAWN_DEFAULT_POSITION, SPAWN_DEFAULT_ROTATION, player:getSkin(), SPAWN_DEFAULT_INTERIOR)
     player:setDimension(PRIVATE_DIMENSION_SERVER)
     player:setFrozen(true)
+      player:setParent(getRootElement())
 
     -- trigger to the client
     player:triggerEvent("onPlayerGamemodeLeft", player, self:getId())

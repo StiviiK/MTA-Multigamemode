@@ -10,7 +10,6 @@ function CopsnRobbers:constructor()
 
   -- Maps
   MapManager:getSingleton():loadMap(self, "gamemodes/CnR/files/maps/LSPolice.map"):load(MAP_LOADING_NORMAL)
-
 end
 
 function CopsnRobbers:destructor()

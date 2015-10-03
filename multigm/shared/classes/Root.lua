@@ -14,3 +14,13 @@ function Root:destructor()
     end
   end
 end
+
+function Root:getAllByType(type, startAt)
+  local elements = {}
+  for i, v in pairs(Element.getAllByType(type or "player", startAt or self)) do
+    if v:getParent() == self then
+      table.insert(elements, v)
+    end
+  end
+  return elements
+end

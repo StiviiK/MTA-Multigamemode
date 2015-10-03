@@ -5,8 +5,6 @@ local FraktionsVehicle = CopsnRobbers.FraktionsVehicle
 
 
 function FraktionsVehicle:constructor(Team,model,position,rotation)
-
-
 self.m_Model = model
 self.Fraction = Team
 self.m_Position = position
@@ -56,7 +54,7 @@ self.EngineState = State
 end
 
 function FraktionsVehicle:SwitchEngine ( player, key, keyState)
-	if self ==  player:getOccupiedVehicle( ) then 
+	if self ==  player:getOccupiedVehicle( ) then
 	outputChatBox("Switch EngineState "..tostring(self.EngineState))
 	self:setEngine()
 	else
@@ -68,7 +66,7 @@ function FraktionsVehicle:SwitchEngine ( player, key, keyState)
 end
 
 function FraktionsVehicle:SwitchLight ( player, key, keyState)
-	if self ==  player:getOccupiedVehicle( ) then 
+	if self ==  player:getOccupiedVehicle( ) then
 	outputChatBox("Switch LightState")
 	self.LightState = not self.LightState
 		if (self.LightState) then
@@ -92,5 +90,5 @@ return veh
 end
 
 
-
+-- Todo: Move constructor the Gamemode:constructor
 FraktionsVehicle:CreateFractionVehicle("Cops",411,Vector3(1536,-1675,12.9),Vector3(0,0,0))
