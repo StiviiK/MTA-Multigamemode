@@ -29,13 +29,13 @@ function CopsnRobbers:onDownloadComplete()
 
   -- spawn the player
 
-  local spawn = self:getSetting("SpawnCops")
-  client:setPosition(spawn.Position)
-  client:setRotation(0, 0, spawn.Rotation)
-  client:setInterior(spawn.Interior)
-  client:setDimension(CNR_DIM)
+  -- local spawn = self:getSetting("SpawnCops")
+  -- client:setPosition(spawn.Position)
+  -- client:setRotation(0, 0, spawn.Rotation)
+  -- client:setInterior(spawn.Interior)
+  -- client:setDimension(CNR_DIM)
 
-  self:CreatePlayerBlip(client)--CreatePlayerBlip
+ --CreatePlayerBlip
   addEventHandler ( "onPlayerWasted", client, bind(CopsnRobbers.Wasted,self) )
 end
 
@@ -58,9 +58,12 @@ end
   client:setCameraTarget(client)
   client:setModel(Skin)
   client:setFraction(Fraction)
+  client:setDimension(CNR_DIM)
+  
   self:GivePlayerFractionWeapons(client,FractionTable,SelectID)
---  client:setDimension()
-outputChatBox("Hier Dimension einfügen und Fraction")
+  self:CreatePlayerBlip(client)
+
+
 end
 
 function CopsnRobbers:GivePlayerFractionWeapons(player,FractionTable,SelectID)

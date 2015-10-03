@@ -40,7 +40,7 @@ end
 
 function CopsnRobbers:onPlayerJoin()
 self:CreatePlayerBlip()
---FractionSelectionMenu:new()
+FractionSelectionMenu:new()
 HudComponentVisible(true)
 end
 
