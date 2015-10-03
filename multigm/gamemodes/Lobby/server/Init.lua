@@ -1,5 +1,4 @@
 Lobby = inherit(Gamemode)
-inherit(GameRooms, Lobby)
 
 Lobby.ms_Settings = {
   Spawn = {

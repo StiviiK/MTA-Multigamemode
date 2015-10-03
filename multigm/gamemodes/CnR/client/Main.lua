@@ -23,8 +23,8 @@ function CopsnRobbers:constructor()
 
   -- Load custom Arrow
   EngineCOL("gamemodes/CnR/files/col/EntranceMarker.col"):replace(1318)
-  EngineDFF("gamemodes/CnR/files/dff/EntranceMarker.dff", 0):replace(1318)
   EngineTXD("gamemodes/CnR/files/txd/EntranceMarker.txd"):import(1318)
+  EngineDFF("gamemodes/CnR/files/dff/EntranceMarker.dff", 0):replace(1318)
 end
 
 function CopsnRobbers:destructor()

@@ -5,9 +5,6 @@ function Lobby:constructor()
 
   -- Load translation file
   TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
-
-  -- Create GameRooms
-  self:addRoom("Lobby", -1)
 end
 
 function Lobby:destructor()
@@ -28,13 +25,6 @@ function Lobby:onDownloadComplete()
   client:setPosition(spawn.Position)
   client:setRotation(0, 0, spawn.Rotation)
   client:setInterior(spawn.Interior)
-
-  local Id = self:findFreeRoom()
-  if Id ~= -1 then
-    self:addToRoom(Id, client)
-  else
-    client:onInternalError(("%s-#%s"):format(self:getName(), RUNTIME_ERROR_NO_ROOM))
-  end
 end
 
 function Lobby:findFreeRoom()
