@@ -45,6 +45,7 @@ end
 
 function Session:update()
   self:setPlayerInfo({
+    ["accountId"] = self.m_Player:getId();
     ["username"] = self.m_Player:getName();
     ["accountname"] = self.m_Player:getAccount():getName();
     ["lastUpdate"] = getRealTime().timestamp;
@@ -60,6 +61,7 @@ function Session:update()
     ["onlineSince"] = getRealTime().timestamp - (getTickCount() - self.m_Player:getJoinTime());
     ["locale"] = self.m_Player:getLocale();
     ["playTime"] = self.m_Player:getPlayTime();
+    ["IP"] = self.m_Player:getIP();
 })
   self.m_Player:setPrivateSync("SessionInfo", self:getPlayerInfo())
 

@@ -15,7 +15,7 @@ function Account.login(player, username, password, hashed)
   		pwhash = sha256(row.Salt..password)
   	end
 
-    local row = sql:asyncQueryFetchSingle("SELECT Id, Name FROM ??_account WHERE Id = ? AND Password = ?;", sql:getPrefix(), row.Id, pwhash)
+    local row = sql:asyncQueryFetchSingle("SELECT Id, Name, Type FROM ??_account WHERE Id = ? AND Password = ?;", sql:getPrefix(), row.Id, pwhash)
     if not row or not row.Id then
     	-- Error: Wrong Password
     	return false
@@ -29,7 +29,7 @@ function Account.login(player, username, password, hashed)
     -- Update last serial and last login
   	sql:queryExec("UPDATE ??_account SET LastSerial = ?, LastLogin = NOW() WHERE Id = ?", sql:getPrefix(), player:getSerial(), row.Id)
 
-    player.m_Account = Account:new(row.Id, row.Name, player, false)
+    player.m_Account = Account:new(row.Id, row.Name, row.Type, player, false)
     player:loadCharacter()
 end
 addEvent("accountlogin", true)
@@ -41,7 +41,7 @@ end
 function Account.guest(player)
   if player:getAccount() then return false end
 
-  player.m_Account = Account:new(0, getRandomUniqueNick(), player, true)
+  player.m_Account = Account:new(0, getRandomUniqueNick(), 0, player, true)
   player:loadCharacter()
 end
 
@@ -49,11 +49,12 @@ function Account.getFromId(id)
   return Account.Map[id]
 end
 
-function Account:constructor(id, username, player, guest)
+function Account:constructor(id, username, type, player, guest)
   -- Account Information
   self.m_Id = id
   self.m_Username = username
   self.m_Player = player
+  self.m_Type = type
   player.m_Account = self
   player.m_IsGuest = guest
   player.m_Id = self:getId()
@@ -86,4 +87,8 @@ end
 
 function Account:getSession()
   return self.m_Session
+end
+
+function Account:getType()
+  return self.m_Type
 end

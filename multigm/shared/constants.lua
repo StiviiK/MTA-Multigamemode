@@ -25,6 +25,20 @@ for k, v in pairs(RANK) do
 end
 RANK = r2
 
+-- ACOUNT TYPES
+ACCOUNTTYPE = {}
+ACCOUNTTYPE[0] = "Normal"
+ACCOUNTTYPE[1] = "Premium"
+ACCOUNTTYPE[2] = "Donator"
+ACCOUNTTYPE[3] = "God"
+
+local r2 = {}
+for k, v in pairs(ACCOUNTTYPE) do
+	r2[k] = v
+	r2[v] = k
+end
+ACCOUNTTYPE = r2
+
 -- LANGUAGE CODES
 LOCALE = {}
 LOCALE[1] = "de"

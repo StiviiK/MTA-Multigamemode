@@ -59,6 +59,9 @@ function DatabasePlayer:load()
 	--
 	self.m_LastPlayTime = row.PlayTime
 
+	-- Sync important Stuff
+	self:setPrivateSync("AccountType", self:getAccount():getType())
+
 	-- Set non element related stuff (otherwise just save it)
 	self:setLocale(row.Locale)
 	self:setXP(row.XP)

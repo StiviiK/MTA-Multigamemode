@@ -205,8 +205,11 @@ msgstr "Delete Friendslist"
 
 #: client/classes/GUIForms/SelfGUI.lua:0
 msgid "uID: %s"
-msgstr "uID: %s "
+msgstr "uID: %s"
 
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "(?)"
+msgstr "(?)"
 
 
 

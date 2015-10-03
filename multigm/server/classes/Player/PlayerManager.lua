@@ -60,10 +60,15 @@ function PlayerManager:Event_ChangeLocale(locale)
 end
 
 function PlayerManager:Event_UpdatePlayerSession()
-	if source:getRank() >= RANK.Developer then
-		source:getAccount():getSession():update()
-		source:triggerEvent("successBox", source, _("Deine Session wurde erfolgreich geupdatet!", source))
+	if ((getTickCount() - (source.m_LastSessionUpdate or 0)) >= 1000*60*5) or (source:getAccount():getType() >= ACCOUNTTYPE.Premium) then
+		if source:getRank() >= RANK.Developer then
+			source:getAccount():getSession():update()
+			source:triggerEvent("successBox", source, _("Deine Session wurde erfolgreich geupdatet!", source))
+			source.m_LastSessionUpdate = getTickCount()
+		else
+			source:triggerEvent("errorBox", source, _("Zugriff verweigert.", source))
+		end
 	else
-		source:triggerEvent("errorBox", source, _("Zugriff verweigert.", source))
+		source:triggerEvent("errorBox", source, _("Du kannst deine Session nur alle 5 Minuten manuell updaten!", source))
 	end
 end

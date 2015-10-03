@@ -33,29 +33,20 @@ function SelfGUI:constructor()
   GUILabel:new(self.m_Width*0.02, self.m_Height*0.3125, self.m_Width*0.25, self.m_Height*0.06, _"Spielzeit:", tabGeneral)
   GUILabel:new(self.m_Width*0.02, self.m_Height*0.373, self.m_Width*0.25, self.m_Height*0.06, _"Rang:", tabGeneral)
   GUILabel:new(self.m_Width*0.3, self.m_Height*0.19, self.m_Width*0.4, self.m_Height*0.06, getPlayerName(localPlayer), tabGeneral)
-  GUILabel:new(self.m_Width*0.3, self.m_Height*0.25, self.m_Width*0.4, self.m_Height*0.06, _"Premium", tabGeneral)
+  self.m_AccountTypeLabel = GUILabel:new(self.m_Width*0.3, self.m_Height*0.25, self.m_Width*0.4, self.m_Height*0.06, "", tabGeneral)
+  localPlayer:setPrivateSyncChangeHandler("AccountType", function (type) self:adjustGeneralTab(type, false) end)
+  self.m_AccountTypeHelpLabel = GUILabel:new(self.m_Width*0.3, self.m_Height*0.25, self.m_Width*0.03, self.m_Height*0.06, _"(?)", tabGeneral):setColor(Color.Orange)
+  self.m_AccountTypeHelpLabel.onHover = function () self.m_AccountTypeHelpLabel:setColor(Color.White) end
+  self.m_AccountTypeHelpLabel.onUnhover = function () self.m_AccountTypeHelpLabel:setColor(Color.Orange) end
+  self.m_AccountTypeHelpLabel.onLeftClick = function () outputChatBox("HelpBar:getSingleton():open(HelpTextTitles.General.AccountType, HelpTexts.General.AccountType)") end
   self.m_PlayTimeLabel = GUILabel:new(self.m_Width*0.3, self.m_Height*0.3125, self.m_Width*0.4, self.m_Height*0.06, _("%s Stunde(n) %s Minute(n)", 0, 0), tabGeneral)
-  self.m_RankLabel = GUILabel:new(self.m_Width*0.3, self.m_Height*0.373, self.m_Width*0.4, self.m_Height*0.06, _(RANK[localPlayer:getRank()]), tabGeneral)
-  localPlayer:setPrivateSyncChangeHandler("Rank", function (rank) self.m_RankLabel:setText(_(RANK[rank])) end)
+  self.m_RankLabel = GUILabel:new(self.m_Width*0.3, self.m_Height*0.373, self.m_Width*0.4, self.m_Height*0.06, "", tabGeneral)
+  localPlayer:setPrivateSyncChangeHandler("Rank", function (rank) self:adjustGeneralTab(false, rank) end)
 
   -- Account
-  local tabAccount = self.m_TabPanel:addTab(_"Account")
-  self.m_TabAccount = tabAccount
-  GUILabel:new(self.m_Width*0.02, self.m_Height*0.016, self.m_Width*0.225, self.m_Height*0.12, _"Account", tabAccount)
-  GUILabel:new(self.m_Width*0.02, self.m_Height*0.12, self.m_Width*0.15, self.m_Height*0.07, _"Allgemein", tabAccount)
-  GUILabel:new(self.m_Width*0.02, self.m_Height*0.2, self.m_Width*0.09, self.m_Height*0.06, _"Name:", tabAccount)
-  self.m_AccountNameEdit = GUIEdit:new(self.m_Width*0.225, self.m_Height*0.2, self.m_Width*0.275, self.m_Height*0.06, tabAccount)
-    :setText(localPlayer:getName())
-  GUILabel:new(self.m_Width*0.02, self.m_Height*0.27, self.m_Width*0.125, self.m_Height*0.06, _"Passwort:", tabAccount)
-  self.m_AccountPasswordEdit = GUIEdit:new(self.m_Width*0.225, self.m_Height*0.27, self.m_Width*0.275, self.m_Height*0.06, tabAccount)
-    :setMasked()
-  GUILabel:new(self.m_Width*0.02, self.m_Height*0.34, self.m_Width*0.125, self.m_Height*0.06, _"E-Mail:", tabAccount)
-  self.m_AccountEMailEdit = GUIEdit:new(self.m_Width*0.15, self.m_Height*0.34, self.m_Width*0.35, self.m_Height*0.06, tabAccount)
-
-  self.m_AccountAcceptButton = VRPButton:new(self.m_Width*0.02, self.m_Height*0.8, self.m_Width*0.35, self.m_Height*0.06, _"Speichern", true, tabAccount)
-    :setBarColor(Color.Red)
-    :setEnabled(false)
-  self.m_AccountWarningLabel = GUILabel:new(self.m_Width*0.02, self.m_Height*0.875, self.m_Width*0.96, self.m_Height*0.05, _"(Achtung: Hier können schwerwiegende Änderungen vorgenommen werden!)", tabAccount)
+  local tabPoints = self.m_TabPanel:addTab(_"Punkte")
+  self.m_TabPoints = tabPoints
+  GUILabel:new(self.m_Width*0.02, self.m_Height*0.016, self.m_Width*0.225, self.m_Height*0.12, _"Punkte", tabPoints)
 
   -- Session
   local tabSession = self.m_TabPanel:addTab(_"Sitzung")
@@ -81,14 +72,10 @@ function SelfGUI:constructor()
   self.m_UpdateSessionButton = VRPButton:new(self.m_Width*0.6, self.m_Height*0.75, self.m_Width*0.35, self.m_Height*0.07, _"Session updaten", true, tabSession)
   self.m_UpdateSessionButton.lastUpdate = 0
   self.m_UpdateSessionButton.onLeftClick = function ()
-    if (getTickCount() - self.m_UpdateSessionButton.lastUpdate) >= 1000*60*5 then
-      if triggerServerEvent("Event_UpdatePlayerSession", localPlayer) then
-        self.m_UpdateSessionButton.lastUpdate = getTickCount()
-      else
-        ErrorBox:new(_"Es ist ein interner Fehler aufgetreten!")
-      end
+    if triggerServerEvent("Event_UpdatePlayerSession", localPlayer) then
+      self.m_UpdateSessionButton.lastUpdate = getTickCount()
     else
-      ErrorBox:new(_"Du kannst deine Session nur alle 5 Minuten manuell updaten!")
+      ErrorBox:new(_"Es ist ein interner Fehler aufgetreten!")
     end
   end
   self.m_DisableSessionButton = VRPButton:new(self.m_Width*0.6, self.m_Height*0.84, self.m_Width*0.35, self.m_Height*0.07, _"Session deaktivieren", true, tabSession)
@@ -140,10 +127,6 @@ function SelfGUI:constructor()
 end
 
 function SelfGUI:onShow()
-  -- PlayTime
-  local hours, minutes = math.floor(localPlayer:getPlayTime()/60), (localPlayer:getPlayTime() - math.floor(localPlayer:getPlayTime()/60)*60)
-  self.m_PlayTimeLabel:setText(_("%s Stunde(n) %s Minute(n)", hours, minutes))
-
   -- Update the Tabs
   self:TabPanel_TabChanged(self.m_TabGeneral.TabIndex)
   self:TabPanel_TabChanged(self.m_TabSession.TabIndex)
@@ -152,12 +135,24 @@ end
 
 function SelfGUI:TabPanel_TabChanged(tabId)
   if tabId == self.m_TabGeneral.TabIndex then
-    local hours, minutes = math.floor(localPlayer:getPlayTime()/60), (localPlayer:getPlayTime() - math.floor(localPlayer:getPlayTime()/60)*60)
-    self.m_PlayTimeLabel:setText(_("%s Stunde(n) %s Minute(n)", hours, minutes))
+    self:adjustGeneralTab(localPlayer:getAccountType(), localPlayer:getRank())
   elseif tabId == self.m_TabSession.TabIndex then
     self:adjustSessionTab()
   elseif tabId == self.m_TabFriends.TabIndex then
     self:adjustFriendsTab(localPlayer:getPrivateSync("FriendId") ~= "")
+  end
+end
+
+function SelfGUI:adjustGeneralTab(AccountType, Rank)
+  local hours, minutes = math.floor(localPlayer:getPlayTime()/60), (localPlayer:getPlayTime() - math.floor(localPlayer:getPlayTime()/60)*60)
+  self.m_PlayTimeLabel:setText(_("%s Stunde(n) %s Minute(n)", hours, minutes))
+
+  if AccountType then
+    self.m_AccountTypeLabel:setText(_(ACCOUNTTYPE[AccountType]))
+    self.m_AccountTypeHelpLabel:setPosition(self.m_Width*0.295 + dxGetTextWidth(_(ACCOUNTTYPE[AccountType]), self.m_AccountTypeLabel:getFontSize(), self.m_AccountTypeLabel:getFont()) + 10, self.m_Height*0.25)
+  end
+  if Rank then
+    self.m_RankLabel:setText(_(RANK[Rank]))
   end
 end
 
@@ -172,11 +167,12 @@ function SelfGUI:adjustSessionTab()
   -- Update Grid
   self.m_SessionGrid:clear()
   for i, v in pairs(localPlayer:getPrivateSync("SessionInfo")) do
+    local i = i:upperFirst()
     if type(v) ~= "table" then
-      self.m_SessionGrid:addItem(i:upperFirst(), tostring(v))
+      self.m_SessionGrid:addItem(i, tostring(v))
     else
       for i2, v in pairs(v) do
-        self.m_SessionGrid:addItem(i:upperFirst().."."..i2, tostring(v))
+        self.m_SessionGrid:addItem(i.."."..i2, tostring(v))
       end
     end
   end
@@ -196,7 +192,7 @@ function SelfGUI:adjustFriendsTab(status)
 
     -- Update FriendId Label
     self.m_FriendIDLabel:setText(_("uID: %s", friendID))
-    self.m_FriendIDCopyLabel:setPosition(self.m_Width*0.02 + dxGetTextWidth(_("uID: %s", friendID), self.m_FriendIDLabel:getFontSize(), self.m_FriendIDLabel:getFont()) + 10, self.m_Height*0.12)
+    self.m_FriendIDCopyLabel:setPosition(self.m_Width*0.015 + dxGetTextWidth(_("uID: %s", friendID), self.m_FriendIDLabel:getFontSize(), self.m_FriendIDLabel:getFont()) + 10, self.m_Height*0.12)
   else
     -- At first hide all elements
     for i, v in pairs(self.m_TabFriends.m_Children) do
@@ -209,15 +205,3 @@ function SelfGUI:adjustFriendsTab(status)
 
   end
 end
-
-
-
---[[
-Test3DGUI = inherit(GUIForm3D)
-
-function Test3DGUI:constructor()
-  GUIForm3D.constructor(self, Vector3(101.166, 1024, 28), Vector3(0, 0, 45), Vector3(25, 25, 0), Vector2(screenWidth, screenHeight), 25)
-  GUIRectangle:new(0, 0, self.m_Width, self.m_Height, tocolor(0, 0, 0, 150), self)
-  self.m_DeleteFriendListButton = VRPButton:new(self.m_Width*0.6, self.m_Height*0.84, self.m_Width*0.35, self.m_Height*0.07, _"Freundesliste löschen", true, self)
-end
---]]
