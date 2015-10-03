@@ -37,7 +37,6 @@
 			<script src="server/classes/Storage/MySQL.lua" type="server"/>
 			<script src="server/classes/Provider.lua" type="server"/>
 			<script src="server/classes/Core.lua" type="server"/>
-			<script src="server/classes/Player/AntiCheat.lua" type="server"/>
 			<script src="server/classes/Player/DatabasePlayer.lua" type="server"/>
 			<script src="server/classes/Player/Player.lua" type="server"/>
 			<script src="server/classes/Player/PlayerManager.lua" type="server"/>
@@ -55,7 +54,6 @@
 				<script src="client/constants.lua" type="client"/>
 				<script src="client/utils.lua" type="client"/>
 				<script src="client/classes/Core.lua" type="client"/>
-				<script src="client/classes/AntiCheat.lua" type="client"/>
 				<script src="client/classes/Provider.lua" type="client"/>
 				<script src="client/classes/Player.lua" type="client"/>
 				<script src="client/classes/LocalPlayer.lua" type="client"/>

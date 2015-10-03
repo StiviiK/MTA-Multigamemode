@@ -22,7 +22,6 @@ function Core:constructor()
 		Debugging:new()
 	end
 
-	AntiCheat:new()
 	Version:new()
 	Cursor = GUICursor:new()
 	Provider:new()
@@ -50,7 +49,4 @@ function Core:destructor()
 	delete(Provider:getSingleton())
 	delete(GamemodeManager:getSingleton())
 	delete(GamemodePedManager:getSingleton())
-
-	-- Delete this at last position
-	delete(AntiCheat:getSingleton())
 end
