@@ -17,13 +17,20 @@ function CopsnRobbers:constructor()
   --outputDebug("Lobby:constructor")
   addRemoteEvents{"onCNRStartDownload"}
   addEventHandler("onCNRStartDownload", root, bind(CopsnRobbers.onDownloadStart, self))
-  
+
    -- Load translation file
   TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
+
+  -- Load custom Arrow
+  EngineCOL("gamemodes/CnR/files/col/EntranceMarker.col"):replace(1318)
+  EngineDFF("gamemodes/CnR/files/dff/EntranceMarker.dff", 0):replace(1318)
+  EngineTXD("gamemodes/CnR/files/txd/EntranceMarker.txd"):import(1318)
 end
 
 function CopsnRobbers:destructor()
-  --outputDebug("Lobby:destructor")
+  -- Restore custom Arrow
+  Engine.restoreCOL(1318)
+  Engine.restoreModel(1318)
 end
 
 function CopsnRobbers:onGamemodesLoaded(numLoadedGamemodes)

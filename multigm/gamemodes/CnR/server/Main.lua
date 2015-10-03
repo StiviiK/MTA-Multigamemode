@@ -1,15 +1,15 @@
 function CopsnRobbers:constructor()
   addRemoteEvents{"onCNRDownloadFinished"}
   addEventHandler("onCNRDownloadFinished", root, bind(CopsnRobbers.onDownloadComplete, self))
- 
+
   addRemoteEvents{"onPlayerSelectTeam"}
   addEventHandler("onPlayerSelectTeam", root, bind(CopsnRobbers.onPlayerSelectTeam, self))
 
    -- Load translation file
   TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
-  
+
   -- Maps
-  MapManager:getSingleton():loadMap(self, "gamemodes/CnR/files/maps/LSPolice.map"):load(MAP_LOADING_FAST)
+  MapManager:getSingleton():loadMap(self, "gamemodes/CnR/files/maps/LSPolice.map"):load(MAP_LOADING_NORMAL)
 
 end
 
@@ -29,13 +29,13 @@ end
 function CopsnRobbers:onDownloadComplete()
 
   -- spawn the player
-  
+
   local spawn = self:getSetting("SpawnCops")
   client:setPosition(spawn.Position)
   client:setRotation(0, 0, spawn.Rotation)
   client:setInterior(spawn.Interior)
   client:setDimension(CNR_DIM)
-  
+
   self:CreatePlayerBlip(client)--CreatePlayerBlip
   addEventHandler ( "onPlayerWasted", client, bind(CopsnRobbers.Wasted,self) )
 end
@@ -43,7 +43,7 @@ end
 
 function CopsnRobbers:onPlayerSelectTeam (Fraction,Skin,SelectID)
   -- spawn the player
-  
+
 if Fraction == "Cops" then
    FractionTable = CNR_Cops
    spawn = CopsnRobbers:getSetting("SpawnCops")
@@ -77,4 +77,3 @@ end
 function Player:getFraction()
 return self.Fraction
 end
-
