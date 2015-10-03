@@ -10,7 +10,7 @@ self.Fraction = Team
 self.m_Position = position
 self.m_Rotation = rotation
 self.m_Dimension = CNR_DIM
-self.EngineState = false
+self.EngineState = nil
 self.LightState  = false
 --self.m_Gamemode = gamemode
 
@@ -25,7 +25,6 @@ self:setRespawnDelay( 10000 )
 self:setRespawnPosition( self.m_Position,self.m_Rotation )
 self:setDamageProof(false)
 
-outputChatBox("Fraction Car Created")
 end
 
 function FraktionsVehicle:destructor()
@@ -33,21 +32,22 @@ self:destroy()
 end
 
 function FraktionsVehicle:onVehicleEnter(thePlayer, seat, jacked)
-outputChatBox("bindKey")
-
-		self:setEngine(self.EngineState)---damit bei erstem einsteigen der motor aus ist
+		if self.EngineState == nil then
+			self:setEngineState(false)   --Damit beim ersten mal motor aus ist
+			self.EngineState = false	 --Damit beim ersten mal motor aus ist
+		end
 		bindKey(thePlayer,"x","down",self.KeyBindSwitchEngine)
 		bindKey(thePlayer,"l","down",self.KeyBindSwitchLight)
 
 end
 
 function FraktionsVehicle:onVehicleStartExit(thePlayer, seat, jacked)
-outputChatBox("unbindKey")
 unbindKey(thePlayer,"x","down",self.KeyBindSwitchEngine)
 unbindKey(thePlayer,"l","down",self.KeyBindSwitchLight)
 end
 
 function FraktionsVehicle:setEngine()
+
 local State = not self.EngineState
 self:setEngineState(State)
 self.EngineState = State
@@ -55,7 +55,6 @@ end
 
 function FraktionsVehicle:SwitchEngine ( player, key, keyState)
 	if self ==  player:getOccupiedVehicle( ) then
-	outputChatBox("Switch EngineState "..tostring(self.EngineState))
 	self:setEngine()
 	else
 		if (isKeyBound (player,"x")) or (isKeyBound (player,"l")) then
@@ -67,14 +66,13 @@ end
 
 function FraktionsVehicle:SwitchLight ( player, key, keyState)
 	if self ==  player:getOccupiedVehicle( ) then
-	outputChatBox("Switch LightState")
 	self.LightState = not self.LightState
 		if (self.LightState) then
-			LightState = 2
+			LightNummer = 2
 		else
-			LightState = 1
+			LightNummer = 1
 		end
-	setVehicleOverrideLights(self, LightState)
+	setVehicleOverrideLights(self, LightNummer)
 	else
 		if (isKeyBound (player,"x")) or (isKeyBound (player,"l")) then
 			unbindKey(player,"x","down",self.KeyBindSwitchEngine)
@@ -85,7 +83,8 @@ end
 
 function FraktionsVehicle:CreateFractionVehicle (Team,model,position,rotation)
 local veh = createVehicle(model,position,rotation,Team)
-enew(veh, FraktionsVehicle,Team,model,position,rotation)
+setVehicleOverrideLights(veh, 1)
+enew(veh,FraktionsVehicle,Team,model,position,rotation)
 return veh
 end
 

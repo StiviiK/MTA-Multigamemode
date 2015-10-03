@@ -65,7 +65,5 @@ end
 
 
 function HudComponentVisible(State)
-
 setPlayerHudComponentVisible (  "all", State )
-
 end

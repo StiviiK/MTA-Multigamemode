@@ -23,13 +23,11 @@ end
 
 function ArrestSystem:CreateCheckTimer()
 if isTimer(self.CheckTimer) then return end
-outputChatBox("ArrestSystem:CreateCheckTimer")
 self.CheckTimer = setTimer(bind(ArrestSystem.CheckTime,self),1000,-1)
 end
 
 function ArrestSystem:StopTimer()
 	if isTimer(self.CheckTimer) then
-		outputChatBox("ArrestSystem:StopTimer")
 		killTimer(self.CheckTimer)
 	end
 end

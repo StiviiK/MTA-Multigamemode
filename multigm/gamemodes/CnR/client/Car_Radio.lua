@@ -1,13 +1,11 @@
+--{ ["Name"] = "", ["Url"] = ""},
+local RadioList = {
+				[0] = {["Name"] = "Radio Off"},---nicht entfernen
 
-local RadioList = {{ ["Name"] = "Kein Plan 1", ["Url"] = "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us1.internet-radio.com:8180/listen.pls&t=.m3u"},
-				   { ["Name"] = "Kein Plan 2", ["Url"] = "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us1.internet-radio.com:11094/listen.pls&t=.m3u"},
-				   { ["Name"] = "Kein Plan 3", ["Url"] = "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://us1.internet-radio.com:8105/listen.pls&t=.m3u"},
-				   { ["Name"] = "Kein Plan 4", ["Url"] = "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk4.internet-radio.com:15476/listen.pls&t=.m3u"},
-				   { ["Name"] = "Kein Plan 5", ["Url"] = "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk2.internet-radio.com:30092/listen.pls&t=.m3u"},
-				   { ["Name"] = "Kein Plan 6", ["Url"] = "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk1.internet-radio.com:8052/live.m3u&t=.m3u"},
-				   { ["Name"] = "Kein Plan 7", ["Url"] = "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://stream.uzic.ch:9010/listen.pls&t=.m3u"},
-				   { ["Name"] = "Kein Plan 8",["Url"] = "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://toxxor.de:8000/listen.pls&t=.m3u"},
-				   { ["Name"] = "Kein Plan 9", ["Url"] = "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://sl128.hnux.com/listen.pls&t=.m3u"}
+				   { ["Name"] = "Dublins KISS", ["Url"] = "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk4.internet-radio.com:15476/listen.pls&t=.m3u"},
+				   { ["Name"] = "ChartHits.FM", ["Url"] = "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://95.141.24.3:80/listen.pls&t=.m3u"},
+				   { ["Name"] = "Radio Jovem Pan FM", ["Url"] = "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://sh1.upx.com.br:9952/listen.pls?sid=1&t=.m3u"},
+				   { ["Name"] = "1FM", ["Url"] = "https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://uk2.internet-radio.com:8008/listen.pls&t=.m3u"}
 }
 
 
@@ -29,6 +27,7 @@ self.onRadioChannelChange = function(  key, keyState )
 
 							end
 
+self.RadioRender = function() self:render() end
 end
 
  
@@ -39,7 +38,9 @@ self.RadioSound:setVolume(self.RadioVolume)
 end
 
 function CarRadio:StopPlay ()
-self.RadioSound:stop()
+	if isElement(self.RadioSound) then 
+		self.RadioSound:stop()
+	end
 end
 
 function CarRadio:StartPlay ()
@@ -107,7 +108,9 @@ addEventHandler("onClientVehicleEnter", getRootElement(),
            source.Radio = new(CarRadio,veh)
 		   source.Radio:BindRadioChannelChange ()
 		end
-		   
+		
+		 source.Radio:StartRender()
+ 
         end
     end
 )
@@ -115,7 +118,7 @@ addEventHandler("onClientVehicleEnter", getRootElement(),
 addEventHandler("onClientVehicleStartExit", getRootElement(),
     function(thePlayer, seat)
         if thePlayer == getLocalPlayer() then
-		
+		 source.Radio:StopRender()
         source.Radio:StopPlay ()
 		source.Radio:UnBindRadioChannelChange ()
         end
@@ -133,3 +136,19 @@ addEventHandler("onClientVehicleStartExit", getRootElement(),
 
 --------------Radio_Visual---------------
 
+
+function CarRadio:render()
+if self.RadioChannel == 0 then
+	dxDrawText ( tostring(RadioList[self.RadioChannel]["Name"]), screenX/2, 0, screenX/2, 100, tocolor ( 255, 0, 0, 255 ), 2, "pricedown","center","center" )
+else
+	dxDrawText ( tostring(RadioList[self.RadioChannel]["Name"]), screenX/2, 0, screenX/2, 100, tocolor ( 0, 255, 0, 255 ), 2, "pricedown","center","center" )
+end
+end
+
+function CarRadio:StartRender()
+addEventHandler("onClientRender", root   , self.RadioRender)
+end
+
+function CarRadio:StopRender()
+removeEventHandler("onClientRender", root, self.RadioRender)
+end
