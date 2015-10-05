@@ -5,6 +5,12 @@ function Lobby:constructor()
 
   -- Load translation file
   TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
+
+  -- TODO: Remove this (it's only for Debugging)
+  addCommandHandler("lobby", function (player)
+    player:getGamemode():removePlayer(player)
+    self:addPlayer(player)
+  end)
 end
 
 function Lobby:destructor()

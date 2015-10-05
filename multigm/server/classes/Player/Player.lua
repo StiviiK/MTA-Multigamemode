@@ -4,6 +4,7 @@ registerElementClass("player", Player)
 
 function Player:constructor()
   self:setDimension(PRIVATE_DIMENSION_SERVER)
+  self:setCameraTarget(self)
 	self:setFrozen(true)
 
   self.m_PrivateSync = {}

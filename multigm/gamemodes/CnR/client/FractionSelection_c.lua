@@ -12,6 +12,8 @@ FractionSelection.SelectSkin = 1--TableID
 
 function FractionSelectionMenu:constructor ()
 GUIForm.constructor(self, (screenWidth/2)-656/2, (screenHeight)-(187+50), 656, 187)---Hier Drauf wird alles gezeichnet
+Cursor:show()
+
 self.m_Button_Left   = GUIButton:new(10, 125, 206, 49, "<---", self)
 self.m_Button_Select   = GUIButton:new(226, 127, 206, 47, "Select", self)
 self.m_Button_Right   = GUIButton:new(442, 125, 206, 48, "--->", self)
@@ -20,37 +22,27 @@ local GridTeam = self.m_GridList:addColumn("Team", 70)
 local CopsItem = self.m_GridList:addItem("Cops")
 local RobbersItem = self.m_GridList:addItem("Robbers")
 
-Cursor:show()
- self.m_GridList.onLeftClick = function ()
-
-
- self2 = self
- setTimer(function()---verzögerung weil Grid Select Item in dem selben moment....
-	local SelectedName = self2.m_GridList.m_SelectedItem.m_Columns[1].text
-	
-	
+self.m_GridList.onSelectItem = function (item)
+  local SelectedName = item:getColumnText(1)
 	if SelectedName then
 		if SelectedName == "Cops" then
 			CopsnRobbers:ShowCopsSelection ()
 		elseif SelectedName == "Robbers" then
 			CopsnRobbers:ShowRobbersSelection ()
-		else
-			outputDebugString("debug error not selected")
 		end
 	end
- end,100,1)
  end
- 
- self.m_Button_Select.onLeftClick = function ()	
-local Team = FractionSelection.SelectTeam
-local Skin = FractionSelection.Select[FractionSelection.SelectSkin]["Skin"]
-local SelectID = FractionSelection.SelectSkin
-self:delete ()
-triggerServerEvent("onPlayerSelectTeam",lp,Team,Skin,SelectID)
- end
- 
- 
- 
+
+self.m_Button_Select.onLeftClick = function ()
+  local Team = FractionSelection.SelectTeam
+  local Skin = FractionSelection.Select[FractionSelection.SelectSkin]["Skin"]
+  local SelectID = FractionSelection.SelectSkin
+  self:delete ()
+  triggerServerEvent("onPlayerSelectTeam",lp,Team,Skin,SelectID)
+end
+
+
+
 self.m_Button_Right.onLeftClick = function ()
 FractionSelection.SelectSkin = FractionSelection.SelectSkin +1
 
@@ -58,8 +50,8 @@ FractionSelection.SelectSkin = FractionSelection.SelectSkin +1
 		FractionSelection.Ped:setModel(FractionSelection.Select[FractionSelection.SelectSkin]["Skin"])
 	end
 
-	
-self.m_Button_Left.onLeftClick = function () 
+
+self.m_Button_Left.onLeftClick = function ()
 FractionSelection.SelectSkin = FractionSelection.SelectSkin -1
 
 	if FractionSelection.SelectSkin < 1 then FractionSelection.SelectSkin = #FractionSelection.Select end
@@ -115,8 +107,3 @@ lp:setDimension(CNR_DIM)
 Camera.setMatrix( 1547.1048583984,-1675.3217773438,17.216079711914,1641.9064941406,-1681.0043945313,-13.09459400177 )
 
 end
-
-
-
-
-
