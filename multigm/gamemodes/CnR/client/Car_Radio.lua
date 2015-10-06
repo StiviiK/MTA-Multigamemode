@@ -137,6 +137,7 @@ addEventHandler("onClientVehicleStartExit", getRootElement(),
 
 
 function CarRadio:render()
+if not isPedInVehicle(getLocalPlayer()) then self:StopRender() end
 if self.RadioChannel == 0 then
 	dxDrawText ( tostring(RadioList[self.RadioChannel]["Name"]), screenX/2, 0, screenX/2, 100, tocolor ( 255, 0, 0, 255 ), 2, "pricedown","center","center" )
 else
