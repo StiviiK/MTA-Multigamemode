@@ -115,6 +115,7 @@
 				<script src="client/classes/GUI/Animations/FadeColor.lua" type="client"/>
 				<script src="client/classes/GUI/Animations/Move.lua" type="client"/>
 				<script src="client/classes/GUI/Animations/FadeAlpha.lua" type="client"/>
+				<script src="client/classes/GUI/Animations/Size.lua" type="client"/>
 
 				<!-- Special GUI elements -->
 				<script src="client/classes/GUI/MessageBoxes/MessageBox.lua" type="client"/>
@@ -135,6 +136,7 @@
 				<script src="client/classes/GUIForms/PasswordBox.lua" type="client"/>
 				<script src="client/classes/GUIForms/DownloadBar.lua" type="client"/>
 				<script src="client/classes/GUIForms/GamemodeInfo.lua" type="client"/>
+				<script src="client/classes/GUIForms/FastLobby.lua" type="client"/>
 
 					<!-- Mouse Menus -->
 					<script src="client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua" type="client"/>
@@ -190,10 +192,24 @@
 			<file src="files/translation/en/client.po"/>
 
 		<!-- Images -->
+			<!-- GUI -->
+			<file src="files/images/GUI/Cursor.png"/>
+			<file src="files/images/GUI/Mouse.png"/>
 			<file src="files/images/GUI/download.png"/>
-			<file src="files/fonts/Betm-Regular.otf"/>
-			<file src="files/fonts/Betmicua-Regular.otf"/>
 			<transferfile src="files/images/GUI/Mouse.png" />
+			<transferfile src="files/images/GUI/Checkbox.png"/>
+			<transferfile src="files/images/GUI/Checkbox_checked.png"/>
+			<transferfile src="files/images/GUI/Radiobutton.png"/>
+			<transferfile src="files/images/GUI/Radiobutton_checked.png"/>
+			<transferfile src="files/images/GUI/Editbox.png"/>
+			<transferfile src="files/images/GUI/RoundedCorner.png"/>
+			<transferfile src="files/images/GUI/HelpIcon.png"/>
+			<transferfile src="files/images/MessageBoxes/Info.png"/>
+			<transferfile src="files/images/MessageBoxes/Warning.png"/>
+			<transferfile src="files/images/MessageBoxes/Error.png"/>
+			<transferfile src="files/images/MessageBoxes/Success.png"/>
+
+			<!-- Skins -->
 			<transferfile src="files/images/skins/0.jpg" />
 			<transferfile src="files/images/skins/1.jpg" />
 			<transferfile src="files/images/skins/2.jpg" />
@@ -483,25 +499,20 @@
 			<transferfile src="files/images/skins/310.jpg" />
 			<transferfile src="files/images/skins/311.jpg" />
 			<transferfile src="files/images/skins/312.jpg" />
+
+			<!-- Audio -->
 			<transferfile src="files/audio/test.mp3" />
-			<transferfile src="files/images/GUI/Checkbox.png"/>
-			<transferfile src="files/images/GUI/Checkbox_checked.png"/>
-			<transferfile src="files/images/GUI/Radiobutton.png"/>
-			<transferfile src="files/images/GUI/Radiobutton_checked.png"/>
-			<file src="files/images/GUI/Cursor.png"/>
-			<file src="files/images/GUI/Mouse.png"/>
-			<transferfile src="files/images/GUI/Editbox.png"/>
-			<transferfile src="files/images/GUI/RoundedCorner.png"/>
-			<transferfile src="files/images/GUI/HelpIcon.png"/>
-			<transferfile src="files/images/MessageBoxes/Info.png"/>
-			<transferfile src="files/images/MessageBoxes/Warning.png"/>
-			<transferfile src="files/images/MessageBoxes/Error.png"/>
-			<transferfile src="files/images/MessageBoxes/Success.png"/>
 
 			<!-- Header Images -->
 			<transferfile src="files/images/HeaderDefaultGamemode.png"/>
 			<transferfile src="gamemodes/Lobby/files/images/HeaderLobby.png" />
 			<transferfile src="gamemodes/CnR/files/images/HeaderCnR.png" />
+
+			<!-- Background Images -->
+			<transferfile src="files/images/backgrounds/user.png"/>
+			<transferfile src="files/images/backgrounds/lobby/lobby-bg.jpg"/>
+
+			<!-- Backgrounds -->
 
 		<!-- Fonts -->
 			<file src="files/fonts/gtafont.ttf"/><!-- do not replace the file tag -->
@@ -510,6 +521,8 @@
 			<transferfile src="files/fonts/Gasalt.ttf"/>
 			<transferfile src="files/fonts/Gasalt_Black.ttf"/>
 			<transferfile src="files/fonts/FontAwesome.otf"/>
+			<transferfile src="files/fonts/Betm-Regular.otf"/>
+			<transferfile src="files/fonts/Betmicua-Regular.otf"/>
 
 	<!-- ACL Request -->
 		<aclrequest>

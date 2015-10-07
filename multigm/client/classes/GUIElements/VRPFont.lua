@@ -41,4 +41,6 @@ FontAwesomeSymbols = {
 	Facebook = "";
 	Heart = "";
 	Info = "";
+	Lock = "";
+	User = "";
 }

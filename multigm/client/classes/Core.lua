@@ -42,6 +42,16 @@ function Core:afterLogin()
 	SelfGUI:new():close()
 	addCommandHandler("self", function () SelfGUI:getSingleton():open() end)
 	bindKey("F2", "down", function() SelfGUI:getSingleton():toggle() end)
+
+	bindKey("F3", "down", function()
+		if localPlayer:getGamemode():getId() ~= 1 then
+			if FastLobby:isInstantiated() then
+				delete(FastLobby:getSingleton())
+			else
+				FastLobby:new()
+			end
+		end
+	end)
 end
 
 function Core:destructor()

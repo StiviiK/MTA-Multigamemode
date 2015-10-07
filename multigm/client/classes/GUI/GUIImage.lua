@@ -36,8 +36,6 @@ function GUIImage:setRotation(rotation, rotationCenterOffsetX, rotationCenterOff
 end
 
 function GUIImage:setImage(path)
-	assert(type(path) == "string", "Bad argument @ GUIImage.setImage")
-
 	self.m_Image = path
 	self:anyChange()
 	return self
