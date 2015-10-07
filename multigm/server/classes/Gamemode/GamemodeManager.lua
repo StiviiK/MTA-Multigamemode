@@ -52,6 +52,7 @@ end
 
 function GamemodeManager:Event_JoinGamemode(Id)
   if source:getGamemode() == self.getFromId(Id) then
+    source:fadeCamera(true, 0.5)
     source:triggerEvent("errorBox", source, _("Du bist bereits in diesem Gamemode!", source))
     return
   end
@@ -61,5 +62,6 @@ function GamemodeManager:Event_JoinGamemode(Id)
   end
 
   self.getFromId(Id):addPlayer(source)
+  source:fadeCamera(true, 0.5)
   source:triggerEvent("successBox", source, _("Du bist dem Gamemode erfolgreich beigetreten!", source))
 end

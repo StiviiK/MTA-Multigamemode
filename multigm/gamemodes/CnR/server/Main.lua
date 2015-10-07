@@ -8,12 +8,22 @@ function CopsnRobbers:constructor()
    -- Load translation file
   TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
 
-  -- Maps
-  MapManager:getSingleton():loadMap(self, "gamemodes/CnR/files/maps/LSPolice.map"):load(MAP_LOADING_NORMAL)
+  -- Load Maps
+  self.m_Maps = {
+    MapManager:getSingleton():loadMap(self, "gamemodes/CnR/files/maps/LSPolice.map");
+  }
+
+  -- Create Maps
+  for i, v in pairs(self.m_Maps) do
+    v:load()
+  end
 end
 
 function CopsnRobbers:destructor()
-
+  -- Delete Maps
+  for i, v in pairs(self.m_Maps) do
+    delete(v)
+  end
 end
 
 function CopsnRobbers:onPlayerJoin(player)
@@ -59,7 +69,7 @@ end
   client:setModel(Skin)
   client:setFraction(Fraction)
   client:setDimension(CNR_DIM)
-  
+
   self:GivePlayerFractionWeapons(client,FractionTable,SelectID)
   self:CreatePlayerBlip(client)
 

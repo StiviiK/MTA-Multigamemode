@@ -213,3 +213,23 @@ function unpackVector(vector)
 		return vector.x, vector.y
 	end
 end
+
+function math.determinante(a, b, c)
+	return a:cross(b):dot(c)
+end
+
+function math.getAngle(vec1, vec2)
+	return math.acos(vec1:dot(vec2)/(vec1.length * vec2.length))
+end
+
+function math.line_plane_intersection(linepos, linedir, planepos, planev1, planev2)
+	local posoffset = linepos - planepos
+	local n = planev1:cross(planev2)
+	if math.abs(n:dot(linedir)) < 1.0e-3 then
+		return false
+	end
+
+	local r = math.determinante(planev1, planev2, posoffset) / math.determinante(planev1, planev2, -linedir)
+
+	return linepos + r * linedir
+end

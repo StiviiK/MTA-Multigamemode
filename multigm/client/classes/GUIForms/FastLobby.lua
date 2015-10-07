@@ -1,10 +1,20 @@
 FastLobby = inherit(GUIForm)
-inherit(Singleton, FastLobby)
 
 function FastLobby:constructor()
   GUIForm.constructor(self, 0, 0, screenWidth, screenHeight)
   self.m_Gamemodes = {
     -- [Id] = {NAME, false (current Gamemode), unlocked}
+    {Name = "Lobby", Current = true, Active = true};
+    {Name = "Cops'n'Robbers", Current = false, Active = true, Background = "files/images/backgrounds/cnr/cnr-bg.jpg"};
+    {Name = "Lobby", Current = false, Active = false};
+    {Name = "Lobby", Current = false, Active = false};
+    {Name = "Lobby", Current = false, Active = false};
+    {Name = "Lobby", Current = false, Active = false};
+    {Name = "Lobby", Current = false, Active = false};
+    {Name = "Lobby", Current = false, Active = false};
+    {Name = "Lobby", Current = false, Active = false};
+    {Name = "Lobby", Current = false, Active = false};
+    {Name = "Lobby", Current = false, Active = false};
     {Name = "Lobby", Current = false, Active = false};
   }
   --if localPlayer:getGamemode() then
@@ -20,7 +30,8 @@ function FastLobby:constructor()
   local hPerImage = (self.m_Height - self.m_Height*0.3 - self.m_Height*0.008)/3
   for colum = 1, 4, 1 do
     for row = 1, 3, 1 do
-      local currGamemode = 1
+      local currGamemode = colum + (row-1) * 4
+      outputDebug(currGamemode)
       if not self.m_Gamemodes[currGamemode] then break end
 
       local posX = self.m_Width*0.05 + self.m_Width*0.005*(colum-1) + wPerImage*(colum-1)
@@ -31,12 +42,13 @@ function FastLobby:constructor()
         if self.m_Gamemodes[currGamemode].Current then
           self.m_Gamemodes[currGamemode].Image = GUIImage:new(posX, posY, width, height, self.m_ScreenSource, self)
           self.m_Gamemodes[currGamemode].Label = GUILabel:new(0, 0, width, height, ("%s %s"):format(FontAwesomeSymbols.User, self.m_Gamemodes[currGamemode].Name), self.m_Gamemodes[currGamemode].Image)
-          self.m_Gamemodes[currGamemode].Label:setFont(FontAwesome(height/4))
+          self.m_Gamemodes[currGamemode].Label:setFont(FontAwesome(height/4.25))
 
         else
-          self.m_Gamemodes[currGamemode].Image = GUIImage:new(posX, posY, width, height, "files/images/backgrounds/lobby/lobby-bg.jpg", self)
-          self.m_Gamemodes[currGamemode].Label = GUILabel:new(0, 0, width, height, ("%s %s"):format(FontAwesomeSymbols.Windows, self.m_Gamemodes[currGamemode].Name), self.m_Gamemodes[currGamemode].Image)
-          self.m_Gamemodes[currGamemode].Label:setFont(FontAwesome(height/4))
+          local img = self.m_Gamemodes[currGamemode].Background or "files/images/backgrounds/lobby/lobby-bg.jpg"
+          self.m_Gamemodes[currGamemode].Image = GUIImage:new(posX, posY, width, height, img, self)
+          self.m_Gamemodes[currGamemode].Label = GUILabel:new(0, 0, width, height, ("%s %s"):format(FontAwesomeSymbols.Gamepad, self.m_Gamemodes[currGamemode].Name), self.m_Gamemodes[currGamemode].Image)
+          self.m_Gamemodes[currGamemode].Label:setFont(FontAwesome(height/4.25))
         end
       else
         self.m_Gamemodes[currGamemode].Image = GUIRectangle:new(posX, posY, width, height, tocolor(0, 0, 0, 150), self)
@@ -54,7 +66,7 @@ function FastLobby:constructor()
           Animation.Size:new(element.m_Parent, 100, width + 10, height + 10)
           Animation.Move:new(element, 100, 10, 10)
           Animation.Move:new(element, 100, 5, 5)
-          element:setFont(FontAwesome((hPerImage + 10)/4))
+          element:setFont(FontAwesome((hPerImage + 10)/4.25))
         end
       end
       self.m_Gamemodes[currGamemode].Label.onUnhover = function (element)
@@ -65,12 +77,16 @@ function FastLobby:constructor()
           Animation.Size:new(element.m_Parent, 100, width, height)
           Animation.Move:new(element, 100, 0, 0)
           Animation.Size:new(element, 100, width, height)
-          element:setFont(FontAwesome(hPerImage/4))
+          element:setFont(FontAwesome(hPerImage/4.25))
         end
       end
       self.m_Gamemodes[currGamemode].Label.onLeftClick = function (element)
         if self.m_Gamemodes[currGamemode].Active then
           outputDebug(element.m_Parent.m_GamemodeId)
+          triggerServerEvent("Event_JoinGamemode", localPlayer, element.m_Parent.m_GamemodeId)
+
+          Camera.fade(false, 0)
+          delete(self)
         end
       end
     end

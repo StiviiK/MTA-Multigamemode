@@ -511,6 +511,7 @@
 			<!-- Background Images -->
 			<transferfile src="files/images/backgrounds/user.png"/>
 			<transferfile src="files/images/backgrounds/lobby/lobby-bg.jpg"/>
+			<transferfile src="files/images/backgrounds/cnr/cnr-bg.jpg"/>
 
 			<!-- Backgrounds -->
 
