@@ -35,5 +35,10 @@ function FontAwesome(height)
 end
 
 FontAwesomeSymbols = {
-	CartPlus = ""
+	CartPlus = "";
+	Windows = "";
+	Chrome = "";
+	Facebook = "";
+	Heart = "";
+	Info = "";
 }
