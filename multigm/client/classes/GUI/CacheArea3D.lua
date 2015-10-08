@@ -10,7 +10,7 @@ CacheArea3D = inherit(CacheArea)
 
 function CacheArea3D:constructor(startPos, endPos, normal, saheight, resx, resy, containsGUIElements)
 	self.m_3DStart = startPos
-	self.m_3DEnd = endPosb
+	self.m_3DEnd = endPos
 
 	self.m_3DWidth = (self.m_3DStart - self.m_3DEnd).length
 	self.m_3DHeight= saheight;

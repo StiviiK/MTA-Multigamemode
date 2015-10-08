@@ -44,13 +44,11 @@ function Core:afterLogin()
 	bindKey("F2", "down", function() SelfGUI:getSingleton():toggle() end)
 
 	bindKey("F3", "down", function()
-		if localPlayer:getGamemode():getId() ~= 1 then
-			if FastLobby:isInstantiated() then
-				delete(FastLobby:getSingleton())
-			else
-				FastLobby:new()
-			end
-		end
+	  if FastLobby:isInstantiated() then
+	    delete(FastLobby:getSingleton())
+	  else
+	    FastLobby:new()
+	  end
 	end)
 end
 

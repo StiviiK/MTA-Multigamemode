@@ -135,4 +135,4 @@ function Player:getJoinTime() return self.m_JoinTime end
 function Player:getSession() return (self:getAccount() and self:getAccount():getSession()) end
 
 -- Short setters
-function Player:setGamemode(instance) self.m_Gamemode = instance end
+function Player:setGamemode(instance) self.m_Gamemode = instance if self:isActive() then self:setPrivateSync("Gamemode", (self.m_Gamemode and self.m_Gamemode:getId()) or 0) end end

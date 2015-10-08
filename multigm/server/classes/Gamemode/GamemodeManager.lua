@@ -50,10 +50,12 @@ function GamemodeManager:Event_DisableGamemode(Id)
   end
 end
 
-function GamemodeManager:Event_JoinGamemode(Id)
+function GamemodeManager:Event_JoinGamemode(Id, fLobby)
   if source:getGamemode() == self.getFromId(Id) then
     source:fadeCamera(true, 0.5)
-    source:triggerEvent("errorBox", source, _("Du bist bereits in diesem Gamemode!", source))
+    if fLobby ~= true then
+      source:triggerEvent("errorBox", source, _("Du bist bereits in diesem Gamemode!", source))
+    end  
     return
   end
 
@@ -61,7 +63,7 @@ function GamemodeManager:Event_JoinGamemode(Id)
     source:getGamemode():removePlayer(source)
   end
 
+  source:fadeCamera(true, 0.75)
   self.getFromId(Id):addPlayer(source)
-  source:fadeCamera(true, 0.5)
   source:triggerEvent("successBox", source, _("Du bist dem Gamemode erfolgreich beigetreten!", source))
 end
