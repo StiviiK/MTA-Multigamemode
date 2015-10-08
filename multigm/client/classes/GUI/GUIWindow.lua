@@ -32,7 +32,7 @@ function GUIWindow:constructor(posX, posY, width, height, title, hasTitlebar, ha
 	end
 
 	if self.m_HasCloseButton then
-		self.m_CloseButton = GUILabel:new(self.m_Width-28, 0, 28, 28, "[x]", self):setFont(VRPFont(35)) --GUIImage(self.m_Width - 40, 4, 35, 27, "files/images/GUI/close_button.png", self)
+		self.m_CloseButton = GUILabel:new(self.m_Width-28, 0, 28, 28, "[x]", self):setFont(VRPFont(35)) --GUIImage(self.m_Width - 40, 4, 35, 27, "res/images/GUI/close_button.png", self)
 		--self.m_CloseButton.onHover = function(btn) btn:setColor(Color.Red) end
 		--self.m_CloseButton.onUnhover = function(btn) btn:setColor(Color.White) end
 		self.m_CloseButton.onLeftClick = bind(GUIWindow.CloseButton_Click, self)
@@ -47,7 +47,7 @@ function GUIWindow:drawThis()
 
 	dxSetBlendMode("modulate_add")
 
-	--dxDrawImage(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, self.m_Height, "files/images/GUI/Window.png")
+	--dxDrawImage(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, self.m_Height, "res/images/GUI/Window.png")
 	-- Draw border (no longer a rectangle as causes issues with alpha)
 	--dxDrawLine(self.m_AbsoluteX, self.m_AbsoluteY, self.m_AbsoluteX + self.m_Width, self.m_AbsoluteY)
 	--dxDrawLine(self.m_AbsoluteX + self.m_Width - 1, self.m_AbsoluteY, self.m_AbsoluteX + self.m_Width - 1, self.m_AbsoluteY + self.m_Height - 1)
@@ -59,7 +59,7 @@ function GUIWindow:drawThis()
 
 	-- Draw logo
 	if false then -- Should the logo be optional? | Todo: Since we haven't got a logo, disable that
-		dxDrawImage(self.m_AbsoluteX + 10, self.m_AbsoluteY + self.m_Height - 29 - 10, 62, 29, "files/images/GUI/logo.png")
+		dxDrawImage(self.m_AbsoluteX + 10, self.m_AbsoluteY + self.m_Height - 29 - 10, 62, 29, "res/images/GUI/logo.png")
 	end
 
 	if self.m_HasTitlebar then

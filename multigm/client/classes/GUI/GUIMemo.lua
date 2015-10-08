@@ -34,7 +34,7 @@ function GUIMemo:drawThis()
 
 	dxSetBlendMode("modulate_add")
 
-	dxDrawImage(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, self.m_Height, "files/images/GUI/editbox.png")
+	dxDrawImage(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, self.m_Height, "res/images/GUI/editbox.png")
 
 	dxSetBlendMode("blend")
 end

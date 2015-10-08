@@ -55,10 +55,10 @@ end
 
 function GUIHorizontalScrollbar:drawThis()
 	-- Draw scroll bar (rectangle)
-	--dxDrawImage(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, self.m_Height, "files/images/GUI/scrollbar_horz.png")
+	--dxDrawImage(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, self.m_Height, "res/images/GUI/scrollbar_horz.png")
 	dxDrawRectangle(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, self.m_Height, Color.Grey)
 
 	-- Draw scrollbar element
-	--dxDrawImage(self.m_AbsoluteX + GUI_SCROLLBAR_ELEMENT_MARGIN + self.m_ScrollPosition * self.m_Width, self.m_AbsoluteY + GUI_SCROLLBAR_ELEMENT_MARGIN, 49, self.m_Height - 2*GUI_SCROLLBAR_ELEMENT_MARGIN, "files/images/GUI/scrollbar_horz_element.png")
+	--dxDrawImage(self.m_AbsoluteX + GUI_SCROLLBAR_ELEMENT_MARGIN + self.m_ScrollPosition * self.m_Width, self.m_AbsoluteY + GUI_SCROLLBAR_ELEMENT_MARGIN, 49, self.m_Height - 2*GUI_SCROLLBAR_ELEMENT_MARGIN, "res/images/GUI/scrollbar_horz_element.png")
 	dxDrawRectangle(self.m_AbsoluteX + GUI_SCROLLBAR_ELEMENT_MARGIN + self.m_ScrollPosition * self.m_Width, self.m_AbsoluteY + GUI_SCROLLBAR_ELEMENT_MARGIN, 49, self.m_Height - 2*GUI_SCROLLBAR_ELEMENT_MARGIN, self.m_Color)
 end

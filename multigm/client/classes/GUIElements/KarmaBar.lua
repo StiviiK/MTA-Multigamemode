@@ -17,6 +17,6 @@ end
 
 function KarmaBar:drawThis()
 	local progress = localPlayer:getKarma()
-	dxDrawImage(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, self.m_Height, "files/images/Bar_hover.png")
-	dxDrawImageSection(self.m_AbsoluteX+self.m_Width/2, self.m_AbsoluteY, progress/100*self.m_Width/2, self.m_Height, 250, 0, progress/100*500/2, 25, "files/images/Bar.png")
+	dxDrawImage(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, self.m_Height, "res/images/Bar_hover.png")
+	dxDrawImageSection(self.m_AbsoluteX+self.m_Width/2, self.m_AbsoluteY, progress/100*self.m_Width/2, self.m_Height, 250, 0, progress/100*500/2, 25, "res/images/Bar.png")
 end

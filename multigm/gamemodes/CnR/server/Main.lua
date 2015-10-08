@@ -10,7 +10,7 @@ function CopsnRobbers:constructor()
 
   -- Load Maps
   self.m_Maps = {
-    MapManager:getSingleton():loadMap(self, "gamemodes/CnR/files/maps/LSPolice.map");
+    MapManager:getSingleton():loadMap(self, "gamemodes/CnR/res/maps/LSPolice.map");
   }
 
   -- Create Maps

@@ -9,11 +9,11 @@
 WarningBox = inherit(MessageBox)
 
 function WarningBox:getImagePath()
-	return "files/images/MessageBoxes/Warning.png"
+	return "res/images/MessageBoxes/Warning.png"
 end
 
 function WarningBox:getSoundPath()
-	return "files/audio/Message.mp3"
+	return "res/audio/Message.mp3"
 end
 
 addEvent("warningBox", true)

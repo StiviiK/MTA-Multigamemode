@@ -9,11 +9,11 @@
 SuccessBox = inherit(MessageBox)
 
 function SuccessBox:getImagePath()
-	return "files/images/MessageBoxes/Success.png"
+	return "res/images/MessageBoxes/Success.png"
 end
 
 function SuccessBox:getSoundPath()
-	return "files/audio/Success.mp3"
+	return "res/audio/Success.mp3"
 end
 
 addEvent("successBox", true)

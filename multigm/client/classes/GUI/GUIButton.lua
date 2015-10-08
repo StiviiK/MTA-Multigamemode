@@ -17,7 +17,7 @@ function GUIButton:constructor(posX, posY, width, height, text, parent)
 	GUIElement.constructor(self, posX, posY, width, height, parent)
 	GUIFontContainer.constructor(self, text, height*0.05)
 
-	self.m_Path = "files/images/GUI/Button.png"
+	self.m_Path = "res/images/GUI/Button.png"
 	self.m_NormalColor = Color.White
 	self.m_HoverColor = Color.Black
 	self.m_BackgroundColor = tocolor(0, 32, 63, 255)
@@ -45,13 +45,13 @@ function GUIButton:performChecks(...)
 end
 
 function GUIButton:onInternalHover()
-	self.m_Path = "files/images/GUI/Button_hover.png"
+	self.m_Path = "res/images/GUI/Button_hover.png"
 	self.m_Color = self.m_HoverColor
 	self:anyChange()
 end
 
 function GUIButton:onInternalUnhover()
-	self.m_Path = "files/images/GUI/Button.png"
+	self.m_Path = "res/images/GUI/Button.png"
 	self.m_Color = self.m_NormalColor
 	self:anyChange()
 end

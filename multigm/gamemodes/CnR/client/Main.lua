@@ -22,9 +22,9 @@ function CopsnRobbers:constructor()
   TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
 
   -- Load custom Arrow
-  EngineCOL("gamemodes/CnR/files/col/EntranceMarker.col"):replace(1318)
-  EngineTXD("gamemodes/CnR/files/txd/EntranceMarker.txd"):import(1318)
-  EngineDFF("gamemodes/CnR/files/dff/EntranceMarker.dff", 0):replace(1318)
+  EngineCOL("gamemodes/CnR/res/col/EntranceMarker.col"):replace(1318)
+  EngineTXD("gamemodes/CnR/res/txd/EntranceMarker.txd"):import(1318)
+  EngineDFF("gamemodes/CnR/res/dff/EntranceMarker.dff", 0):replace(1318)
 end
 
 function CopsnRobbers:destructor()

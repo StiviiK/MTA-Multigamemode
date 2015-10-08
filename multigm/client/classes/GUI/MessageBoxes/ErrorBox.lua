@@ -9,11 +9,11 @@
 ErrorBox = inherit(MessageBox)
 
 function ErrorBox:getImagePath()
-	return "files/images/MessageBoxes/Error.png"
+	return "res/images/MessageBoxes/Error.png"
 end
 
 function ErrorBox:getSoundPath()
-	return "files/audio/Message.mp3"
+	return "res/audio/Message.mp3"
 end
 
 addEvent("errorBox", true)

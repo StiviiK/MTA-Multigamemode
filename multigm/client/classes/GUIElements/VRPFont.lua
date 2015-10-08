@@ -12,7 +12,7 @@ local VRPFonts = {}
 function VRPFont(height)
 	local fontsize = math.floor(height/2)
 	if not VRPFonts[fontsize] then
-		VRPFonts[fontsize] = dxCreateFont("files/fonts/Segoe/segoeui.ttf", fontsize)
+		VRPFonts[fontsize] = dxCreateFont("res/fonts/Segoe/segoeui.ttf", fontsize)
 	end
 
 	return VRPFonts[fontsize]
@@ -28,7 +28,7 @@ local FontAwesomes = {}
 function FontAwesome(height)
 	local fontsize = math.floor(height/2)
 	if not FontAwesomes[fontsize] then
-		FontAwesomes[fontsize] = dxCreateFont("files/fonts/FontAwesome.otf", fontsize)
+		FontAwesomes[fontsize] = dxCreateFont("res/fonts/FontAwesome.otf", fontsize)
 	end
 
 	return FontAwesomes[fontsize]

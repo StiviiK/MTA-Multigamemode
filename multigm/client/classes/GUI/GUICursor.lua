@@ -42,7 +42,7 @@ function GUICursor:draw()
 	local cursorX, cursorY = getCursorPosition()
 	if cursorX then
 		cursorX, cursorY = cursorX*screenWidth, cursorY*screenHeight
-		dxDrawImage(cursorX, cursorY, 12, 20, "files/images/GUI/Cursor.png", 0, 0, 0, Color.White, true)
+		dxDrawImage(cursorX, cursorY, 12, 20, "res/images/GUI/Cursor.png", 0, 0, 0, Color.White, true)
 	end
 end
 

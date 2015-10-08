@@ -1,7 +1,7 @@
 CopsnRobbers = inherit(Gamemode)
 CopsnRobbers.ms_Settings = {
-  HeaderPath = "gamemodes/CnR/files/images/HeaderCnR.png";
-  TranslationFile = "gamemodes/CnR/files/translation/en/client.po";
+  HeaderPath = "gamemodes/CnR/res/images/HeaderCnR.png";
+  TranslationFile = "gamemodes/CnR/res/translation/en/client.po";
 }
 
 function CopsnRobbers:getSetting(key)

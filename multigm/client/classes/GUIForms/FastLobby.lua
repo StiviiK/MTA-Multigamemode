@@ -6,7 +6,8 @@ function FastLobby:constructor()
   self.m_Gamemodes = {
     -- [Id] = {NAME, false (current Gamemode), unlocked}
     {Name = "Lobby", Current = false, Active = true};
-    {Name = "Cops'n'Robbers", Current = false, Active = true, Background = "files/images/backgrounds/cnr/cnr-bg.jpg"};
+    {Name = "Cops'n'Robbers", Current = false, Active = true, Background = "res/images/backgrounds/cnr/cnr-bg.jpg"};
+    {Name = "Renegade Squad", Current = false, Active = false, Background = "res/images/backgrounds/rns/rns-bg.png"};
   }
   if localPlayer:getGamemode() then
     self.m_ScreenSource = DxScreenSource(self.m_Width, self.m_Height)
@@ -16,7 +17,7 @@ function FastLobby:constructor()
     self.m_UpdateScreenSource = bind(self.updateScreenSource, self)
     addEventHandler("onClientRender", root, self.m_UpdateScreenSource)
   end
-  self.m_Background = GUIImage:new(0, 0, self.m_Width, self.m_Height, "files/images/backgrounds/lobby/lobby-bg.jpg", self)
+  self.m_Background = GUIImage:new(0, 0, self.m_Width, self.m_Height, "res/images/backgrounds/lobby/lobby-bg.jpg", self)
 
   local wPerImage = (self.m_Width - self.m_Width*0.105 - self.m_Width*0.005)/4
   local hPerImage = (self.m_Height - self.m_Height*0.3 - self.m_Height*0.008)/3
@@ -37,7 +38,7 @@ function FastLobby:constructor()
           self.m_Gamemodes[currGamemode].Label = GUILabel:new(0, 0, width, height, ("%s %s"):format(FontAwesomeSymbols.User, self.m_Gamemodes[currGamemode].Name), self.m_Gamemodes[currGamemode].Image)
           self.m_Gamemodes[currGamemode].Label:setFont(FontAwesome(height/4.25))
         else
-          local img = self.m_Gamemodes[currGamemode].Background or "files/images/backgrounds/lobby/lobby-bg.jpg"
+          local img = self.m_Gamemodes[currGamemode].Background or "res/images/backgrounds/lobby/lobby-bg.jpg"
           self.m_Gamemodes[currGamemode].Image = GUIImage:new(posX, posY, width, height, img, self)
           self.m_Gamemodes[currGamemode].Label = GUILabel:new(0, 0, width, height, ("%s %s"):format(FontAwesomeSymbols.Gamepad, self.m_Gamemodes[currGamemode].Name), self.m_Gamemodes[currGamemode].Image)
           self.m_Gamemodes[currGamemode].Label:setFont(FontAwesome(height/4.25))
@@ -85,7 +86,7 @@ function FastLobby:constructor()
 
   -- Account Info
   --[[
-  GUIImage:new(self.m_Width*0.01, self.m_Height*0.01, self.m_Width*0.05, self.m_Width*0.05, "files/images/backgrounds/user.png", self)
+  GUIImage:new(self.m_Width*0.01, self.m_Height*0.01, self.m_Width*0.05, self.m_Width*0.05, "res/images/backgrounds/user.png", self)
   GUILabel:new(self.m_Width*0.065, self.m_Height*0.01, self.m_Width*0.1, self.m_Width*0.03, localPlayer:getName(), self)
   GUILabel:new(self.m_Width*0.065, self.m_Height*0.045, self.m_Width*0.1, self.m_Width*0.025, "Level: 3", self)
   --]]

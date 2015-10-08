@@ -1,10 +1,10 @@
 <meta>
   <!-- COL files -->
-    <transferfile src="gamemodes/CnR/files/col/EntranceMarker.col"/>
+    <transferfile src="gamemodes/CnR/res/col/EntranceMarker.col"/>
 
   <!-- DFF files -->
-    <transferfile src="gamemodes/CnR/files/dff/EntranceMarker.dff"/>
+    <transferfile src="gamemodes/CnR/res/dff/EntranceMarker.dff"/>
 
   <!-- TXD files -->
-    <transferfile src="gamemodes/CnR/files/txd/EntranceMarker.txd"/>
+    <transferfile src="gamemodes/CnR/res/txd/EntranceMarker.txd"/>
 </meta>

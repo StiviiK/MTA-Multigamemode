@@ -9,11 +9,11 @@
 InfoBox = inherit(MessageBox)
 
 function InfoBox:getImagePath()
-	return "files/images/MessageBoxes/Info.png"
+	return "res/images/MessageBoxes/Info.png"
 end
 
 function InfoBox:getSoundPath()
-	return "files/audio/Message.mp3"
+	return "res/audio/Message.mp3"
 end
 
 addEvent("infoBox", true)

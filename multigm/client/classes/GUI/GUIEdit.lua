@@ -28,7 +28,7 @@ function GUIEdit:drawThis()
 	dxSetBlendMode("modulate_add")
 
 	dxDrawRectangle(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, self.m_Height, Color.White)
-	--dxDrawImage(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, self.m_Height, "files/images/GUI/Editbox.png")
+	--dxDrawImage(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, self.m_Height, "res/images/GUI/Editbox.png")
 
 	local text = self:getDrawnText()
 
