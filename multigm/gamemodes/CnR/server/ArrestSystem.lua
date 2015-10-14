@@ -5,6 +5,8 @@ ArrestPrisons = {}--Hier sind alle Gefängnise
 --Strafen = "High","Medium","Low"
 
 function ArrestSystem:constructor(MarkerGaragePos,ArrestPos,ArrestRot,ArrestInt,RespawnPos,RespawnRot,RespawnInt)
+table.insert(ArrestPrisons,self)
+self.m_Parent = parent
 self.ArrestPos  = ArrestPos
 self.ArrestRot  = ArrestRot
 self.ArrestInt  = ArrestInt
@@ -123,7 +125,7 @@ end
 
 
 
-
+function CopsnRobbers:CreateJails ()
 
 
 ------LSPD Jail------------
@@ -136,28 +138,6 @@ LSPD.RespawnPos = Vector3(1552.79,-1675.23,16.19)
 LSPD.RespawnRot = Vector3(0,0,87)
 LSPD.RespawnInt = 0
 
-local LSPDJail = new(ArrestSystem,LSPD.GarageMarkerPos,LSPD.ArrestPos,LSPD.ArrestRot,LSPD.ArrestInt,LSPD.RespawnPos,LSPD.RespawnRot,LSPD.RespawnInt)
-table.insert(ArrestPrisons,LSPDJail)
+local LSPDJail = new(ArrestSystem,LSPD.GarageMarkerPos,LSPD.ArrestPos,LSPD.ArrestRot,LSPD.ArrestInt,LSPD.RespawnPos,LSPD.RespawnRot,LSPD.RespawnInt,self)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-addCommandHandler("arr",function(player)
-outputChatBox(#ArrestSystem)
---player:GivePlayerWanteds(1)
-end)
+end

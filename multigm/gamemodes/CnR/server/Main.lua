@@ -17,6 +17,9 @@ function CopsnRobbers:constructor()
   for i, v in pairs(self.m_Maps) do
     v:load()
   end
+---Create all Jails----
+self:CreateJails ()
+
 end
 
 function CopsnRobbers:destructor()
