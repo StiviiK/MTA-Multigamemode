@@ -16,9 +16,9 @@ function GamemodeManager:constructor()
   addEventHandler("UpdateGamemodeSync", root, bind(GamemodeManager.Event_UpdateGamemodeSync, self))
 
   local Gamemodes = {
-    Lobby:new("Lobby", "This is the Lobby.");
-    CopsnRobbers:new("Cops'n'Robbers", "Cops'n'Robbers Gamemode");
-    RenegadeSquad:new("RenegadeSquad", "RenegadeSquad Gamemode");
+    Lobby:new();
+    CopsnRobbers:new();
+    RenegadeSquad:new();
   }
   for k, v in pairs(Gamemodes) do
     v:setId(k)

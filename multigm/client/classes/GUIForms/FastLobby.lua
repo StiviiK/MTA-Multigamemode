@@ -9,9 +9,9 @@ function FastLobby:constructor()
 
   self.m_Gamemodes = {
     -- [Id] = {NAME, false (current Gamemode), unlocked}
-    {Name = "Lobby", Active = true};
-    {Name = "Cops'n'Robbers", Active = true, Background = "res/images/backgrounds/cnr/cnr-bg.jpg"};
-    {Name = "Renegade Squad", Active = true, Background = "res/images/backgrounds/rns/rns-bg.png"};
+    {Name = GamemodeManager.getFromId(1):getName(), Active = true};
+    {Name = GamemodeManager.getFromId(2):getName(), Active = true, Background = "res/images/backgrounds/cnr/cnr-bg.jpg"};
+    {Name = GamemodeManager.getFromId(3):getName(), Active = true, Background = "res/images/backgrounds/rns/rns-bg.png"};
   }
   if localPlayer:getGamemode() then
     self.m_ScreenSource = DxScreenSource(self.m_Width, self.m_Height)

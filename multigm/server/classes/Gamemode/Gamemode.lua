@@ -16,7 +16,9 @@ function Gamemode:virtual_constructor(name, desc)
   self.m_SyncInfoUpdate = {}
 
   -- Set important SyncInfo
-  self:setSyncInfo("Dimension", self.m_Dimension)
+  self:setSyncInfo("Name", self:getName())
+  self:setSyncInfo("Description", self:getDescription())
+  self:setSyncInfo("Dimension", self:getDimension())
 end
 
 function Gamemode:virtual_destructor()
@@ -95,4 +97,5 @@ end
 
 -- Short getters
 function Gamemode:getName() return self.m_Name end
+function Gamemode:getDescription() return self.m_Description end
 function Gamemode:getDimension() return self.m_Dimension end
