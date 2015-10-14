@@ -9,6 +9,7 @@ function Lobby:constructor()
   -- Create important stuff when the Dimension is available (e.g. GamemodePeds)
   self:addSyncChangeHandler("Dimension", function (dim)
     -- Create Gamemode Peds
+    GamemodePed:new(0, Vector3(1713.793, -1655.604, 20.222), Vector3(0, 0, -90), self:getDimension(), self:getSetting("Spawn").Interior, GamemodeManager.getFromId(2))
     GamemodePed:new(0, Vector3(1713.793, -1663.490, 20.222), Vector3(0, 0, -90), dim, self:getSetting("Spawn").Interior, self)
     GamemodePed:new(0, Vector3(1729.256, -1647.652, 20.222), Vector3(0, 0, 90), dim, self:getSetting("Spawn").Interior, self)
     GamemodePed:new(0, Vector3(1729.256, -1655.511, 20.222), Vector3(0, 0, 90), dim, self:getSetting("Spawn").Interior, self)
@@ -16,7 +17,6 @@ function Lobby:constructor()
 end
 
 function Lobby:destructor()
-  --outputDebug("Lobby:destructor")
 end
 
 function Lobby:onPlayerJoin()

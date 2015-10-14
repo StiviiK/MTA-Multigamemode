@@ -44,6 +44,9 @@ end
 function PlayerManager:playerReady()
 	showChat(client, true)
 	self:spawnPlayer(client)
+
+	-- Send the inital Sync for the Player
+	GamemodeManager:getSingleton():updateSync(client)
 end
 
 function PlayerManager:spawnPlayer(player)

@@ -25,14 +25,6 @@ end
 function CopsnRobbers:destructor()
 end
 
-function CopsnRobbers:onGamemodesLoaded(numLoadedGamemodes)
-  -- Create Gamemode Ped (in Lobby)
-  setTimer(function () -- Delayed, otherwise the dim is not ready
-    local Lobby = GamemodeManager.getFromId(1)
-    GamemodePed:new(0, Vector3(1713.793, -1655.604, 20.222), Vector3(0, 0, -90), Lobby:getDimension(), Lobby:getSetting("Spawn").Interior, self)
-  end, 500, 1)
-end
-
 function CopsnRobbers:onPlayerJoin()
 self:CreatePlayerBlip()
 FractionSelectionMenu:new()

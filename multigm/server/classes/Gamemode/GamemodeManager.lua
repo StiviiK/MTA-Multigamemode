@@ -73,7 +73,7 @@ function GamemodeManager:Event_JoinGamemode(Id, fLobby)
   source:triggerEvent("successBox", source, _("Du bist dem Gamemode erfolgreich beigetreten!", source))
 end
 
-function GamemodeManager:updateSync()
+function GamemodeManager:updateSync(player)
   local SyncData = {}
   for i, gamemode in pairs(GamemodeManager.Map) do
     SyncData[gamemode:getId()] = {}
@@ -84,6 +84,10 @@ function GamemodeManager:updateSync()
   end
 
   if table.size(SyncData) ~= 0 then
-    triggerClientEvent(root, "UpdateGamemodeSync", root, SyncData)
+    if player then
+      triggerClientEvent(player, "UpdateGamemodeSync", player, SyncData)
+    else
+      triggerClientEvent(root, "UpdateGamemodeSync", root, SyncData)
+    end
   end
 end

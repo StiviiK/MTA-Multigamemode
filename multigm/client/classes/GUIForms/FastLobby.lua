@@ -16,7 +16,7 @@ function FastLobby:constructor()
   if localPlayer:getGamemode() then
     self.m_ScreenSource = DxScreenSource(self.m_Width, self.m_Height)
     self.m_ScreenSource:update()
-    self.m_Gamemodes[localPlayer:getGamemode()].Current = true
+    self.m_Gamemodes[localPlayer:getGamemode():getId()].Current = true
 
     self.m_UpdateScreenSource = bind(self.updateScreenSource, self)
     addEventHandler("onClientRender", root, self.m_UpdateScreenSource)
