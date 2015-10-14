@@ -17,6 +17,8 @@ Gamemode.onPlayerLeft = pure_virtual
 function Gamemode:virtual_constructor(name)
   self.m_Name = name
   self.m_GamemodePeds = {}
+  self.m_SyncInfo = {}
+  self.m_SyncChangeHandler = {}
 end
 
 function Gamemode:virtual_destructor()
@@ -35,5 +37,14 @@ function Gamemode:getId()
   return self.m_Id
 end
 
+function Gamemode:getSyncInfo(key)
+  return self.m_SyncInfo[key]
+end
+
+function Gamemode:addSyncChangeHandler(key, handler)
+  self.m_SyncChangeHandler[key] = handler
+end
+
 -- Short getters
 function Gamemode:getName() return self.m_Name end
+function Gamemode:getDimension() return self:getSyncInfo("Dimension") end

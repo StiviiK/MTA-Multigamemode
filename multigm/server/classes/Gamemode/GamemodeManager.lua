@@ -16,6 +16,10 @@ function GamemodeManager:constructor()
     end
   end
 
+  -- Gamemode Sync
+  self.m_SyncPulse = TimedPulse:new(500)
+  self.m_SyncPulse:registerHandler(bind(self.updateSync, self))
+
   -- Manager Events
   addRemoteEvents{"Event_DisableGamemode", "Event_JoinGamemode"}
   addEventHandler("Event_DisableGamemode", root, bind(self.Event_DisableGamemode, self))
@@ -67,4 +71,19 @@ function GamemodeManager:Event_JoinGamemode(Id, fLobby)
   source:fadeCamera(true, 0.75)
   self.getFromId(Id):addPlayer(source)
   source:triggerEvent("successBox", source, _("Du bist dem Gamemode erfolgreich beigetreten!", source))
+end
+
+function GamemodeManager:updateSync()
+  local SyncData = {}
+  for i, gamemode in pairs(GamemodeManager.Map) do
+    SyncData[gamemode:getId()] = {}
+    for k, v in pairs(gamemode.m_SyncInfoUpdate) do
+  		SyncData[gamemode:getId()][k] = gamemode.m_SyncInfo[k]
+  	end
+  	gamemode.m_SyncInfoUpdate = {}
+  end
+
+  if table.size(SyncData) ~= 0 then
+    triggerClientEvent(root, "UpdateGamemodeSync", root, SyncData)
+  end
 end

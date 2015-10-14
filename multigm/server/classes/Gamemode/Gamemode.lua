@@ -12,6 +12,11 @@ function Gamemode:virtual_constructor(name, desc)
   self.m_Description = desc or ""
   self.m_Players = {}
   self.m_Dimension = DimensionManager:getSingleton():getFreeDimension()
+  self.m_SyncInfo = {}
+  self.m_SyncInfoUpdate = {}
+
+  -- Set important SyncInfo
+  self:setSyncInfo("Dimension", self.m_Dimension)
 end
 
 function Gamemode:virtual_destructor()
@@ -79,6 +84,13 @@ function Gamemode:sendMessage(msg, ...)
   for _, player in pairs(self.m_Players) do
     outputChatBox(msg, player, ...)
   end
+end
+
+function Gamemode:setSyncInfo(key, value)
+  if self.m_SyncInfo[key] ~= value then
+		self.m_SyncInfo[key] = value
+		self.m_SyncInfoUpdate[key] = true
+	end
 end
 
 -- Short getters
