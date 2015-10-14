@@ -20,17 +20,9 @@ function CopsnRobbers:constructor()
 
    -- Load translation file
   TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
-
-  -- Load custom Arrow
-  EngineCOL("gamemodes/CnR/res/col/EntranceMarker.col"):replace(1318)
-  EngineTXD("gamemodes/CnR/res/txd/EntranceMarker.txd"):import(1318)
-  EngineDFF("gamemodes/CnR/res/dff/EntranceMarker.dff", 0):replace(1318)
 end
 
 function CopsnRobbers:destructor()
-  -- Restore custom Arrow
-  Engine.restoreCOL(1318)
-  Engine.restoreModel(1318)
 end
 
 function CopsnRobbers:onGamemodesLoaded(numLoadedGamemodes)
@@ -41,7 +33,6 @@ end
 function CopsnRobbers:onPlayerJoin()
 self:CreatePlayerBlip()
 FractionSelectionMenu:new()
-HudComponentVisible(true)
 end
 
 function CopsnRobbers:CreatePlayerBlip()
@@ -53,6 +44,10 @@ end
 function CopsnRobbers:onPlayerLeft()
  source.MapBlip:destroy()
  HudComponentVisible(false)
+
+ -- Restore custom Arrow
+ Engine.restoreCOL(1318)
+ Engine.restoreModel(1318)
 end
 
 function CopsnRobbers:onDownloadStart()
@@ -61,6 +56,12 @@ end
 
 function CopsnRobbers:onDownloadFinish()
   triggerServerEvent("onCNRDownloadFinished", localPlayer)
+
+  -- Load custom Arrow
+  EngineCOL("gamemodes/CnR/res/col/EntranceMarker.col"):replace(1318)
+  EngineTXD("gamemodes/CnR/res/txd/EntranceMarker.txd"):import(1318)
+  EngineDFF("gamemodes/CnR/res/dff/EntranceMarker.dff", 0):replace(1318)
+  HudComponentVisible(true)
 end
 
 
