@@ -3,7 +3,7 @@ inherit(Singleton, SelfGUI)
 
 function SelfGUI:constructor()
   GUIForm.constructor(self, screenWidth/2-300, screenHeight/2-230, 600, 460)
-
+  
   -- TODO: Find a better location
   localPlayer:setPublicSyncChangeHandler("Locale", function ()
     if SelfGUI:getSingleton():isVisible() then

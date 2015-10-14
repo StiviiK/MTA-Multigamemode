@@ -21,6 +21,8 @@ self.m_GridList = GUIGridList:new(231, 29, 201, 90, self)
 local GridTeam = self.m_GridList:addColumn("Team", 70)
 local CopsItem = self.m_GridList:addItem("Cops")
 local RobbersItem = self.m_GridList:addItem("Robbers")
+-- Force click the first Item
+CopsItem:onInternalLeftClick()
 
 self.m_GridList.onSelectItem = function (item)
   local SelectedName = item:getColumnText(1)

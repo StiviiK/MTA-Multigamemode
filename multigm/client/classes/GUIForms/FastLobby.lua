@@ -3,11 +3,15 @@ inherit(Singleton, FastLobby)
 
 function FastLobby:constructor()
   GUIForm.constructor(self, 0, 0, screenWidth, screenHeight)
+  if SelfGUI:getSingleton().m_Visible then
+    SelfGUI:getSingleton():close()
+  end
+
   self.m_Gamemodes = {
     -- [Id] = {NAME, false (current Gamemode), unlocked}
-    {Name = "Lobby", Current = false, Active = true};
-    {Name = "Cops'n'Robbers", Current = false, Active = true, Background = "res/images/backgrounds/cnr/cnr-bg.jpg"};
-    {Name = "Renegade Squad", Current = false, Active = false, Background = "res/images/backgrounds/rns/rns-bg.png"};
+    {Name = "Lobby", Active = true};
+    {Name = "Cops'n'Robbers", Active = true, Background = "res/images/backgrounds/cnr/cnr-bg.jpg"};
+    {Name = "Renegade Squad", Active = true, Background = "res/images/backgrounds/rns/rns-bg.png"};
   }
   if localPlayer:getGamemode() then
     self.m_ScreenSource = DxScreenSource(self.m_Width, self.m_Height)
@@ -46,7 +50,7 @@ function FastLobby:constructor()
       else
         self.m_Gamemodes[currGamemode].Image = GUIRectangle:new(posX, posY, width, height, tocolor(0, 0, 0, 150), self)
         self.m_Gamemodes[currGamemode].Label = GUILabel:new(0, 0, width, height, ("%s %s"):format(FontAwesomeSymbols.Lock, "Coming soon"), self.m_Gamemodes[currGamemode].Image)
-        self.m_Gamemodes[currGamemode].Label:setFont(FontAwesome(height/5))
+        self.m_Gamemodes[currGamemode].Label:setFont(FontAwesome(height/6))
       end
 
       self.m_Gamemodes[currGamemode].Image.m_GamemodeId = currGamemode

@@ -49,6 +49,7 @@ end
 function PlayerManager:spawnPlayer(player)
 	player:spawn(SPAWN_DEFAULT_POSITION, SPAWN_DEFAULT_ROTATION, SPAWN_DEFAULT_SKIN, SPAWN_DEFAULT_INTERIOR)
 	player:setFrozen(true)
+	player:setCameraTarget(player)
 end
 
 -- Events

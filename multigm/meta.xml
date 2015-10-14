@@ -1,5 +1,5 @@
 <meta>
-	<info name="" author="" type=""/>
+	<info name="vMultigamemode" author="StiviK" type="gamemode"/>
 	<min_mta_version server="1.5" client="1.5"/>
 	<oop>true</oop>
 
@@ -23,10 +23,7 @@
 			<script src="shared/classes/TranslationManager.lua" type="shared"/>
 			<script src="shared/classes/Root.lua" type="shared"/>
 			<script src="shared/classes/Gamemode/Element/GamemodeElement.lua" type="shared"/>
-
-		<!-- Updater -->
-			<!-- script src="update/Updater.lua" type="server"/-->
-
+			<script src="shared/classes/DimensionManager.lua" type="shared"/>
 
 		<!-- Server -->
 			<script src="server/constants.lua" type="server"/>
@@ -186,6 +183,21 @@
 			<script src="gamemodes/CnR/client/Car_Radio.lua" type="client"/>
 			<script src="gamemodes/CnR/Usefull/TeleportMaker/client.lua" type="client"/>
 			<script src="gamemodes/CnR/Usefull/Minimap/minimap_c.lua" type="client"/>
+
+	<!-- Lobby -->
+		<!-- Meta -->
+			<metafile src="gamemodes/RnS/meta.xml"/>
+
+		<!-- Shared -->
+			<script src="gamemodes/RnS/constants.lua" type="shared"/>
+
+		<!-- Server -->
+			<script src="gamemodes/RnS/server/Init.lua" type="server"/>
+			<script src="gamemodes/RnS/server/Main.lua" type="server"/>
+
+		<!-- Client -->
+			<script src="gamemodes/RnS/client/Init.lua" type="client"/>
+			<script src="gamemodes/RnS/client/Main.lua" type="client"/>
 
 	<!-- Files -->
 		<!-- Translation -->

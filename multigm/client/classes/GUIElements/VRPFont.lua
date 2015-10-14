@@ -44,4 +44,5 @@ FontAwesomeSymbols = {
 	Lock = "";
 	User = "";
 	Gamepad = "";
+	Bug = "";
 }

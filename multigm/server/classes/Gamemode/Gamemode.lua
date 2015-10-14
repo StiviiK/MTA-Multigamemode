@@ -11,11 +11,12 @@ function Gamemode:virtual_constructor(name, desc)
   self.m_Name = name or ""
   self.m_Description = desc or ""
   self.m_Players = {}
-  self.m_Dimension = 12 -- TODO: Add dimension manager
+  self.m_Dimension = DimensionManager:getSingleton():getFreeDimension()
 end
 
 function Gamemode:virtual_destructor()
   GamemodeManager:getSingleton():removeRef(self)
+  DimensionManager:getSingleton():freeDimension(self:getDimension())
 
   for _, v in pairs(self.m_Players) do
     self:removePlayer(v)

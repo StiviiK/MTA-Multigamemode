@@ -16,7 +16,8 @@ function GamemodeManager:constructor()
 
   local Gamemodes = {
     Lobby:new("Lobby", "This is the Lobby.");
-    CopsnRobbers:new("Cops'n'Robbers", "Cops'n'Robbers Gamemode")
+    CopsnRobbers:new("Cops'n'Robbers", "Cops'n'Robbers Gamemode");
+    RenegadeSquad:new("RenegadeSquad", "RenegadeSquad Gamemode");
   }
   for k, v in pairs(Gamemodes) do
     v:setId(k)

@@ -4,7 +4,8 @@ GamemodeManager.Map = {}
 function GamemodeManager:constructor()
   local Gamemodes = {
     Lobby:new("Lobby", "This is the Lobby.");
-    CopsnRobbers:new("Cops'n'Robbers", "Cops'n'Robbers Gamemode")
+    CopsnRobbers:new("Cops'n'Robbers", "Cops'n'Robbers Gamemode");
+    RenegadeSquad:new("RenegadeSquad", "RenegadeSquad Gamemode");
   }
   for k, v in pairs(Gamemodes) do
     v:setId(k)
@@ -55,7 +56,7 @@ function GamemodeManager:Event_JoinGamemode(Id, fLobby)
     source:fadeCamera(true, 0.5)
     if fLobby ~= true then
       source:triggerEvent("errorBox", source, _("Du bist bereits in diesem Gamemode!", source))
-    end  
+    end
     return
   end
 

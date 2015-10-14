@@ -40,6 +40,7 @@ function Core:constructor ()
   Provider:new()
   PlayerManager:new()
   GamemodeManager:new()
+  DimensionManager:new()
 
   -- instantiate all players
   for k, v in pairs(getElementsByType("player")) do
@@ -51,6 +52,7 @@ function Core:constructor ()
     {"Main", "", "main.data"};
     {"Lobby", "gamemodes/Lobby/", "lobby.data"};
     {"Cops'n'Robbers", "gamemodes/CnR/", "cnr.data"};
+    {"Renegade Squad", "gamemodes/RnS/", "rns.data"};
   }
   for _, v in ipairs(gamemodes) do
     outputDebug(("Generating Package for %s..."):format(v[1]))
