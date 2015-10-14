@@ -20,16 +20,14 @@ def rm_r(path):
         os.remove(path)
 rm_r(outdir)
 os.mkdir(outdir)
-shutil.copytree(rootdir+"files", outdir+"files")
+shutil.copytree(rootdir+"res", outdir+"res")
 
 # Copy Important Data
-shutil.copyfile(rootdir+"Version.txt", outdir+"Version.txt")
-
 os.mkdir(outdir+"gamemodes")
 os.mkdir(outdir+"gamemodes/Lobby")
 os.mkdir(outdir+"gamemodes/CnR")
-shutil.copytree(rootdir+"gamemodes/Lobby/files", outdir+"gamemodes/Lobby/files")
-shutil.copytree(rootdir+"gamemodes/CnR/files", outdir+"gamemodes/CnR/files")
+shutil.copytree(rootdir+"gamemodes/Lobby/res", outdir+"gamemodes/Lobby/res")
+shutil.copytree(rootdir+"gamemodes/CnR/res", outdir+"gamemodes/CnR/res")
 shutil.copyfile(rootdir+"gamemodes/Lobby/meta.xml", outdir+"gamemodes/Lobby/meta.xml")
 shutil.copyfile(rootdir+"gamemodes/CnR/meta.xml", outdir+"gamemodes/CnR/meta.xml")
 
@@ -42,14 +40,14 @@ tree = ET.parse(rootdir + "meta.xml")
 root = tree.getroot()
 
 for child in root.findall("script"):
-	if child.attrib["type"] == "server": 
+	if child.attrib["type"] == "server":
 		files["server"].append(rootdir+child.attrib["src"])
-	if child.attrib["type"] == "client": 
+	if child.attrib["type"] == "client":
 		files["client"].append(rootdir+child.attrib["src"])
-	if child.attrib["type"] == "shared": 
+	if child.attrib["type"] == "shared":
 		files["server"].append(rootdir+child.attrib["src"])
 		files["client"].append(rootdir+child.attrib["src"])
-		
+
 	root.remove(child)
 
 serverNode = ET.SubElement(root, "script")

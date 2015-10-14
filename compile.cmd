@@ -7,6 +7,9 @@ if errorlevel 1 goto errorNoPython
 :: Run buildscript with Python
 title Compiling Gamemode
 py -3 "tools/buildscript.py"
+if errorlevel 1 (
+	pause
+)
 goto EXIT
 
 :errorNoPython
