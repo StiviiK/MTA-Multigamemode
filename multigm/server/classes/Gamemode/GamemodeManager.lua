@@ -70,7 +70,9 @@ function GamemodeManager:Event_JoinGamemode(Id, fLobby)
 
   source:fadeCamera(true, 0.75)
   self.getFromId(Id):addPlayer(source)
-  source:triggerEvent("successBox", source, _("Du bist dem Gamemode erfolgreich beigetreten!", source))
+  if fLobby ~= true then
+    source:triggerEvent("successBox", source, _("Du bist dem Gamemode erfolgreich beigetreten!", source))
+  end  
 end
 
 function GamemodeManager:updateSync(player)

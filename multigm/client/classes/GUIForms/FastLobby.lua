@@ -22,6 +22,8 @@ function FastLobby:constructor()
     addEventHandler("onClientRender", root, self.m_UpdateScreenSource)
   end
   self.m_Background = GUIImage:new(0, 0, self.m_Width, self.m_Height, "res/images/backgrounds/lobby/lobby-bg.jpg", self)
+  GUILabel:new(self.m_Width/2 - self.m_Width*0.14/2, self.m_Height*0.9 - self.m_Height*0.025, self.m_Width*0.14, self.m_Height*0.04, _("%d Player(s) online", #Element.getAllByType("player")), self)
+    :setFont(FontAwesome(self.m_Height*0.04))
 
   local wPerImage = (self.m_Width - self.m_Width*0.105 - self.m_Width*0.005)/4
   local hPerImage = (self.m_Height - self.m_Height*0.3 - self.m_Height*0.008)/3
@@ -96,14 +98,14 @@ function FastLobby:constructor()
   --]]
 
   -- Git Info
-  self.m_GeneralInfo = GUILabel:new(self.m_Width*0.01, self.m_Height*0.935, self.m_Width*0.075, self.m_Height*0.03, ("%s About us."):format(FontAwesomeSymbols.Heart), self)
+  self.m_GeneralInfo = GUILabel:new(self.m_Width*0.01, self.m_Height*0.935, self.m_Width*0.075, self.m_Height*0.03, _("%s About us.", FontAwesomeSymbols.Heart), self)
   self.m_GeneralInfo:setFont(FontAwesome(self.m_Height*0.03))
   self.m_GeneralInfo.onHover = function () self.m_GeneralInfo:setColor(Color.Orange) end
   self.m_GeneralInfo.onUnhover = function () self.m_GeneralInfo:setColor(Color.White) end
   self.m_GeneralInfo.onLeftClick = function () InfoBox:new("Not implemented!") end
 
   -- Facebook Info
-  self.m_FacebookInfo = GUILabel:new(self.m_Width*0.01, self.m_Height*0.965, self.m_Width*0.15, self.m_Height*0.03, ("%s Visit us on Facebook."):format(FontAwesomeSymbols.Facebook), self)
+  self.m_FacebookInfo = GUILabel:new(self.m_Width*0.01, self.m_Height*0.965, self.m_Width*0.15, self.m_Height*0.03, _("%s Visit us on Facebook.", FontAwesomeSymbols.Facebook), self)
   self.m_FacebookInfo:setFont(FontAwesome(self.m_Height*0.03))
   self.m_FacebookInfo.onHover = function () self.m_FacebookInfo:setColor(Color.Orange) end
   self.m_FacebookInfo.onUnhover = function () self.m_FacebookInfo:setColor(Color.White) end

@@ -5,6 +5,16 @@ function RenegadeSquad:constructor()
 
   -- Load translation file
   TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
+
+  -- Load Maps
+  self.m_Maps = {
+    --MapManager:getSingleton():loadMap(self, "");
+  }
+
+  -- Create Maps
+  for i, v in pairs(self.m_Maps) do
+    v:load()
+  end
 end
 
 function RenegadeSquad:destructor()

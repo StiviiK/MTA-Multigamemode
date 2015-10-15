@@ -32,7 +32,6 @@ function MapManager:registerMap(name)
 end
 
 function MapManager:loadMap(gamemode, name)
-  if MapManager.Map[name] then return false end
   if not self.m_LoadedMaps[name] then return end
   if not self.m_LoadedMaps[name].Parsed then
     self.m_LoadedMaps[name] = {Objects = MapManager.parseMapXML(name), Parsed = true}

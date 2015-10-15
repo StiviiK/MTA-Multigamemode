@@ -17,9 +17,9 @@ function CopsnRobbers:constructor()
   for i, v in pairs(self.m_Maps) do
     v:load()
   end
----Create all Jails----
-self:CreateJails ()
 
+  ---Create all Jails----
+  self:CreateJails ()
 end
 
 function CopsnRobbers:destructor()
@@ -71,7 +71,7 @@ end
   client:setCameraTarget(client)
   client:setModel(Skin)
   client:setFraction(Fraction)
-  client:setDimension(CNR_DIM)
+  client:setDimension(self:getDimension())
 
   self:GivePlayerFractionWeapons(client,FractionTable,SelectID)
   self:CreatePlayerBlip(client)

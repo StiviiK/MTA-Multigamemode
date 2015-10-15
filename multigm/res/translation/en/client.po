@@ -211,6 +211,19 @@ msgstr "uID: %s"
 msgid "(?)"
 msgstr "(?)"
 
+#: client/classes/GUIForms/FastLobby.lua:0
+msgid "%d Player(s) online"
+msgstr "%d Player(s) online"
+
+#: client/classes/GUIForms/FastLobby.lua:0
+msgid "%s About us."
+msgstr "%s About us."
+
+#: client/classes/GUIForms/FastLobby.lua:0
+msgid "%s Visit us on Facebook."
+msgstr "%s Visit us on Facebook."
+
+
 
 
 #: DUE AN BUG - LEAVE THIS AT THE LAST LINE
