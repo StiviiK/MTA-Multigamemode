@@ -20,6 +20,9 @@ function CopsnRobbers:constructor()
 
   ---Create all Jails----
   self:CreateJails ()
+  self:CreateSchranken ()
+  self:CreateTeleports ()
+  self:CreateGates ()
 end
 
 function CopsnRobbers:destructor()

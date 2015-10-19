@@ -10,10 +10,9 @@ FractionSelection.SelectSkin = 1--TableID
 
 
 
-function FractionSelectionMenu:constructor ()
+function FractionSelectionMenu:constructor (CNR_SELF)
 GUIForm.constructor(self, (screenWidth/2)-656/2, (screenHeight)-(187+50), 656, 187)---Hier Drauf wird alles gezeichnet
 Cursor:show()
-
 self.m_Button_Left   = GUIButton:new(10, 125, 206, 49, "<---", self)
 self.m_Button_Select   = GUIButton:new(226, 127, 206, 47, "Select", self)
 self.m_Button_Right   = GUIButton:new(442, 125, 206, 48, "--->", self)
@@ -41,6 +40,7 @@ self.m_Button_Select.onLeftClick = function ()
   local SelectID = FractionSelection.SelectSkin
   self:delete ()
   triggerServerEvent("onPlayerSelectTeam",lp,Team,Skin,SelectID)
+  CNR_SELF:onPlayerSelectTeam(Team,Skin,SelectID)
 end
 
 

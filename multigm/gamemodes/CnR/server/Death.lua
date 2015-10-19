@@ -1,6 +1,3 @@
-
-
-
 function CopsnRobbers:Wasted ( ammo, attacker, weapon, bodypart )
 local player = source
 local PlayerPos = source.position

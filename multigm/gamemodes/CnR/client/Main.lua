@@ -20,29 +20,51 @@ function CopsnRobbers:constructor()
 
    -- Load translation file
   TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
+  
+  
+
 end
 
 function CopsnRobbers:destructor()
 end
 
 function CopsnRobbers:onPlayerJoin()
-self:CreatePlayerBlip()
-FractionSelectionMenu:new()
+if self.Radar then
+	self.Radar:show()
+else
+	self.Radar = new(MiniMap)
+end
+-- self:CreatePlayerBlip()
+self.FractionSelectionMenu = FractionSelectionMenu:new(self)
 end
 
-function CopsnRobbers:CreatePlayerBlip()
-if lp == source then return end
- source.MapBlip = createBlip( 0, 0, 0 )
- source.MapBlip:setDimension(CNR_DIM)
+-- function CopsnRobbers:CreatePlayerBlip()
+-- if lp == source then return end
+ -- source.MapBlip = createBlip( 0, 0, 0 )
+ -- source.MapBlip:setDimension(CNR_DIM)
+-- end
+
+function CopsnRobbers:onPlayerSelectTeam(Team,Skin,SelectID)
+self.Radar:show()
 end
+
+
+
+
+
+
 
 function CopsnRobbers:onPlayerLeft()
- source.MapBlip:destroy()
- HudComponentVisible(false)
 
+ HudComponentVisible(false)
+ -- Delete Fraction Selection Menu
+	self.FractionSelectionMenu:delete ()
+	
  -- Restore custom Arrow
- Engine.restoreCOL(1318)
- Engine.restoreModel(1318)
+	Engine.restoreCOL(1318)
+	Engine.restoreModel(1318)
+ -- Hide Radar
+	self.Radar:hide()
 end
 
 function CopsnRobbers:onDownloadStart()

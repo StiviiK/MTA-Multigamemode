@@ -90,7 +90,7 @@ function CreateTeleport (TeleportsTable)
 	local PickupModel	   = TeleportsTable["PickupModel"]
 	local TeleportText     = TeleportsTable["TeleportName"]
 
-AddTeleportToScript ("\nlocal "..TeleportText.." = new(Teleports,Vector3("..StartPos.x..","..StartPos.y..","..StartPos.z.."),Vector3(0,0,"..StartRot.z.."),"..StartInt..","..StartDim..",Vector3("..EndPos.x..","..EndPos.y..","..EndPos.z.."),Vector3(0,0,"..EndRot.z.."),"..EndInt..","..EndDim..","..tostring(TwoWay)..","..PickupModel..")",255,0,0)
+AddTeleportToScript ("\n--local "..TeleportText.." = new(Teleports,Vector3("..StartPos.x..","..StartPos.y..","..StartPos.z.."),Vector3(0,0,"..StartRot.z.."),"..StartInt..","..StartDim..",Vector3("..EndPos.x..","..EndPos.y..","..EndPos.z.."),Vector3(0,0,"..EndRot.z.."),"..EndInt..","..EndDim..","..tostring(TwoWay)..","..PickupModel..")",255,0,0)
 new(Teleports,StartPos,StartRot,StartInt,StartDim,EndPos,EndRot,EndInt,EndDim,TwoWay,PickupModel)
 end
 addEvent("CreateTeleport", true)
@@ -98,19 +98,26 @@ addEventHandler("CreateTeleport", root, CreateTeleport)
 
 function AddTeleportToScript (TeleportText)
 
-outputChatBox("Write")
 
-local hFile = fileOpen ( "gamemodes/CnR/TeleportMaker/TeleportsListe.lua")
-if hFile then  
-	 local buffer
-    while not fileIsEOF(hFile) do             
-        buffer = fileRead(hFile, 500)  
-    end
+
+
+outputChatBox(TeleportText)
+
+
+
+-- outputChatBox("Write")
+
+-- local hFile = fileOpen ( "gamemodes/CnR/TeleportMaker/TeleportsListe.lua")
+-- if hFile then  
+	 -- local buffer
+    -- while not fileIsEOF(hFile) do             
+        -- buffer = fileRead(hFile, 500)  
+    -- end
                                 
-    fileWrite(hFile, buffer.."\n"..TeleportText)
-    fileClose(hFile)                        
-else
-    outputChatBox("Unable to open test.txt")
-end
+    -- fileWrite(hFile, buffer.."\n"..TeleportText)
+    -- fileClose(hFile)                        
+-- else
+    -- outputChatBox("Unable to open TeleportsListe.lua")
+-- end
 
 end

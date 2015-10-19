@@ -171,18 +171,25 @@
 			<script src="gamemodes/CnR/server/Fraktion_Car.lua" type="server"/>
 			<script src="gamemodes/CnR/server/Death.lua" type="server"/>
 			<script src="gamemodes/CnR/server/WantedSystem.lua" type="server"/>
+			<script src="gamemodes/CnR/server/SaveSystem.lua" type="server"/>
+			
 			<script src="gamemodes/CnR/Usefull/TeleportMaker/server.lua" type="server"/>
 			<script src="gamemodes/CnR/Usefull/TeleportMaker/TeleportsListe.lua" type="server"/>
 			<script src="gamemodes/CnR/Usefull/SchankenMaker/SchrankenCreater.lua" type="server"/>
+			<script src="gamemodes/CnR/Usefull/SchankenMaker/SchrankenList.lua" type="server"/>
 			<script src="gamemodes/CnR/Usefull/GateMaker/GateCreater.lua" type="server"/>
-
+			<script src="gamemodes/CnR/Usefull/GateMaker/GateList.lua" type="server"/>
+			
+			
 		<!-- Client -->
 			<script src="gamemodes/CnR/client/Init.lua" type="client"/>
 			<script src="gamemodes/CnR/client/Main.lua" type="client"/>
 			<script src="gamemodes/CnR/client/FractionSelection_c.lua" type="client"/>
 			<script src="gamemodes/CnR/client/Car_Radio.lua" type="client"/>
 			<script src="gamemodes/CnR/Usefull/TeleportMaker/client.lua" type="client"/>
-			<script src="gamemodes/CnR/Usefull/Minimap/minimap_c.lua" type="client"/>
+			<script src="gamemodes/CnR/Usefull/Radar/Radar_c.lua" type="client"/>
+			
+			
 
 	<!-- Lobby -->
 		<!-- Meta -->
