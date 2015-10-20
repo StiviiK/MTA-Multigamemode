@@ -1,6 +1,6 @@
 ﻿GateSystem = {}
 
-function GateSystem:constructor (model,x,y,z,rx,ry,rz,ColRadius,moveTime,closeTime,richtung,Fraction )
+function GateSystem:constructor (CNR_SELF,model,x,y,z,rx,ry,rz,ColRadius,moveTime,closeTime,richtung,Fraction )
 
 self.Fraction = Fraction
 self.x = x
@@ -14,13 +14,13 @@ self.moveTime = moveTime
 self.closeTime = moveTime+closeTime
 self.richtung = richtung
 self.GateObject = createObject( model,self.x,self.y,self.z,rx,ry,rz)--schranke
-self.GateObject:setDimension(CNR_DIM)
+self.GateObject:setDimension(CNR_SELF:getDimension())
 
 self.GateCol = createColSphere ( x,y,z, ColRadius )
-self.GateCol:setDimension(CNR_DIM)
+self.GateCol:setDimension(CNR_SELF:getDimension())
 
 self.GateStatus = "zu"
-
+self.HornOpen = function () self:Open() end
 
 if self.richtung == "up" then
 self.MoveDirection = 1
@@ -31,17 +31,29 @@ self.MoveDirection = 1
 elseif self.richtung == "right" then
 self.MoveDirection = -1
 end
-addEventHandler ( "onColShapeHit", self.GateCol, bind(GateSystem.BindPlayerKey,self))
-
+addEventHandler ( "onColShapeHit"  , self.GateCol, bind(GateSystem.BindPlayerKey,self))
+addEventHandler ( "onColShapeLeave", self.GateCol, bind(GateSystem.UnBindPlayerKey,self))
 end
 
 
 
 function GateSystem:BindPlayerKey(player, matchingDimension)
-if self.Fraction == player.Fraction or not self.Fraction then
-	self:Open()
+	if getElementType ( player ) == "player" then  
+		if self.Fraction == player.Fraction or not self.Fraction then
+			self:Open()
+		end
+		
+	bindKey(player,"horn","down",self.HornOpen)
+	end
 end
+
+function GateSystem:UnBindPlayerKey(player, matchingDimension)
+	if getElementType ( player ) == "player" then  
+		unbindKey(player,"horn","down",self.HornOpen)
+	end
 end
+
+
 
 function GateSystem:Open()
 

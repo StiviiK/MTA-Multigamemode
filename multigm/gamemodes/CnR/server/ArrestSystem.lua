@@ -4,7 +4,7 @@ local ArrestSystem = CopsnRobbers.ArrestSystem
 ArrestPrisons = {}--Hier sind alle Gefängnise
 --Strafen = "High","Medium","Low"
 
-function ArrestSystem:constructor(MarkerGaragePos,ArrestPos,ArrestRot,ArrestInt,RespawnPos,RespawnRot,RespawnInt)
+function ArrestSystem:constructor(CNR_SELF,MarkerGaragePos,ArrestPos,ArrestRot,ArrestInt,RespawnPos,RespawnRot,RespawnInt)
 table.insert(ArrestPrisons,self)
 self.m_Parent = parent
 self.ArrestPos  = ArrestPos
@@ -18,7 +18,7 @@ self.RespawnInt = RespawnInt
 
 self.ArrestetPlayers = {}
 self.GarageMarker = Marker( MarkerGaragePos, "cylinder", 3, 255, 255, 0, 100 )
-self.GarageMarker:setDimension(CNR_DIM)
+self.GarageMarker:setDimension(CNR_SELF:getDimension())
 addEventHandler( "onMarkerHit", self.GarageMarker, bind(ArrestSystem.onHitArrestMarker,self) )
 self:CreateCheckTimer()
 end
@@ -138,6 +138,6 @@ LSPD.RespawnPos = Vector3(1552.79,-1675.23,16.19)
 LSPD.RespawnRot = Vector3(0,0,87)
 LSPD.RespawnInt = 0
 
-local LSPDJail = new(ArrestSystem,LSPD.GarageMarkerPos,LSPD.ArrestPos,LSPD.ArrestRot,LSPD.ArrestInt,LSPD.RespawnPos,LSPD.RespawnRot,LSPD.RespawnInt,self)
+local LSPDJail = new(ArrestSystem,self,LSPD.GarageMarkerPos,LSPD.ArrestPos,LSPD.ArrestRot,LSPD.ArrestInt,LSPD.RespawnPos,LSPD.RespawnRot,LSPD.RespawnInt,self)
 
 end

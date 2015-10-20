@@ -4,14 +4,15 @@ local FraktionsVehicle = CopsnRobbers.FraktionsVehicle
 
 
 
-function FraktionsVehicle:constructor(Team,model,position,rotation)
+function FraktionsVehicle:constructor(CNR_SELF,Team,model,position,rotation,color)
 self.m_Model = model
 self.Fraction = Team
 self.m_Position = position
 self.m_Rotation = rotation
-self.m_Dimension = CNR_DIM
+self.m_Dimension = CNR_SELF:getDimension()
 self.EngineState = nil
 self.LightState  = false
+self.Color = color or {0,0,0}
 --self.m_Gamemode = gamemode
 
 addEventHandler ( "onVehicleEnter", self, bind(FraktionsVehicle.onVehicleEnter, self) )
@@ -19,12 +20,12 @@ addEventHandler ( "onVehicleStartExit", self, bind(FraktionsVehicle.onVehicleSta
 self.KeyBindSwitchEngine = function( player, key, keyState) self:SwitchEngine ( player, key, keyState) end
 self.KeyBindSwitchLight  = function( player, key, keyState) self:SwitchLight ( player, key, keyState) end
 
-self:setDimension(CNR_DIM)
+self:setDimension(CNR_SELF:getDimension())
 self:toggleRespawn( true )
 self:setRespawnDelay( 10000 )
 self:setRespawnPosition( self.m_Position,self.m_Rotation )
 self:setDamageProof(false)
-
+self:setColor(unpack(self.Color))
 end
 
 function FraktionsVehicle:destructor()
@@ -35,7 +36,11 @@ function FraktionsVehicle:onVehicleEnter(thePlayer, seat, jacked)
 		if self.EngineState == nil then
 			self:setEngineState(false)   --Damit beim ersten mal motor aus ist
 			self.EngineState = false	 --Damit beim ersten mal motor aus ist
+		else
+			self:setEngineState(self.EngineState) 
 		end
+			  
+
 		bindKey(thePlayer,"x","down",self.KeyBindSwitchEngine)
 		bindKey(thePlayer,"l","down",self.KeyBindSwitchLight)
 
@@ -81,13 +86,10 @@ function FraktionsVehicle:SwitchLight ( player, key, keyState)
 	end
 end
 
-function FraktionsVehicle:CreateFractionVehicle (Team,model,position,rotation)
+function CopsnRobbers:CreateFractionVehicle (Team,model,position,rotation,color)
 local veh = createVehicle(model,position,rotation,Team)
 setVehicleOverrideLights(veh, 1)
-enew(veh,FraktionsVehicle,Team,model,position,rotation)
+enew(veh,FraktionsVehicle,self,Team,model,position,rotation,color)
+addVehicleSirens(veh,1,3,true,false,false)
 return veh
 end
-
-
--- Todo: Move constructor the Gamemode:constructor
-FraktionsVehicle:CreateFractionVehicle("Cops",411,Vector3(1536,-1675,12.9),Vector3(0,0,0))

@@ -14,15 +14,14 @@ addCommandHandler("omp",outputMyPosition)
 
 
 function CopsnRobbers:constructor()
-  --outputDebug("Lobby:constructor")
+
   addRemoteEvents{"onCNRStartDownload"}
   addEventHandler("onCNRStartDownload", root, bind(CopsnRobbers.onDownloadStart, self))
-
+  
    -- Load translation file
   TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
   
-  
-
+ -- outputChatBox("getDimension:"..tostring(self:getDimension()))
 end
 
 function CopsnRobbers:destructor()
@@ -34,15 +33,13 @@ if self.Radar then
 else
 	self.Radar = new(MiniMap)
 end
--- self:CreatePlayerBlip()
+
+
+
 self.FractionSelectionMenu = FractionSelectionMenu:new(self)
 end
 
--- function CopsnRobbers:CreatePlayerBlip()
--- if lp == source then return end
- -- source.MapBlip = createBlip( 0, 0, 0 )
- -- source.MapBlip:setDimension(CNR_DIM)
--- end
+
 
 function CopsnRobbers:onPlayerSelectTeam(Team,Skin,SelectID)
 self.Radar:show()

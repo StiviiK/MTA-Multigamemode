@@ -1,17 +1,17 @@
 
-function Player:GivePlayerWanteds(Wanteds)
+function CopsnRobbers:GivePlayerWanteds(player,Wanteds)
 local Wanteds = tonumber(Wanteds)
-	if self:getType() == "player" and type(Wanteds) == "number" then
-		self:setData("Wanteds",self:getData("Wanteds") or 0+Wanteds)
+	if player:getType() == "player" and type(Wanteds) == "number" then
+		player:setData("Wanteds",player:getData("Wanteds") or 0+Wanteds)
 	else
 		outputDebugString("GivePlayerWanteds Error")
 
 	end
 end
 
-function Player:GetPlayerWanteds()
-	if self:getType() == "player" then
-		return tonumber(self:getData("Wanteds") or 0)
+function CopsnRobbers:GetPlayerWanteds(player)
+	if player:getType() == "player" then
+		return tonumber(player:getData("Wanteds") or 0)
 	else
 		outputDebugString("GetPlayerWanteds Error")
 
@@ -19,19 +19,19 @@ function Player:GetPlayerWanteds()
 	end
 end
 
-function Player:TakePlayerWanteds(Wanteds)
+function CopsnRobbers:TakePlayerWanteds(player,Wanteds)
 local Wanteds = tonumber(Wanteds)
-	if self:getType() == "player" and type(Wanteds) == "number" then
-		self:setData("Wanteds",self:getData("Wanteds") or 0-Wanteds)
+	if player:getType() == "player" and type(Wanteds) == "number" then
+		player:setData("Wanteds",player:getData("Wanteds") or 0-Wanteds)
 	else
 		outputDebugString("TakePlayerWanteds Error")
 
 	end
 end
 
-function Player:ResetPlayerWanteds()
-	if self:getType() == "player" then
-		self:setData("Wanteds",0)
+function CopsnRobbers:ResetPlayerWanteds(player)
+	if player:getType() == "player" then
+		player:setData("Wanteds",0)
 	else
 		outputDebugString("ResetPlayerWanteds Error")
 

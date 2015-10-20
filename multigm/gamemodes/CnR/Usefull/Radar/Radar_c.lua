@@ -15,17 +15,16 @@ self.y     = sh-abstand-self.h
 self.Diagonal   = math.sqrt(self.w^2+self.h^2)
 
 --IMAGE--
-self.IMG_Map             =   dxCreateTexture( "gamemodes/CnR/res/images/Radar/Radar.jpg","dxt5" )
-self.IMG_Cursor          =   dxCreateTexture( "gamemodes/CnR/res/images/Radar/Cursor.png","dxt5" )
-self.IMG_Heli     		 =   dxCreateTexture( "gamemodes/CnR/res/images/Radar/Heli.png","dxt5" )
-self.IMG_HeliRotoren     =   dxCreateTexture( "gamemodes/CnR/res/images/Radar/HeliRotoren.png","dxt5" )
-self.IMG_Flugzeug     	 =   dxCreateTexture( "gamemodes/CnR/res/images/Radar/Flugzeug.png","dxt5" )
-self.IMG_Water     		 =   dxCreateTexture( "gamemodes/CnR/res/images/Radar/Water.jpg","dxt5" )
+self.IMG_Map             =   "gamemodes/CnR/res/images/Radar/Radar.jpg"--dxCreateTexture( "gamemodes/CnR/res/images/Radar/Radar.jpg","dxt5" )
+self.IMG_Cursor          =   "gamemodes/CnR/res/images/Radar/Cursor.png"--dxCreateTexture( "gamemodes/CnR/res/images/Radar/Cursor.png","dxt5" )
+self.IMG_Heli     		 =   "gamemodes/CnR/res/images/Radar/Heli.png"--dxCreateTexture( "gamemodes/CnR/res/images/Radar/Heli.png","dxt5" )
+self.IMG_HeliRotoren     =   "gamemodes/CnR/res/images/Radar/HeliRotoren.png"--dxCreateTexture( "gamemodes/CnR/res/images/Radar/HeliRotoren.png","dxt5" )
+self.IMG_Flugzeug     	 =   "gamemodes/CnR/res/images/Radar/Flugzeug.png"--dxCreateTexture( "gamemodes/CnR/res/images/Radar/Flugzeug.png","dxt5" )
+self.IMG_Water     		 =   "gamemodes/CnR/res/images/Radar/Water.jpg"-- dxCreateTexture( "gamemodes/CnR/res/images/Radar/Water.jpg","dxt5" )
 
 self.Blip = {}
 for BlipID = 0,63 do
-self.Blip[BlipID]     =   dxCreateTexture( "gamemodes/CnR/res/images/Radar/blip/"..BlipID..".png","dxt5" )
-
+self.Blip[BlipID]     =   "gamemodes/CnR/res/images/Radar/blip/"..BlipID..".png" --dxCreateTexture( "gamemodes/CnR/res/images/Radar/blip/"..BlipID..".png","dxt5" )
 end
 ---------
 

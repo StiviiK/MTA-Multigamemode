@@ -90,7 +90,6 @@ Camera.setMatrix(2494.4318847656,-1683.3291015625,24.370414733887,2492.520996093
 
 end
 
-
 function CopsnRobbers:ShowCopsSelection ()
 
 FractionSelection.Select = CNR_Cops

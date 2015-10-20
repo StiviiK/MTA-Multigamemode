@@ -169,6 +169,8 @@
 			<script src="gamemodes/CnR/server/PlayerBlip.lua" type="server"/>
 			<script src="gamemodes/CnR/server/ArrestSystem.lua" type="server"/>
 			<script src="gamemodes/CnR/server/Fraktion_Car.lua" type="server"/>
+			<script src="gamemodes/CnR/server/FraktionCar_Loader.lua" type="server"/>
+			
 			<script src="gamemodes/CnR/server/Death.lua" type="server"/>
 			<script src="gamemodes/CnR/server/WantedSystem.lua" type="server"/>
 			<script src="gamemodes/CnR/server/SaveSystem.lua" type="server"/>

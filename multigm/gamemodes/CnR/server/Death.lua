@@ -1,4 +1,5 @@
 function CopsnRobbers:Wasted ( ammo, attacker, weapon, bodypart )
+local CNR_SELF = self
 local player = source
 local PlayerPos = source.position
 local LowestDistance = false
@@ -53,7 +54,7 @@ end
 		local Rot = CNR_Spawns_Hospital[LowestDistanceID]["Rot"]
 		local Skin = player:getModel()
 		local Int  = player:getInterior()
-		local Dim  = CNR_DIM
+		local Dim  = CNR_SELF:getDimension()
 
 		player:spawn(Pos.x,Pos.y,Pos.z,Rot.z,Skin,Int,Dim)
 	 

@@ -23,6 +23,7 @@ function CopsnRobbers:constructor()
   self:CreateSchranken ()
   self:CreateTeleports ()
   self:CreateGates ()
+  self:SpawnFractionVehicles ()
 end
 
 function CopsnRobbers:destructor()
@@ -38,7 +39,7 @@ function CopsnRobbers:onPlayerJoin(player)
 end
 
 function CopsnRobbers:onPlayerLeft(player)
-self:DestroyPlayerBlip(player)--DestroyPlayerBlip
+
 end
 
 function CopsnRobbers:onDownloadComplete()
@@ -49,7 +50,7 @@ function CopsnRobbers:onDownloadComplete()
   -- client:setPosition(spawn.Position)
   -- client:setRotation(0, 0, spawn.Rotation)
   -- client:setInterior(spawn.Interior)
-  -- client:setDimension(CNR_DIM)
+  -- client:setDimension(self:getDimension())
 
  --CreatePlayerBlip
   addEventHandler ( "onPlayerWasted", client, bind(CopsnRobbers.Wasted,self) )
@@ -77,7 +78,7 @@ end
   client:setDimension(self:getDimension())
 
   self:GivePlayerFractionWeapons(client,FractionTable,SelectID)
-  self:CreatePlayerBlip(client)
+
 
 
 end
