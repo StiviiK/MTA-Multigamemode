@@ -24,6 +24,10 @@ function CopsnRobbers:constructor()
   self:CreateTeleports ()
   self:CreateGates ()
   self:SpawnFractionVehicles ()
+  --self:CreateAmmunationShops ()
+  self:CreateShops ()
+  self.WastedHandler = function() self:Wasted() end
+  addEventHandler ( "onPlayerWasted", self:getRoot(), self.WastedHandler )
 end
 
 function CopsnRobbers:destructor()
@@ -34,16 +38,29 @@ function CopsnRobbers:destructor()
 end
 
 function CopsnRobbers:onPlayerJoin(player)
-
+	-----------CNR_DEBUG---------------
+-- DebugOutPut( "CopsnRobbers:onPlayerJoin" )
+-----------------------------------
   player:triggerEvent("onCNRStartDownload", player)
 end
 
 function CopsnRobbers:onPlayerLeft(player)
+-----------CNR_DEBUG---------------
+-- DebugOutPut( "CopsnRobbers:onPlayerLeft" )
+-----------------------------------
 
+player:setCameraTarget(player)
+
+removeEventHandler ( "onPlayerWasted", player, self.WastedHandler )
+local x,y,z = getElementPosition(player)
+outputChatBox(x..","..y..","..z)
+outputChatBox(debug.traceback())
 end
 
 function CopsnRobbers:onDownloadComplete()
-
+-----------CNR_DEBUG---------------
+-- DebugOutPut( "CopsnRobbers:onDownloadComplete" )
+-----------------------------------
   -- spawn the player
 
   -- local spawn = self:getSetting("SpawnCops")
@@ -53,7 +70,7 @@ function CopsnRobbers:onDownloadComplete()
   -- client:setDimension(self:getDimension())
 
  --CreatePlayerBlip
-  addEventHandler ( "onPlayerWasted", client, bind(CopsnRobbers.Wasted,self) )
+  
 end
 
 
@@ -79,7 +96,10 @@ end
 
   self:GivePlayerFractionWeapons(client,FractionTable,SelectID)
 
-
+  if CNR_DEBUG then
+	LoadPosition (client)
+  end
+  
 
 end
 

@@ -96,6 +96,7 @@ function CarRadio:delete ()
 self:destructor()
 end
 
+
 addEventHandler("onClientVehicleEnter", getRootElement(),
     function(thePlayer, seat)
         if thePlayer == getLocalPlayer() then

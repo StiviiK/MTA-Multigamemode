@@ -52,11 +52,10 @@ end
 	setTimer(function()
 		local Pos = CNR_Spawns_Hospital[LowestDistanceID]["Pos"]
 		local Rot = CNR_Spawns_Hospital[LowestDistanceID]["Rot"]
+		local Int = CNR_Spawns_Hospital[LowestDistanceID]["Int"]
 		local Skin = player:getModel()
-		local Int  = player:getInterior()
 		local Dim  = CNR_SELF:getDimension()
 
 		player:spawn(Pos.x,Pos.y,Pos.z,Rot.z,Skin,Int,Dim)
-	 
 	 end,5000,1)
 end

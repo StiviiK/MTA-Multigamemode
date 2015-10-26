@@ -41,10 +41,11 @@ self.m_Diagonal = 100
 self.RenderTargetMap           = dxCreateRenderTarget( 3000, 3000 )
 self.RenderTargetFenster       = dxCreateRenderTarget( self.w, self.h )
 
-self.RenderHandler = function() self:render() end
+self.RenderHandler 		   = function() self:render() end
+self.RenderHandler_Status  = false
 self.RenderTargetUmrandung = dxCreateRenderTarget( self.w, self.h,true  )
 
-self.visible = true
+self.visible = false
 
 self:Umrandung()
 
@@ -159,13 +160,17 @@ end
 
 
 function MiniMap:show()
-self.visible = true
-addEventHandler("onClientRender", getRootElement(), self.RenderHandler) ;
+	if self.visible == false then
+		addEventHandler("onClientRender", getRootElement(), self.RenderHandler) ;
+		self.visible = true
+	end
 end
 
 function MiniMap:hide()
-self.visible = false
-removeEventHandler("onClientRender", getRootElement(), self.RenderHandler );
+	if self.visible == true then
+		removeEventHandler("onClientRender", getRootElement(), self.RenderHandler );
+		self.visible = false
+	end
 end
 
 
@@ -205,7 +210,6 @@ end
 function MiniMap:render()
 
 if self.visible then
-
 
     local x,y = getElementPosition(lp)
 	local _, _, RotZ = getElementRotation(lp)

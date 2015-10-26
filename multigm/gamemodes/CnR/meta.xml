@@ -8,6 +8,14 @@
   <!-- TXD files -->
     <transferfile src="gamemodes/CnR/res/txd/EntranceMarker.txd"/>
 	
+	<!-- Shader files -->
+	
+	
+	
+	
+	<!-- Weapon_Shop files -->
+	<transferfile src="gamemodes/CnR/res/images/Weapon_Selection/select.png"/>
+	
 	
 	
 	<!-- Radar -->
