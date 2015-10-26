@@ -14,6 +14,7 @@ function Gamemode:virtual_constructor(name, desc)
   self.m_Dimension = DimensionManager:getSingleton():getFreeDimension()
   self.m_SyncInfo = {}
   self.m_SyncInfoUpdate = {}
+  self.m_InitialSyncInfo = {}
 
   -- Set important SyncInfo
   self:setSyncInfo("Name", self:getName())
@@ -92,6 +93,7 @@ function Gamemode:setSyncInfo(key, value)
   if self.m_SyncInfo[key] ~= value then
 		self.m_SyncInfo[key] = value
 		self.m_SyncInfoUpdate[key] = true
+    self.m_InitialSyncInfo[key] = true
 	end
 end
 

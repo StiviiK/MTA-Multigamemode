@@ -72,10 +72,10 @@ function GamemodeManager:Event_JoinGamemode(Id, fLobby)
   self.getFromId(Id):addPlayer(source)
   if fLobby ~= true then
     source:triggerEvent("successBox", source, _("Du bist dem Gamemode erfolgreich beigetreten!", source))
-  end  
+  end
 end
 
-function GamemodeManager:updateSync(player)
+function GamemodeManager:updateSync()
   local SyncData = {}
   for i, gamemode in pairs(GamemodeManager.Map) do
     SyncData[gamemode:getId()] = {}
@@ -85,11 +85,24 @@ function GamemodeManager:updateSync(player)
   	gamemode.m_SyncInfoUpdate = {}
   end
 
-  if table.size(SyncData) ~= 0 then
+  if table.size(SyncData) ~= GamemodeManager.Map then
+    triggerClientEvent(root, "UpdateGamemodeSync", root, SyncData)
+  end
+end
+
+function GamemodeManager:sendInitialSync(player)
+  local SyncData = {}
+  for i, gamemode in pairs(GamemodeManager.Map) do
+    SyncData[gamemode:getId()] = {}
+    for k, v in pairs(gamemode.m_InitialSyncInfo) do
+      SyncData[gamemode:getId()][k] = gamemode.m_SyncInfo[k]
+    end
+  end
+
+  if table.size(SyncData) ~= GamemodeManager.Map then
     if player then
-      triggerClientEvent(player, "UpdateGamemodeSync", player, SyncData)
-    else
-      triggerClientEvent(root, "UpdateGamemodeSync", root, SyncData)
+      outputChatBox("SEND @ "..getRealTime().timestamp)
+      outputChatBox("STATUS: "..tostring(player:triggerEvent("UpdateGamemodeSync", player, SyncData)))
     end
   end
 end
