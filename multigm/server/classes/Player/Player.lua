@@ -56,7 +56,7 @@ function Player:loadCharacter()
 end
 
 function Player:onInternalError(error)
-  self:kick("System - Player", _("Ein interner Fehler is aufgetreten! Error Id: %s", self, error))
+  self:kick("System - Player", _("Ein interner Fehler is aufgetreten! Error Hash: %s", self, error))
 end
 
 function Player:setPrivateSync(key, value)

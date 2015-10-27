@@ -13,6 +13,7 @@
 			<script src="shared/classes/Package.lua" type="shared"/>
 			<script src="shared/classes/Hook.lua" type="shared"/>
 			<script src="shared/Cache.lua" type="shared"/>
+			<script src="shared/crc32lua.lua" type="shared"/>
 			<script src="shared/classes/Thread.lua" type="shared"/>
 
 			<script src="shared/constants.lua" type="shared"/>
@@ -182,8 +183,8 @@
 			<script src="gamemodes/CnR/server/24_7_Shop_List.lua" type="server"/>
 			
 
-			
-			
+
+
 		<!-- Client -->
 			<script src="gamemodes/CnR/client/Init.lua" type="client"/>
 			<script src="gamemodes/CnR/client/Main.lua" type="client"/>
@@ -200,8 +201,8 @@
 			<script src="gamemodes/CnR/Usefull/GateMaker/GateList.lua" type="server"/>
 			<script src="gamemodes/CnR/Usefull/TeleportMaker/client.lua" type="client"/>
 			<script src="gamemodes/CnR/Usefull/Radar/Radar_c.lua" type="client"/>
-			
-			
+
+
 
 	<!-- Lobby -->
 		<!-- Meta -->

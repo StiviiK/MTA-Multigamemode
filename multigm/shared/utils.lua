@@ -233,3 +233,7 @@ function math.line_plane_intersection(linepos, linedir, planepos, planev1, plane
 
 	return linepos + r * linedir
 end
+
+function toHex(num)
+	return (("0x%X"):format(num))
+end

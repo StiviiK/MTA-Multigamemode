@@ -14,7 +14,6 @@ function Gamemode:virtual_constructor(name, desc)
   self.m_Dimension = DimensionManager:getSingleton():getFreeDimension()
   self.m_SyncInfo = {}
   self.m_SyncInfoUpdate = {}
-  self.m_InitialSyncInfo = {}
 
   -- Set important SyncInfo
   self:setSyncInfo("Name", self:getName())
@@ -43,7 +42,7 @@ end
 
 function Gamemode:addPlayer(player)
   if (type(self:getSetting("DownloadPath")) == "string") and (not fileExists(self:getSetting("DownloadPath"))) then
-    player:onInternalError(("%s-#%s"):format(self:getName(), DOWNLOAD_ERROR_UNKOWN_FILE))
+    player:onInternalError(DOWNLOAD_ERROR_UNKOWN_FILE)
     return
   end
 
@@ -93,7 +92,6 @@ function Gamemode:setSyncInfo(key, value)
   if self.m_SyncInfo[key] ~= value then
 		self.m_SyncInfo[key] = value
 		self.m_SyncInfoUpdate[key] = true
-    self.m_InitialSyncInfo[key] = true
 	end
 end
 

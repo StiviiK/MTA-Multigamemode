@@ -94,15 +94,14 @@ function GamemodeManager:sendInitialSync(player)
   local SyncData = {}
   for i, gamemode in pairs(GamemodeManager.Map) do
     SyncData[gamemode:getId()] = {}
-    for k, v in pairs(gamemode.m_InitialSyncInfo) do
+    for k, v in pairs(gamemode.m_SyncInfo) do
       SyncData[gamemode:getId()][k] = gamemode.m_SyncInfo[k]
     end
   end
 
   if table.size(SyncData) ~= GamemodeManager.Map then
     if player then
-      outputChatBox("SEND @ "..getRealTime().timestamp)
-      outputChatBox("STATUS: "..tostring(player:triggerEvent("UpdateGamemodeSync", player, SyncData)))
+      player:triggerEvent("UpdateGamemodeSync", player, SyncData)
     end
   end
 end
