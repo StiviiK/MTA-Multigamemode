@@ -7,7 +7,7 @@ end
 function SQL:destructor()
 	if self.m_DBHandle then
 		destroyElement(self.m_DBHandle)
-	end	
+	end
 end
 
 function SQL:queryExec(query, ...)
@@ -29,6 +29,10 @@ end
 -- SQL:queryFetch(function callback, string query, ...) [[ asyncronous processing ]]
 -- SQL:queryFetch(query, ...) [[ waits ]]
 function SQL:queryFetch(...)
+	if not self.m_DBHandle then
+		core:onInternalError(RUNTIME_ERROR_MYSQL_CON_LOST)
+	end
+
 	local args = {...}
 	if type(args[1]) == "string" then
 		return self.dbPoll(dbQuery(self.m_DBHandle, ...), -1)
@@ -57,6 +61,10 @@ end
 -- SQL:queryFetchSingle(function callback, string query, ...) [[ asyncronous processing ]]
 -- SQL:queryFetchSingle(query, ...) [[ waits ]]
 function SQL:queryFetchSingle(...)
+	if not self.m_DBHandle then
+		core:onInternalError(RUNTIME_ERROR_MYSQL_CON_LOST)
+	end
+
 	local args = {...}
 	if type(args[1]) == "string" then
 		return self.dbPoll(dbQuery(self.m_DBHandle, ...), -1)[1]

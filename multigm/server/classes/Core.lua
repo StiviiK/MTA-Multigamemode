@@ -5,7 +5,6 @@ function Core:constructor ()
 
   -- Small hack to get the global core immediately
 	core = self
-
   -- Important Data
   self.ms_StartTime = getRealTime().timestamp
   self.ms_StartTick = getTickCount()
@@ -91,7 +90,7 @@ end
 
 function Core:onInternalError(error)
   for i, v in pairs(getElementsByType("player")) do
-    v:kick("System - Core", _("Ein interner Fehler is aufgetreten! Error Hash: %s", v, error))
+    v:kick("System - Core", ("Internal Error occured! Hash: %s"):format(error))
   end
 
   stopResource(getThisResource())

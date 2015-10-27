@@ -157,5 +157,5 @@ function M.crc32(s, crc)
 end
 
 
-crc32 = M.crc32
---setmetatable(crc32, {__call = function (self, ...) return self.crc32(...) end})
+crc32 = M
+setmetatable(crc32, {__call = function (self, ...) return self.crc32(...) end})

@@ -25,6 +25,7 @@
 			<script src="shared/classes/Root.lua" type="shared"/>
 			<script src="shared/classes/Gamemode/Element/GamemodeElement.lua" type="shared"/>
 			<script src="shared/classes/DimensionManager.lua" type="shared"/>
+			<script src="shared/classes/Command.lua" type="shared"/>
 
 		<!-- Server -->
 			<script src="server/constants.lua" type="server"/>
@@ -160,28 +161,28 @@
 	<!-- Cops'n'Robbers -->
 		<!-- Meta -->
 			<metafile src="gamemodes/CnR/meta.xml"/>
-		
+
 		<!-- Shared -->
 			<script src="gamemodes/CnR/constants.lua" type="shared"/>
 			<script src="gamemodes/CnR/DEBUG/DEBUG.lua" type="shared"/>
-			
+
 			<file src="gamemodes/CnR/res/fx/shader.fx" />
-			
+
 		<!-- Server -->
 			<script src="gamemodes/CnR/server/Init.lua" type="server"/>
 			<script src="gamemodes/CnR/server/Main.lua" type="server"/>
 			<script src="gamemodes/CnR/server/PlayerBlip.lua" type="server"/>
 			<script src="gamemodes/CnR/server/ArrestSystem.lua" type="server"/>
 			<script src="gamemodes/CnR/server/Fraktion_Car.lua" type="server"/>
-			<script src="gamemodes/CnR/server/FraktionCar_Loader.lua" type="server"/>			
+			<script src="gamemodes/CnR/server/FraktionCar_Loader.lua" type="server"/>
 			<script src="gamemodes/CnR/server/Death.lua" type="server"/>
 			<script src="gamemodes/CnR/server/WantedSystem.lua" type="server"/>
 			<script src="gamemodes/CnR/server/SaveSystem.lua" type="server"/>
 			<script src="gamemodes/CnR/server/Weapon_Shop.lua" type="server"/>
-			<script src="gamemodes/CnR/server/Weapon_Shop_List.lua" type="server"/>	
+			<script src="gamemodes/CnR/server/Weapon_Shop_List.lua" type="server"/>
 			<script src="gamemodes/CnR/server/24_7_Shop.lua" type="server"/>
 			<script src="gamemodes/CnR/server/24_7_Shop_List.lua" type="server"/>
-			
+
 
 
 

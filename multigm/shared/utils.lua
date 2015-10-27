@@ -237,3 +237,8 @@ end
 function toHex(num)
 	return (("0x%X"):format(num))
 end
+
+function resolveError(hash)
+	assert(type(hash) == "string", "Bad Argument @ resolveError [Exepected <<Error-Hash>> at argument 1, got "..type(hash).."]")
+	return table.find(_G, hash)
+end
