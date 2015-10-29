@@ -13,23 +13,23 @@ function Map:destructor()
   self:unload()
 end
 
-function Map:load(piority)
+function Map:load(priority)
   if self:getThread() then return end
-  if not piority then piority = MAP_LOADING_NORMAL end
+  if not priority then priority = MAP_LOADING_NORMAL end
 
   self.m_Thread = Thread:new(bind(Map.AsyncCreateObjects, self))
-  if piority == MAP_LOADING_FAST then
-    self:getThread():setPiority(THREAD_PIORITY_HIGHEST)
-  elseif piority == MAP_LOADING_NORMAL then
-    self:getThread():setPiority(THREAD_PIORITY_HIGH)
+  if priority == MAP_LOADING_FAST then
+    self:getThread():setPriority(THREAD_PRIORITY_HIGHEST)
+  elseif priority == MAP_LOADING_NORMAL then
+    self:getThread():setPriority(THREAD_PRIORITY_HIGH)
   end
-  self:getThread():start(piority)
+  self:getThread():start(ptiority)
 end
 
 function Map:unload()
   if self:getThread() then return end
   self.m_Thread = Thread:new(bind(Map.removeObjects, self))
-  self:getThread():setPiority(THREAD_PIORITY_HIGHEST)
+  self:getThread():setPriority(THREAD_PRIORITY_HIGHEST)
   self:getThread():start()
 end
 

@@ -48,7 +48,7 @@ function Core:constructor ()
 
   -- Generate Download-Package
   local gamemodes = {
-    {"Main", "", "main.data"};
+    {"Main", "", "vmg.data"};
     {"Lobby", "gamemodes/Lobby/", "lobby.data"};
     {"Cops'n'Robbers", "gamemodes/CnR/", "cnr.data"};
     {"Renegade Squad", "gamemodes/RnS/", "rns.data"};

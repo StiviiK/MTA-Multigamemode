@@ -42,7 +42,7 @@ function PlayerManager:playerJoin()
 end
 
 function PlayerManager:playerReady()
-	outputDebug(getRealTime().timestamp)
+	client.m_ClientReady = true
 
 	showChat(client, true)
 	self:spawnPlayer(client)

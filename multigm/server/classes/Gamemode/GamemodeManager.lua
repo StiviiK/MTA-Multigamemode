@@ -86,7 +86,11 @@ function GamemodeManager:updateSync()
   end
 
   if table.size(SyncData) ~= GamemodeManager.Map then
-    triggerClientEvent(root, "UpdateGamemodeSync", root, SyncData)
+    for i, v in pairs(Element.getAllByType("players")) do -- Todo: Improve?
+      if v:isClientReady() then
+        v:triggerEvent("UpdateGamemodeSync", v, SyncData)
+      end
+    end
   end
 end
 
@@ -101,7 +105,9 @@ function GamemodeManager:sendInitialSync(player)
 
   if table.size(SyncData) ~= GamemodeManager.Map then
     if player then
-      player:triggerEvent("UpdateGamemodeSync", player, SyncData)
+      if player:isClientReady() then
+        player:triggerEvent("UpdateGamemodeSync", player, SyncData)
+      end
     end
   end
 end

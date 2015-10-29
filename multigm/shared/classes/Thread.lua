@@ -1,10 +1,10 @@
 Thread = inherit(Object)
 Thread.Map = {}
 
-function Thread:constructor(func)
+function Thread:constructor(func, priority)
   self.m_Id = table.push(Thread.Map, self)
   self.m_Func = func
-  self.m_Piority = THREAD_PIORITY_LOW
+  self.m_Priority = piority or THREAD_PRIORITY_LOW
   self.ms_Thread = false
   self.ms_Timer = false
   self.m_Yields = 0
@@ -14,6 +14,8 @@ end
 function Thread:destructor()
   Thread.Map[self:getId()] = nil
   self.ms_Thread = nil
+
+  --outputDebug("[Thread | "..self:getId().."] Finished! Took: "..getTickCount()-self.ms_StartTime.."ms; Yields: "..self.m_Yields)
 
   if isTimer(self.ms_Timer) then
     killTimer(self.ms_Timer)
@@ -32,7 +34,7 @@ function Thread:start(...)
     elseif self:getStatus() == COROUTINE_STATUS_DEAD then
       delete(self)
     end
-  end, self:getPiority(), -1)
+  end, self:getPriority(), -1)
 end
 
 function Thread:resume(...)
@@ -51,14 +53,14 @@ function Thread:getId()
   return self.m_Id
 end
 
-function Thread:getPiority()
-  return self.m_Piority
+function Thread:getPriority()
+  return self.m_Priority
 end
 
 function Thread:getThread()
   return self.ms_Thread
 end
 
-function Thread:setPiority(piority)
-  self.m_Piority = piority
+function Thread:setPriority(priority)
+  self.m_Priority = priority
 end
