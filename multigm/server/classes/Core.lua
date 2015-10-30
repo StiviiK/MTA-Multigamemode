@@ -5,7 +5,6 @@ function Core:constructor ()
 
   -- Small hack to get the global core immediately
 	core = self
-
   -- Important Data
   self.ms_StartTime = getRealTime().timestamp
   self.ms_StartTick = getTickCount()
@@ -49,7 +48,7 @@ function Core:constructor ()
 
   -- Generate Download-Package
   local gamemodes = {
-    {"Main", "", "main.data"};
+    {"Main", "", "vmg.data"};
     {"Lobby", "gamemodes/Lobby/", "lobby.data"};
     {"Cops'n'Robbers", "gamemodes/CnR/", "cnr.data"};
     {"Renegade Squad", "gamemodes/RnS/", "rns.data"};
@@ -91,7 +90,7 @@ end
 
 function Core:onInternalError(error)
   for i, v in pairs(getElementsByType("player")) do
-    v:kick("System - Core", _("Ein interner Fehler is aufgetreten! Error Id: %s", v, error))
+    v:kick("System - Core", ("Internal Error occured! Hash: %s"):format(error))
   end
 
   stopResource(getThisResource())

@@ -137,8 +137,8 @@ ShopItems = {
 {["Slot"] = 12,["Name"] = "Satchel Detonator"     , ["ModelID"]= 364, ["WeaponID"]= 40, ["Price"]= 100}
 
 }
- 
- WeaponSlot = {} 
+
+ WeaponSlot = {}
  WeaponSlot[0] = {1}
  WeaponSlot[1] = {2,3,4,5,6,7,8,9}
  WeaponSlot[2] = {10,11,12}

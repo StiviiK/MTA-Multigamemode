@@ -3,16 +3,25 @@ inherit(Singleton, FastLobby)
 
 function FastLobby:constructor()
   GUIForm.constructor(self, 0, 0, screenWidth, screenHeight)
+
+  -- Check for visible GUI Elements
   if SelfGUI:getSingleton().m_Visible then
     SelfGUI:getSingleton():close()
   end
 
   self.m_Gamemodes = {
-    -- [Id] = {NAME, false (current Gamemode), unlocked}
-    {Name = GamemodeManager.getFromId(1):getName() or "ERR_UNKOWN_NAME", Active = true};
-    {Name = GamemodeManager.getFromId(2):getName() or "ERR_UNKOWN_NAME", Active = true, Background = "res/images/backgrounds/cnr/cnr-bg.jpg"};
-    {Name = GamemodeManager.getFromId(3):getName() or "ERR_UNKOWN_NAME", Active = true, Background = "res/images/backgrounds/rns/rns-bg.png"};
+    {Gamemode = GamemodeManager.getFromId(1), Active = true};
+    {Gamemode = GamemodeManager.getFromId(2), Active = true, Background = "res/images/backgrounds/cnr/cnr-bg.jpg"};
+    {Gamemode = GamemodeManager.getFromId(3), Active = true, Background = "res/images/backgrounds/rns/rns-bg.png"};
   }
+  for i, v in pairs(self.m_Gamemodes) do
+    if v.Gamemode then
+      v.Name = ("%s\n(%s / %s)"):format(v.Gamemode:getName(), v.Gamemode:getSyncInfo("CurrPlayers"), v.Gamemode:getSyncInfo("MaxPlayers")) or "ERR_UNKOWN_NAME"
+    else
+      v.Active = false
+    end
+  end
+
   if localPlayer:getGamemode() then
     self.m_ScreenSource = DxScreenSource(self.m_Width, self.m_Height)
     self.m_ScreenSource:update()
@@ -42,6 +51,11 @@ function FastLobby:constructor()
         if self.m_Gamemodes[currGamemode].Current then
           self.m_Gamemodes[currGamemode].Image = GUIImage:new(posX, posY, width, height, self.m_ScreenSource, self.m_Background)
           self.m_Gamemodes[currGamemode].Label = GUILabel:new(0, 0, width, height, ("%s %s"):format(FontAwesomeSymbols.User, self.m_Gamemodes[currGamemode].Name), self.m_Gamemodes[currGamemode].Image)
+          self.m_Gamemodes[currGamemode].Label:setFont(FontAwesome(height/4.25))
+        elseif self.m_Gamemodes[currGamemode].Gamemode:getSyncInfo("CurrPlayers") == self.m_Gamemodes[currGamemode].Gamemode:getSyncInfo("MaxPlayers") then
+          local img = self.m_Gamemodes[currGamemode].Background or "res/images/backgrounds/lobby/lobby-bg.jpg"
+          self.m_Gamemodes[currGamemode].Image = GUIImage:new(posX, posY, width, height, img, self)
+          self.m_Gamemodes[currGamemode].Label = GUILabel:new(0, 0, width, height, ("%s %s"):format(FontAwesomeSymbols.Lock, self.m_Gamemodes[currGamemode].Name), self.m_Gamemodes[currGamemode].Image)
           self.m_Gamemodes[currGamemode].Label:setFont(FontAwesome(height/4.25))
         else
           local img = self.m_Gamemodes[currGamemode].Background or "res/images/backgrounds/lobby/lobby-bg.jpg"

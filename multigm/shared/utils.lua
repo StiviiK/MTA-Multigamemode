@@ -233,3 +233,12 @@ function math.line_plane_intersection(linepos, linedir, planepos, planev1, plane
 
 	return linepos + r * linedir
 end
+
+function toHex(num)
+	return (("0x%X"):format(num))
+end
+
+function resolveError(hash)
+	assert(type(hash) == "string", "Bad Argument @ resolveError [Exepected <<Error-Hash>> at argument 1, got "..type(hash).."]")
+	return table.find(_G, hash)
+end

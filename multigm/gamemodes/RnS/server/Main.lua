@@ -8,12 +8,12 @@ function RenegadeSquad:constructor()
 
   -- Load Maps
   self.m_Maps = {
-    --MapManager:getSingleton():loadMap(self, "");
+    --MapManager:getSingleton():loadMap(self, "gamemodes/RnS/res/maps/SurvivalIsland/Map.map");
   }
 
   -- Create Maps
   for i, v in pairs(self.m_Maps) do
-    v:load()
+    --v:load()
   end
 end
 

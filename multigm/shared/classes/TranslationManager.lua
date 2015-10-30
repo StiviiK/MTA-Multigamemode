@@ -54,11 +54,13 @@ function TranslationManager:translate(message, locale)
 		if  translatedMsg then
 			return translatedMsg
 		else
-			for i, poParser in ipairs(self.m_AddonTranslations[locale]) do
-				local translatedMsg = poParser:translate(message)
-				if translatedMsg then
-					return translatedMsg
-				end
+			if self.m_AddonTranslations[locale] then
+				for i, poParser in ipairs(self.m_AddonTranslations[locale]) do
+					local translatedMsg = poParser:translate(message)
+					if translatedMsg then
+						return translatedMsg
+					end
+				end	
 			end
 
 			outputDebug("There's a missing translation. Please update the .po files. ("..locale..")")

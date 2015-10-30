@@ -28,8 +28,8 @@ function Core:constructor()
 	GamemodePedManager:new()
 	GamemodeManager:new()
 
-	-- Reqeust main.data
-	Provider:getSingleton():requestFile("main.data", bind(Core.ready, self))
+	-- Request main.data
+	Provider:getSingleton():requestFile("vmg.data", bind(Core.ready, self))
 end
 
 function Core:ready()

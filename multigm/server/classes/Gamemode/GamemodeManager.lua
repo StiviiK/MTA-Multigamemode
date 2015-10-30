@@ -86,7 +86,11 @@ function GamemodeManager:updateSync()
   end
 
   if table.size(SyncData) ~= GamemodeManager.Map then
-    triggerClientEvent(root, "UpdateGamemodeSync", root, SyncData)
+    for i, v in pairs(Element.getAllByType("players")) do -- Todo: Improve?
+      if v:isClientReady() then
+        v:triggerEvent("UpdateGamemodeSync", v, SyncData)
+      end
+    end
   end
 end
 
@@ -94,15 +98,16 @@ function GamemodeManager:sendInitialSync(player)
   local SyncData = {}
   for i, gamemode in pairs(GamemodeManager.Map) do
     SyncData[gamemode:getId()] = {}
-    for k, v in pairs(gamemode.m_InitialSyncInfo) do
+    for k, v in pairs(gamemode.m_SyncInfo) do
       SyncData[gamemode:getId()][k] = gamemode.m_SyncInfo[k]
     end
   end
 
   if table.size(SyncData) ~= GamemodeManager.Map then
     if player then
-      outputChatBox("SEND @ "..getRealTime().timestamp)
-      outputChatBox("STATUS: "..tostring(player:triggerEvent("UpdateGamemodeSync", player, SyncData)))
+      if player:isClientReady() then
+        player:triggerEvent("UpdateGamemodeSync", player, SyncData)
+      end
     end
   end
 end

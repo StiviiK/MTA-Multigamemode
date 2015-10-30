@@ -13,6 +13,7 @@ function Player:constructor()
 	self.m_PublicSync = {}
 	self.m_PublicSyncUpdate = {}
   self.m_JoinTime = getTickCount()
+  self.m_ClientReady = false
 end
 
 function Player:destructor()
@@ -56,7 +57,7 @@ function Player:loadCharacter()
 end
 
 function Player:onInternalError(error)
-  self:kick("System - Player", _("Ein interner Fehler is aufgetreten! Error Id: %s", self, error))
+  self:kick("System - Player", ("Internal Error occured! Hash: %s"):format(error))
 end
 
 function Player:setPrivateSync(key, value)
@@ -133,6 +134,7 @@ function Player:isLoggedIn() return self.m_Id ~= -1	end
 function Player:getGamemode() return self.m_Gamemode end
 function Player:getJoinTime() return self.m_JoinTime end
 function Player:getSession() return (self:getAccount() and self:getAccount():getSession()) end
+function Player:isClientReady() return self.m_ClientReady end
 
 -- Short setters
 function Player:setGamemode(instance) self.m_Gamemode = instance if self:isActive() then self:setPrivateSync("Gamemode", (self.m_Gamemode and self.m_Gamemode:getId()) or 0) end end

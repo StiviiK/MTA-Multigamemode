@@ -4,7 +4,7 @@ function MySQL:constructor(host, port, user, password, database, unixpath)
 	local connectString = ("dbname=%s;host=%s;port=%d;unix_socket=%s"):format(database, host, port or 3306, unixpath or "")
 	self.m_DBHandle = dbConnect("mysql", connectString, user, password, "share=0;batch=1;autoreconnect=1;log=0;tag=gtasaonline")
 	if not self.m_DBHandle then
-		core:onInternalError(("MySQL-#%s"):format(ERROR_MYSQL_CONNECTION_FAILED))
+		core:onInternalError(ERROR_MYSQL_CONNECTION_FAILED)
 	end
 end
 
