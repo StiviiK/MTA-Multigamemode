@@ -6,11 +6,13 @@ local sw,sh = guiGetScreenSize()
 local abstand = 10
 function MiniMap:constructor()
 
-self.w     = 250
-self.h     = 150
+self.w     = screenWidth*0.285
+self.h     = screenHeight*0.25
 
 self.x     = abstand
-self.y     = sh-abstand-self.h
+self.y     = sh-abstand*2-self.h
+
+
 
 self.Diagonal   = math.sqrt(self.w^2+self.h^2)
 

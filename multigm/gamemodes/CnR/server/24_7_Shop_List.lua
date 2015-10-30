@@ -1,12 +1,12 @@
 function CopsnRobbers:CreateShops ()
 ------ Shop 1 ------------
-local Shop_Int        = 4
+local Shop_Int        = 18
 local Shop_Dim        = 4
-local SellerPed_Pos   = Vector3(295.5,-82.716300964355,1001.515625)
+local SellerPed_Pos   = Vector3(-28.114866256714,-91.648895263672,1003.546875)
 local SellerPed_Skin  = 1
 local SellerPed_Rot   = 0
-local BuyMarker_Pos   = Vector3(295.5,-80,1000.5)
-local BuyMarker_Size  = 1.5 
+local BuyMarker_Pos   = Vector3(-28.024250030518,-89.679550170898,1002.7)
+local BuyMarker_Size  = 1 
 local BuyMarker_Color = {255,255,0,100}
 
 

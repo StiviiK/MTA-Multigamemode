@@ -137,3 +137,9 @@ lp:setDimension(CNR_DIM)
 Camera.setMatrix( 1547.1048583984,-1675.3217773438,17.216079711914,1641.9064941406,-1681.0043945313,-13.09459400177 )
 
 end
+
+
+
+function CopsnRobbers:CreateFractionSelectMenu ()
+self.FractionSelectionMenu = FractionSelectionMenu:new(self)
+end

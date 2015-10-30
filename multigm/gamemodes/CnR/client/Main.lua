@@ -23,6 +23,8 @@ function CopsnRobbers:constructor()
   addRemoteEvents{"onCNRStartDownload"}
   addEventHandler("onCNRStartDownload", root, bind(CopsnRobbers.onDownloadStart, self))
   
+  addRemoteEvents{"CreateFractionSelectMenu"}
+  addEventHandler("CreateFractionSelectMenu", root, bind(CopsnRobbers.CreateFractionSelectMenu, self))
    -- Load translation file
   TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
   
@@ -46,8 +48,8 @@ if not self.Radar then
 end
 
 self:CreateWeaponSelectionEvent ()
+self:ShopGUI_Event ()
 
-self.FractionSelectionMenu = FractionSelectionMenu:new(self)
 	---------------------------CNR_DEBUG------------------------------------
 				if CNR_DEBUG then
 					
@@ -91,6 +93,7 @@ function CopsnRobbers:onPlayerLeft()
  -- Hide Radar
 	self:DestroyWeaponSelection ()	
 	self.Radar:hide()
+	self.ShopGUI_destructor()
 end
 
 function CopsnRobbers:onDownloadStart()

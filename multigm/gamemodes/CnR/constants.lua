@@ -71,6 +71,15 @@ CNR_RobbersSkins = {
 {["Skin"] = 123,["Weapons"] = {5,23}}
 }
 
+ShopItems = {
+{["Name"] = "C4"		,["Price"] = 100		,["Description"] = "-----C4-----\n\n "},
+{["Name"] = "Camera"	,["Price"] = 100		,["Description"] = "-----Camera-----\n\n "},
+{["Name"] = "Pizza"		,["Price"] = 100		,["Description"] = "-----Pizza-----\n\n "},
+{["Name"] = "Meidic-Kit",["Price"] = 100		,["Description"] = "-----Meidic-Kit-----\n\n "},
+{["Name"] = "Test"		,["Price"] = 100		,["Description"] = "-----Test-----\n\n "}
+
+}
+
  WeaponsList = {
 {["Slot"] = 0,["Name"] = "Brass Knuckles"         , ["ModelID"]= 331, ["WeaponID"]= 1, ["Price"]= 100},
 

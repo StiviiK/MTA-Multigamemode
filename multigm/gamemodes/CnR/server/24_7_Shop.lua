@@ -1,5 +1,6 @@
 Shop = {}
 
+
 function Shop:constructor(CNR_SELF,Shop_Int,Shop_Dim,SellerPed_Pos,SellerPed_Skin,SellerPed_Rot,BuyMarker_Pos,BuyMarker_Size,BuyMarker_Color)
 self.Shop_Int = Shop_Int
 self.Shop_Dim = Shop_Dim
@@ -45,26 +46,31 @@ end
 
 
 function Shop:OnMarkerHit(player,dim)
-DebugOutPut("Fenster Öffnen")
+player:triggerEvent("OpenShopGUI",player)
 end
 
 function Shop:OnMarkerLeave(player,dim)
-DebugOutPut("Fenster schließen")
+player:triggerEvent("CloseShopGUI",player)
+player:triggerEvent("CloseShopGUI",player)
 end
 
--- function BuyWeapon ()
--- local u_Money       = getPlayerMoney(source)
--- local WeaponPrice   = WeaponsList[TableID]["Price"]
+function BuyShopItem (BuyID)
+local u_Money        = getPlayerMoney(source)
+local BuyItemPrice   = ShopItems[BuyID]["Price"]
+local BuyItemName    = ShopItems[BuyID]["Name"]
 
-	-- if (u_Money - WeaponPrice) >= 0 then
-	
-	-- else
-		
-	-- end
+	if (u_Money - BuyItemPrice) >= 0 then
+		takePlayerMoney(source,BuyItemPrice)
+		outputChatBox("Shop Item Kaufen:"..BuyItemName)
+		outputChatBox("Hier noch item geben einfügen",getRootElement(),255,0,0)
+		playSoundFrontEnd(source,46)
+	else
+		DebugOutPut("zu wenig geld")
+	end
 
----------CNR_DEBUG---------------
--- DebugOutPut(("%s Weapon:%s Ammo:%s"):format(source:getName(),WeaponID,WeaponAmmo))
----------------------------------
--- end
--- addRemoteEvents{"BuyWeapon"}
--- addEventHandler("BuyWeapon", root, BuyWeapon)
+-----------CNR_DEBUG---------------
+--DebugOutPut(("%s Weapon:%s Ammo:%s"):format(source:getName(),WeaponID,WeaponAmmo))
+-----------------------------------
+end
+addRemoteEvents{"BuyShopItem"}
+addEventHandler("BuyShopItem", root, BuyShopItem)

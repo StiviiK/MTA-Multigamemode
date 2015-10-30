@@ -24,7 +24,7 @@ function CopsnRobbers:constructor()
   self:CreateTeleports ()
   self:CreateGates ()
   self:SpawnFractionVehicles ()
-  --self:CreateAmmunationShops ()
+  self:CreateAmmunationShops ()
   self:CreateShops ()
   self.WastedHandler = function() self:Wasted() end
   addEventHandler ( "onPlayerWasted", self:getRoot(), self.WastedHandler )
@@ -48,29 +48,17 @@ function CopsnRobbers:onPlayerLeft(player)
 -----------CNR_DEBUG---------------
 -- DebugOutPut( "CopsnRobbers:onPlayerLeft" )
 -----------------------------------
-
+self:Save_Player(player)
 player:setCameraTarget(player)
 
 removeEventHandler ( "onPlayerWasted", player, self.WastedHandler )
-local x,y,z = getElementPosition(player)
-outputChatBox(x..","..y..","..z)
-outputChatBox(debug.traceback())
 end
 
 function CopsnRobbers:onDownloadComplete()
 -----------CNR_DEBUG---------------
 -- DebugOutPut( "CopsnRobbers:onDownloadComplete" )
 -----------------------------------
-  -- spawn the player
-
-  -- local spawn = self:getSetting("SpawnCops")
-  -- client:setPosition(spawn.Position)
-  -- client:setRotation(0, 0, spawn.Rotation)
-  -- client:setInterior(spawn.Interior)
-  -- client:setDimension(self:getDimension())
-
- --CreatePlayerBlip
-  
+  self:Load_Player(client)
 end
 
 
