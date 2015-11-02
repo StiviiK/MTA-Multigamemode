@@ -2,11 +2,10 @@
 multigm_build/*
 
 # Ignore .data Packages
-multigm/main.data
-multigm/gamemodes/Lobby/lobby.data
-multigm/gamemodes/CnR/cnr.data
-multigm/update/update.rpf
-multigm_local.lnk
+*.data
+
+# Ignore links
+*.lnk
 
 # Ignore Version file
 multigm/version.txt

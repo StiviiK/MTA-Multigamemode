@@ -1,0 +1,231 @@
+# vMultigamemode Translation File
+# http://www.domain-missing.org
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-09-24 18:49+0000\n"
+"PO-Revision-Date: 2015-09-24 18:49+0000\n"
+"Last-Translator: none <none@no.mail>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: client/classes/GUIForms/GamemodeInfo.lua:0
+msgid "Gamemode beitreten"
+msgstr "Join Gamemode"
+
+#: client/classes/GUIForms/GamemodeInfo.lua:0
+msgid "Abbrechen"
+msgstr "Abort"
+
+#: client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua:0
+msgid "Gamemode: %s"
+msgstr "Gamemode: %s"
+
+#: client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua:0
+msgid "Gamemode Infos"
+msgstr "Gamemode Info"
+
+#: client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua:0
+msgid "Admin: Ped respawnen"
+msgstr "Admin: Respawn Ped"
+
+#: client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua:0
+msgid "Admin: Ped löschen"
+msgstr "Admin: Delete Ped"
+
+#: client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua:0
+msgid "Developer: Gamemode deaktivieren"
+msgstr "Developer: Disable Gamemode"
+
+#: client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua:0
+msgid "Möchtest du diesen Gamemode wirklich dauerhaft deaktivieren?"
+msgstr "Do you really want to disable this Gamemode?"
+
+#: client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua:0
+msgid "Diese Aktion kann nicht rückgängig gemacht werden!"
+msgstr "This Action can not be undone!"
+
+#: client/classes/GUIForms/QuestionBox.lua:0
+msgid "Frage"
+msgstr "Question"
+
+#: client/classes/GUIForms/QuestionBox.lua:0
+msgid "Ja"
+msgstr "Yes"
+
+#: client/classes/GUIForms/QuestionBox.lua:0
+msgid "Nein"
+msgstr "No"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Allgemein"
+msgstr "General"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Statistiken"
+msgstr "Statistics"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Sitzung"
+msgstr "Session"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "(kopieren)"
+msgstr "(copy)"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Token wurde erfolgreich kopiert!"
+msgstr "Token has been copied successfully!"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Token konnte nicht kopiert werden!"
+msgstr "Token could not be copied!"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Punkte"
+msgstr "Points"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Einstellungen"
+msgstr "Settings"
+
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Token: %s"
+msgstr "Token: %s"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Sprache"
+msgstr "Language"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Deutsch"
+msgstr "German"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Englisch"
+msgstr "English"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Speichern"
+msgstr "Save"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Index"
+msgstr "Index"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Wert"
+msgstr "Value"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Session deaktivieren"
+msgstr "Disable Session"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Session updaten"
+msgstr "Update Session"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Es ist ein interner Fehler aufgetreten!"
+msgstr "An internal Error occured!"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Du kannst deine Session nur alle 5 Minuten manuell updaten!"
+msgstr "You can update your session only every 5 minutes manually!"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Account:"
+msgstr "Account:"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Spielzeit:"
+msgstr "Playtime:"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "%s Stunde(n) %s Minute(n)"
+msgstr "%s Hour(s) %s Minute(s)"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Rang:"
+msgstr "Rank: "
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Account"
+msgstr "Account"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Name:"
+msgstr "Name:"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Account-Typ:"
+msgstr "Account-Type:"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Passwort:"
+msgstr "Password:"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "E-Mail:"
+msgstr "Mail:"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "(Achtung: Hier können schwerwiegende Änderungen vorgenommen werden!)"
+msgstr "(Warning: Major changes can be made here!) "
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Freunde"
+msgstr "Friends"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Name"
+msgstr "Name"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Gamemode"
+msgstr "Gamemode"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Status"
+msgstr "Status"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Freund hinzufügen"
+msgstr "Add Friend"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Freund löschen"
+msgstr "Remove Friend"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Freundesliste löschen"
+msgstr "Delete Friendslist"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "uID: %s"
+msgstr "uID: %s"
+
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "(?)"
+msgstr "(?)"
+
+#: client/classes/GUIForms/FastLobby.lua:0
+msgid "%d Player(s) online"
+msgstr "%d Player(s) online"
+
+#: client/classes/GUIForms/FastLobby.lua:0
+msgid "%s About us."
+msgstr "%s About us."
+
+#: client/classes/GUIForms/FastLobby.lua:0
+msgid "%s Visit us on Facebook."
+msgstr "%s Visit us on Facebook."
+
+
+
+
+#: DUE AN BUG - LEAVE THIS AT THE LAST LINE
+msgid ""
+msgstr ""

@@ -1,0 +1,569 @@
+<meta>
+	<info name="vMultigamemode" author="StiviK" type="gamemode"/>
+	<min_mta_version server="1.5" client="1.5"/>
+	<oop>true</oop>
+
+	<!-- Main -->
+		<!-- Shared -->
+			<script src="shared/classlib.lua" type="shared"/>
+			<script src="shared/utils.lua" type="shared"/>
+			<script src="shared/classes/Object.lua" type="shared"/>
+			<script src="shared/classes/Singleton.lua" type="shared"/>
+			<script src="shared/classes/MTAElement.lua" type="shared"/>
+			<script src="shared/classes/Package.lua" type="shared"/>
+			<script src="shared/classes/Hook.lua" type="shared"/>
+			<script src="shared/Cache.lua" type="shared"/>
+			<script src="shared/crc32lua.lua" type="shared"/>
+			<script src="shared/classes/Thread.lua" type="shared"/>
+
+			<script src="shared/constants.lua" type="shared"/>
+			<script src="shared/async.lua" type="shared"/>
+			<script src="shared/debug.lua" type="shared"/>
+			<script src="shared/classes/TimedPulse.lua" type="shared"/>
+			<script src="shared/classes/POParser.lua" type="shared"/>
+			<script src="shared/classes/TranslationManager.lua" type="shared"/>
+			<script src="shared/classes/Root.lua" type="shared"/>
+			<script src="shared/classes/Gamemode/Element/GamemodeElement.lua" type="shared"/>
+			<script src="shared/classes/DimensionManager.lua" type="shared"/>
+			<script src="shared/classes/Command.lua" type="shared"/>
+
+		<!-- Server -->
+			<script src="server/constants.lua" type="server"/>
+			<script src="server/utils.lua" type="server"/>
+			<script src="server/API.lua" type="server"/>
+			<script src="server/classes/Debugging.lua" type="server"/>
+			<script src="server/classes/Storage/SQL.lua" type="server"/>
+			<script src="server/classes/Storage/MySQL.lua" type="server"/>
+			<script src="server/classes/Provider.lua" type="server"/>
+			<script src="server/classes/Core.lua" type="server"/>
+			<script src="server/classes/Player/DatabasePlayer.lua" type="server"/>
+			<script src="server/classes/Player/Player.lua" type="server"/>
+			<script src="server/classes/Player/PlayerManager.lua" type="server"/>
+			<script src="server/classes/Player/Account.lua" type="server"/>
+			<script src="server/classes/Player/Session.lua" type="server"/>
+			<script src="server/classes/Gamemode/GamemodeManager.lua" type="server"/>
+			<script src="server/classes/Gamemode/Gamemode.lua" type="server"/>
+			<script src="server/classes/Gamemode/GameRoom.lua" type="server"/>
+			<script src="server/classes/Environment/MapManager.lua" type="server"/>
+			<script src="server/classes/Environment/Map.lua" type="server"/>
+
+	    <script src="server/Main.lua" type="server"/>
+
+			<!-- Client -->
+				<script src="client/constants.lua" type="client"/>
+				<script src="client/utils.lua" type="client"/>
+				<script src="client/classes/Core.lua" type="client"/>
+				<script src="client/classes/Provider.lua" type="client"/>
+				<script src="client/classes/Player.lua" type="client"/>
+				<script src="client/classes/LocalPlayer.lua" type="client"/>
+				<script src="client/classes/Debugging.lua" type="client"/>
+				<script src="client/classes/Version.lua" type="client"/>
+				<script src="client/classes/Gamemode/GamemodeManager.lua" type="client"/>
+				<script src="client/classes/Gamemode/Gamemode.lua" type="client"/>
+				<script src="client/classes/Gamemode/GamemodePedManager.lua" type="client"/>
+				<script src="client/classes/Gamemode/GamemodePed.lua" type="client"/>
+
+				<!-- GUI system -->
+				<script src="client/classes/ClickHandler.lua" type="client"/>
+				<script src="client/classes/Color.lua" type="client"/>
+				<script src="client/classes/GUI/DxElement.lua" type="client"/>
+				<script src="client/classes/GUI/GUIElement.lua" type="client"/>
+				<script src="client/classes/GUI/CacheArea.lua" type="client"/>
+				<script src="client/classes/GUI/CacheArea3D.lua" type="client"/>
+				<script src="client/classes/GUI/abstract/GUIColorable.lua" type="client"/>
+				<script src="client/classes/GUI/abstract/GUIFontContainer.lua" type="client"/>
+				<script src="client/classes/GUI/abstract/GUIMovable.lua" type="client"/>
+				<script src="client/classes/GUI/GUIScrollableArea.lua" type="client"/>
+				<script src="client/classes/GUI/GUIButton.lua" type="client"/>
+				<script src="client/classes/GUI/GUICheckbox.lua" type="client"/>
+				<script src="client/classes/GUI/GUIDebugging.lua" type="client"/>
+				<script src="client/classes/GUI/GUIInputControl.lua" type="client"/>
+				<script src="client/classes/GUI/GUIImage.lua" type="client"/>
+				<script src="client/classes/GUI/GUIEdit.lua" type="client"/>
+				<script src="client/classes/GUI/GUIForm.lua" type="client"/>
+				<script src="client/classes/GUI/GUIForm3D.lua" type="client"/>
+				<script src="client/classes/GUI/GUILabel.lua" type="client"/>
+				<script src="client/classes/GUI/GUIRenderer.lua" type="client"/>
+				<script src="client/classes/GUI/GUIWindow.lua" type="client"/>
+				<script src="client/classes/GUI/GUICursor.lua" type="client"/>
+				<script src="client/classes/GUI/GUIMouseMenu.lua" type="client"/>
+				<script src="client/classes/GUI/GUIMouseMenuItem.lua" type="client"/>
+				<script src="client/classes/GUI/GUIMouseMenuNoClickItem.lua" type="client"/>
+				<script src="client/classes/GUI/GUIGridList.lua" type="client"/>
+				<script src="client/classes/GUI/GUIGridListItem.lua" type="client"/>
+				<script src="client/classes/GUI/GUIRectangle.lua" type="client"/>
+				<script src="client/classes/GUI/GUIScrollbar.lua" type="client"/>
+				<script src="client/classes/GUI/GUITabControl.lua" type="client"/>
+				<script src="client/classes/GUI/GUITabPanel.lua" type="client"/>
+				<script src="client/classes/GUI/GUIVerticalScrollbar.lua" type="client"/>
+				<script src="client/classes/GUI/GUIHorizontalScrollbar.lua" type="client"/>
+				<script src="client/classes/GUI/GUICombobox.lua" type="client"/>
+				<script src="client/classes/GUI/GUIChanger.lua" type="client"/>
+				<script src="client/classes/GUI/GUIProgressBar.lua" type="client"/>
+				<script src="client/classes/GUI/GUIRadioButton.lua" type="client"/>
+				<script src="client/classes/GUI/GUIRadioButtonGroup.lua" type="client"/>
+				<script src="client/classes/GUI/GUIRoundedRect.lua" type="client"/>
+				<script src="client/classes/GUI/GUIWebView.lua" type="client"/>
+				<script src="client/classes/GUI/GUIWebForm.lua" type="client"/>
+				<script src="client/classes/GUI/GUIScrollableText.lua" type="client"/>
+
+				<!-- Animations -->
+				<script src="client/classes/GUI/Animations/Animation.lua" type="client"/>
+				<script src="client/classes/GUI/Animations/FadeOut.lua" type="client"/>
+				<script src="client/classes/GUI/Animations/FadeIn.lua" type="client"/>
+				<script src="client/classes/GUI/Animations/FadeColor.lua" type="client"/>
+				<script src="client/classes/GUI/Animations/Move.lua" type="client"/>
+				<script src="client/classes/GUI/Animations/FadeAlpha.lua" type="client"/>
+				<script src="client/classes/GUI/Animations/Size.lua" type="client"/>
+
+				<!-- Special GUI elements -->
+				<script src="client/classes/GUI/MessageBoxes/MessageBox.lua" type="client"/>
+				<script src="client/classes/GUI/MessageBoxes/InfoBox.lua" type="client"/>
+				<script src="client/classes/GUI/MessageBoxes/WarningBox.lua" type="client"/>
+				<script src="client/classes/GUI/MessageBoxes/ErrorBox.lua" type="client"/>
+				<script src="client/classes/GUI/MessageBoxes/SuccessBox.lua" type="client"/>
+				<script src="client/classes/GUI/MessageBoxes/ShortMessage.lua" type="client"/>
+
+				<script src="client/classes/GUIElements/VRPFont.lua" type="client"/>
+				<script src="client/classes/GUIElements/VRPButton.lua" type="client"/>
+				<script src="client/classes/GUIElements/VRPItem.lua" type="client"/>
+				<script src="client/classes/GUIElements/KarmaBar.lua" type="client"/>
+
+				<!-- GUI Forms -->
+				<script src="client/classes/GUIForms/SelfGUI.lua" type="client"/>
+				<script src="client/classes/GUIForms/QuestionBox.lua" type="client"/>
+				<script src="client/classes/GUIForms/PasswordBox.lua" type="client"/>
+				<script src="client/classes/GUIForms/DownloadBar.lua" type="client"/>
+				<script src="client/classes/GUIForms/GamemodeInfo.lua" type="client"/>
+				<script src="client/classes/GUIForms/FastLobby.lua" type="client"/>
+
+					<!-- Mouse Menus -->
+					<script src="client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua" type="client"/>
+
+				<!-- Main -->
+		    <script src="client/Main.lua" type="client"/>
+
+	<!-- Lobby -->
+		<!-- Meta -->
+			<metafile src="gamemodes/Lobby/meta.xml"/>
+
+		<!-- Shared -->
+			<script src="gamemodes/Lobby/constants.lua" type="shared"/>
+
+		<!-- Server -->
+			<script src="gamemodes/Lobby/server/Init.lua" type="server"/>
+			<script src="gamemodes/Lobby/server/Main.lua" type="server"/>
+
+		<!-- Client -->
+			<script src="gamemodes/Lobby/client/Init.lua" type="client"/>
+			<script src="gamemodes/Lobby/client/Main.lua" type="client"/>
+
+	<!-- Cops'n'Robbers -->
+		<!-- Meta -->
+			<metafile src="gamemodes/CnR/meta.xml"/>
+
+		<!-- Shared -->
+			<script src="gamemodes/CnR/constants.lua" type="shared"/>
+			<script src="gamemodes/CnR/DEBUG/DEBUG.lua" type="shared"/>
+
+			<file src="gamemodes/CnR/res/fx/shader.fx" />
+
+		<!-- Server -->
+			<script src="gamemodes/CnR/server/Init.lua" type="server"/>
+			<script src="gamemodes/CnR/server/Main.lua" type="server"/>
+			<script src="gamemodes/CnR/server/PlayerBlip.lua" type="server"/>
+			<script src="gamemodes/CnR/server/ArrestSystem.lua" type="server"/>
+			<script src="gamemodes/CnR/server/Fraktion_Car.lua" type="server"/>
+			<script src="gamemodes/CnR/server/FraktionCar_Loader.lua" type="server"/>
+			<script src="gamemodes/CnR/server/Death.lua" type="server"/>
+			<script src="gamemodes/CnR/server/WantedSystem.lua" type="server"/>
+			<script src="gamemodes/CnR/server/SaveSystem.lua" type="server"/>
+			<script src="gamemodes/CnR/server/Weapon_Shop.lua" type="server"/>
+			<script src="gamemodes/CnR/server/Weapon_Shop_List.lua" type="server"/>
+			<script src="gamemodes/CnR/server/24_7_Shop.lua" type="server"/>
+			<script src="gamemodes/CnR/server/24_7_Shop_List.lua" type="server"/>
+
+
+
+
+		<!-- Client -->
+			<script src="gamemodes/CnR/client/Init.lua" type="client"/>
+			<script src="gamemodes/CnR/client/Main.lua" type="client"/>
+			<script src="gamemodes/CnR/client/FractionSelection_c.lua" type="client"/>
+			<script src="gamemodes/CnR/client/Car_Radio.lua" type="client"/>
+			<script src="gamemodes/CnR/client/Weapon_Shop.lua" type="client"/>
+			<script src="gamemodes/CnR/client/24_7_Shop.lua" type="client"/>
+		<!-- USEFULL -->
+			<script src="gamemodes/CnR/Usefull/TeleportMaker/server.lua" type="server"/>
+			<script src="gamemodes/CnR/Usefull/TeleportMaker/TeleportsListe.lua" type="server"/>
+			<script src="gamemodes/CnR/Usefull/SchankenMaker/SchrankenCreater.lua" type="server"/>
+			<script src="gamemodes/CnR/Usefull/SchankenMaker/SchrankenList.lua" type="server"/>
+			<script src="gamemodes/CnR/Usefull/GateMaker/GateCreater.lua" type="server"/>
+			<script src="gamemodes/CnR/Usefull/GateMaker/GateList.lua" type="server"/>
+			<script src="gamemodes/CnR/Usefull/TeleportMaker/client.lua" type="client"/>
+			<script src="gamemodes/CnR/Usefull/Radar/Radar_c.lua" type="client"/>
+
+
+
+	<!-- Lobby -->
+		<!-- Meta -->
+			<metafile src="gamemodes/RnS/meta.xml"/>
+
+		<!-- Shared -->
+			<script src="gamemodes/RnS/constants.lua" type="shared"/>
+
+		<!-- Server -->
+			<script src="gamemodes/RnS/server/Init.lua" type="server"/>
+			<script src="gamemodes/RnS/server/Main.lua" type="server"/>
+
+		<!-- Client -->
+			<script src="gamemodes/RnS/client/Init.lua" type="client"/>
+			<script src="gamemodes/RnS/client/Main.lua" type="client"/>
+
+	<!-- Files -->
+		<!-- Translation -->
+			<file src="res/translation/en/client.po"/>
+
+		<!-- Images -->
+			<!-- GUI -->
+			<file src="res/images/GUI/Cursor.png"/>
+			<file src="res/images/GUI/Mouse.png"/>
+			<file src="res/images/GUI/download.png"/>
+			<transferfile src="res/images/GUI/Mouse.png" />
+			<transferfile src="res/images/GUI/Checkbox.png"/>
+			<transferfile src="res/images/GUI/Checkbox_checked.png"/>
+			<transferfile src="res/images/GUI/Radiobutton.png"/>
+			<transferfile src="res/images/GUI/Radiobutton_checked.png"/>
+			<transferfile src="res/images/GUI/Editbox.png"/>
+			<transferfile src="res/images/GUI/RoundedCorner.png"/>
+			<transferfile src="res/images/GUI/HelpIcon.png"/>
+			<transferfile src="res/images/MessageBoxes/Info.png"/>
+			<transferfile src="res/images/MessageBoxes/Warning.png"/>
+			<transferfile src="res/images/MessageBoxes/Error.png"/>
+			<transferfile src="res/images/MessageBoxes/Success.png"/>
+
+			<!-- Skins -->
+			<transferfile src="res/images/skins/0.jpg" />
+			<transferfile src="res/images/skins/1.jpg" />
+			<transferfile src="res/images/skins/2.jpg" />
+			<transferfile src="res/images/skins/7.jpg" />
+			<transferfile src="res/images/skins/9.jpg" />
+			<transferfile src="res/images/skins/10.jpg" />
+			<transferfile src="res/images/skins/11.jpg" />
+			<transferfile src="res/images/skins/12.jpg" />
+			<transferfile src="res/images/skins/13.jpg" />
+			<transferfile src="res/images/skins/14.jpg" />
+			<transferfile src="res/images/skins/15.jpg" />
+			<transferfile src="res/images/skins/16.jpg" />
+			<transferfile src="res/images/skins/18.jpg" />
+			<transferfile src="res/images/skins/19.jpg" />
+			<transferfile src="res/images/skins/20.jpg" />
+			<transferfile src="res/images/skins/21.jpg" />
+			<transferfile src="res/images/skins/22.jpg" />
+			<transferfile src="res/images/skins/23.jpg" />
+			<transferfile src="res/images/skins/24.jpg" />
+			<transferfile src="res/images/skins/25.jpg" />
+			<transferfile src="res/images/skins/26.jpg" />
+			<transferfile src="res/images/skins/27.jpg" />
+			<transferfile src="res/images/skins/28.jpg" />
+			<transferfile src="res/images/skins/29.jpg" />
+			<transferfile src="res/images/skins/30.jpg" />
+			<transferfile src="res/images/skins/31.jpg" />
+			<transferfile src="res/images/skins/32.jpg" />
+			<transferfile src="res/images/skins/33.jpg" />
+			<transferfile src="res/images/skins/34.jpg" />
+			<transferfile src="res/images/skins/35.jpg" />
+			<transferfile src="res/images/skins/36.jpg" />
+			<transferfile src="res/images/skins/37.jpg" />
+			<transferfile src="res/images/skins/38.jpg" />
+			<transferfile src="res/images/skins/39.jpg" />
+			<transferfile src="res/images/skins/40.jpg" />
+			<transferfile src="res/images/skins/41.jpg" />
+			<transferfile src="res/images/skins/43.jpg" />
+			<transferfile src="res/images/skins/44.jpg" />
+			<transferfile src="res/images/skins/45.jpg" />
+			<transferfile src="res/images/skins/46.jpg" />
+			<transferfile src="res/images/skins/47.jpg" />
+			<transferfile src="res/images/skins/48.jpg" />
+			<transferfile src="res/images/skins/49.jpg" />
+			<transferfile src="res/images/skins/50.jpg" />
+			<transferfile src="res/images/skins/52.jpg" />
+			<transferfile src="res/images/skins/53.jpg" />
+			<transferfile src="res/images/skins/54.jpg" />
+			<transferfile src="res/images/skins/55.jpg" />
+			<transferfile src="res/images/skins/56.jpg" />
+			<transferfile src="res/images/skins/57.jpg" />
+			<transferfile src="res/images/skins/58.jpg" />
+			<transferfile src="res/images/skins/59.jpg" />
+			<transferfile src="res/images/skins/60.jpg" />
+			<transferfile src="res/images/skins/61.jpg" />
+			<transferfile src="res/images/skins/62.jpg" />
+			<transferfile src="res/images/skins/63.jpg" />
+			<transferfile src="res/images/skins/64.jpg" />
+			<transferfile src="res/images/skins/66.jpg" />
+			<transferfile src="res/images/skins/67.jpg" />
+			<transferfile src="res/images/skins/68.jpg" />
+			<transferfile src="res/images/skins/69.jpg" />
+			<transferfile src="res/images/skins/70.jpg" />
+			<transferfile src="res/images/skins/71.jpg" />
+			<transferfile src="res/images/skins/72.jpg" />
+			<transferfile src="res/images/skins/73.jpg" />
+			<transferfile src="res/images/skins/75.jpg" />
+			<transferfile src="res/images/skins/76.jpg" />
+			<transferfile src="res/images/skins/77.jpg" />
+			<transferfile src="res/images/skins/78.jpg" />
+			<transferfile src="res/images/skins/79.jpg" />
+			<transferfile src="res/images/skins/80.jpg" />
+			<transferfile src="res/images/skins/81.jpg" />
+			<transferfile src="res/images/skins/82.jpg" />
+			<transferfile src="res/images/skins/83.jpg" />
+			<transferfile src="res/images/skins/84.jpg" />
+			<transferfile src="res/images/skins/85.jpg" />
+			<transferfile src="res/images/skins/87.jpg" />
+			<transferfile src="res/images/skins/88.jpg" />
+			<transferfile src="res/images/skins/89.jpg" />
+			<transferfile src="res/images/skins/90.jpg" />
+			<transferfile src="res/images/skins/91.jpg" />
+			<transferfile src="res/images/skins/92.jpg" />
+			<transferfile src="res/images/skins/93.jpg" />
+			<transferfile src="res/images/skins/94.jpg" />
+			<transferfile src="res/images/skins/95.jpg" />
+			<transferfile src="res/images/skins/96.jpg" />
+			<transferfile src="res/images/skins/97.jpg" />
+			<transferfile src="res/images/skins/98.jpg" />
+			<transferfile src="res/images/skins/100.jpg" />
+			<transferfile src="res/images/skins/101.jpg" />
+			<transferfile src="res/images/skins/102.jpg" />
+			<transferfile src="res/images/skins/103.jpg" />
+			<transferfile src="res/images/skins/104.jpg" />
+			<transferfile src="res/images/skins/105.jpg" />
+			<transferfile src="res/images/skins/106.jpg" />
+			<transferfile src="res/images/skins/107.jpg" />
+			<transferfile src="res/images/skins/109.jpg" />
+			<transferfile src="res/images/skins/110.jpg" />
+			<transferfile src="res/images/skins/111.jpg" />
+			<transferfile src="res/images/skins/112.jpg" />
+			<transferfile src="res/images/skins/114.jpg" />
+			<transferfile src="res/images/skins/115.jpg" />
+			<transferfile src="res/images/skins/116.jpg" />
+			<transferfile src="res/images/skins/117.jpg" />
+			<transferfile src="res/images/skins/118.jpg" />
+			<transferfile src="res/images/skins/120.jpg" />
+			<transferfile src="res/images/skins/121.jpg" />
+			<transferfile src="res/images/skins/122.jpg" />
+			<transferfile src="res/images/skins/123.jpg" />
+			<transferfile src="res/images/skins/124.jpg" />
+			<transferfile src="res/images/skins/125.jpg" />
+			<transferfile src="res/images/skins/126.jpg" />
+			<transferfile src="res/images/skins/127.jpg" />
+			<transferfile src="res/images/skins/128.jpg" />
+			<transferfile src="res/images/skins/129.jpg" />
+			<transferfile src="res/images/skins/130.jpg" />
+			<transferfile src="res/images/skins/131.jpg" />
+			<transferfile src="res/images/skins/132.jpg" />
+			<transferfile src="res/images/skins/133.jpg" />
+			<transferfile src="res/images/skins/134.jpg" />
+			<transferfile src="res/images/skins/135.jpg" />
+			<transferfile src="res/images/skins/136.jpg" />
+			<transferfile src="res/images/skins/137.jpg" />
+			<transferfile src="res/images/skins/138.jpg" />
+			<transferfile src="res/images/skins/139.jpg" />
+			<transferfile src="res/images/skins/140.jpg" />
+			<transferfile src="res/images/skins/141.jpg" />
+			<transferfile src="res/images/skins/142.jpg" />
+			<transferfile src="res/images/skins/143.jpg" />
+			<transferfile src="res/images/skins/144.jpg" />
+			<transferfile src="res/images/skins/145.jpg" />
+			<transferfile src="res/images/skins/146.jpg" />
+			<transferfile src="res/images/skins/147.jpg" />
+			<transferfile src="res/images/skins/148.jpg" />
+			<transferfile src="res/images/skins/150.jpg" />
+			<transferfile src="res/images/skins/151.jpg" />
+			<transferfile src="res/images/skins/152.jpg" />
+			<transferfile src="res/images/skins/153.jpg" />
+			<transferfile src="res/images/skins/154.jpg" />
+			<transferfile src="res/images/skins/155.jpg" />
+			<transferfile src="res/images/skins/156.jpg" />
+			<transferfile src="res/images/skins/157.jpg" />
+			<transferfile src="res/images/skins/158.jpg" />
+			<transferfile src="res/images/skins/159.jpg" />
+			<transferfile src="res/images/skins/160.jpg" />
+			<transferfile src="res/images/skins/162.jpg" />
+			<transferfile src="res/images/skins/163.jpg" />
+			<transferfile src="res/images/skins/164.jpg" />
+			<transferfile src="res/images/skins/165.jpg" />
+			<transferfile src="res/images/skins/167.jpg" />
+			<transferfile src="res/images/skins/168.jpg" />
+			<transferfile src="res/images/skins/169.jpg" />
+			<transferfile src="res/images/skins/170.jpg" />
+			<transferfile src="res/images/skins/171.jpg" />
+			<transferfile src="res/images/skins/173.jpg" />
+			<transferfile src="res/images/skins/175.jpg" />
+			<transferfile src="res/images/skins/176.jpg" />
+			<transferfile src="res/images/skins/177.jpg" />
+			<transferfile src="res/images/skins/178.jpg" />
+			<transferfile src="res/images/skins/179.jpg" />
+			<transferfile src="res/images/skins/180.jpg" />
+			<transferfile src="res/images/skins/181.jpg" />
+			<transferfile src="res/images/skins/182.jpg" />
+			<transferfile src="res/images/skins/183.jpg" />
+			<transferfile src="res/images/skins/184.jpg" />
+			<transferfile src="res/images/skins/185.jpg" />
+			<transferfile src="res/images/skins/186.jpg" />
+			<transferfile src="res/images/skins/187.jpg" />
+			<transferfile src="res/images/skins/188.jpg" />
+			<transferfile src="res/images/skins/189.jpg" />
+			<transferfile src="res/images/skins/190.jpg" />
+			<transferfile src="res/images/skins/191.jpg" />
+			<transferfile src="res/images/skins/192.jpg" />
+			<transferfile src="res/images/skins/193.jpg" />
+			<transferfile src="res/images/skins/194.jpg" />
+			<transferfile src="res/images/skins/195.jpg" />
+			<transferfile src="res/images/skins/196.jpg" />
+			<transferfile src="res/images/skins/197.jpg" />
+			<transferfile src="res/images/skins/198.jpg" />
+			<transferfile src="res/images/skins/199.jpg" />
+			<transferfile src="res/images/skins/200.jpg" />
+			<transferfile src="res/images/skins/201.jpg" />
+			<transferfile src="res/images/skins/203.jpg" />
+			<transferfile src="res/images/skins/205.jpg" />
+			<transferfile src="res/images/skins/206.jpg" />
+			<transferfile src="res/images/skins/207.jpg" />
+			<transferfile src="res/images/skins/208.jpg" />
+			<transferfile src="res/images/skins/209.jpg" />
+			<transferfile src="res/images/skins/210.jpg" />
+			<transferfile src="res/images/skins/211.jpg" />
+			<transferfile src="res/images/skins/212.jpg" />
+			<transferfile src="res/images/skins/213.jpg" />
+			<transferfile src="res/images/skins/214.jpg" />
+			<transferfile src="res/images/skins/215.jpg" />
+			<transferfile src="res/images/skins/216.jpg" />
+			<transferfile src="res/images/skins/217.jpg" />
+			<transferfile src="res/images/skins/218.jpg" />
+			<transferfile src="res/images/skins/219.jpg" />
+			<transferfile src="res/images/skins/220.jpg" />
+			<transferfile src="res/images/skins/221.jpg" />
+			<transferfile src="res/images/skins/222.jpg" />
+			<transferfile src="res/images/skins/223.jpg" />
+			<transferfile src="res/images/skins/224.jpg" />
+			<transferfile src="res/images/skins/225.jpg" />
+			<transferfile src="res/images/skins/226.jpg" />
+			<transferfile src="res/images/skins/227.jpg" />
+			<transferfile src="res/images/skins/228.jpg" />
+			<transferfile src="res/images/skins/229.jpg" />
+			<transferfile src="res/images/skins/230.jpg" />
+			<transferfile src="res/images/skins/231.jpg" />
+			<transferfile src="res/images/skins/232.jpg" />
+			<transferfile src="res/images/skins/234.jpg" />
+			<transferfile src="res/images/skins/235.jpg" />
+			<transferfile src="res/images/skins/236.jpg" />
+			<transferfile src="res/images/skins/237.jpg" />
+			<transferfile src="res/images/skins/238.jpg" />
+			<transferfile src="res/images/skins/239.jpg" />
+			<transferfile src="res/images/skins/240.jpg" />
+			<transferfile src="res/images/skins/241.jpg" />
+			<transferfile src="res/images/skins/242.jpg" />
+			<transferfile src="res/images/skins/243.jpg" />
+			<transferfile src="res/images/skins/244.jpg" />
+			<transferfile src="res/images/skins/245.jpg" />
+			<transferfile src="res/images/skins/246.jpg" />
+			<transferfile src="res/images/skins/247.jpg" />
+			<transferfile src="res/images/skins/248.jpg" />
+			<transferfile src="res/images/skins/249.jpg" />
+			<transferfile src="res/images/skins/250.jpg" />
+			<transferfile src="res/images/skins/251.jpg" />
+			<transferfile src="res/images/skins/252.jpg" />
+			<transferfile src="res/images/skins/253.jpg" />
+			<transferfile src="res/images/skins/254.jpg" />
+			<transferfile src="res/images/skins/255.jpg" />
+			<transferfile src="res/images/skins/256.jpg" />
+			<transferfile src="res/images/skins/257.jpg" />
+			<transferfile src="res/images/skins/258.jpg" />
+			<transferfile src="res/images/skins/259.jpg" />
+			<transferfile src="res/images/skins/260.jpg" />
+			<transferfile src="res/images/skins/261.jpg" />
+			<transferfile src="res/images/skins/262.jpg" />
+			<transferfile src="res/images/skins/263.jpg" />
+			<transferfile src="res/images/skins/264.jpg" />
+			<transferfile src="res/images/skins/265.jpg" />
+			<transferfile src="res/images/skins/266.jpg" />
+			<transferfile src="res/images/skins/267.jpg" />
+			<transferfile src="res/images/skins/268.jpg" />
+			<transferfile src="res/images/skins/269.jpg" />
+			<transferfile src="res/images/skins/270.jpg" />
+			<transferfile src="res/images/skins/271.jpg" />
+			<transferfile src="res/images/skins/272.jpg" />
+			<transferfile src="res/images/skins/274.jpg" />
+			<transferfile src="res/images/skins/275.jpg" />
+			<transferfile src="res/images/skins/276.jpg" />
+			<transferfile src="res/images/skins/277.jpg" />
+			<transferfile src="res/images/skins/278.jpg" />
+			<transferfile src="res/images/skins/279.jpg" />
+			<transferfile src="res/images/skins/280.jpg" />
+			<transferfile src="res/images/skins/281.jpg" />
+			<transferfile src="res/images/skins/282.jpg" />
+			<transferfile src="res/images/skins/283.jpg" />
+			<transferfile src="res/images/skins/284.jpg" />
+			<transferfile src="res/images/skins/285.jpg" />
+			<transferfile src="res/images/skins/286.jpg" />
+			<transferfile src="res/images/skins/287.jpg" />
+			<transferfile src="res/images/skins/288.jpg" />
+			<transferfile src="res/images/skins/289.jpg" />
+			<transferfile src="res/images/skins/290.jpg" />
+			<transferfile src="res/images/skins/291.jpg" />
+			<transferfile src="res/images/skins/292.jpg" />
+			<transferfile src="res/images/skins/293.jpg" />
+			<transferfile src="res/images/skins/294.jpg" />
+			<transferfile src="res/images/skins/295.jpg" />
+			<transferfile src="res/images/skins/296.jpg" />
+			<transferfile src="res/images/skins/297.jpg" />
+			<transferfile src="res/images/skins/298.jpg" />
+			<transferfile src="res/images/skins/299.jpg" />
+			<transferfile src="res/images/skins/300.jpg" />
+			<transferfile src="res/images/skins/301.jpg" />
+			<transferfile src="res/images/skins/302.jpg" />
+			<transferfile src="res/images/skins/303.jpg" />
+			<transferfile src="res/images/skins/304.jpg" />
+			<transferfile src="res/images/skins/305.jpg" />
+			<transferfile src="res/images/skins/306.jpg" />
+			<transferfile src="res/images/skins/307.jpg" />
+			<transferfile src="res/images/skins/308.jpg" />
+			<transferfile src="res/images/skins/309.jpg" />
+			<transferfile src="res/images/skins/310.jpg" />
+			<transferfile src="res/images/skins/311.jpg" />
+			<transferfile src="res/images/skins/312.jpg" />
+
+			<!-- Audio -->
+			<transferfile src="res/audio/test.mp3" />
+
+			<!-- Header Images -->
+			<transferfile src="res/images/HeaderDefaultGamemode.png"/>
+			<transferfile src="gamemodes/Lobby/res/images/HeaderLobby.png" />
+			<transferfile src="gamemodes/CnR/res/images/HeaderCnR.png" />
+
+			<!-- Background Images -->
+			<transferfile src="res/images/backgrounds/user.png"/>
+			<transferfile src="res/images/backgrounds/lobby/lobby-bg.jpg"/>
+			<transferfile src="res/images/backgrounds/cnr/cnr-bg.jpg"/>
+			<transferfile src="res/images/backgrounds/rns/rns-bg.png"/>
+
+			<!-- Backgrounds -->
+
+		<!-- Fonts -->
+			<file src="res/fonts/gtafont.ttf"/><!-- do not replace the file tag -->
+			<file src="res/fonts/Segoe/segoeui.ttf"/>
+			<transferfile src="res/fonts/Ghetto.ttf"/>
+			<transferfile src="res/fonts/Gasalt.ttf"/>
+			<transferfile src="res/fonts/Gasalt_Black.ttf"/>
+			<transferfile src="res/fonts/FontAwesome.otf"/>
+			<transferfile src="res/fonts/Betm-Regular.otf"/>
+			<transferfile src="res/fonts/Betmicua-Regular.otf"/>
+
+	<!-- ACL Request -->
+		<aclrequest>
+			<right name="function.startResource" access="true" />
+			<right name="function.stopResource" access="true" />
+			<right name="function.kickPlayer" access="true" />
+			<right name="function.fetchRemote" access="true" />
+	 </aclrequest>
+</meta>
