@@ -1,21 +1,17 @@
 Account = inherit(Object)
 Account.Map = {}
 
-function Account.login(player, username, password, hashed)
+function Account.login(player, username, password)
     if player:getAccount() then return false end
   	if (not username or not password) and not pwhash then return false end
 
-    local row = sql:asyncQueryFetchSingle("SELECT Id, Salt FROM ??_account WHERE Name = ? ", sql:getPrefix(), username)
+    local row = sql:asyncQueryFetchSingle("SELECT Id, PublicKey FROM ??_account WHERE Name = ? ", sql:getPrefix(), username)
     if not row or not row.Id then
   		-- Error: Invalid username
   		return false
   	end
 
-    if not hashed then
-  		pwhash = sha256(row.Salt..password)
-  	end
-
-    local row = sql:asyncQueryFetchSingle("SELECT Id, Name, Type FROM ??_account WHERE Id = ? AND Password = ?;", sql:getPrefix(), row.Id, pwhash)
+    local row = sql:asyncQueryFetchSingle("SELECT Id, Name, Type FROM ??_account WHERE Id = ? AND Password = ?;", sql:getPrefix(), row.Id, hash("sha256", teaEncode(password, row.PublicKey)))
     if not row or not row.Id then
     	-- Error: Wrong Password
     	return false
@@ -34,6 +30,15 @@ function Account.login(player, username, password, hashed)
 end
 addEvent("accountlogin", true)
 addEventHandler("accountlogin", root, function(...) Async.create(Account.login)(client, ...) end)
+
+--[[
+CLIENT:
+
+local password = "krassespasswort"
+local PRIVATE_KEY = "mta"
+triggerServerEvent("accountlogin", localPlayer, "ACCOUNT", hash("sha256", teaEncode(password, PRIVATE_KEY)))
+
+]]
 
 function Account.register()
 end
