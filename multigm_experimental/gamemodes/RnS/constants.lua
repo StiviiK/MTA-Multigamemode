@@ -1,0 +1,1 @@
+RNS_DOWNLOAD_FILE = "gamemodes/RnS/rns.data"
