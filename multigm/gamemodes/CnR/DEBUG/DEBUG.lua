@@ -1,5 +1,5 @@
 
-CNR_DEBUG = true
+CNR_DEBUG = false
 
 function DebugOutPut (Text)
 	if CNR_DEBUG then
@@ -38,7 +38,7 @@ if SERVER and CNR_DEBUG then
 	
 	function LoadPosition (player)
 	local playeraccount = getPlayerAccount ( player )
-		if ( playeraccount ) and not isGuestAccount ( playeraccount ) then
+		if ( playeraccount ) and getAccountData ( playeraccount, "PosX" ) and not isGuestAccount ( playeraccount ) then
 		
 			local PosX = getAccountData ( playeraccount, "PosX" )
 			local PosY = getAccountData ( playeraccount, "PosY" )

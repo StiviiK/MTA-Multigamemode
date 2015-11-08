@@ -49,6 +49,7 @@ self.m_Button_Select.onLeftClick = function ()
   self:delete ()
   triggerServerEvent("onPlayerSelectTeam",lp,Team,Skin,SelectID)
   CNR_SELF:onPlayerSelectTeam(Team,Skin,SelectID)
+  Cursor:hide()
 end
 
 

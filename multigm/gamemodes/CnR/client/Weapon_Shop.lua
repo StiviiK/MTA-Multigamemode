@@ -10,7 +10,7 @@ function CopsnRobbers:CreateWeaponSelection (Weapon_Pos,Int,Dim)
 -- DebugOutPut( ("Weapon_Pos1 = %s, Weapon_Pos2 = %s, Weapon_Pos3 = %s,"):format(tostring(Weapon_Pos[1]),tostring(Weapon_Pos[2]),tostring(Weapon_Pos[3])) )
 -----------------------------------
 CNR_SELF = self
-self.Radar:hide()
+self:HideRadar()
 
 WeaponObject = createObject(WeaponsList[SelectedWeapon]["ModelID"],Vector3(Weapon_Pos[1],Weapon_Pos[2],Weapon_Pos[3]),Vector3(0,0,0))
 WeaponObject:setInterior(Int)

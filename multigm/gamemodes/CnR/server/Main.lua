@@ -45,10 +45,13 @@ function CopsnRobbers:onPlayerJoin(player)
 end
 
 function CopsnRobbers:onPlayerLeft(player)
+local Pos = player:getPosition()
+outputChatBox(("onPlayerLeft Position: %s,%s,%s"):format(Pos.x,Pos.y,Pos.z),player,255,0,0)
 -----------CNR_DEBUG---------------
 -- DebugOutPut( "CopsnRobbers:onPlayerLeft" )
 -----------------------------------
 self:Save_Player(player)
+
 player:setCameraTarget(player)
 
 removeEventHandler ( "onPlayerWasted", player, self.WastedHandler )
@@ -56,7 +59,7 @@ end
 
 function CopsnRobbers:onDownloadComplete()
 -----------CNR_DEBUG---------------
--- DebugOutPut( "CopsnRobbers:onDownloadComplete" )
+DebugOutPut( "CopsnRobbers:onDownloadComplete" )
 -----------------------------------
   self:Load_Player(client)
 end
@@ -74,15 +77,9 @@ else
 end
 
 
-  client:setPosition(spawn.Position)
-  client:setRotation(0, 0, spawn.Rotation)
-  client:setInterior(spawn.Interior)
-  client:setCameraTarget(client)
-  client:setModel(Skin)
-  client:setFraction(Fraction)
-  client:setDimension(self:getDimension())
+  self:SpawnPlayer(client,spawn.Position.x,spawn.Position.y,spawn.Position.z,spawn.Rotation,spawn.Interior,dim,Skin,Fraction)
 
-  self:GivePlayerFractionWeapons(client,FractionTable,SelectID)
+  self:GivePlayerFractionWeapons(client,FractionTable,SelectID)------Das ändern
 
   if CNR_DEBUG then
 	LoadPosition (client)
@@ -97,10 +94,34 @@ function CopsnRobbers:GivePlayerFractionWeapons(player,FractionTable,SelectID)
 	end
 end
 
+function CopsnRobbers:ShowRadar(player)
+  triggerClientEvent(player,"ShowRadar", player)
+end
+
+function CopsnRobbers:HideRadar()
+  triggerClientEvent(player,"HideRadar", player)
+end
+
 function Player:setFraction(Fraction)
 self.Fraction = Fraction
 end
 
 function Player:getFraction()
 return self.Fraction
+end
+
+function CopsnRobbers:SpawnPlayer(player,x,y,z,rot,int,dim,skin,fraction)
+		  player:setPosition(x,y,z)
+		  player:setRotation(0, 0, rot)
+		  player:setCameraTarget(player)
+		  player:setModel(skin)
+		  player:setFraction(fraction)
+		  
+		  player:setInterior(int)
+		  if int ~= 0 then 
+			 player:setDimension(dim)
+		  else
+			 player:setDimension(self:getDimension())
+		  end 
+		 self:ShowRadar(player)
 end

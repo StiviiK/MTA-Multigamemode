@@ -25,6 +25,13 @@ function CopsnRobbers:constructor()
   
   addRemoteEvents{"CreateFractionSelectMenu"}
   addEventHandler("CreateFractionSelectMenu", root, bind(CopsnRobbers.CreateFractionSelectMenu, self))
+  
+   addRemoteEvents{"ShowRadar"}
+   addEventHandler("ShowRadar", root, bind(CopsnRobbers.ShowRadar, self))
+  
+  
+   addRemoteEvents{"HideRadar"}
+   addEventHandler("HideRadar", root, bind(CopsnRobbers.HideRadar, self))
    -- Load translation file
   TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
   
@@ -43,9 +50,7 @@ end
 
 function CopsnRobbers:onPlayerJoin()
 
-if not self.Radar then
-	self.Radar = new(MiniMap)
-end
+	MiniMap:getSingleton()
 
 self:CreateWeaponSelectionEvent ()
 self:ShopGUI_Event ()
@@ -67,10 +72,17 @@ end
 
 
 function CopsnRobbers:onPlayerSelectTeam(Team,Skin,SelectID)
-	self.Radar:show()
+	MiniMap:getSingleton():show()
 end
 
 
+function CopsnRobbers:ShowRadar()
+	MiniMap:getSingleton():show()
+end
+
+function CopsnRobbers:HideRadar()
+	MiniMap:getSingleton():hide()
+end
 
 
 
@@ -84,7 +96,7 @@ function CopsnRobbers:onPlayerLeft()
  HudComponentVisible(false)
  -- Delete Fraction Selection Menu
 	
-	if not CNR_DEBUG then
+	if self.FractionSelectionMenu and not CNR_DEBUG then
 	self.FractionSelectionMenu:delete ()
 	end
  -- Restore custom Arrow

@@ -1,11 +1,13 @@
-﻿MiniMap = {};
+﻿
+-- local myBlip = createBlip( 0,0,0, 0, 255, 0, 0, 100 )-- Test später weg machen
+
+MiniMap = inherit(Singleton)
 
 local lp = getLocalPlayer()
 local sw,sh = guiGetScreenSize()
 
 local abstand = 10
 function MiniMap:constructor()
-
 self.w     = screenWidth*0.285
 self.h     = screenHeight*0.25
 
@@ -30,7 +32,7 @@ self.Blip[BlipID]     =   "gamemodes/CnR/res/images/Radar/blip/"..BlipID..".png"
 end
 ---------
 
-
+self.ZoomWertStandart = 1
 self.ZoomWert   = 1
 
 self.CarZoomMax = 2
@@ -77,7 +79,7 @@ local CarZoom = 1
 
 
 function MiniMap:ZoomInByDriving ()
-if not getPedOccupiedVehicle(getLocalPlayer()) then self.ZoomWert = 1 return end
+if not getPedOccupiedVehicle(getLocalPlayer()) then self.ZoomWert = self.ZoomWertStandart return end
 local speed = getElementSpeed(getPedOccupiedVehicle(getLocalPlayer()), "km/h")
 
 	if speed > 70 then
@@ -149,8 +151,16 @@ local BlipVisibleDistance =  getBlipVisibleDistance ( Blip )
 			
 			local xg,yg = 1500+(BlipX*0.5)-blipsize*0.5,1500+(-BlipY*0.5)-blipsize*0.5
 			
-				if blipicon == "up" or blipicon == "down" or blipicon == "square"  then
-						dxDrawImage(xg,yg, blipsize, blipsize, self.Blip[blipicon], -camRotZ, 0, 0,r, g, b)
+				if blipicon == 0 then --if blipicon == "up" or blipicon == "down" or blipicon == "square"  then
+				local MapMiddleX = (x/(6000/self.MapSizeX))*self.ZoomWert+1500
+				local MapMiddleY = (-y/(6000/self.MapSizeY))*self.ZoomWert+1500
+				local Distance = getDistanceBetweenPoints2D ( xg,yg, MapMiddleX, MapMiddleY )
+				
+				outputChatBox(Distance..","..self.Diagonal)
+				
+						--dxDrawImage(MapMiddleX-blipsize/2,MapMiddleY-blipsize/2, blipsize, blipsize, self.Blip[41], -camRotZ, 0, 0,tocolor(r, g, b))
+				
+						dxDrawImage(xg,yg, blipsize, blipsize, self.Blip[blipicon], -camRotZ, 0, 0,tocolor(r, g, b))
 				else
 						dxDrawImage(xg,yg, blipsize, blipsize, self.Blip[blipicon], -camRotZ, 0, 0)
 				end
