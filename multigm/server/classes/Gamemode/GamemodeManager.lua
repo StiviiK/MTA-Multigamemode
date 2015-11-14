@@ -3,12 +3,11 @@ GamemodeManager.Map = {}
 
 function GamemodeManager:constructor()
   local Gamemodes = {
-    Lobby:new("Lobby", "This is the Lobby.");
-    CopsnRobbers:new("Cops'n'Robbers", "Cops'n'Robbers Gamemode");
-    RenegadeSquad:new("Renegade Squad", "RenegadeSquad Gamemode");
+    Lobby:new("Lobby", "This is the Lobby."):setId(1);
+    CopsnRobbers:new("Cops'n'Robbers", "Cops'n'Robbers Gamemode"):setId(2);
+    RenegadeSquad:new("Renegade Squad", "RenegadeSquad Gamemode"):setId(3);
   }
   for k, v in pairs(Gamemodes) do
-    v:setId(k)
     self:addRef(v)
 
     if v.onGamemodesLoaded then

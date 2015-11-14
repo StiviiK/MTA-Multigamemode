@@ -1,10 +1,9 @@
 GamemodePedMouseMenu = inherit(GUIMouseMenu)
 
-function GamemodePedMouseMenu:constructor(posX, posY, instance)
+function GamemodePedMouseMenu:constructor(posX, posY, instance, CustomColor)
   GUIMouseMenu.constructor(self, posX, posY, 330, 1)
 
   self:addItem(_("Gamemode: %s", instance:getGamemode():getName()))
-      :setTextColor(Color.Red)
 
   self:addItem(_"Gamemode Infos",
     function ()
@@ -45,4 +44,7 @@ function GamemodePedMouseMenu:constructor(posX, posY, instance)
       end
     )
   end
+
+  -- Adjust color at the end!
+  self:setColor(CustomColor or Color.Orange)
 end

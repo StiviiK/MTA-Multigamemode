@@ -37,10 +37,8 @@ end
 
 function Gamemode:setId(Id)
   self.m_Id = Id
-end
 
-function Gamemode:getId()
-  return self.m_Id
+  return self
 end
 
 function Gamemode:addPlayer(player)
@@ -106,6 +104,7 @@ function Gamemode:setSyncInfo(key, value)
 end
 
 -- Short getters
+function Gamemode:getId() return self.m_Id end
 function Gamemode:getName() return self.m_Name end
 function Gamemode:getDescription() return self.m_Description end
 function Gamemode:getDimension() return self.m_Dimension end

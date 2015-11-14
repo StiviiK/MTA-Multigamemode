@@ -7,7 +7,7 @@
 -- ****************************************************************************
 GamemodePed = inherit(Object)
 
-function GamemodePed:constructor(model, position, rotation, dimension, interior, gamemode)
+function GamemodePed:constructor(model, position, rotation, dimension, interior, gamemode, customColor)
   self.m_Id = GamemodePedManager:getSingleton():addRef(self)
   self.m_Model = model
   self.m_Position = position
@@ -15,6 +15,7 @@ function GamemodePed:constructor(model, position, rotation, dimension, interior,
   self.m_Dimension = dimension
   self.m_Interior = interior
   self.m_Gamemode = gamemode
+  self.m_CustomColor = customColor
 
   self.m_Ped = self.m_Gamemode:createPed(self.m_Model, self.m_Position)
   self.m_Ped:setDimension(self.m_Dimension)
@@ -23,17 +24,17 @@ function GamemodePed:constructor(model, position, rotation, dimension, interior,
 
   self.m_Ped:setFrozen(true)
 
-  if self.m_Gamemode.m_GamemodePeds then
+  if self:getGamemode().m_GamemodePeds then
     table.insert(self:getGamemode().m_GamemodePeds, self.m_Id, self)
   end
 end
 
 function GamemodePed:destructor()
+  GamemodePedManager:getSingleton():removeRef(self)
+
   if isElement(self.m_Ped) then
     destroyElement(self.m_Ped)
   end
-
-  GamemodePedManager:getSingleton():removeRef(self)
 
   if self:getGamemode().m_GamemodePeds then
     self:getGamemode().m_GamemodePeds[self:getId()] = nil
@@ -48,3 +49,5 @@ function GamemodePed:getGamemode() return self.m_Gamemode end
 function GamemodePed:getModel() return self.m_Model end
 function GamemodePed:getInterior() return self.m_Interior end
 function GamemodePed:getDimension() return self.m_Dimension end
+function GamemodePed:hasCustomColor() return self.m_CustomColor ~= nil end
+function GamemodePed:getCustomColor() return self.m_CustomColor end

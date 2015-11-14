@@ -44,3 +44,11 @@ end
 function GUIMouseMenu:getElement()
 	return self.m_Element
 end
+
+function GUIMouseMenu:setColor(color)
+	for i, v in pairs(self.m_Items) do
+		v:setColor(color)
+	end
+
+	return self
+end

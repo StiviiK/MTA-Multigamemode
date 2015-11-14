@@ -16,12 +16,12 @@ function GamemodeManager:constructor()
   addEventHandler("UpdateGamemodeSync", root, bind(GamemodeManager.Event_UpdateGamemodeSync, self))
 
   local Gamemodes = {
-    Lobby:new();
-    CopsnRobbers:new();
-    RenegadeSquad:new();
+    Lobby:new():setId(1);
+    CopsnRobbers:new(Color.LightBlue):setId(2);
+    RenegadeSquad:new(Color.Yellow):setId(3);
   }
   for k, v in pairs(Gamemodes) do
-    v:setId(k)
+    --v:setId(k)
     self:addRef(v)
 
     if v.onGamemodesLoaded then
