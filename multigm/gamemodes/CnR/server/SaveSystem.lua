@@ -17,14 +17,14 @@ local Dim  		= player:getDimension()
 local Weapons   = "xxxxxxx"
 
 
-	local row = sql:queryFetchSingle("SELECT Name FROM ??_CnR WHERE Name = ? ", sql:getPrefix(), player:getName())
+	local row = sql:queryFetchSingle("SELECT Name FROM ??_CnR WHERE Name = ? ", sql:getPrefix(), player:getAccount():getName())
      if not row or not row.Name then
 		--INSERT
-	sql:queryExec("INSERT INTO multigm_CnR (Name, Position, Skin, Fraction, Weapons, Dimension, Interior) VALUES (?,?,?,?,?,?,?);", player:getName(), Position ,Skin ,Fraction ,Weapons ,Dim ,Int )
+	sql:queryExec("INSERT INTO multigm_CnR (Name, Position, Skin, Fraction, Weapons, Dimension, Interior) VALUES (?,?,?,?,?,?,?);", player:getAccount():getName(), Position ,Skin ,Fraction ,Weapons ,Dim ,Int )
 
 	else
 		--Update
-	sql:queryExec("UPDATE multigm_CnR SET Name = ?, Position = ?, Skin = ?, Fraction = ?, Weapons = ?, Dimension = ?, Interior = ?;", player:getName(), Position ,Skin ,Fraction ,Weapons ,Dim ,Int )
+	sql:queryExec("UPDATE multigm_CnR SET Position = ?, Skin = ?, Fraction = ?, Weapons = ?, Dimension = ?, Interior = ? WHERE Name = ?;", Position ,Skin ,Fraction ,Weapons ,Dim ,Int, player:getAccount():getName())
 
 	end
 
@@ -35,9 +35,9 @@ end
 
 function CopsnRobbers:Load_Player(player)
 
-	local row = sql:queryFetchSingle("SELECT * FROM ??_CnR WHERE Name = ? ", sql:getPrefix(), player:getName())
+	local row = sql:queryFetchSingle("SELECT * FROM ??_CnR WHERE Name = ? ", sql:getPrefix(), player:getAccount():getName())
      if  not row or  not row.Name then
-		
+
 		-- Default
 
 		player:triggerEvent("CreateFractionSelectMenu",player)
@@ -50,4 +50,3 @@ function CopsnRobbers:Load_Player(player)
 
 
 end
-

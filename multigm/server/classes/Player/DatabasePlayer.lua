@@ -27,17 +27,18 @@ function DatabasePlayer:destructor()
 end
 
 function DatabasePlayer:virtual_constructor()
-  self.m_Account  = false
-  self.m_IsGuest  = false
+	self.m_Account  = false
+	self.m_IsGuest  = false
 	self.m_Locale   = "en"
 	self.m_Id       = -1
 	self.m_Health   = 100
 	self.m_Armor    = 0
-  self.m_Skin     = 0
+	self.m_Skin     = 0
 	self.m_XP 	    = 0
-  self.m_Money    = 0
+	self.m_Money    = 0
 	self.m_Gamemode = nil
 	self.m_Rank 		= 0
+	self.m_LastPlayTime = 0
 end
 
 function DatabasePlayer:virtual_destructor()
@@ -85,6 +86,10 @@ function DatabasePlayer:loadGuest()
 	self:setXP(self.m_XP)
 	self:setMoney(self.m_Money)
 	self:setRank(self.m_Rank)
+	self:setFriendId("false")
+
+	-- Set Account Type
+	self:setPrivateSync("AccountType", self:getAccount():getType())
 end
 
 -- Short getters
