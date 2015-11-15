@@ -39,6 +39,8 @@ end
 
 function GUIMouseMenu:setElement(element)
 	self.m_Element = element
+	
+	return self
 end
 
 function GUIMouseMenu:getElement()

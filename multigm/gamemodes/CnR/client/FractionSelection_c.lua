@@ -13,7 +13,7 @@ FractionSelection.SelectSkin = 1--TableID
 function FractionSelectionMenu:constructor (CNR_SELF)
 
 	---------------------------CNR_DEBUG------------------------------------
-						if CNR_DEBUG then 
+						if CNR_DEBUG then
 								triggerServerEvent("onPlayerSelectTeam",lp,"Cops",1,1)
 								CNR_SELF:onPlayerSelectTeam("Cops",1,1)
 						return end
@@ -22,9 +22,13 @@ function FractionSelectionMenu:constructor (CNR_SELF)
 GUIForm.constructor(self, (screenWidth/2)-656/2, (screenHeight)-(187+50), 656, 187)---Hier Drauf wird alles gezeichnet
 Cursor:show()
 self.m_Button_Left   = GUIButton:new(10, 125, 206, 49, "<---", self)
+	:setBackgroundColor(CNR_SELF:getColor())
 self.m_Button_Select   = GUIButton:new(226, 127, 206, 47, "Select", self)
+	:setBackgroundColor(CNR_SELF:getColor())
 self.m_Button_Right   = GUIButton:new(442, 125, 206, 48, "--->", self)
+	:setBackgroundColor(CNR_SELF:getColor())
 self.m_GridList = GUIGridList:new(231, 29, 201, 90, self)
+	:setColor(CNR_SELF:getColor())
 local GridTeam = self.m_GridList:addColumn("Team", 70)
 local CopsItem = self.m_GridList:addItem("Cops")
 local RobbersItem = self.m_GridList:addItem("Robbers")

@@ -17,7 +17,7 @@ function GamemodeManager:constructor()
 
   local Gamemodes = {
     Lobby:new():setId(1);
-    CopsnRobbers:new(Color.LightBlue):setId(2);
+    CopsnRobbers:new(Color.Green):setId(2);
     RenegadeSquad:new(Color.Yellow):setId(3);
   }
   for k, v in pairs(Gamemodes) do

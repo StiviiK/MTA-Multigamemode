@@ -12,7 +12,7 @@ local ITEM_HEIGHT = 30
 
 function GUIGridList:constructor(posX, posY, width, height, parent)
 	GUIElement.constructor(self, posX, posY, width, height, parent)
-	GUIColorable.constructor(self, tocolor(0, 0, 0, 180))
+	GUIColorable.constructor(self, Color.LightBlue)
 
 	self.m_Columns = {}
 	self.m_ScrollArea = GUIScrollableArea:new(0, ITEM_HEIGHT, self.m_Width, self.m_Height-ITEM_HEIGHT, self.m_Width, 1, true, false, self, ITEM_HEIGHT)
@@ -107,14 +107,14 @@ function GUIGridList:onInternalSelectItem(item)
 		item:setBackgroundColor(Color.Clear)
 	end
 
-	item:setBackgroundColor(Color.LightBlue)
+	item:setBackgroundColor(self.m_Color)
 	self:anyChange()
 end
 
 function GUIGridList:draw(incache) -- Swap render order
 	if self.m_Visible then
 		-- Draw background
-		dxDrawRectangle(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, self.m_Height, self.m_Color)
+		dxDrawRectangle(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, self.m_Height, tocolor(0, 0, 0, 180))
 
 		-- Draw items
 		for k, v in ipairs(self.m_Children) do
