@@ -115,7 +115,7 @@ function SelfGUI:constructor()
   local tabSettings = self.m_TabPanel:addTab(_"Einstellungen")
   self.m_TabSettings = tabSettings
   GUILabel:new(self.m_Width*0.02, self.m_Height*0.016, self.m_Width*0.35, self.m_Height*0.12, _"Einstellungen", tabSettings)
-  GUILabel:new(self.m_Width*0.02, self.m_Height*0.12, self.m_Width*0.125, self.m_Height*0.07, _"Sprache", tabSettings)
+  GUILabel:new(self.m_Width*0.02, self.m_Height*0.12, self.m_Width*0.145, self.m_Height*0.07, _"Sprache", tabSettings)
   self.m_LocaleChange = GUIChanger:new(self.m_Width*0.02, self.m_Height*0.19, self.m_Width*0.35, self.m_Height*0.07, tabSettings)
   for i = 1, #LANG, 1 do
     	self.m_LocaleChange:addItem(_(LANG[i]))
@@ -139,7 +139,7 @@ function SelfGUI:TabPanel_TabChanged(tabId)
   elseif tabId == self.m_TabSession.TabIndex then
     self:adjustSessionTab()
   elseif tabId == self.m_TabFriends.TabIndex then
-    self:adjustFriendsTab(localPlayer:getPrivateSync("FriendId") ~= "")
+    self:adjustFriendsTab(localPlayer:getPrivateSync("FriendId"))
   end
 end
 
@@ -178,9 +178,8 @@ function SelfGUI:adjustSessionTab()
   end
 end
 
-function SelfGUI:adjustFriendsTab(status)
-  if status then
-    local friendID = localPlayer:getPrivateSync("FriendId")
+function SelfGUI:adjustFriendsTab(friendID)
+  if friendID then
     for i, v in pairs(self.m_TabFriends.m_Children) do
       if not v.m_Visible then
         v:setVisible(true)
@@ -188,7 +187,11 @@ function SelfGUI:adjustFriendsTab(status)
     end
 
     -- Hide all which are not neccessary
-
+    --[[
+    if self.m_FriendIDCopyLabel.onLeftClickOLD then
+      self.m_FriendIDCopyLabel.onLeftClick = self.m_FriendIDCopyLabel.onLeftClickOLD
+    end
+    --]]
 
     -- Update FriendId Label
     self.m_FriendIDLabel:setText(_("uID: %s", friendID))
@@ -202,6 +205,21 @@ function SelfGUI:adjustFriendsTab(status)
     end
 
     -- Show only elements when the player has no "FriendId"
+    if localPlayer:isGuest() then
+      self.m_FriendIDLabel:setText(_"Diese Funktion ist im Gast-Modus nicht verfügbar!")
+      --[[
+      self.m_FriendIDCopyLabel:setText(_"(?)")
+      self.m_FriendIDCopyLabel:setPosition(self.m_Width*0.015 + dxGetTextWidth(_"Diese Funktion ist im Gast-Modus nicht verfügbar!", self.m_FriendIDLabel:getFontSize(), self.m_FriendIDLabel:getFont()) + 10, self.m_Height*0.12)
+      self.m_FriendIDCopyLabel:setVisible(true)
 
+      -- Update m_FriendIDCopyLabel click function
+      self.m_FriendIDCopyLabel.onLeftClickOLD = self.m_FriendIDCopyLabel.onLeftClick
+      self.m_FriendIDCopyLabel.onLeftClick = function ()
+      end
+      --]]
+    else
+      self.m_FriendIDLabel:setText(_"Es ist ein unbekannter Fehler aufgetreten!")
+    end
+    self.m_FriendIDLabel:setVisible(true)
   end
 end

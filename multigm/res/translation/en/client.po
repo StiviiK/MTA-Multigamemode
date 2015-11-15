@@ -223,6 +223,9 @@ msgstr "%s About us."
 msgid "%s Visit us on Facebook."
 msgstr "%s Visit us on Facebook."
 
+#: client/classes/GUIForms/SelfGUI.lua:0
+msgid "Diese Funktion ist im Gast-Modus nicht verfügbar!"
+msgstr "In guest mode this feature is not available!"
 
 
 

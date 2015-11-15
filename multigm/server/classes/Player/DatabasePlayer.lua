@@ -19,6 +19,7 @@ function DatabasePlayer:constructor(id)
 	DatabasePlayer.virtual_constructor(self)
 
 	self.m_Id = id
+	self.m_JoinTime = getTickCount()
 	DatabasePlayer.Map[id] = self
 end
 
@@ -27,21 +28,24 @@ function DatabasePlayer:destructor()
 end
 
 function DatabasePlayer:virtual_constructor()
-	self.m_Account  = false
-	self.m_IsGuest  = false
-	self.m_Locale   = "en"
-	self.m_Id       = -1
-	self.m_Health   = 100
-	self.m_Armor    = 0
-	self.m_Skin     = 0
-	self.m_XP 	    = 0
-	self.m_Money    = 0
-	self.m_Gamemode = nil
-	self.m_Rank 		= 0
+	self.m_Account      = false
+	self.m_IsGuest      = false
+	self.m_Locale       = "en"
+	self.m_Id           = -1
+	self.m_Health       = 100
+	self.m_Armor        = 0
+	self.m_Skin         = 0
+	self.m_XP           = 0
+	self.m_Money        = 0
+	self.m_Gamemode     = nil
+	self.m_Rank         = 0
+	self.m_JoinTime     = 0
 	self.m_LastPlayTime = 0
 end
 
 function DatabasePlayer:virtual_destructor()
+	outputDebug("Freeing Id "..self.m_Id)
+
 	if self.m_Id > 0 then
 		DatabasePlayer.Map[self.m_Id] = nil
 	end
@@ -61,7 +65,9 @@ function DatabasePlayer:load()
 	self.m_LastPlayTime = row.PlayTime
 
 	-- Sync important Stuff
-	self:setPrivateSync("AccountType", self:getAccount():getType())
+	if self:isActive() then
+		self:setPrivateSync("AccountType", self:getAccount():getType())
+	end	
 
 	-- Set non element related stuff (otherwise just save it)
 	self:setLocale(row.Locale)
@@ -81,15 +87,15 @@ function DatabasePlayer:save()
 end
 
 function DatabasePlayer:loadGuest()
+	-- Sync important Stuff
+	self:setPrivateSync("AccountType", self:getAccount():getType())
+
 	-- Reset data to Sync it
 	self:setLocale(self.m_Locale)
 	self:setXP(self.m_XP)
 	self:setMoney(self.m_Money)
 	self:setRank(self.m_Rank)
-	self:setFriendId("false")
-
-	-- Set Account Type
-	self:setPrivateSync("AccountType", self:getAccount():getType())
+	self:setFriendId(false)
 end
 
 -- Short getters
@@ -102,6 +108,7 @@ function DatabasePlayer:getLocale() return self.m_Locale end
 function DatabasePlayer:getXP() return self.m_XP end
 function DatabasePlayer:getRank() return self.m_Rank end
 function DatabasePlayer:getLastPlayTime() return self.m_LastPlayTime or 0 end
+function DatabasePlayer:getJoinTime() return self.m_JoinTime end
 function DatabasePlayer:getPlayTime() return math.floor(self:getLastPlayTime() + (getTickCount() - self:getJoinTime())/1000/60) end
 function DatabasePlayer:getFriendId() return self.m_FriendId end
 

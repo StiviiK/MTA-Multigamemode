@@ -125,7 +125,9 @@ function ClickHandler:dispatchClick(clickInfo, trigger)
 			for i, v in pairs(GamemodePedManager.Map) do
 				if v.m_Ped == element then
 					if trigger then
-						self:addMouseMenu(GamemodePedMouseMenu:new(clickInfo.absoluteX, clickInfo.absoluteY, v, (v:hasCustomColor() and v:getCustomColor())), element)
+						if button == "left" then
+							self:addMouseMenu(GamemodePedMouseMenu:new(clickInfo.absoluteX, clickInfo.absoluteY, v, (v:hasCustomColor() and v:getCustomColor())), element)
+						end
 					end
 					return true
 				end

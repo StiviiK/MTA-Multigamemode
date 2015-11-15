@@ -48,6 +48,7 @@ function Player:loadCharacter()
   self:setPrivateSync("Id", self:getId())
   self:setPrivateSync("joinTime", self:getJoinTime())
   self:setPrivateSync("LastPlayTime", self.m_LastPlayTime)
+  self:setPrivateSync("isGuest", self.m_IsGuest)
 
   -- unfreeze the player
   self:setFrozen(false)
@@ -132,7 +133,6 @@ function Player:isActive() return true end
 function Player:getAccount() return self.m_Account end
 function Player:isLoggedIn() return self.m_Id ~= -1	end
 function Player:getGamemode() return self.m_Gamemode end
-function Player:getJoinTime() return self.m_JoinTime end
 function Player:getSession() return (self:getAccount() and self:getAccount():getSession()) end
 function Player:isClientReady() return self.m_ClientReady end
 
