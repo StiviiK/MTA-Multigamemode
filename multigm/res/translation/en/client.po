@@ -10,6 +10,38 @@
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: shared/constants.lua:0
+msgid "Banned"
+msgstr "Banned"
+
+#: shared/constants.lua:0
+msgid "Gast"
+msgstr "Guest"
+
+#: shared/constants.lua:0
+msgid "User"
+msgstr "User"
+
+#: shared/constants.lua:0
+msgid "Supporter"
+msgstr "Supporter"
+
+#: shared/constants.lua:0
+msgid "Moderator"
+msgstr "Moderator"
+
+#: shared/constants.lua:0
+msgid "SuperModerator"
+msgstr "SuperModerator"
+
+#: shared/constants.lua:0
+msgid "Administrator"
+msgstr "Administrator"
+
+#: shared/constants.lua:0
+msgid "Developer"
+msgstr "Developer"
+
 #: client/classes/GUIForms/GamemodeInfo.lua:0
 msgid "Gamemode beitreten"
 msgstr "Join Gamemode"

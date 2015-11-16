@@ -8,6 +8,7 @@ function GamemodeManager:constructor()
     RenegadeSquad:new("Renegade Squad", "RenegadeSquad Gamemode"):setId(3);
   }
   for k, v in pairs(Gamemodes) do
+    --v:setId(k)
     self:addRef(v)
 
     if v.onGamemodesLoaded then
@@ -84,8 +85,8 @@ function GamemodeManager:updateSync()
   	gamemode.m_SyncInfoUpdate = {}
   end
 
-  if table.size(SyncData) ~= GamemodeManager.Map then
-    for i, v in pairs(Element.getAllByType("players")) do -- Todo: Improve?
+  if table.size(SyncData, true) > 0 then
+    for i, v in pairs(getElementsByType("player")) do -- Todo: Improve?
       if v:isClientReady() then
         v:triggerEvent("UpdateGamemodeSync", v, SyncData)
       end

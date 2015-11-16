@@ -38,14 +38,12 @@ function DatabasePlayer:virtual_constructor()
 	self.m_XP           = 0
 	self.m_Money        = 0
 	self.m_Gamemode     = nil
-	self.m_Rank         = 0
+	self.m_Rank         = RANK.Gast
 	self.m_JoinTime     = 0
 	self.m_LastPlayTime = 0
 end
 
 function DatabasePlayer:virtual_destructor()
-	outputDebug("Freeing Id "..self.m_Id)
-
 	if self.m_Id > 0 then
 		DatabasePlayer.Map[self.m_Id] = nil
 	end
@@ -67,7 +65,7 @@ function DatabasePlayer:load()
 	-- Sync important Stuff
 	if self:isActive() then
 		self:setPrivateSync("AccountType", self:getAccount():getType())
-	end	
+	end
 
 	-- Set non element related stuff (otherwise just save it)
 	self:setLocale(row.Locale)

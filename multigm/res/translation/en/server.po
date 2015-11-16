@@ -20,7 +20,7 @@ msgstr "Action completed successfully!"
 
 #: server/classes/Gamemode/GamemodeManager.lua:0
 msgid "Zugriff verweigert."
-msgstr "Permission denied."
+msgstr "Access denied."
 
 #: server/classes/Gamemode/GamemodeManager.lua:0
 msgid "Du bist bereits in diesem Gamemode!"
@@ -33,4 +33,8 @@ msgstr "You joinde the Gamemdoe successfully!"
 #: server/classes/Player/PlayerManager.lua:0
 msgid "Deine Session wurde erfolgreich geupdatet!"
 msgstr "Your session has been updated successfully!"
+
+#: server/classes/Player/PlayerManager.lua:0
+msgid "Diese Funktion ist im Gast-Modus nicht verfügbar!"
+msgstr "In guest mode this feature is not available!"
 

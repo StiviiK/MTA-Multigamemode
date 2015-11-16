@@ -2,7 +2,7 @@ MYSQL_HOST	= "localhost"
 MYSQL_PORT	= 3306
 MYSQL_USER	= "root"
 MYSQL_PW	  = ""
-MYSQL_DB	  = "multigm"
+MYSQL_DB	  = "multigm_develop"
 
 USE_REMOTE_API = false
 API_URL = "stivik.jusonex.net/multigm/api"

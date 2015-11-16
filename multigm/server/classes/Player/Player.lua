@@ -22,6 +22,10 @@ function Player:destructor()
       self:save()
     end
 
+    if self:getGamemode() then
+      self:getGamemode():removePlayer(self)
+    end
+
     delete(self.m_Account)
   end
 end

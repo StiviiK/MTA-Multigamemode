@@ -10,12 +10,13 @@ BUILD = "development"
 -- RANKS
 RANK = {}
 RANK[-1] = "Banned"
-RANK[0] = "User"
-RANK[1] = "Supporter"
-RANK[2] = "Moderator"
-RANK[3] = "SuperModerator"
-RANK[4] = "Administrator"
-RANK[5] = "Developer"
+RANK[0] = "Gast"
+RANK[1] = "User"
+RANK[2] = "Supporter"
+RANK[3] = "Moderator"
+RANK[4] = "SuperModerator"
+RANK[5] = "Administrator"
+RANK[6] = "Developer"
 
 local r2 = {}
 for k, v in pairs(RANK) do
