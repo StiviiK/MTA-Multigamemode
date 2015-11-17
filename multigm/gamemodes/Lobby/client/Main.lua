@@ -21,9 +21,15 @@ function Lobby:destructor()
 end
 
 function Lobby:onPlayerJoin()
+  for i, v in pairs(getElementsByType("player")) do
+    v:setCollidableWith(localPlayer, false)
+  end
 end
 
 function Lobby:onPlayerLeft()
+  for i, v in pairs(getElementsByType("player")) do
+    v:setCollidableWith(localPlayer, true)
+  end
 end
 
 function Lobby:onDownloadStart()
