@@ -16,6 +16,9 @@ end
 function Lobby:destructor()
 end
 
+function Lobby:onGamemodesLoaded(numLoadedGamemodes)
+end
+
 function Lobby:onPlayerJoin(player)
   player:triggerEvent("onLobbyStartDownload", player)
   player:setAlpha(200)

@@ -18,14 +18,11 @@ function GamemodeManager:constructor()
   addEventHandler("DeleteGamemodePed", root, bind(GamemodeManager.Event_DeleteGamemodePed, self))
 
   local Gamemodes = {
-    Lobby:new():setId(1);
-    CopsnRobbers:new(Color.Green):setId(2);
-    RenegadeSquad:new(Color.Yellow):setId(3);
+    self:addRef(Lobby:new():setId(1));
+    self:addRef(CopsnRobbers:new(Color.Green):setId(2));
+    self:addRef(RenegadeSquad:new(Color.Yellow):setId(3));
   }
-  for k, v in pairs(Gamemodes) do
-    --v:setId(k)
-    self:addRef(v)
-
+  for k, v in ipairs(Gamemodes) do
     if v.onGamemodesLoaded then
       v:onGamemodesLoaded(#Gamemodes)
     end
@@ -44,6 +41,7 @@ end
 
 function GamemodeManager:addRef(ref)
   GamemodeManager.Map[ref:getId()] = ref
+  return ref
 end
 
 function GamemodeManager:removeRef(ref)

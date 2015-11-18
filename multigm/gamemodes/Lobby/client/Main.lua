@@ -20,6 +20,9 @@ end
 function Lobby:destructor()
 end
 
+function Lobby:onGamemodesLoaded(numLoadedGamemodes)
+end
+
 function Lobby:onPlayerJoin()
   for i, v in pairs(getElementsByType("player")) do
     v:setCollidableWith(localPlayer, false)
