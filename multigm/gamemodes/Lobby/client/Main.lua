@@ -24,12 +24,18 @@ function Lobby:onPlayerJoin()
   for i, v in pairs(getElementsByType("player")) do
     v:setCollidableWith(localPlayer, false)
   end
+  toggleControl("fire", false)
+  toggleControl("jump", false)
+  toggleControl("aim_weapon", false)
 end
 
 function Lobby:onPlayerLeft()
   for i, v in pairs(getElementsByType("player")) do
     v:setCollidableWith(localPlayer, true)
   end
+  toggleControl("fire", true)
+  toggleControl("jump", true)
+  toggleControl("aim_weapon", true)
 end
 
 function Lobby:onDownloadStart()

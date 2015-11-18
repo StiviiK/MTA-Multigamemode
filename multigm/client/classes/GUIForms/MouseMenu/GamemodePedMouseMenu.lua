@@ -20,16 +20,14 @@ function GamemodePedMouseMenu:constructor(posX, posY, instance, CustomColor)
   if localPlayer:getRank() >= RANK.Administrator then
     self:addItem(_"Admin: Ped respawnen",
       function ()
-        local skin, pos, rot, dimension, interior, gamemode = instance:getModel(), instance:getPosition(), instance:getRotation(), instance:getDimension(), instance:getInterior(), instance:getGamemode()
-        delete(instance)
-
-        GamemodePed:new(skin, pos, rot, dimension, interior, gamemode)
+        triggerServerEvent("Event_RespawnGamemodePed", localPlayer, instance:getId())
+        Cursor:hide()
       end
     )
 
     self:addItem(_"Admin: Ped löschen",
       function ()
-        delete(instance)
+        triggerServerEvent("Event_DeleteGamemodePed", localPlayer, instance:getId())
         Cursor:hide()
       end
     )

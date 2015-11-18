@@ -9,11 +9,13 @@ GamemodeManager = inherit(Singleton)
 GamemodeManager.Map = {}
 
 function GamemodeManager:constructor()
-  addRemoteEvents{"onPlayerGamemodeJoin", "onPlayerGamemodeLeft", "onGamemodeDestruct", "UpdateGamemodeSync"}
+  addRemoteEvents{"onPlayerGamemodeJoin", "onPlayerGamemodeLeft", "onGamemodeDestruct", "UpdateGamemodeSync", "RespawnGamemodePed", "DeleteGamemodePed"}
   addEventHandler("onPlayerGamemodeJoin", root, bind(GamemodeManager.Event_OnPlayerGamemodeJoin, self))
   addEventHandler("onPlayerGamemodeLeft", root, bind(GamemodeManager.Event_OnPlayerGamemodeLeft, self))
   addEventHandler("onGamemodeDestruct", root, bind(GamemodeManager.Event_OnGamemodeDestruct, self))
   addEventHandler("UpdateGamemodeSync", root, bind(GamemodeManager.Event_UpdateGamemodeSync, self))
+  addEventHandler("RespawnGamemodePed", root, bind(GamemodeManager.Event_RespawnGamemodePed, self))
+  addEventHandler("DeleteGamemodePed", root, bind(GamemodeManager.Event_DeleteGamemodePed, self))
 
   local Gamemodes = {
     Lobby:new():setId(1);
@@ -80,5 +82,24 @@ function GamemodeManager:Event_UpdateGamemodeSync(SyncInfo)
         if f then f(v) end
       end
     end
+  end
+end
+
+function GamemodeManager:Event_RespawnGamemodePed(Id)
+  if GamemodePedManager.getFromId(Id) then
+    local instance = GamemodePedManager.getFromId(Id)
+    local m, p, r, d, i, g, c = instance:getModel(), instance:getPosition(), instance:getRotation(), instance:getDimension(), instance:getInterior(), instance:getGamemode(), instance:getCustomColor()
+
+    delete(instance)
+    self.getFromId(1).m_GamemodePeds[Id] = nil
+
+    instance = GamemodePed:new(m, p, r, d, i, g, c)
+    self.getFromId(1).m_GamemodePeds[instance:getId()] = instance
+  end
+end
+
+function GamemodeManager:Event_DeleteGamemodePed(Id)
+  if GamemodePedManager.getFromId(Id) then
+    delete(GamemodePedManager.getFromId(Id))
   end
 end

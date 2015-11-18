@@ -18,12 +18,14 @@ function GamemodeManager:constructor()
 
   -- Gamemode Sync
   self.m_SyncPulse = TimedPulse:new(500)
-  self.m_SyncPulse:registerHandler(bind(self.updateSync, self))
+  self.m_SyncPulse:registerHandler(self.updateSync)
 
   -- Manager Events
-  addRemoteEvents{"Event_DisableGamemode", "Event_JoinGamemode"}
-  addEventHandler("Event_DisableGamemode", root, bind(self.Event_DisableGamemode, self))
-  addEventHandler("Event_JoinGamemode", root, bind(self.Event_JoinGamemode, self))
+  addRemoteEvents{"Event_DisableGamemode", "Event_JoinGamemode", "Event_RespawnGamemodePed", "Event_DeleteGamemodePed"}
+  addEventHandler("Event_DisableGamemode", root, bind(GamemodeManager.Event_DisableGamemode, self))
+  addEventHandler("Event_JoinGamemode", root, bind(GamemodeManager.Event_JoinGamemode, self))
+  addEventHandler("Event_RespawnGamemodePed", root, bind(GamemodeManager.Event_RespawnGamemodePed, self))
+  addEventHandler("Event_DeleteGamemodePed", root, bind(GamemodeManager.Event_DeleteGamemodePed, self))
 end
 
 function GamemodeManager:destructor()
@@ -75,7 +77,7 @@ function GamemodeManager:Event_JoinGamemode(Id, fLobby)
   end
 end
 
-function GamemodeManager:updateSync()
+function GamemodeManager.updateSync()
   local SyncData = {}
   for i, gamemode in pairs(GamemodeManager.Map) do
     SyncData[gamemode:getId()] = {}
@@ -94,7 +96,7 @@ function GamemodeManager:updateSync()
   end
 end
 
-function GamemodeManager:sendInitialSync(player)
+function GamemodeManager.sendInitialSync(player)
   local SyncData = {}
   for i, gamemode in pairs(GamemodeManager.Map) do
     SyncData[gamemode:getId()] = {}
@@ -109,5 +111,27 @@ function GamemodeManager:sendInitialSync(player)
         player:triggerEvent("UpdateGamemodeSync", player, SyncData)
       end
     end
+  end
+end
+
+function GamemodeManager:Event_RespawnGamemodePed(Id)
+  if source:getRank() >= RANK.Administrator then
+    outputDebug(("[GamemodeManager] %s respawned GamemodePed! [Id: %d]"):format(source:getAccount():getName(), Id))
+
+    triggerClientEvent("RespawnGamemodePed", source, Id)
+    source:triggerEvent("successBox", source, _("Aktion erfolgreich ausgeführt!", source))
+  else
+    source:triggerEvent("errorBox", source, _("Zugriff verweigert.", source))
+  end
+end
+
+function GamemodeManager:Event_DeleteGamemodePed(Id)
+  if source:getRank() >= RANK.Administrator then
+    outputDebug(("[GamemodeManager] %s deleted GamemodePed! [Id: %d]"):format(source:getAccount():getName(), Id))
+
+    triggerClientEvent("DeleteGamemodePed", source, Id)
+    source:triggerEvent("successBox", source, _("Aktion erfolgreich ausgeführt!", source))
+  else
+    source:triggerEvent("errorBox", source, _("Zugriff verweigert.", source))
   end
 end

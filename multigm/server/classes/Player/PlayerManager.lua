@@ -48,7 +48,7 @@ function PlayerManager:playerReady()
 	self:spawnPlayer(client)
 
 	-- Send the inital Sync for the Player
-	GamemodeManager:getSingleton():sendInitialSync(client)
+	GamemodeManager.sendInitialSync(client)
 end
 
 function PlayerManager:spawnPlayer(player)
