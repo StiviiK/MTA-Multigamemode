@@ -4,7 +4,7 @@ from os.path import join
 
 fileCount = 0
 scriptFileCount = 0
-lineCount = 0
+lineCount = "0	(currently disabled)"
 
 for root, dirs, files in os.walk("multigm"):
 	for name in files:
@@ -12,12 +12,14 @@ for root, dirs, files in os.walk("multigm"):
 	
 		if name[-3:] == "lua" or name[-3:] == "xml":
 			scriptFileCount += 1
-			file = open(join(root, name))
+
+			# Todo: Doesn't work for some reason? (Can't decode byte 0x81?)
+			#file = open(join(root, name))
 			
-			for line in file:
-				lineCount += 1
+			#for line in file:
+			#	lineCount += 1
 			
-			file.close()
+			#file.close()
 
 print("======= vMultigamemode: Script statistics =======")
 print("")

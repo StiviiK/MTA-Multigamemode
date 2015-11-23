@@ -10,6 +10,14 @@ function DatabasePlayer.get(id)
 	return DatabasePlayer:new(id), true
 end
 
+function DatabasePlayer.saveGet(Id)
+	local Account, isOffline = DatabasePlayer.get(Id)
+	if isOffline then
+		Account:load()
+	end
+	return Account, isOffline
+end
+
 function DatabasePlayer.getFromId(id)
   return DatabasePlayer.Map[id]
 end
@@ -41,6 +49,7 @@ function DatabasePlayer:virtual_constructor()
 	self.m_Rank         = RANK.Gast
 	self.m_JoinTime     = 0
 	self.m_LastPlayTime = 0
+	self.m_FriendId     = ""
 end
 
 function DatabasePlayer:virtual_destructor()

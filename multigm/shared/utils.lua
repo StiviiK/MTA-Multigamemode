@@ -112,6 +112,10 @@ function table.copy(tab)
 	return temp
 end
 
+function table.random(tbl)
+ return tbl[math.random(tbl[0] ~= nil and 0 or 1, table.size(tbl))]
+end
+
 function getRandomUniqueNick()
 	local randomNick
 	repeat

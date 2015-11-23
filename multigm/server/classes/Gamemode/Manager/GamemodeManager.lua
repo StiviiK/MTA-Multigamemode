@@ -12,10 +12,12 @@ function GamemodeManager:constructor()
       v:onGamemodesLoaded(#Gamemodes)
     end
   end
+  self.m_LoadedGamemodes = #Gamemodes
 
   -- Gamemode Sync
   self.m_SyncPulse = TimedPulse:new(500)
   self.m_SyncPulse:registerHandler(self.updateSync)
+
 
   -- Manager Events
   addRemoteEvents{"Event_DisableGamemode", "Event_JoinGamemode", "Event_RespawnGamemodePed", "Event_DeleteGamemodePed"}

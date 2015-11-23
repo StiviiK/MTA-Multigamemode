@@ -6,13 +6,12 @@ function Lobby:constructor()
   -- Load translation file
   TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
 
-  -- Create important stuff when the Dimension is available (e.g. GamemodePeds)
+  -- Reset GamemodePed dimension
 	self:addSyncChangeHandler("Dimension", function (dim)
-    if table.size(self.m_GamemodePeds) == 0 then
-  		GamemodePed:new(math.random(280, 286), Vector3(1713.793, -1655.604, 20.222), Vector3(0, 0, -90), dim, self:getSetting("Spawn").Interior, GamemodeManager.getFromId(2), GamemodeManager.getFromId(2):getColor())
-  		GamemodePed:new(math.random(163, 166), Vector3(1713.793, -1663.490, 20.222), Vector3(0, 0, -90), dim, self:getSetting("Spawn").Interior, GamemodeManager.getFromId(3), GamemodeManager.getFromId(3):getColor())
-  		GamemodePed:new(0, Vector3(1729.256, -1647.652, 20.222), Vector3(0, 0, 90), dim, self:getSetting("Spawn").Interior, self)
-  		GamemodePed:new(0, Vector3(1729.256, -1655.511, 20.222), Vector3(0, 0, 90), dim, self:getSetting("Spawn").Interior, self)
+    for _, gamemode in pairs(GamemodeManager.Map) do
+      for _, ped in pairs(gamemode.m_GamemodePeds) do
+        ped:setDimension(dim)
+      end
     end
 	end)
 end
@@ -21,6 +20,9 @@ function Lobby:destructor()
 end
 
 function Lobby:onGamemodesLoaded(numLoadedGamemodes)
+  for i = 1, numLoadedGamemodes, 1 do
+    GamemodePed:new(table.random(self:get("GamemodePedSkins")[i]), self:get("GamemodePedPositions")[i], self:get("GamemodePedRotations")[i], 0, self:getSetting("Spawn").Interior, GamemodeManager.getFromId(i))
+  end
 end
 
 function Lobby:onPlayerJoin()

@@ -15,7 +15,7 @@ function GamemodePed:constructor(model, position, rotation, dimension, interior,
   self.m_Dimension = dimension
   self.m_Interior = interior
   self.m_Gamemode = gamemode
-  self.m_CustomColor = customColor
+  self.m_CustomColor = customColor or self:getGamemode():getColor()
 
   self.m_Ped = self.m_Gamemode:createPed(self.m_Model, self.m_Position)
   self.m_Ped:setDimension(self.m_Dimension)
@@ -39,6 +39,11 @@ function GamemodePed:destructor()
   if self:getGamemode().m_GamemodePeds then
     self:getGamemode().m_GamemodePeds[self:getId()] = nil
   end
+end
+
+function GamemodePed:setDimension(dim)
+  self.m_Dimension = dim
+  self.m_Ped:setDimension(self.m_Dimension)
 end
 
 -- Short getters

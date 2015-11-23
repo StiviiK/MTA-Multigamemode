@@ -14,9 +14,14 @@ function Core:constructor()
 	-- Instantiate the localPlayer instance right now
 	enew(localPlayer, LocalPlayer)
 
+	-- Instantiate ConfigManager
+	self.m_Config = ConfigXML:new("config.xml")
+	if core:get("Account", "PrivateKey", false) ~= "mta" then -- TODO: Change this block later
+		core:set("Account", "PrivateKey", "mta")
+	end
+
 	-- Instantiate TranslationManager
 	TranslationManager:new()
-
 
   if DEBUG then
 		Debugging:new()
@@ -57,4 +62,19 @@ function Core:destructor()
 	delete(Provider:getSingleton())
 	delete(GamemodeManager:getSingleton())
 	delete(GamemodePedManager:getSingleton())
+
+	-- Delete Config at last position
+	delete(self:getConfig())
+end
+
+function Core:getConfig()
+	return self.m_Config
+end
+
+function Core:get(...)
+	return self:getConfig():get(...)
+end
+
+function Core:set(...)
+	return self:getConfig():set(...)
 end

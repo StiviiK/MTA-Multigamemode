@@ -15,6 +15,7 @@
 			<script src="shared/Cache.lua" type="shared"/>
 			<script src="shared/crc32lua.lua" type="shared"/>
 			<script src="shared/classes/Thread.lua" type="shared"/>
+			<script src="shared/classes/ConfigXML.lua" type="shared"/>
 
 			<script src="shared/constants.lua" type="shared"/>
 			<script src="shared/async.lua" type="shared"/>
@@ -142,8 +143,8 @@
 
 			<!-- Main -->
 		    <script src="client/Main.lua" type="client"/>
-			
-			
+
+
 
 	<!-- Lobby -->
 		<!-- Meta -->
@@ -160,8 +161,8 @@
 			<script src="gamemodes/Lobby/client/Init.lua" type="client"/>
 			<script src="gamemodes/Lobby/client/Main.lua" type="client"/>
 
-			
-			
+
+
 	<!-- Cops'n'Robbers -->
 		<!-- Meta -->
 			<metafile src="gamemodes/CnR/meta.xml"/>
@@ -228,6 +229,8 @@
 			<script src="gamemodes/RnS/client/Init.lua" type="client"/>
 			<script src="gamemodes/RnS/client/Main.lua" type="client"/>
 						
+
+
 
 	<!-- Files -->
 		<!-- Translation -->

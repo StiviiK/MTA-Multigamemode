@@ -17,7 +17,7 @@ end
 
 function Root:getAllByType(type, startAt)
   local elements = {}
-  for i, v in pairs(Element.getAllByType(type or "player", startAt or self)) do
+  for i, v in pairs(Element.getAllByType(type or "player", startAt or self)) do -- TODO: Improve, only loop through children
     if v:getParent() == self then
       table.insert(elements, v)
     end
