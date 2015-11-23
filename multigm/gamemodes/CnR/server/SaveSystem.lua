@@ -2,14 +2,16 @@
 
 
 function CopsnRobbers:Save_Player(player)
+Gast = false
+if Gast then return end
 local Pos 		= player:getPosition()
 local rot 		= player:getRotation()
-
 local Position 		= toJSON ( { ["x"] = Pos.x , ["y"] = Pos.y , ["z"] = Pos.z , ["rot"] = rot.z  } )
 
 local Money 	= player:getMoney()
 local Skin 		= player:getModel()
-local Fraction  = "Cops"--self:GetPlayerFraktion(player)
+local Fraction  = CNR_Fraction_Name[self:getPlayerFraction(player)]--CNR_Fraction_Name[]
+
 
 local Int  		= player:getInterior()
 local Dim  		= player:getDimension()
@@ -45,7 +47,7 @@ function CopsnRobbers:Load_Player(player)
 	 else
 
 		  local Position = fromJSON(row.Position)
-		  self:SpawnPlayer(player,Position.x,Position.y,Position.z,Position.rot,row.Interior,player:getDimension(),row.Skin,row.Fraction)
+		  self:SpawnPlayer(player,Position.x,Position.y,Position.z,Position.rot,row.Interior,player:getDimension(),row.Skin,CNR_Fraction_ID[row.Fraction])
   	 end
 
 

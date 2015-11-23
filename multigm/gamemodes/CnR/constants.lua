@@ -1,7 +1,37 @@
 CNR_DOWNLOAD_FILE = "gamemodes/CnR/cnr.data"
 CNR_DIM = 4
 -- TODO: REMOVE THIS; GAMEMODE REQUIRES MAJOR REWORK -> READ DIM FROM GAMEMODE!
+CNR_Fraction_Name = {
+[1] = "Cops",
+[2] = "Robbers"
+}
 
+CNR_Fraction_ID = {
+["Cops"] = 1,
+["Robbers"] = 2
+}
+
+CNR_LootDeliveryPoints = {
+[1] = {["x"] = 0,["y"] = 0,["z"] = 0},
+[2] = {["x"] = 20,["y"] = 0,["z"] = 0},
+[3] = {["x"] = 20,["y"] = 20,["z"] = 0}
+}
+
+
+CNR_Fraction_Color= {
+[1] = {0,0,255},
+[2] = {255,0,0}
+}
+
+CNR_Cops =    CNR_Fraction_ID["Cops"]
+CNR_Robbers = CNR_Fraction_ID["Robbers"]
+
+CNR_Extra_Dimension = {
+[1] = 8881,
+[2] = 8882,
+[3] = 8883,
+[4] = 8884
+}
 
 CNR_Spawns_Hospital = {
 {["Pos"] = Vector3(1181.9976806641,-1323.4655761719,13.58145236969) ,["Rot"] = Vector3(-0,0,269.85369873047),["Int"] = 0},---LS Mitte

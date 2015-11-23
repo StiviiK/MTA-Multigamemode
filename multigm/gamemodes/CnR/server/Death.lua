@@ -7,7 +7,7 @@ local LowestDistanceID = false
 
 
 if attacker then
-	if attacker:getFraction() == "Cops" and player:GetPlayerWanteds() > 0 then 
+	if self:getPlayerFraction(attacker) == "Cops" and player:GetPlayerWanteds() > 0 then 
 -------If Cop kill Player with wanteds-----------
 		for i = 1,#ArrestPrisons do
 				local Distance = getDistanceBetweenPoints2D ( PlayerPos.x, PlayerPos.y, ArrestPrisons[i].RespawnPos.x,ArrestPrisons[i].RespawnPos.y )

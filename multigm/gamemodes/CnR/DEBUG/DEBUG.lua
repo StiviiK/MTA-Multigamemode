@@ -1,12 +1,17 @@
 
 CNR_DEBUG = false
 
-function DebugOutPut (Text)
+function DebugOutPut (Text,r,g,b)
+
+if not r or not g or not b then
+	r,g,b = 255,255,255
+end
+
 	if CNR_DEBUG then
 		if SERVER then
-			outputChatBox("CNR_DEBUG SERVER: "..Text,getRootElement(),math.random(1,255),math.random(1,255),math.random(1,255))
+			outputChatBox("CNR_DEBUG SERVER: "..Text,getRootElement(),r,g,b)
 		else
-			outputChatBox("CNR_DEBUG CLIENT:"..Text,tocolor(math.random(1,255),math.random(1,255),math.random(1,255)))
+			outputChatBox("CNR_DEBUG CLIENT:"..Text,tocolor(r,g,b))
 		end
 		
 	end

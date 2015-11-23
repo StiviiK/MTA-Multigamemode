@@ -19,19 +19,19 @@ addCommandHandler("omm",outputMyMatrix)
 
 
 function CopsnRobbers:constructor()
-
-  addRemoteEvents{"onCNRStartDownload"}
+--Handler--
+  addRemoteEvents{"onCNRStartDownload","CreateFractionSelectMenu","ShowRadar","HideRadar","CreatePlayerBlip","DestroyPlayerBlip","CreateMoneyDeliveryCheckpoint"}
   addEventHandler("onCNRStartDownload", root, bind(CopsnRobbers.onDownloadStart, self))
-  
-  addRemoteEvents{"CreateFractionSelectMenu"}
   addEventHandler("CreateFractionSelectMenu", root, bind(CopsnRobbers.CreateFractionSelectMenu, self))
+  addEventHandler("ShowRadar", root, bind(CopsnRobbers.ShowRadar, self))
+  addEventHandler("HideRadar", root, bind(CopsnRobbers.HideRadar, self))
   
-   addRemoteEvents{"ShowRadar"}
-   addEventHandler("ShowRadar", root, bind(CopsnRobbers.ShowRadar, self))
+  addEventHandler("CreatePlayerBlip" , root, bind(CopsnRobbers.CreatePlayerBlip, self))
+  addEventHandler("DestroyPlayerBlip", root, bind(CopsnRobbers.DestroyPlayerBlip, self))
   
-  
-   addRemoteEvents{"HideRadar"}
-   addEventHandler("HideRadar", root, bind(CopsnRobbers.HideRadar, self))
+  addEventHandler("CreateMoneyDeliveryCheckpoint" , root, bind(CopsnRobbers.CreateMoneyDeliveryCheckpoint, self))
+ ----------
+
    -- Load translation file
   TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
   
@@ -39,6 +39,7 @@ function CopsnRobbers:constructor()
 -----------CNR_DEBUG---------------
  -- DebugOutPut( "CopsnRobbers:constructor" )
 -----------------------------------
+
 
 end
 
@@ -49,8 +50,14 @@ function CopsnRobbers:destructor()
 end
 
 function CopsnRobbers:onPlayerJoin()
+--Handler--
+		self.TazerDamageEventHandler = function(...) self:TazerDamage(...) end
+		addRemoteEvents{"onClientPlayerDamage"}
+		addEventHandler("onClientPlayerDamage", source, self.TazerDamageEventHandler)
+-----------
 
-	MiniMap:getSingleton()
+self:CreateAllPlayerBlip (source)
+MiniMap:getSingleton():hide()
 
 self:CreateWeaponSelectionEvent ()
 self:ShopGUI_Event ()
@@ -58,10 +65,12 @@ self:ShopGUI_Event ()
 	---------------------------CNR_DEBUG------------------------------------
 				if CNR_DEBUG then
 					
-					for i = 1,2 do
+					for i = 1,10 do
 					outputChatBox("\n",tocolor(0,255,0))
+					
 					end
 					outputChatBox("### CNR_DEBUG Enabled ###",tocolor(0,255,0))
+					outputDebugString("------------------------------------------------------------------------------------------------------------------------------")
 				end
 	-----------------------------------------------------------------------
 	
@@ -89,6 +98,11 @@ end
 
 
 function CopsnRobbers:onPlayerLeft()
+--Handler--
+   removeEventHandler("onClientPlayerDamage", source, self.TazerDamageEventHandler)
+-----------
+self:DestroyPlayerBlip(source)
+self:DestroyAllPlayerBlip()
 -----------CNR_DEBUG---------------
 -- DebugOutPut( "CopsnRobbers:onPlayerLeft" )
 -----------------------------------
@@ -104,8 +118,10 @@ function CopsnRobbers:onPlayerLeft()
 	Engine.restoreModel(1318)
  -- Hide Radar
 	self:DestroyWeaponSelection ()	
-	self.Radar:hide()
+	MiniMap:getSingleton():hide()
 	self.ShopGUI_destructor()
+--Robbery	
+	self:DestroyMoneyDeliveryCheckpoint(source)
 end
 
 function CopsnRobbers:onDownloadStart()
@@ -123,9 +139,9 @@ function CopsnRobbers:onDownloadFinish()
   triggerServerEvent("onCNRDownloadFinished", localPlayer)
 
   -- Load custom Arrow
-  EngineCOL("gamemodes/CnR/res/col/EntranceMarker.col"):replace(1318)
-  EngineTXD("gamemodes/CnR/res/txd/EntranceMarker.txd"):import(1318)
-  EngineDFF("gamemodes/CnR/res/dff/EntranceMarker.dff", 0):replace(1318)
+  -- EngineCOL("gamemodes/CnR/res/col/EntranceMarker.col"):replace(1318)
+  -- EngineTXD("gamemodes/CnR/res/txd/EntranceMarker.txd"):import(1318)
+  -- EngineDFF("gamemodes/CnR/res/dff/EntranceMarker.dff", 0):replace(1318)
   HudComponentVisible(true)
 end
 
@@ -137,3 +153,4 @@ setPlayerHudComponentVisible (  "radio", false )
 setPlayerHudComponentVisible (  "area_name", false )
 setPlayerHudComponentVisible (  "vehicle_name", false )
 end
+

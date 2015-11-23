@@ -3,6 +3,7 @@ function CopsnRobbers:GivePlayerWanteds(player,Wanteds)
 local Wanteds = tonumber(Wanteds)
 	if player:getType() == "player" and type(Wanteds) == "number" then
 		player:setData("Wanteds",player:getData("Wanteds") or 0+Wanteds)
+		DebugOutPut("Give Wanteds to "..player:getName().." | Wtds:"..Wanteds,255,255,0)
 	else
 		outputDebugString("GivePlayerWanteds Error")
 

@@ -11,8 +11,8 @@ function Teleports:constructor(StartPos,StartRot,StartInt,StartDim,EndPos,EndRot
   self.StartCol:setDimension(StartDim)
   self.StartCol:setInterior(StartInt)
 
-  function self.onColShapeHit_Start(theElement)
-	if self.TeleportStatus then
+  function self.onColShapeHit_Start(theElement,matchingDim)
+	if self.TeleportStatus and matchingDim then
 		 self.TeleportStatus = false
 		 setTimer ( function() self.TeleportStatus = true end, 1000, 1 )
 		 
@@ -37,8 +37,8 @@ if twoway then
  self.EndPickup:setDimension(EndDim)
  self.EndPickup:setInterior(EndInt)
  
-					 function self.onColShapeHit_End(theElement)
-						if self.TeleportStatus then
+					 function self.onColShapeHit_End(theElement,matchingDim)
+						if self.TeleportStatus and matchingDim then
 							self.TeleportStatus = false
 							setTimer ( function() self.TeleportStatus = true end, 1000, 1 )
 							
