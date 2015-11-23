@@ -1,7 +1,14 @@
 __CACHE = {}
 
-function registerCache(type)
+function registerCache(type, timeout)
+  if getCache(type) then
+    return false
+  end
   __CACHE[type] = {}
+
+  if timeout then
+    setTimer(clearCache, timeout, 1, type)
+  end
 end
 
 function getCache(type)
@@ -9,25 +16,26 @@ function getCache(type)
 end
 
 function clearCache(type)
-  if (not type) or (__CACHE[type] == nil) then
+  if not type then
     for i in pairs(__CACHE) do
       clearCache(i)
     end
 
+    collectgarbage()
     return
   end
 
   __CACHE[type] = {}
+  collectgarbage()
 end
 
 
 
--- register cache
-registerCache("function")
-
+-- Cache init
 if SERVER then
-  --registerCache("")
 end
 if CLIENT then
-  registerCache("font")
+  -- Register font cache
+  registerCache("VRPFont")
+  registerCache("FontAwesome")
 end

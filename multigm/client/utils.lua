@@ -44,3 +44,7 @@ function fromcolor(color)
 	end
 	return unpack(value)
 end
+
+function ColorToHex(color)
+  return toHex(color):gsub("0xFF", "#")
+end

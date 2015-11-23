@@ -8,11 +8,13 @@
 -- ****************************************************************************
 MessageBox = inherit(DxElement)
 inherit(GUIFontContainer, MessageBox)
+inherit(GUIColorable, MessageBox)
 MessageBox.MessageBoxes = {}
 
 function MessageBox:constructor(text, timeout)
 	DxElement.constructor(self, screenWidth/2-340/2, screenHeight, 340, 110)
 	GUIFontContainer.constructor(self, text, 1, VRPFont(26))
+	GUIColorable.constructor(self, Color.White)
 
 	if timeout and type(timeout) == "number" then
 		if timeout > 50 then
@@ -48,7 +50,7 @@ function MessageBox:drawThis()
 	dxDrawImage(self.m_AbsoluteX + 10, self.m_AbsoluteY + self.m_Height/2 - 80/2, 85, 85, self:getImagePath())
 
 	-- Draw message text
-	dxDrawText(self.m_Text, self.m_AbsoluteX + 120, self.m_AbsoluteY + 20, self.m_AbsoluteX + self.m_Width - 5, self.m_AbsoluteY + self.m_Height - 10, Color.White, self.m_FontSize, self.m_Font, "left", "top", false, true)
+	dxDrawText(self.m_Text, self.m_AbsoluteX + 120, self.m_AbsoluteY + 20, self.m_AbsoluteX + self.m_Width - 5, self.m_AbsoluteY + self.m_Height - 10, self.m_Color, self.m_FontSize, self.m_Font, "left", "top", false, true)
 end
 
 function MessageBox.resortPositions ()

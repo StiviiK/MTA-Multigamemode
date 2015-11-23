@@ -20,8 +20,8 @@ function Lobby:destructor()
 end
 
 function Lobby:onGamemodesLoaded(numLoadedGamemodes)
-  for i = 1, numLoadedGamemodes, 1 do
-    GamemodePed:new(table.random(self:get("GamemodePedSkins")[i]), self:get("GamemodePedPositions")[i], self:get("GamemodePedRotations")[i], 0, self:getSetting("Spawn").Interior, GamemodeManager.getFromId(i))
+  for i = 2, numLoadedGamemodes, 1 do
+    GamemodePed:new(table.random(self:get("GamemodePedSkins")[i-1]), self:get("GamemodePedPositions")[i-1], self:get("GamemodePedRotations")[i-1], 0, self:getSetting("Spawn").Interior, GamemodeManager.getFromId(i))
   end
 end
 

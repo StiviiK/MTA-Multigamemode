@@ -8,14 +8,13 @@
 -- ****************************************************************************
 
 -- This rescales our font to look good on a certain pixel height
-local VRPFonts = {}
 function VRPFont(height)
 	local fontsize = math.floor(height/2)
-	if not VRPFonts[fontsize] then
-		VRPFonts[fontsize] = dxCreateFont("res/fonts/Segoe/segoeui.ttf", fontsize)
+	if not getCache("VRPFont")[fontsize] then
+		getCache("VRPFont")[fontsize] = dxCreateFont("res/fonts/Segoe/segoeui.ttf", fontsize)
 	end
 
-	return VRPFonts[fontsize]
+	return getCache("VRPFont")[fontsize]
 end
 
 -- This gets the text width for a font which is 'height' pixels high
@@ -24,14 +23,14 @@ function VRPTextWidth(text, height)
 end
 
 
-local FontAwesomes = {}
+-- FontAwesome
 function FontAwesome(height)
 	local fontsize = math.floor(height/2)
-	if not FontAwesomes[fontsize] then
-		FontAwesomes[fontsize] = dxCreateFont("res/fonts/FontAwesome.otf", fontsize)
+	if not getCache("FontAwesome")[fontsize] then
+		getCache("FontAwesome")[fontsize] = dxCreateFont("res/fonts/FontAwesome.otf", fontsize)
 	end
 
-	return FontAwesomes[fontsize]
+	return getCache("FontAwesome")[fontsize]
 end
 
 FontAwesomeSymbols = {
@@ -45,4 +44,5 @@ FontAwesomeSymbols = {
 	User = "";
 	Gamepad = "";
 	Bug = "";
+	WhatsApp = "";
 }

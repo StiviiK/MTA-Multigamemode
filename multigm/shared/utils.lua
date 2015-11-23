@@ -113,7 +113,19 @@ function table.copy(tab)
 end
 
 function table.random(tbl)
- return tbl[math.random(tbl[0] ~= nil and 0 or 1, table.size(tbl))]
+	if tbl[0] ~= nil or tbl[1] ~= nil then
+ 		return tbl[math.random(tbl[0] ~= nil and 0 or 1, table.size(tbl))]
+	else
+		-- Register an 500ms active cache
+		registerCache("randomTbl", 500)
+
+		local i = 1
+		for i2, v in pairs(tbl) do
+			getCache("randomTbl")[i] = v
+			i = i + 1
+		end
+		return table.random(getCache("randomTbl"))
+	end
 end
 
 function getRandomUniqueNick()
