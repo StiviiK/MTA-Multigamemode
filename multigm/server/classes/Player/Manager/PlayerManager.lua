@@ -1,13 +1,14 @@
 PlayerManager = inherit(Singleton)
 
 function PlayerManager:constructor()
-	--self.m_WastedHook = Hook:new()
+	self.m_WastedHook = Hook:new()
 	self.m_ReadyPlayers = {}
 
 	-- Register events
 	addRemoteEvents{"onPlayerReady", "Player_changeLanguage", "Event_UpdatePlayerSession"}
   addEventHandler("onPlayerConnect", root, bind(PlayerManager.playerConnect, self))
   addEventHandler("onPlayerJoin", root, bind(PlayerManager.playerJoin, self))
+	addEventHandler("onPlayerWasted", root, bind(self.playerWasted, self))
 	addEventHandler("onPlayerReady", root, bind(PlayerManager.playerReady, self))
 	addEventHandler("Player_changeLanguage", root, bind(PlayerManager.Event_ChangeLocale, self))
 	addEventHandler("Event_UpdatePlayerSession", root, bind(PlayerManager.Event_UpdatePlayerSession, self))
@@ -57,7 +58,18 @@ function PlayerManager:spawnPlayer(player)
 	player:setCameraTarget(player)
 end
 
+function PlayerManager:getWastedHook()
+	return self.m_WastedHook
+end
+
 -- Events
+function PlayerManager:playerWasted()
+	-- Call wasted hook
+	if self.m_WastedHook:call(source) then
+		return
+	end
+end
+
 function PlayerManager:Event_ChangeLocale(locale)
 	source:setLocale(LOCALE[locale])
 	source:getAccount():getSession():update()

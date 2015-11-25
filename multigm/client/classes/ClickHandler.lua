@@ -114,13 +114,7 @@ function ClickHandler:dispatchClick(clickInfo, trigger)
 			if button == "left" then
 				SelfGUI:getSingleton():open()
 			elseif button == "right" then
-				local color = table.random(Color)
-
-				-- Find random color, without Alpha values
-				repeat color = table.random(Color)
-				until color ~= Color.Clear and color ~= Color.Grey and color ~= Color.BrownAlpha and color ~= Color.DarkBlueAlpha
-
-				outputChatBox(ColorToHex(color).."Hm, seems you're trying to right-click yourself.\nOkay... ehm, so you're retarded?", 255, 255, 255, true)
+				outputChatBox(ColorToHex(Color.Yellow).."Hm, seems you're trying to right-click yourself.\nOkay... ehm, so you're retarded?", 255, 255, 255, true)
 			end
 		end
 		return true

@@ -3,7 +3,7 @@ Account.Map = {}
 
 function Account.login(player, username, password)
     if player:getAccount() then return false end
-  	if (not username or not password) and not pwhash then return false end
+  	if (not username or not password) then return false end
 
     local row = sql:asyncQueryFetchSingle("SELECT Id, PublicKey FROM ??_account WHERE Name = ? ", sql:getPrefix(), username)
     if not row or not row.Id then
@@ -40,8 +40,37 @@ triggerServerEvent("accountlogin", localPlayer, "ACCOUNT", hash("sha256", teaEnc
 
 ]]
 
-function Account.register()
+function Account.register(player, accountname, password)
+  if player:getAccount() then return false end
+  if (not accountname or not password) then return false end
+
+  -- Check for existing Account
+  local row = sql:asyncQueryFetchSingle("SELECT Id FROM ??_account WHERE Name = ?;", sql:getPrefix(), accountname)
+  if row then
+    -- Error: Account exists already
+    return false
+  end
+
+  -- Create Account
+  local PublicKey = genPublicKey(player, accountname)
+  sql:queryExec("INSERT INTO ??_account (Name, PublicKey, Password, Type) VALUES (?, ?, ?, 0);", sql:getPrefix(), accountname, PublicKey, hash("sha256", teaEncode(password, PublicKey)))
+
+  -- Fetch Account Id
+  local Id = sql:lastInsertId()
+
+  -- Create Character
+  sql:queryExec("INSERT INTO ??_character (Id, Rank, Locale, Skin, XP, Money, PlayTime) VALUES (?, ?, 'en', 0, 0, 1, 0);", sql:getPrefix(), Id, RANK.User)
+
+  -- Create FriendId
+  local FriendId = genFriendId(Id, accountname)
+  sql:queryExec("INSERT INTO ??_friends (Id, Name, Friends) VALUES (?, ?, '[ [ ] ]');", sql:getPrefix(), FriendId, accountname)
+  sql:queryExec("UPDATE ??_character SET FriendId = ? WHERE Id = ?;", sql:getPrefix(), FriendId, Id)
+
+  -- Log into the Account
+  return Account.login(player, accountname, password)
 end
+addEvent("accountregister", true)
+addEventHandler("accountregister", root, function (...) Async.create(Account.register)(client, ...) end)
 
 function Account.guest(player)
   if player:getAccount() then return false end

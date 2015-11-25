@@ -5,7 +5,15 @@ function Hook:constructor()
 end
 
 function Hook:register(hookFunc)
-    self.m_Functions[#self.m_Functions + 1] = hookFunc
+    return table.push(self.m_Functions, hookFunc)
+end
+
+function Hook:remove(hookFunc)
+  local idx = table.find(self.m_Functions, hookFunc)
+  if idx then
+    return table.remove(self.m_Functions, idx)
+  end
+  return false  
 end
 
 function Hook:call(...)

@@ -11,8 +11,8 @@ function registerCache(type, timeout)
   end
 end
 
-function getCache(type)
-  return __CACHE[type]
+function getCache(cType)
+  return (type(cType) == "string" and __CACHE[cType]) or __CACHE
 end
 
 function clearCache(type)
