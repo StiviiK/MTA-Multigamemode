@@ -11,7 +11,7 @@
 function VRPFont(height)
 	local fontsize = math.floor(height/2)
 	if not getCache("VRPFont")[fontsize] then
-		getCache("VRPFont")[fontsize] = dxCreateFont("res/fonts/Segoe/segoeui.ttf", fontsize)
+		__CACHE["VRPFont"][fontsize] = dxCreateFont("res/fonts/Segoe/segoeui.ttf", fontsize)
 	end
 
 	return getCache("VRPFont")[fontsize]
@@ -24,10 +24,11 @@ end
 
 
 -- FontAwesome
+local FontAwesomes = {}
 function FontAwesome(height)
 	local fontsize = math.floor(height/2)
 	if not getCache("FontAwesome")[fontsize] then
-		getCache("FontAwesome")[fontsize] = dxCreateFont("res/fonts/FontAwesome.otf", fontsize)
+		__CACHE["FontAwesome"][fontsize] = dxCreateFont("res/fonts/FontAwesome.otf", fontsize)
 	end
 
 	return getCache("FontAwesome")[fontsize]
