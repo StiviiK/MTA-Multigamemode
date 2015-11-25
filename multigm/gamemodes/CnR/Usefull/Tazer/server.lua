@@ -1,4 +1,4 @@
-﻿function CopsnRobbers:TazerPlayer (player)
+function CopsnRobbers:TazerPlayer (player)
 local CNR_SELF = self
 outputChatBox("player tazert:"..player:getName())	
 		--player.Tazered = true

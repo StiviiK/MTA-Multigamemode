@@ -1,4 +1,4 @@
-﻿SchrankeSystem = {}
+SchrankeSystem = {}
 
 function SchrankeSystem:constructor (CNR_SELF,x,y,z,rx,ry,rz,ColRadius,moveTime,closeTime,richtung,Fraction )
 

@@ -1,4 +1,4 @@
-﻿
+
 -- local myBlip = createBlip( 0,0,0, 0, 255, 0, 0, 100 )-- Test später weg machen
 
 MiniMap = inherit(Singleton)

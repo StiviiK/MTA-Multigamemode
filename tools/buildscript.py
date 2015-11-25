@@ -26,10 +26,13 @@ shutil.copytree(rootdir+"res", outdir+"res")
 os.mkdir(outdir+"gamemodes")
 os.mkdir(outdir+"gamemodes/Lobby")
 os.mkdir(outdir+"gamemodes/CnR")
+os.mkdir(outdir+"gamemodes/RnS")
 shutil.copytree(rootdir+"gamemodes/Lobby/res", outdir+"gamemodes/Lobby/res")
 shutil.copytree(rootdir+"gamemodes/CnR/res", outdir+"gamemodes/CnR/res")
+shutil.copytree(rootdir+"gamemodes/RnS/res", outdir+"gamemodes/RnS/res")
 shutil.copyfile(rootdir+"gamemodes/Lobby/meta.xml", outdir+"gamemodes/Lobby/meta.xml")
 shutil.copyfile(rootdir+"gamemodes/CnR/meta.xml", outdir+"gamemodes/CnR/meta.xml")
+shutil.copyfile(rootdir+"gamemodes/RnS/meta.xml", outdir+"gamemodes/RnS/meta.xml")
 
 # Get files
 files = {}
@@ -67,6 +70,7 @@ tree.write(outdir+"meta.xml")
 serverCall = [ compiler, "-o", outdir+"server.luac" ]
 serverCall.extend(files["server"])
 call(serverCall)
+
 
 clientCall = [ compiler, "-o", outdir+"client.luac" ]
 clientCall.extend(files["client"])

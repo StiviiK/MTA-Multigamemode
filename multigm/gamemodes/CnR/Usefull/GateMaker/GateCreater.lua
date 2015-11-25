@@ -1,4 +1,4 @@
-﻿GateSystem = {}
+GateSystem = {}
 
 function GateSystem:constructor (CNR_SELF,model,x,y,z,rx,ry,rz,ColRadius,moveTime,closeTime,richtung,Fraction )
 

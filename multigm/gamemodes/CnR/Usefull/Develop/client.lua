@@ -1,4 +1,4 @@
-﻿local PlayerBlips = {}
+local PlayerBlips = {}
 
 function CopsnRobbers:CreatePlayerBlip (player)
 PlayerBlips[player] = createBlipAttachedTo ( player, 0 )
