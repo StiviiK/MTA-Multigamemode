@@ -22,18 +22,14 @@ rm_r(outdir)
 os.mkdir(outdir)
 shutil.copytree(rootdir+"res", outdir+"res")
 
-# Copy Important Data
+# Copy Gamemodes
 os.mkdir(outdir+"gamemodes")
-os.mkdir(outdir+"gamemodes/Lobby")
-os.mkdir(outdir+"gamemodes/CnR")
-os.mkdir(outdir+"gamemodes/RnS")
-shutil.copytree(rootdir+"gamemodes/Lobby/res", outdir+"gamemodes/Lobby/res")
-shutil.copytree(rootdir+"gamemodes/CnR/res", outdir+"gamemodes/CnR/res")
-shutil.copytree(rootdir+"gamemodes/RnS/res", outdir+"gamemodes/RnS/res")
-shutil.copyfile(rootdir+"gamemodes/Lobby/meta.xml", outdir+"gamemodes/Lobby/meta.xml")
-shutil.copyfile(rootdir+"gamemodes/CnR/meta.xml", outdir+"gamemodes/CnR/meta.xml")
-shutil.copyfile(rootdir+"gamemodes/RnS/meta.xml", outdir+"gamemodes/RnS/meta.xml")
-
+for dirname in os.listdir(rootdir+"gamemodes/"):
+	if os.path.isdir(os.path.join(rootdir+"gamemodes/", dirname)):
+		os.mkdir(outdir+"gamemodes/"+dirname)
+		shutil.copytree(rootdir+"gamemodes/"+dirname+"/res/", outdir+"gamemodes/"+dirname+"/res/")
+		shutil.copyfile(rootdir+"gamemodes/"+dirname+"/meta.xml", outdir+"gamemodes/"+dirname+"/meta.xml")
+		
 # Get files
 files = {}
 files["server"] = []
