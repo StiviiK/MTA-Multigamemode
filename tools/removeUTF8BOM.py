@@ -2,7 +2,7 @@
 import os
 
 numBOMFiles = 0
-for root, subdirs, files in os.walk("../multigm/"):
+for root, subdirs, files in os.walk("multigm/"):
 	for filename in files:
 		filePath = os.path.join(root, filename)
 		
