@@ -29,14 +29,14 @@ function ClickHandler:constructor()
 			-- Do not draw if cursor is not visible and is not on top of any GUI element
 			if not isCursorShowing() or GUIElement.getHoveredElement() then
 				self.m_DrawCursor = false
-				setCursorAlpha(255)
+				Cursor.m_DrawCursor = true
 				return
 			end
 
 			local element = getElementBehindCursor(worldX, worldY, worldZ)
 			if not element then
 				self.m_DrawCursor = false
-				setCursorAlpha(255)
+				Cursor.m_DrawCursor = true
 				return
 			end
 
@@ -45,9 +45,9 @@ function ClickHandler:constructor()
 			-- ClickHandler:dispatchClick returns true if there is a special mouse event available, false otherwise
 			self.m_DrawCursor = self:dispatchClick(clickInfo)
 			if self.m_DrawCursor then
-				setCursorAlpha(0)
+				Cursor.m_DrawCursor = false
 			else
-				setCursorAlpha(255)
+				Cursor.m_DrawCursor = true
 			end
 		end
 	)

@@ -14,6 +14,7 @@ function Player:constructor()
 	self.m_PublicSyncUpdate = {}
   self.m_JoinTime = getTickCount()
   self.m_ClientReady = false
+  self.m_JobPoints = 0
 end
 
 function Player:destructor()
@@ -139,6 +140,14 @@ function Player:isLoggedIn() return self.m_Id ~= -1	end
 function Player:getGamemode() return self.m_Gamemode end
 function Player:getSession() return (self:getAccount() and self:getAccount():getSession()) end
 function Player:isClientReady() return self.m_ClientReady end
+function Player:getJobPoints() return self.m_JobPoints end
 
 -- Short setters
 function Player:setGamemode(instance) self.m_Gamemode = instance if self:isActive() then self:setPrivateSync("Gamemode", (self.m_Gamemode and self.m_Gamemode:getId()) or 0) end end
+function Player:setJobPoints(jpoints) self.m_JobPoints = jpoints if self:isActive() then self:setPublicSync("JobPoints", self.m_JobPoints) end end
+
+-- Increment functions
+function Player:incrementJobPoints(incrementAmount)
+  self.m_JobPoints = self.m_JobPoints + (incrementAmount or 1)
+  if self:isActive() then self:setPublicSync("JobPoints", self.m_JobPoints) end
+end

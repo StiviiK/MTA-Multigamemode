@@ -10,6 +10,8 @@ GUICursor = inherit(Object)
 
 function GUICursor:constructor()
 	self.m_Counter = 0
+	self.m_DrawCursor = true
+	self.m_FuncDraw = bind(self.draw, self)
 	self.m_CursorFunc = function(button, state)
 		if self.m_CursorMode then -- is instant?
 			showCursor(state == "down")
@@ -23,26 +25,31 @@ function GUICursor:constructor()
 		end
 	end
 
-	--[[
 	if not core:get("HUD", "CursorMode", false) then
 		core:set("HUD", "CursorMode", 1)
 	end
 
 	self:setCursorMode(toboolean(core:get("HUD", "CursorMode", false)))
-	--]]
-	self:setCursorMode(false)
+
+	-- Draw new Cursor
+	setCursorAlpha(0)
+	addEventHandler("onClientRender", root, self.m_FuncDraw)
 end
 
 function GUICursor:destructor()
-	--setCursorAlpha(255)
-	--removeEventHandler("onClientRender", root, self.m_FuncDraw)
+	setCursorAlpha(255)
+	removeEventHandler("onClientRender", root, self.m_FuncDraw)
 end
 
 function GUICursor:draw()
-	local cursorX, cursorY = getCursorPosition()
-	if cursorX then
-		cursorX, cursorY = cursorX*screenWidth, cursorY*screenHeight
-		dxDrawImage(cursorX, cursorY, 12, 20, "res/images/GUI/Cursor.png", 0, 0, 0, Color.White, true)
+	if isCursorShowing() then
+		local cursorX, cursorY = getCursorPosition()
+		if cursorX then
+			if self.m_DrawCursor then
+				cursorX, cursorY = cursorX*screenWidth, cursorY*screenHeight
+				dxDrawImage(cursorX, cursorY, 12, 20, "res/images/GUI/Cursor.png", 0, 0, 0, Color.White, true)
+			end
+		end
 	end
 end
 

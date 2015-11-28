@@ -62,6 +62,7 @@ function Session:update()
     ["locale"] = self.m_Player:getLocale();
     ["playTime"] = self.m_Player:getPlayTime();
     ["IP"] = self.m_Player:getIP();
+    ["jobPoints"] = self.m_Player:getJobPoints();
 })
   self.m_Player:setPrivateSync("SessionInfo", self:getPlayerInfo())
 

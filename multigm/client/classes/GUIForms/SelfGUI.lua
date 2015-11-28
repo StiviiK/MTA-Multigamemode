@@ -124,6 +124,15 @@ function SelfGUI:constructor()
   self.m_LocaleChangeButton = GUIButton:new(self.m_Width*0.02, self.m_Height*0.27, self.m_Width*0.35, self.m_Height*0.055, _"Speichern", tabSettings)
   self.m_LocaleChangeButton.onLeftClick = function () local _, index = self.m_LocaleChange:getIndex() triggerServerEvent("Player_changeLanguage", localPlayer, index) end
 
+  GUILabel:new(self.m_Width*0.02, self.m_Height*0.34, self.m_Width*0.8, self.m_Height*0.07, _"Cursor Modus", tabSettings)
+	self.m_CursorChange = GUIChanger:new(self.m_Width*0.02, self.m_Height*0.41, self.m_Width*0.35, self.m_Height*0.07, tabSettings)
+	self.m_CursorChange:addItem("Normal")
+	self.m_CursorChange:addItem("Instant")
+	self.m_CursorChange.onChange = function(text, index)
+		core:getConfig():set("HUD", "CursorMode", index - 1)
+		Cursor:setCursorMode(toboolean(index - 1))
+	end
+	self.m_CursorChange:setIndex(core:get("HUD", "CursorMode", 0) + 1, true)
 end
 
 function SelfGUI:onShow()

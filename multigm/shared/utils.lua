@@ -258,3 +258,7 @@ function resolveError(hash)
 	assert(type(hash) == "string", "Bad Argument @ resolveError [Exepected <<Error-Hash>> at argument 1, got "..type(hash).."]")
 	return table.find(_G, hash)
 end
+
+function toboolean(num)
+	return num ~= 0 and num ~= "0"
+end

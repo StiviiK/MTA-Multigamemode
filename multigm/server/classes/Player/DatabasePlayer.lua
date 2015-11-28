@@ -74,6 +74,7 @@ function DatabasePlayer:load()
 	-- Sync important Stuff
 	if self:isActive() then
 		self:setPrivateSync("AccountType", self:getAccount():getType())
+		self:setPublicSync("JobPoints", self:getJobPoints())
 	end
 
 	-- Set non element related stuff (otherwise just save it)
@@ -96,6 +97,7 @@ end
 function DatabasePlayer:loadGuest()
 	-- Sync important Stuff
 	self:setPrivateSync("AccountType", self:getAccount():getType())
+	self:setPrivateSync("JobPoints", self:getJobPoints())
 
 	-- Reset data to Sync it
 	self:setLocale(self.m_Locale)
