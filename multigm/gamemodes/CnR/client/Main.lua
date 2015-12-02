@@ -25,16 +25,16 @@ function CopsnRobbers:constructor()
   addEventHandler("CreateFractionSelectMenu", root, bind(CopsnRobbers.CreateFractionSelectMenu, self))
   addEventHandler("ShowRadar", root, bind(CopsnRobbers.ShowRadar, self))
   addEventHandler("HideRadar", root, bind(CopsnRobbers.HideRadar, self))
-  
+
   addEventHandler("CreatePlayerBlip" , root, bind(CopsnRobbers.CreatePlayerBlip, self))
   addEventHandler("DestroyPlayerBlip", root, bind(CopsnRobbers.DestroyPlayerBlip, self))
-  
+
   addEventHandler("CreateMoneyDeliveryCheckpoint" , root, bind(CopsnRobbers.CreateMoneyDeliveryCheckpoint, self))
  ----------
 
    -- Load translation file
   TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
-  
+
 
 -----------CNR_DEBUG---------------
  -- DebugOutPut( "CopsnRobbers:constructor" )
@@ -64,19 +64,22 @@ self:ShopGUI_Event ()
 
 	---------------------------CNR_DEBUG------------------------------------
 				if CNR_DEBUG then
-					
+
 					for i = 1,10 do
 					outputChatBox("\n",tocolor(0,255,0))
-					
+
 					end
 					outputChatBox("### CNR_DEBUG Enabled ###",tocolor(0,255,0))
 					outputDebugString("------------------------------------------------------------------------------------------------------------------------------")
 				end
 	-----------------------------------------------------------------------
-	
+
 	-----------CNR_DEBUG---------------
  -- DebugOutPut( "CopsnRobbers:onPlayerJoin" )
 -----------------------------------
+
+  -- Change HelpBar Text
+  HelpBar:getSingleton():setText(HelpTexts.Gamemodes.CnR)
 end
 
 
@@ -109,7 +112,7 @@ self:DestroyAllPlayerBlip()
 
  HudComponentVisible(false)
  -- Delete Fraction Selection Menu
-	
+
 	if self.FractionSelectionMenu and not CNR_DEBUG then
 	self.FractionSelectionMenu:delete ()
 	end
@@ -117,10 +120,10 @@ self:DestroyAllPlayerBlip()
 	Engine.restoreCOL(1318)
 	Engine.restoreModel(1318)
  -- Hide Radar
-	self:DestroyWeaponSelection ()	
+	self:DestroyWeaponSelection ()
 	MiniMap:getSingleton():hide()
 	self.ShopGUI_destructor()
---Robbery	
+--Robbery
 	self:DestroyMoneyDeliveryCheckpoint(source)
 end
 
@@ -153,4 +156,3 @@ setPlayerHudComponentVisible (  "radio", false )
 setPlayerHudComponentVisible (  "area_name", false )
 setPlayerHudComponentVisible (  "vehicle_name", false )
 end
-

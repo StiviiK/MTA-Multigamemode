@@ -34,14 +34,22 @@ function SelfGUI:constructor()
   GUILabel:new(self.m_Width*0.02, self.m_Height*0.373, self.m_Width*0.25, self.m_Height*0.06, _"Rang:", tabGeneral)
   GUILabel:new(self.m_Width*0.3, self.m_Height*0.19, self.m_Width*0.4, self.m_Height*0.06, getPlayerName(localPlayer), tabGeneral)
   self.m_AccountTypeLabel = GUILabel:new(self.m_Width*0.3, self.m_Height*0.25, self.m_Width*0.4, self.m_Height*0.06, "", tabGeneral)
-  localPlayer:setPrivateSyncChangeHandler("AccountType", function (type) self:adjustGeneralTab(type, false) end)
+  localPlayer:setPrivateSyncChangeHandler("AccountType", function (type) self:adjustGeneralTab(type, false, false) end)
   self.m_AccountTypeHelpLabel = GUILabel:new(self.m_Width*0.3, self.m_Height*0.25, self.m_Width*0.03, self.m_Height*0.06, _"(?)", tabGeneral):setColor(Color.Orange)
   self.m_AccountTypeHelpLabel.onHover = function () self.m_AccountTypeHelpLabel:setColor(Color.White) end
   self.m_AccountTypeHelpLabel.onUnhover = function () self.m_AccountTypeHelpLabel:setColor(Color.Orange) end
-  self.m_AccountTypeHelpLabel.onLeftClick = function () outputChatBox("HelpBar:getSingleton():open(HelpTextTitles.General.AccountType, HelpTexts.General.AccountType)") end
+  self.m_AccountTypeHelpLabel.onLeftClick = function () HelpBar:getSingleton():open(HelpTexts.General.AccountType, true) end
   self.m_PlayTimeLabel = GUILabel:new(self.m_Width*0.3, self.m_Height*0.3125, self.m_Width*0.4, self.m_Height*0.06, _("%s Stunde(n) %s Minute(n)", 0, 0), tabGeneral)
   self.m_RankLabel = GUILabel:new(self.m_Width*0.3, self.m_Height*0.373, self.m_Width*0.4, self.m_Height*0.06, "", tabGeneral)
-  localPlayer:setPrivateSyncChangeHandler("Rank", function (rank) self:adjustGeneralTab(false, rank) end)
+  localPlayer:setPrivateSyncChangeHandler("Rank", function (rank) self:adjustGeneralTab(false, rank, false) end)
+  GUILabel:new(self.m_Width*0.02, self.m_Height*0.45, self.m_Width*0.8, self.m_Height*0.07, _"Game-Stats", tabGeneral)
+  GUILabel:new(self.m_Width*0.02, self.m_Height*0.525, self.m_Width*0.25, self.m_Height*0.06, _"Job-Points (JP):", tabGeneral) -- TODO: Maybe another name?
+  self.m_JobPointsLabel = GUILabel:new(self.m_Width*0.3, self.m_Height*0.525, self.m_Width*0.4, self.m_Height*0.06, localPlayer:getPublicSync("JobPoints"), tabGeneral)
+  self.m_JobPointsHelpLabel = GUILabel:new(self.m_Width*0.3, self.m_Height*0.525, self.m_Width*0.03, self.m_Height*0.06, _"(?)", tabGeneral):setColor(Color.Orange)
+  self.m_JobPointsHelpLabel.onHover = function () self.m_JobPointsHelpLabel:setColor(Color.White) end
+  self.m_JobPointsHelpLabel.onUnhover = function () self.m_JobPointsHelpLabel:setColor(Color.Orange) end
+  self.m_JobPointsHelpLabel.onLeftClick = function () HelpBar:getSingleton():open(HelpTexts.Game.JobPoints, true) end
+  localPlayer:setPublicSyncChangeHandler("JobPoints", function (jp) self:adjustGeneralTab(false, false, jp) end)
 
   -- Account
   local tabPoints = self.m_TabPanel:addTab(_"Punkte")
@@ -144,7 +152,7 @@ end
 
 function SelfGUI:TabPanel_TabChanged(tabId)
   if tabId == self.m_TabGeneral.TabIndex then
-    self:adjustGeneralTab(localPlayer:getAccountType(), localPlayer:getRank())
+    self:adjustGeneralTab(localPlayer:getAccountType(), localPlayer:getRank(), localPlayer:getJobPoints())
   elseif tabId == self.m_TabSession.TabIndex then
     self:adjustSessionTab()
   elseif tabId == self.m_TabFriends.TabIndex then
@@ -152,7 +160,7 @@ function SelfGUI:TabPanel_TabChanged(tabId)
   end
 end
 
-function SelfGUI:adjustGeneralTab(AccountType, Rank)
+function SelfGUI:adjustGeneralTab(AccountType, Rank, JobPoints)
   local hours, minutes = math.floor(localPlayer:getPlayTime()/60), (localPlayer:getPlayTime() - math.floor(localPlayer:getPlayTime()/60)*60)
   self.m_PlayTimeLabel:setText(_("%s Stunde(n) %s Minute(n)", hours, minutes))
 
@@ -162,6 +170,10 @@ function SelfGUI:adjustGeneralTab(AccountType, Rank)
   end
   if Rank then
     self.m_RankLabel:setText(_(RANK[Rank]))
+  end
+  if JobPoints then
+    self.m_JobPointsLabel:setText(tostring(JobPoints))
+    self.m_JobPointsHelpLabel:setPosition(self.m_Width*0.295 + dxGetTextWidth(JobPoints, self.m_JobPointsLabel:getFontSize(), self.m_JobPointsLabel:getFont()) + 10, self.m_Height*0.525)
   end
 end
 

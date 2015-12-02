@@ -5,7 +5,9 @@ registerElementClass("player", Player)
 function Player:constructor()
   self:setDimension(PRIVATE_DIMENSION_SERVER)
   self:setCameraTarget(self)
+  self:fadeCamera(true)
   self:setFrozen(true)
+  self:setHudComponentVisible("all", false)
 
   self.m_PrivateSync = {}
 	self.m_PrivateSyncUpdate = {}

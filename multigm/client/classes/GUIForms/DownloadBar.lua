@@ -29,6 +29,11 @@ function DownloadBar:constructor(callback, callbackargs)
 
   self.m_Callback = callback
   self.m_CallbackArgs = callbackargs or {}
+
+  -- Hide HelpBar help label
+  if HelpBar:isInstantiated() then
+    HelpBar:getSingleton().m_HelpLabel:setVisible(false)
+  end
 end
 
 function DownloadBar:updateData(fileData, latentStatus)
@@ -42,5 +47,10 @@ function DownloadBar:destructor()
 
   if self.m_Callback then
     self.m_Callback(unpack(self.m_CallbackArgs))
+  end
+
+  -- Show HelpBar help label
+  if HelpBar:isInstantiated() then
+    HelpBar:getSingleton().m_HelpLabel:setVisible(true)
   end
 end

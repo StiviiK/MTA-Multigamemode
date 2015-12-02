@@ -46,4 +46,7 @@ FontAwesomeSymbols = {
 	Gamepad = "";
 	Bug = "";
 	WhatsApp = "";
+	ArrowRight = "";
+	ArrowLeft = "";
+	QuestionCircle = "";
 }

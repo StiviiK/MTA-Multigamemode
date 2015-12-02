@@ -10,6 +10,8 @@ function RenegadeSquad:destructor()
 end
 
 function RenegadeSquad:onPlayerJoin()
+  -- Change HelpBar Text
+  HelpBar:getSingleton():setText(HelpTexts.Gamemodes.RnS)
 end
 
 function RenegadeSquad:onPlayerLeft()

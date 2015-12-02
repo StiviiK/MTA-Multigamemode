@@ -23,6 +23,7 @@ function Core:constructor()
 	-- Instantiate TranslationManager
 	TranslationManager:new()
 
+	-- Instantiate classes
   if DEBUG then
 		Debugging:new()
 	end
@@ -43,6 +44,9 @@ function Core:ready()
 end
 
 function Core:afterLogin()
+	-- Instantiate classes
+	HelpBar:new()
+
 	-- Create bindings
 	SelfGUI:new():close()
 	addCommandHandler("self", function () SelfGUI:getSingleton():open() end)
@@ -55,6 +59,9 @@ function Core:afterLogin()
 	    FastLobby:new()
 	  end
 	end)
+
+	-- Set default text @ HelpBar
+	HelpBar:getSingleton():setText(HelpTexts.General.Main)
 end
 
 function Core:destructor()

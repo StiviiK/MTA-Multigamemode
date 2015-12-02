@@ -131,6 +131,7 @@
 				<script src="client/classes/GUIElements/KarmaBar.lua" type="client"/>
 
 				<!-- GUI Forms -->
+				<script src="client/classes/GUIForms/HelpBar.lua" type="client"/>
 				<script src="client/classes/GUIForms/SelfGUI.lua" type="client"/>
 				<script src="client/classes/GUIForms/QuestionBox.lua" type="client"/>
 				<script src="client/classes/GUIForms/PasswordBox.lua" type="client"/>
@@ -168,10 +169,10 @@
 			<metafile src="gamemodes/CnR/meta.xml"/>
 
 		<!-- Shared -->
-			
+
 			<script src="gamemodes/CnR/constants.lua" type="shared"/>
 			<script src="gamemodes/CnR/DEBUG/DEBUG.lua" type="shared"/>
-			
+
 			<file src="gamemodes/CnR/res/fx/shader.fx" />
 
 		<!-- Server -->
@@ -188,7 +189,7 @@
 			<script src="gamemodes/CnR/server/Weapon_Shop_List.lua" type="server"/>
 			<script src="gamemodes/CnR/server/24_7_Shop.lua" type="server"/>
 			<script src="gamemodes/CnR/server/24_7_Shop_List.lua" type="server"/>
-			
+
 
 		<!-- Client -->
 			<script src="gamemodes/CnR/client/Init.lua" type="client"/>
@@ -206,10 +207,10 @@
 			<script src="gamemodes/CnR/Usefull/GateMaker/GateList.lua" type="server"/>
 			<script src="gamemodes/CnR/Usefull/TeleportMaker/client.lua" type="client"/>
 			<script src="gamemodes/CnR/Usefull/Radar/Radar_c.lua" type="client"/>
-			
+
 			<script src="gamemodes/CnR/Usefull/Tazer/server.lua" type="server"/>
 			<script src="gamemodes/CnR/Usefull/Tazer/client.lua" type="client"/>
-			
+
 			<script src="gamemodes/CnR/Usefull/Develop/server.lua" type="server"/>
 			<script src="gamemodes/CnR/Usefull/Develop/client.lua" type="client"/>
 
@@ -228,7 +229,7 @@
 		<!-- Client -->
 			<script src="gamemodes/RnS/client/Init.lua" type="client"/>
 			<script src="gamemodes/RnS/client/Main.lua" type="client"/>
-						
+
 
 
 

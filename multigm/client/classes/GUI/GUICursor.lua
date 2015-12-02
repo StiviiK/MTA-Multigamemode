@@ -17,7 +17,7 @@ function GUICursor:constructor()
 			showCursor(state == "down")
 		else
 			if isCursorShowing() then
-				self.m_Counter = 0
+				--self.m_Counter = 0
 				showCursor(false)
 			else
 				showCursor(true)
