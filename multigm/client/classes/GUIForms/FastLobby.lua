@@ -5,8 +5,11 @@ function FastLobby:constructor()
   GUIForm.constructor(self, 0, 0, screenWidth, screenHeight)
 
   -- Check for visible GUI Elements
-  if SelfGUI:getSingleton().m_Visible then
+  if SelfGUI:getSingleton():isVisible() then
     SelfGUI:getSingleton():close()
+  end
+  if HelpBar:isInstantiated() then
+    HelpBar:getSingleton():setText(HelpTexts.General.FastLobby)
   end
 
   self.m_Gamemodes = {
@@ -132,6 +135,12 @@ function FastLobby:constructor()
 end
 
 function FastLobby:destructor()
+  -- Reset HelpBar to default text
+  if HelpBar:isInstantiated() then
+    HelpBar:getSingleton():setText(HelpTexts.General.Main)
+  end
+
+
   GUIForm.destructor(self)
 
   showChat(true)

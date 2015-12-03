@@ -13,13 +13,5 @@ function Version:setVersion(versionString)
 end
 
 function Version:setRevision()
-	if BUILD == "development" then
-		VERSION_LABEL = ("%s %sdev"):format(PROJECT_NAME, VERSION)
-	elseif BUILD == "unstable" then
-		VERSION_LABEL = ("%s %s unstable"):format(PROJECT_NAME, VERSION)
-	else
-		VERSION_LABEL = ("%s %s"):format(PROJECT_NAME, VERSION)
-	end
-
 	self:setVersion(VERSION_LABEL)
 end

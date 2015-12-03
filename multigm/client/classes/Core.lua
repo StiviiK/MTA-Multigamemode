@@ -16,8 +16,8 @@ function Core:constructor()
 
 	-- Instantiate ConfigManager
 	self.m_Config = ConfigXML:new("config.xml")
-	if core:get("Account", "PrivateKey", false) ~= "mta" then -- TODO: Change this block later
-		core:set("Account", "PrivateKey", "mta")
+	if self:get("Account", "PrivateKey", false) ~= "mta" then -- TODO: Change this block later
+		self:set("Account", "PrivateKey", "mta")
 	end
 
 	-- Instantiate TranslationManager

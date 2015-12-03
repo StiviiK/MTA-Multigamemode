@@ -6,20 +6,19 @@ function HelpBar:constructor()
 
   self.m_HelpLabel = GUILabel:new(screenWidth - screenWidth*0.055/ASPECT_RATIO_MULTIPLIER , screenHeight - screenHeight*0.125, screenWidth*0.05/ASPECT_RATIO_MULTIPLIER, screenHeight*0.1, FontAwesomeSymbols.QuestionCircle)
     :setFont(FontAwesome(screenHeight*0.1))
-  self.m_HelpLabel.onHover = function () self.m_HelpLabel:setColor(Color.Orange) end
-  self.m_HelpLabel.onUnhover = function () self.m_HelpLabel:setColor(Color.White) end
-  self.m_HelpLabel.onLeftClick = function ()
-    self:open()
-  end
+    :setColor(Color.Orange)
+  self.m_HelpLabel.onHover = function () self.m_HelpLabel:setColor(Color.White) end
+  self.m_HelpLabel.onUnhover = function () self.m_HelpLabel:setColor(Color.Orange) end
+  self.m_HelpLabel.onLeftClick = function () self:open() end
 
   self.m_Rectangle = GUIRectangle:new(self.m_Width, 0, self.m_Width, self.m_Height, tocolor(0, 0, 0, 200), self)
   self.m_TitleLabel = GUILabel:new(self.m_Width*0.05, self.m_Height*0.01, self.m_Width*0.9, self.m_Height*0.1, _"Hilfe", self.m_Rectangle):setColor(Color.Orange)
   self.m_SubTitleLabel = GUILabel:new(self.m_Width*0.05, self.m_Height*0.1, self.m_Width*0.9, self.m_Height*0.04, "Kein Text", self.m_Rectangle):setColor(Color.Orange)
   self.m_TextLabel = GUILabel:new(self.m_Width*0.05, self.m_Height*0.15, self.m_Width*0.9, self.m_Height*0.8, LOREM_IPSUM, self.m_Rectangle):setFont(VRPFont(self.m_Height*0.029))
 
-  self.m_CloseButton = GUILabel:new(self.m_Width*0.75, self.m_Height*0.035, self.m_Width*0.25, self.m_Height*0.05, FontAwesomeSymbols.ArrowRight, self.m_Rectangle)
+  self.m_CloseButton = GUILabel:new(self.m_Width*0.75, self.m_Height*0.0325, self.m_Width*0.25, self.m_Height*0.055, FontAwesomeSymbols.ArrowRight, self.m_Rectangle)
     :setColor(Color.Orange)
-    :setFont(FontAwesome(self.m_Height*0.05))
+    :setFont(FontAwesome(self.m_Height*0.055))
 	self.m_CloseButton.onLeftClick = function() self:close() end
 	self.m_CloseButton.onHover = function () self.m_CloseButton:setColor(Color.White) end
 	self.m_CloseButton.onUnhover = function () self.m_CloseButton:setColor(Color.Orange) end
@@ -29,10 +28,11 @@ function HelpBar:constructor()
 end
 
 function HelpBar:destructor()
+  GUIForm.destructor(self)
 end
 
 function HelpBar:open(...)
-  if self:isVisible() then return end
+  if self:isVisible() then return false end
 
   -- Reset color according to the current gamemode
   local color = localPlayer:getGamemode():getColor() or Color.Orange
@@ -55,11 +55,10 @@ function HelpBar:close()
   self:fadeOut()
 
   -- Reset text, if temporary
-  if self.m_TemporaryHelp then
+  if self.m_TemporaryText then
     setTimer(function ()
-      self:setText(self.m_OldText, false)
-      self.m_TemporaryHelp = false
-      self.m_OldText = false
+      self:setText(self.m_TemporaryText, false)
+      self.m_TemporaryText = false
     end, 500, 1)
   end
 end
@@ -91,11 +90,10 @@ end
 function HelpBar:setText(tbl, temporary)
   if not tbl then return false end
   if temporary then
-    self.m_TemporaryHelp = true
-    self.m_OldText = {title = self.m_SubTitleLabel:getText(), text = self.m_TextLabel:getText()}
+    self.m_TemporaryText = {title = self.m_SubTitleLabel:getText(), text = self.m_TextLabel:getText()}
   end
 
   -- Set the translated text
   self.m_SubTitleLabel:setText(_(tbl.title))
-  self.m_TextLabel:setText(_(tbl.text, tbl.format ~= nil and unpack(tbl.format) or unpack({})))
+  self.m_TextLabel:setText(_(tbl.text, unpack(tbl.format or {})):gsub("/n/", "\n"))
 end

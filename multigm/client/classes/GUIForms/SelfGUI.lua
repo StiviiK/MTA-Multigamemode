@@ -13,6 +13,15 @@ function SelfGUI:constructor()
       delete(SelfGUI:getSingleton())
       SelfGUI:getSingleton():hide()
     end
+    if HelpBar:isInstantiated() then
+      if HelpBar:getSingleton():isVisible() then
+        delete(HelpBar:getSingleton())
+        HelpBar:getSingleton():open(HelpTexts.General.Main)
+      else
+        delete(HelpBar:getSingleton())
+        HelpBar:getSingleton():setText(HelpTexts.General.Main)
+      end
+    end
   end)
 
   -- Tabpanel
@@ -38,7 +47,7 @@ function SelfGUI:constructor()
   self.m_AccountTypeHelpLabel = GUILabel:new(self.m_Width*0.3, self.m_Height*0.25, self.m_Width*0.03, self.m_Height*0.06, _"(?)", tabGeneral):setColor(Color.Orange)
   self.m_AccountTypeHelpLabel.onHover = function () self.m_AccountTypeHelpLabel:setColor(Color.White) end
   self.m_AccountTypeHelpLabel.onUnhover = function () self.m_AccountTypeHelpLabel:setColor(Color.Orange) end
-  self.m_AccountTypeHelpLabel.onLeftClick = function () HelpBar:getSingleton():open(HelpTexts.General.AccountType, true) end
+  self.m_AccountTypeHelpLabel.onLeftClick = function () HelpBar:getSingleton():open(HelpTexts.Game.AccountType, true) end
   self.m_PlayTimeLabel = GUILabel:new(self.m_Width*0.3, self.m_Height*0.3125, self.m_Width*0.4, self.m_Height*0.06, _("%s Stunde(n) %s Minute(n)", 0, 0), tabGeneral)
   self.m_RankLabel = GUILabel:new(self.m_Width*0.3, self.m_Height*0.373, self.m_Width*0.4, self.m_Height*0.06, "", tabGeneral)
   localPlayer:setPrivateSyncChangeHandler("Rank", function (rank) self:adjustGeneralTab(false, rank, false) end)

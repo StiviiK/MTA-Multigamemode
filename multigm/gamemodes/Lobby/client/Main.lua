@@ -32,6 +32,11 @@ function Lobby:onPlayerJoin()
   toggleControl("fire", false)
   toggleControl("jump", false)
   toggleControl("aim_weapon", false)
+
+  if localPlayer:getLocale() then
+    -- Change HelpBar Text
+    HelpBar:getSingleton():setText(HelpTexts.General.Main)
+  end
 end
 
 function Lobby:onPlayerLeft()
@@ -41,9 +46,6 @@ function Lobby:onPlayerLeft()
   toggleControl("fire", true)
   toggleControl("jump", true)
   toggleControl("aim_weapon", true)
-
-  -- Change HelpBar Text
-  HelpBar:getSingleton():setText(HelpTexts.General.Main)
 end
 
 function Lobby:onDownloadStart()

@@ -42,6 +42,10 @@ msgstr "Administrator"
 msgid "Developer"
 msgstr "Developer"
 
+#: client/constants.lua:0
+msgid "vMultigamemode ist ein moderner Multigamemode, dieser wird von StiviK geschrieben und/n/administriert. Das Ziel dieses MG ist es viele verschiedene und aber auch im Typ verschiedene Gamemodes zusammen zu bringen, somit ist von Race bis DM alles dabei! Die einzelnen Gamemodes werden aber auch von anderen Spielern aus der Community, geschrieben und/n/administriert! Dieses Projekt wird verwaltet via GIT auf GitLab.com. Das Projekt befindet sich seit ca. September 2015 in Entwicklung, und wird auch immernoch weiterhin weiter Entwickelt. Die aktuelle Version ist derzeit %s./n//n/Beteiligte Entwickler:/n/vMG-Kern: StiviK/n/Cops'n'Robbers: Piccolo/n/Renegade Squad: StiviK"
+msgstr "vMultigamemode is an mordern multi-game mode, it is written and administered by StiviK. The objective of this multi-game mode is to bring many diffrent Gamemodes together. There is everything from Race to DM! Some of the Gamemodes are written and administered by Users of the Community! This project is managed via GIT on/n/GitLab.com. This Project is since September 2015 in Development, and it is still work in progress. The current Version is %s./n//n/Involved Developers:/n/vMG-Core: StiviK/n/Cops'n'Robbers: Piccolo/n/Renegade Squad: StiviK"
+
 #: client/classes/GUIForms/GamemodeInfo.lua:0
 msgid "Gamemode beitreten"
 msgstr "Join Gamemode"
@@ -258,8 +262,6 @@ msgstr "%s Visit us on Facebook."
 #: client/classes/GUIForms/SelfGUI.lua:0
 msgid "Diese Funktion ist im Gast-Modus nicht verfügbar!"
 msgstr "In guest mode this feature is not available!"
-
-
 
 #: DUE AN BUG - LEAVE THIS AT THE LAST LINE
 msgid ""

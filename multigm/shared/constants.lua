@@ -7,6 +7,14 @@ PROJECT_NAME = "vMultigamemode"
 VERSION = "0.1"
 BUILD = "development"
 
+if BUILD == "development" then
+	VERSION_LABEL = ("%s %sdev"):format(PROJECT_NAME, VERSION)
+elseif BUILD == "unstable" then
+	VERSION_LABEL = ("%s %s unstable"):format(PROJECT_NAME, VERSION)
+else
+	VERSION_LABEL = ("%s %s"):format(PROJECT_NAME, VERSION)
+end
+
 -- RANKS
 RANK = {}
 RANK[-1] = "Banned"

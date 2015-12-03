@@ -8,15 +8,19 @@ HelpTexts = {
   General = {
     Main = {
       title = "vMultigamemode";
-      text = "vMultigamemode ist ein moderner Multigamemode, dieser wird von StiviK geschrieben und\nadministriert. Das Ziel dieses MG ist es viele verschiedene und aber auch im Typ verschiedene Gamemodes zusammen zu bringen, somit ist von Race bis DM alles dabei! Die einzelenen Gamemodes werden aber auch von anderen Spielern aus der Community, geschrieben und\nadministriert! Dieses Projekt wird verwaltet via GIT auf GitLab.com. Das Projekt befindet sich seit ca. Setember 2015 in Entwicklung, und wird auch immernoch weiterhin weiter Entwickelt. Die aktuelle Version ist derzeit %s.\n\nDie Entwickler der einzelen Gamemodes sind folgende:\nvMG-Kern: StiviK\nCops'n'Robbers: Piccolo\nRenegade Squad: StiviK";
-      format = {("%sdev"):format(VERSION)};
+      text = "vMultigamemode ist ein moderner Multigamemode, dieser wird von StiviK geschrieben und/n/administriert. Das Ziel dieses MG ist es viele verschiedene und aber auch im Typ verschiedene Gamemodes zusammen zu bringen, somit ist von Race bis DM alles dabei! Die einzelnen Gamemodes werden aber auch von anderen Spielern aus der Community, geschrieben und/n/administriert! Dieses Projekt wird verwaltet via GIT auf GitLab.com. Das Projekt befindet sich seit ca. September 2015 in Entwicklung, und wird auch immernoch weiterhin weiter Entwickelt. Die aktuelle Version ist derzeit %s./n//n/Beteiligte Entwickler:/n/vMG-Kern: StiviK/n/Cops'n'Robbers: Piccolo/n/Renegade Squad: StiviK";
+      format = {VERSION_LABEL:gsub("vMultigamemode ", "")};
     };
+    FastLobby = {
+      title = "Quick-Lobby";
+      text = LOREM_IPSUM;
+    };
+  };
+  Game = {
     AccountType = {
       title = "Account-Typ";
       text = LOREM_IPSUM
     };
-  };
-  Game = {
     JobPoints = {
       title = "Job-Points";
       text = LOREM_IPSUM
