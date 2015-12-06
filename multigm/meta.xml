@@ -187,6 +187,7 @@
 			<script src="gamemodes/CnR/server/SaveSystem.lua" type="server"/>
 			<script src="gamemodes/CnR/server/Weapon_Shop.lua" type="server"/>
 			<script src="gamemodes/CnR/server/Weapon_Shop_List.lua" type="server"/>
+						<script src="gamemodes/CnR/server/PedRobberySystem.lua" type="server"/>
 			<script src="gamemodes/CnR/server/24_7_Shop.lua" type="server"/>
 			<script src="gamemodes/CnR/server/24_7_Shop_List.lua" type="server"/>
 
@@ -197,7 +198,10 @@
 			<script src="gamemodes/CnR/client/FractionSelection_c.lua" type="client"/>
 			<script src="gamemodes/CnR/client/Car_Radio.lua" type="client"/>
 			<script src="gamemodes/CnR/client/Weapon_Shop.lua" type="client"/>
+			<script src="gamemodes/CnR/client/PedRobberySystem.lua" type="client"/>
 			<script src="gamemodes/CnR/client/24_7_Shop.lua" type="client"/>
+			
+
 		<!-- USEFULL -->
 			<script src="gamemodes/CnR/Usefull/TeleportMaker/server.lua" type="server"/>
 			<script src="gamemodes/CnR/Usefull/TeleportMaker/TeleportsListe.lua" type="server"/>
@@ -213,7 +217,8 @@
 
 			<script src="gamemodes/CnR/Usefull/Develop/server.lua" type="server"/>
 			<script src="gamemodes/CnR/Usefull/Develop/client.lua" type="client"/>
-
+			
+			<script src="gamemodes/CnR/shared/Fraction.lua" type="shared"/>
 
 	<!-- Lobby -->
 		<!-- Meta -->

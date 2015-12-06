@@ -165,7 +165,15 @@ end
 
 function RechteckKantenBerechnung(w,h,winkel)
 if winkel < 0 	then winkel = 360-winkel end
+if winkel < 0 	then winkel = 360-winkel end
+if winkel < 0 	then winkel = 360-winkel end
+if winkel < 0 	then winkel = 360-winkel end
+
 if winkel > 360 then winkel = winkel-360 end
+if winkel > 360 then winkel = winkel-360 end
+if winkel > 360 then winkel = winkel-360 end
+if winkel > 360 then winkel = winkel-360 end
+
 local w,h =w/2,h/2
 local av = w/h
 local X,Y
@@ -216,6 +224,7 @@ elseif winkel > 270 and  winkel <  360 then
                     Y =  -h
            end
 else
+DebugOutPut("Error:RechteckKantenBerechnung winkel:"..winkel)
                    X = 0
                    Y = 0
 end
@@ -227,11 +236,10 @@ end
 
 
 
+local myBlip2 = createBlip( 120,40,0, 30, 50, 0, 0, 100 )-- Test später weg machen
+local myBlip2 = createBlip( 120,40,0, 0, 50, 255, 0, 100 )-- Test später weg machen
 
-
-
-local myBlip2 = createBlip( 100,0,0, 0, 50, 0, 0, 100 )-- Test später weg machen
-
+local BlipDrawAtedge = {}
 function MiniMap:DrawBlip ()
 	local x,y = getElementPosition(lp)
 	local _, _, RotZ = getElementRotation(lp)
@@ -265,24 +273,36 @@ local BlipVisibleDistance =  getBlipVisibleDistance ( Blip )
 				local PlayerY = (1500-y/2)--*self.ZoomWert
 
 	
-				local Winkel = findRotation(PlayerX,PlayerY,xg,yg)
+				local Winkel = findRotation(x,y,BlipX, BlipY)+180
 				local Distance = getDistanceBetweenPoints2D ( xg,yg, PlayerX, PlayerY )
 				-- outputChatBox("Winkel+180-camRotZ:"..Winkel+180-camRotZ)
-				local X,Y = RechteckKantenBerechnung(150,150,Winkel+180-camRotZ)
-				Var = 0.6
-			A = Vector2(xg,yg)
-			B = Vector2(PlayerX,PlayerY)
-			
-			VerbindungsVector = -(B - A)
-			VectorTT = B + VerbindungsVector * Var
-			if blipicon == 0 then 
-						if Distance < 50 then
-						dxDrawImage(xg,yg, blipsize, blipsize, self.Blip[blipicon], -camRotZ, 0, 0,tocolor(r, g, b)	)
+				-- local X,Y = RechteckKantenBerechnung(150,150,camRotZ)
+				
+	   		if blipicon == 0 then 
+						if Distance < 110 then
+						outputChatBox(("xg,yg = %s,%s"):format(xg,yg))
+							dxDrawImage(xg,yg, blipsize, blipsize, self.Blip[blipicon], -camRotZ, 0, 0,tocolor(r, g, b)	)
+							BlipDrawAtedge[Blip] = false
 						else
 						
-						outputChatBox("VectorTT.x,VectorTT.y: "..VectorTT.x.." | "..VectorTT.y)
-							dxDrawImage(VectorTT.x-blipsize/2,VectorTT.y-blipsize/2, blipsize, blipsize, self.Blip[blipicon], -camRotZ, 0, 0,tocolor(r, g, b)	)
+							BlipDrawAtedge[Blip] = true
+							
+						local bx,by = getPointFromDistanceRotation(PlayerX, PlayerY, self.Diagonal/2, Winkel)
 						
+				-- local bpx = math.max(Left, math.min(Right, x))
+				-- local bpy = math.max(Top, math.min(Bottem, y))
+				
+						local Left		= PlayerX-100
+						local Right 	= PlayerX+100
+						local Bottem 	= PlayerY+100
+						local Top 		= PlayerY-100
+						
+						local bx = math.max(Left, math.min(Right, bx))
+						local by = math.max(Top, math.min(Bottem, by))
+						
+						-- outputChatBox(("x2,y2 = %s,%s,%s"):format(bx,by,self.Diagonal))
+						-- dxDrawImage(bx-blipsize/2,by-blipsize/2, blipsize,blipsize, self.Blip[blipicon], -camRotZ, 0, 0	)
+						-- dxDrawLine(PlayerX, PlayerY, bx,by, tocolor(255, 0, 0))
 						end
 			else	
 						
@@ -348,6 +368,7 @@ end
 
 	local cam = getCamera()
 function MiniMap:render()
+
  local Interior = getElementInterior(lp)
 	if self.visible  then
 		if Interior == 0 then
@@ -417,8 +438,50 @@ function MiniMap:render()
 		local X,Y = RechteckKantenBerechnung(self.w,self.h ,camRotZ)
 		local mitteX,mitteY = self.x+((self.w)*0.5),	self.y+((self.h)*0.5)
 
+		-- -Blip--
+		
+	for i, Blip in pairs(getElementsByType("blip")) do
+
+	local BlipX, BlipY  = getElementPosition(Blip)
+	local BlipDistanceToPlayer = getDistanceBetweenPoints2D ( BlipX, BlipY, x,y )
+	local BlipVisibleDistance =  getBlipVisibleDistance ( Blip )
+	local blipicon 		= getBlipIcon(Blip)
+	
+	blipsize 		=  15
+				local xg,yg = 1500+(BlipX*0.5)-blipsize*0.5,1500+(-BlipY*0.5)-blipsize*0.5
+	
+				local PlayerX = (1500+x/2)--*self.ZoomWert
+				local PlayerY = (1500-y/2)--*self.ZoomWert
+				
+				local Winkel = findRotation(PlayerX,PlayerY,xg,yg)
+				-- outputChatBox("Winkel:"..Winkel)
+
+		local BlipOffsetX,BlipOffsetY = RechteckKantenBerechnung(self.w,self.h ,180+camRotZ+Winkel)
+	
+	
+	
+										---Blip--
+	
+	
+	
+										if BlipDrawAtedge[Blip] then
+												
+													local rot = findRotation(PlayerX,PlayerY,xg,yg)-camRotZ
+													local bpx, bpy = getPointFromDistanceRotation(mitteX,mitteY, 300,rot+270)
+													local bpx = math.max(self.x, math.min(self.x+self.w, bpx))
+													local bpy = math.max(self.y, math.min(self.y+self.h, bpy))		
+							
+															
+															dxDrawImage(bpx ,bpy, blipsize*2,blipsize*2, self.Blip[10], 0, 0, 0)
+								
+															
+										-- end
+										end
+	end	
+		
+		
 		local NorthSize = 50
-		dxDrawImage ( mitteX+X-NorthSize/2,mitteY+Y-NorthSize/2, NorthSize, NorthSize, self.Blip[4],0 )---Cursor
+		-- dxDrawImage ( mitteX+X-NorthSize/2,mitteY+Y-NorthSize/2, NorthSize, NorthSize, self.Blip[4],0 )---Cursor
 else
 	
  dxDrawImage ( self.x,self.y, self.w, self.h, self.RenderTargetInterior )---Umrandung
@@ -426,6 +489,7 @@ else
  
 		end
 	end
+
 end
 
 

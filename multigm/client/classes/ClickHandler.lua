@@ -13,6 +13,7 @@ function ClickHandler:constructor()
 	self.m_Menu = {
 		player = PlayerMouseMenu;
 	}
+	self.m_ElementMenu = {};
 	self.m_ClickInfo = false
 	self.m_DrawCursor = false
 
@@ -148,6 +149,20 @@ function ClickHandler:dispatchClick(clickInfo, trigger)
 		return true
 	end
 
+		-- Phase 4: 
+
+	if self.m_ElementMenu[element]  then
+		if self.m_ElementMenu[element]["Gamemode"] == localPlayer:getGamemode() then
+			if trigger then
+				if button == "left" then
+					self.m_ElementMenu[element]["Menu"]:getSingleton():open()
+				end
+			end
+			return true
+		end
+	end
+	
+	
 	return false
 end
 
@@ -156,9 +171,22 @@ function ClickHandler:addMouseMenu(menu, element)
 	table.insert(self.m_OpenMenus, menu)
 end
 
+function ClickHandler:addElementMenu(Gamemode,menu, element)
+self.m_ElementMenu[element] = {["Gamemode"] = Gamemode,["Menu"] = menu}
+end
+
+function ClickHandler:RemoveElementMenu(Gamemode,element)
+self.m_ElementMenu[element] = false
+end
+
+
 function ClickHandler:clearMouseMenus()
 	for k, menu in ipairs(self.m_OpenMenus) do
 		delete(menu)
 	end
 	self.m_OpenMenus = {}
+		
+	    for k, Element in ipairs(self.m_ElementMenu) do
+         ----TODO
+        end
 end

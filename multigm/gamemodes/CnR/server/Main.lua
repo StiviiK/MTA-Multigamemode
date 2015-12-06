@@ -24,7 +24,7 @@ function CopsnRobbers:constructor()
   self:CreateTeleports ()
   self:CreateGates ()
   --self:CreateWeaponPickup ()
-  self:CreateShops ()
+  self:CreateShops()
   self:SpawnFractionVehicles ()
   self:CreateAmmunationShops ()
   self.WastedHandler = function() self:Wasted() end
@@ -32,9 +32,9 @@ function CopsnRobbers:constructor()
   
   
   ----------TESTTESTSET---
-
--- AutoLogin ()---Weg machen
-
+if CNR_DEBUG then
+AutoLogin ()---Weg machen
+end
   
 end
 
@@ -47,6 +47,7 @@ function CopsnRobbers:destructor()
   for i, v in pairs(self.m_Maps) do
     delete(v)
   end
+removeEventHandler ( "onPlayerWasted", self:getRoot(), self.WastedHandler )
 end
 
 function CopsnRobbers:onPlayerJoin(player)
@@ -78,7 +79,6 @@ local Pos = player:getPosition()
 
 player:setCameraTarget(player)
 self:TazerRemove( player )
-removeEventHandler ( "onPlayerWasted", player, self.WastedHandler )
 self:Save_Player(player)
 setElementData( player,"RobbedMoney", 0)
 end
@@ -144,6 +144,8 @@ function CopsnRobbers:SpawnPlayer(player,x,y,z,rot,int,dim,skin,fraction)
 		  player:setCameraTarget(player)
 		  player:setModel(skin)
 		  self:setPlayerFraction(player,fraction)
+		  
+		  self:GivePlayerFractionWeapons(player,CNR_Cops,3)---YYXXXXXXXXXy
 		  
 		  player:setInterior(int)
 		  if int ~= 0 then 

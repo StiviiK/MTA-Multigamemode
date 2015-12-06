@@ -20,7 +20,7 @@ addCommandHandler("omm",outputMyMatrix)
 
 function CopsnRobbers:constructor()
 --Handler--
-  addRemoteEvents{"onCNRStartDownload","CreateFractionSelectMenu","ShowRadar","HideRadar","CreatePlayerBlip","DestroyPlayerBlip","CreateMoneyDeliveryCheckpoint"}
+  addRemoteEvents{"onCNRStartDownload","CreateFractionSelectMenu","ShowRadar","HideRadar","CreatePlayerBlip","DestroyPlayerBlip","CreateMoneyDeliveryCheckpoint","addEventOnPlayerClickPed","removeEventOnPlayerClickPed"}
   addEventHandler("onCNRStartDownload", root, bind(CopsnRobbers.onDownloadStart, self))
   addEventHandler("CreateFractionSelectMenu", root, bind(CopsnRobbers.CreateFractionSelectMenu, self))
   addEventHandler("ShowRadar", root, bind(CopsnRobbers.ShowRadar, self))
@@ -29,6 +29,9 @@ function CopsnRobbers:constructor()
   addEventHandler("CreatePlayerBlip" , root, bind(CopsnRobbers.CreatePlayerBlip, self))
   addEventHandler("DestroyPlayerBlip", root, bind(CopsnRobbers.DestroyPlayerBlip, self))
 
+  addEventHandler("addEventOnPlayerClickPed"    , root, bind(CopsnRobbers.addEventOnPlayerClickPed, self))
+  addEventHandler("removeEventOnPlayerClickPed" , root, bind(CopsnRobbers.removeEventOnPlayerClickPed, self))
+  
   addEventHandler("CreateMoneyDeliveryCheckpoint" , root, bind(CopsnRobbers.CreateMoneyDeliveryCheckpoint, self))
  ----------
 
@@ -57,7 +60,7 @@ function CopsnRobbers:onPlayerJoin()
 -----------
 
 self:CreateAllPlayerBlip (source)
-MiniMap:getSingleton():hide()
+MiniMap:new():hide()
 
 self:CreateWeaponSelectionEvent ()
 self:ShopGUI_Event ()
@@ -104,8 +107,14 @@ function CopsnRobbers:onPlayerLeft()
 --Handler--
    removeEventHandler("onClientPlayerDamage", source, self.TazerDamageEventHandler)
 -----------
+
+--Destroy--
 self:DestroyPlayerBlip(source)
 self:DestroyAllPlayerBlip()
+self:DestroyMoneyDeliveryCheckpoint(source)
+-----------
+
+
 -----------CNR_DEBUG---------------
 -- DebugOutPut( "CopsnRobbers:onPlayerLeft" )
 -----------------------------------

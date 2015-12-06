@@ -1,10 +1,27 @@
+
+function CopsnRobbers:addEventOnPlayerClickPed (ped)
+ClickHandler:getSingleton():addElementMenu(self,Shop_GUI, ped)
+end
+
+function CopsnRobbers:removeEventOnPlayerClickPed (ped)
+--ClickHandler:getSingleton():RemoveElementMenu(self,ped)
+end
+
+
+
+
+
+
+
+
+
+
 Shop_GUI = inherit(GUIForm)
 inherit(Singleton, Shop_GUI)
 
 
 			
 function Shop_GUI:constructor()
-
 self.m_Width  = 400
 self.m_Height = 500
 self.m_X   	  = (screenWidth-self.m_Width)*0.5
@@ -34,19 +51,35 @@ self.m_Y 	  = (screenHeight-self.m_Height)*0.5
 	 :setBarColor(Color.Green)
 	 
 	 self.m_Buy.onLeftClick = function ()
-	 
-								local BuyID = self.m_BuyItemGrid:getSelectedItem():getColumnText(1)
-									triggerServerEvent("BuyShopItem",lp,BuyID)
+									if self.m_BuyItemGrid:getSelectedItem() then
+										local BuyID = self.m_BuyItemGrid:getSelectedItem():getColumnText(1)
+										triggerServerEvent("BuyShopItem",lp,BuyID)
+									end
 							   end
 	 
 	 self.m_Exit = VRPButton:new(self.m_Width*0.53, self.m_Height*0.88, self.m_Width*0.45, self.m_Height*0.1, "Exit", true, self.m_Window)
 	 :setBarColor(Color.Red)
 
 self.m_Exit.onLeftClick = function ()
-							self:close()
-							Cursor:hide()
+							self:ShopGUI_close ()
 						  end
+ toggleAllControls(false)						  
 end
+
+
+
+function Shop_GUI:ShopGUI_open ()
+self:getSingleton():show()
+Cursor:show()
+toggleAllControls(false)
+end
+
+function Shop_GUI:ShopGUI_close ()
+self:getSingleton():close()
+Cursor:hide()
+toggleAllControls(true)
+end
+
 
 function CopsnRobbers:ShopGUI_Event ()
 self.ShopGUI_open_EventHandler  = function(...) self:ShopGUI_open(...) end
@@ -62,6 +95,7 @@ end
 function CopsnRobbers:ShopGUI_open ()
 Shop_GUI:getSingleton():show()
 Cursor:show()
+toggleAllControls(false)
 end
 
 
@@ -69,6 +103,7 @@ end
 function CopsnRobbers:ShopGUI_close ()
 Shop_GUI:getSingleton():close()
 Cursor:hide()
+toggleAllControls(true)
 end
 
 function CopsnRobbers:ShopGUI_destructor ()
@@ -78,34 +113,3 @@ end
 
 
 
-function CopsnRobbers:CreateMoneyDeliveryCheckpoint(Dim)
-local RandomDeliveryPoint = math.random(1,#CNR_LootDeliveryPoints)
-local x = CNR_LootDeliveryPoints[RandomDeliveryPoint]["x"]
-local y = CNR_LootDeliveryPoints[RandomDeliveryPoint]["y"]
-local z = CNR_LootDeliveryPoints[RandomDeliveryPoint]["z"]
-
-if self.MoneyDeliveryCheckpoint or self.MoneyDeliveryCheckpointBlip then self:DestroyMoneyDeliveryCheckpoint(source) end
-DebugOutPut("CreateMoneyDeliveryCheckpoint")
-self.MoneyDeliveryCheckpoint 	 = createMarker ( x,y,z, "cylinder", 4, 255, 0, 0, 255 )
-self.MoneyDeliveryCheckpoint:setDimension(Dim)
-self.MoneyDeliveryCheckpointBlip = createBlip   ( x,y,z, 41 )
-self.MoneyDeliveryCheckpointHandler = function(...) self:GivePlayerRobberyMoney(...) end
-addEventHandler ( "onClientMarkerHit", self.MoneyDeliveryCheckpoint, self.MoneyDeliveryCheckpointHandler )
-end
-
-function CopsnRobbers:GivePlayerRobberyMoney(hitPlayer, matchingDimension)
-	if getElementType( hitPlayer ) == "player" and matchingDimension then
-		triggerServerEvent("givePlayerRobbedMoney",hitPlayer)
-		self:DestroyMoneyDeliveryCheckpoint(hitPlayer)
-	end
-end
-
-function CopsnRobbers:DestroyMoneyDeliveryCheckpoint(Robber)
-DebugOutPut("DestroyMoneyDeliveryCheckpoint")
-	if self.MoneyDeliveryCheckpoint or self.MoneyDeliveryCheckpointBlip then
-		self.MoneyDeliveryCheckpoint:destroy()	
-		self.MoneyDeliveryCheckpointBlip:destroy()	 
-		self.MoneyDeliveryCheckpoint = false
-		self.MoneyDeliveryCheckpointBlip = false
-	end
-end
