@@ -12,6 +12,7 @@ for root, subdirs, files in os.walk("multigm/"):
 				
 				# Is there a BOM?
 				if file.read(3) == b"\xEF\xBB\xBF":
+					print("\tRemoved BOM from " + filePath.replace("\\", "/"))
 					numBOMFiles = numBOMFiles + 1
 					
 					content = file.read()
@@ -23,4 +24,7 @@ for root, subdirs, files in os.walk("multigm/"):
 			finally:
 				file.close()
 					
-print("Removed BOM of " + str(numBOMFiles) + " script files!")
+if numBOMFiles > 0:
+	print("\nRemoved BOM of " + str(numBOMFiles) + " script files!")
+else:
+	print("Removed BOM of " + str(numBOMFiles) + " script files!")

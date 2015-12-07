@@ -241,6 +241,7 @@
 	<!-- Files -->
 		<!-- Translation -->
 			<file src="res/translation/en/client.po"/>
+			<file src="res/translation/sk/client.po"/>
 
 		<!-- Images -->
 			<!-- GUI -->

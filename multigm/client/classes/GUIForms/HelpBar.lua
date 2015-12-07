@@ -11,7 +11,7 @@ function HelpBar:constructor()
   self.m_HelpLabel.onUnhover = function () self.m_HelpLabel:setColor(Color.Orange) end
   self.m_HelpLabel.onLeftClick = function () self:open() end
 
-  self.m_Rectangle = GUIRectangle:new(self.m_Width, 0, self.m_Width, self.m_Height, tocolor(0, 0, 0, 200), self)
+  self.m_Rectangle = GUIRectangle:new(self.m_Width, 0, self.m_Width, self.m_Height, tocolor(0, 0, 0, 175), self)
   self.m_TitleLabel = GUILabel:new(self.m_Width*0.05, self.m_Height*0.01, self.m_Width*0.9, self.m_Height*0.1, _"Hilfe", self.m_Rectangle):setColor(Color.Orange)
   self.m_SubTitleLabel = GUILabel:new(self.m_Width*0.05, self.m_Height*0.1, self.m_Width*0.9, self.m_Height*0.04, "Kein Text", self.m_Rectangle):setColor(Color.Orange)
   self.m_TextLabel = GUILabel:new(self.m_Width*0.05, self.m_Height*0.15, self.m_Width*0.9, self.m_Height*0.8, LOREM_IPSUM, self.m_Rectangle):setFont(VRPFont(self.m_Height*0.029))

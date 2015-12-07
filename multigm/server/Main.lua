@@ -1,4 +1,4 @@
-Main = {}
+n = {}
 
 function Main.resourceStart()
 	-- Instantiate Core

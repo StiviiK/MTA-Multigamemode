@@ -1,5 +1,5 @@
 
-CNR_DEBUG = true
+CNR_DEBUG = false
 
 function DebugOutPut (Text,r,g,b)
 
