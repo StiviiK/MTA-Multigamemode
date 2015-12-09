@@ -33,6 +33,7 @@
 			<script src="server/utils.lua" type="server"/>
 			<script src="server/API.lua" type="server"/>
 			<script src="server/classes/Debugging.lua" type="server"/>
+			<script src="server/classes/Performance.lua" type="server"/>
 			<script src="server/classes/Storage/SQL.lua" type="server"/>
 			<script src="server/classes/Storage/MySQL.lua" type="server"/>
 			<script src="server/classes/Provider.lua" type="server"/>
@@ -58,6 +59,7 @@
 			<script src="client/classes/Player/Player.lua" type="client"/>
 			<script src="client/classes/Player/LocalPlayer.lua" type="client"/>
 			<script src="client/classes/Debugging.lua" type="client"/>
+			<script src="client/classes/Performance.lua" type="client"/>
 			<script src="client/classes/Version.lua" type="client"/>
 			<script src="client/classes/Gamemode/Manager/GamemodeManager.lua" type="client"/>
 			<script src="client/classes/Gamemode/Gamemode.lua" type="client"/>
@@ -132,6 +134,7 @@
 
 				<!-- GUI Forms -->
 				<script src="client/classes/GUIForms/HelpBar.lua" type="client"/>
+				<script src="client/classes/GUIForms/DebugPanel.lua" type="client"/>
 				<script src="client/classes/GUIForms/SelfGUI.lua" type="client"/>
 				<script src="client/classes/GUIForms/QuestionBox.lua" type="client"/>
 				<script src="client/classes/GUIForms/PasswordBox.lua" type="client"/>
@@ -200,7 +203,7 @@
 			<script src="gamemodes/CnR/client/Weapon_Shop.lua" type="client"/>
 			<script src="gamemodes/CnR/client/PedRobberySystem.lua" type="client"/>
 			<script src="gamemodes/CnR/client/24_7_Shop.lua" type="client"/>
-			
+
 
 		<!-- USEFULL -->
 			<script src="gamemodes/CnR/Usefull/TeleportMaker/server.lua" type="server"/>
@@ -217,7 +220,7 @@
 
 			<script src="gamemodes/CnR/Usefull/Develop/server.lua" type="server"/>
 			<script src="gamemodes/CnR/Usefull/Develop/client.lua" type="client"/>
-			
+
 			<script src="gamemodes/CnR/shared/Fraction.lua" type="shared"/>
 
 	<!-- Lobby -->

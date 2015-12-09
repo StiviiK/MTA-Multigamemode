@@ -36,6 +36,7 @@ function Core:constructor ()
   MapManager:getSingleton():registerMap("gamemodes/CnR/res/maps/LSPolice.map")
 
 	-- Instantiate classes
+  Performance:new()
   Provider:new()
   PlayerManager:new()
   GamemodeManager:new()
@@ -94,6 +95,10 @@ function Core:onInternalError(error)
   end
 
   stopResource(getThisResource())
+end
+
+function Core:getStartTime()
+  return Main.coreStartTime
 end
 
 function Core:setAPIStatements()

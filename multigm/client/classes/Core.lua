@@ -28,6 +28,7 @@ function Core:constructor()
 		Debugging:new()
 	end
 
+	Performance:new()
 	Version:new()
 	Cursor = GUICursor:new()
 	Provider:new()
