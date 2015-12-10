@@ -141,6 +141,7 @@
 				<script src="client/classes/GUIForms/DownloadBar.lua" type="client"/>
 				<script src="client/classes/GUIForms/GamemodeInfo.lua" type="client"/>
 				<script src="client/classes/GUIForms/FastLobby.lua" type="client"/>
+				<script src="client/classes/GUIForms/New_FastLobby.lua" type="client"/>
 
 					<!-- Mouse Menus -->
 					<script src="client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua" type="client"/>
@@ -190,7 +191,7 @@
 			<script src="gamemodes/CnR/server/SaveSystem.lua" type="server"/>
 			<script src="gamemodes/CnR/server/Weapon_Shop.lua" type="server"/>
 			<script src="gamemodes/CnR/server/Weapon_Shop_List.lua" type="server"/>
-						<script src="gamemodes/CnR/server/PedRobberySystem.lua" type="server"/>
+			<script src="gamemodes/CnR/server/PedRobberySystem.lua" type="server"/>
 			<script src="gamemodes/CnR/server/24_7_Shop.lua" type="server"/>
 			<script src="gamemodes/CnR/server/24_7_Shop_List.lua" type="server"/>
 
@@ -223,7 +224,7 @@
 
 			<script src="gamemodes/CnR/shared/Fraction.lua" type="shared"/>
 
-	<!-- Lobby -->
+	<!-- Renegade Squad -->
 		<!-- Meta -->
 			<metafile src="gamemodes/RnS/meta.xml"/>
 
@@ -238,7 +239,20 @@
 			<script src="gamemodes/RnS/client/Init.lua" type="client"/>
 			<script src="gamemodes/RnS/client/Main.lua" type="client"/>
 
+	<!-- SuperSweeper -->
+		<!-- Meta -->
+			<metafile src="gamemodes/SuperS/meta.xml"/>
 
+		<!-- Shared -->
+			<script src="gamemodes/SuperS/constants.lua" type="shared"/>
+
+		<!-- Server -->
+			<script src="gamemodes/SuperS/server/Init.lua" type="server"/>
+			<script src="gamemodes/SuperS/server/Main.lua" type="server"/>
+
+		<!-- Client -->
+			<script src="gamemodes/SuperS/client/Init.lua" type="client"/>
+			<script src="gamemodes/SuperS/client/Main.lua" type="client"/>
 
 
 	<!-- Files -->
@@ -568,6 +582,7 @@
 				<transferfile src="res/images/backgrounds/lobby/lobby-bg.jpg"/>
 				<transferfile src="res/images/backgrounds/cnr/cnr-bg.jpg"/>
 				<transferfile src="res/images/backgrounds/rns/rns-bg.png"/>
+				<transferfile src="res/images/backgrounds/supers/supers-bg.png"/>
 
 			<!-- Backgrounds -->
 
