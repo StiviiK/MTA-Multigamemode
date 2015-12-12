@@ -24,8 +24,13 @@ function Core:constructor ()
   end
 
   -- Establish database connection
-	sql = MySQL:new(MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PW, MYSQL_DB, "")
-	sql:setPrefix("multigm")
+  if not IS_TESTSERVER then
+    MYSQL_PW = ""
+	MYSQL_DB = "multigm_develop"
+  end
+  
+  sql = MySQL:new(MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PW, MYSQL_DB, "")
+  sql:setPrefix("multigm")
 
   -- Instantiate TranslationManager
   TranslationManager:new()
