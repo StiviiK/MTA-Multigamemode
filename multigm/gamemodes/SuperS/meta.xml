@@ -1,4 +1,10 @@
 <meta>
   <!-- Translation -->
-    <transferfile src="gamemodes/RnS/res/translation/en/client.po"/>
+    <transferfile src="gamemodes/SuperS/res/translation/en/client.po"/>
+
+  <!-- Shader -->
+    <transferfile src="gamemodes/SuperS/res/shader/swap.fx"/>
+
+  <!-- Textures -->
+    <transferfile src="gamemodes/SuperS/res/images/sign_tresspass2.png"/>
 </meta>

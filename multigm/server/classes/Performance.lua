@@ -59,7 +59,11 @@ function Performance:update()
 end
 
 function Performance:sendPerformanceData()
-  triggerClientEvent(Element.getAllByType("player") --[[self.m_Players]], "receivePerformanceStats", root, self.m_PerformanceData)
+  for i, v in pairs(Element.getAllByType("player") --[[self.m_Players]]) do
+    if v:isClientReady() then
+      triggerClientEvent(v, "receivePerformanceStats", v, self.m_PerformanceData)
+    end  
+  end
 end
 
 function Performance:getLUATimings()

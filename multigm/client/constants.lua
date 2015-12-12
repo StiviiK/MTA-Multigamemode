@@ -35,6 +35,10 @@ HelpTexts = {
       title = "Renegade Squad";
       text = LOREM_IPSUM;
     };
+    SuperS = {
+      title = "Super Sweeper";
+      text = LOREM_IPSUM;
+    };
   };
   SelfGUI = {
     TabSession = {
