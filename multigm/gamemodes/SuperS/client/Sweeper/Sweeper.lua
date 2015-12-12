@@ -1,10 +1,10 @@
 local Sweeper = inherit(Object)
 
-function Sweeper:constructor(Id, owner, vehicle, sweeperTexture)
+function Sweeper:constructor(Id, owner, vehicle, weapon, sweeperTexture)
   self.m_Id = Id
   self.m_Owner = owner
   self.m_Vehicle = vehicle
-  self.m_Weapon = SuperS.Sweeper.Weapon:new(self, 23)
+  self.m_Weapon = SuperS.Sweeper.Weapon:new(self, weapon)
   self.m_Shader = SuperS.Shader:new("gamemodes/SuperS/res/shader/swap.fx")
   self.m_Shader:setTexture(sweeperTexture or "gamemodes/SuperS/res/images/Logos/default.png")
   self.m_Shader:applyShaderValue("swap")
@@ -42,19 +42,25 @@ function Sweeper:stopFire(...)
 end
 
 function Sweeper:onAttack(attacker)
-  local driver = source:getController()
+  if not isElement(self:getVehicle()) then return end
+  local driver = getVehicleController(self:getVehicle())
   if attacker ~= nil and driver == localPlayer then
     if attacker ~= driver then
       if attacker:getType() == "weapon" then -- Convert attacker (if it is the weapon) to a player
-        attacker = attacker.m_Sweeper:getOwner():getId()
-      elseif attacker:getType() == "player" then
-        attacker = attacker:getId()
+        attacker = attacker.m_Sweeper:getOwner()
       end
-      if type(attacker) == "number" then
-        triggerServerEvent("onSweeperAttack", root, SuperS.SweeperManager.getFromVehicle(source):getId(), attacker)
+      if attacker:getType() == "player" then
+        triggerServerEvent("onSweeperAttack", root, self:getId(), attacker)
       end
     end
   end
+end
+
+function Sweeper:changeWeapon(weapon)
+  if self.m_Weapon then
+    delete(self.m_Weapon)
+  end
+  self.m_Weapon = SuperS.Sweeper.Weapon:new(self, weapon)
 end
 
 -- "Export" to SuperS

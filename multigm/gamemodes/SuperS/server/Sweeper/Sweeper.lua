@@ -10,6 +10,7 @@ function Sweeper:constructor(player)
   self.m_Vehicle = Vehicle(574, SuperS.SweeperManager:getSingleton():getRandomSpawnPoint())
   self.m_Vehicle:setDimension(SuperS.getInstance():getDimension())
   self.m_LastAttacker = false
+  self.m_Weapon = 23
 
   player.m_SweeperId = self:getId()
   player:warpIntoVehicle(self.m_Vehicle)
@@ -61,6 +62,15 @@ function Sweeper:getVehicle()
   return self.m_Vehicle
 end
 
+function Sweeper:changeWeapon(weapon)
+  self.m_Weapon = weapon
+  triggerClientEvent(root, "changeSweeperWeapon", root, self:getId(), self:getWeapon())
+end
+
+function Sweeper:getWeapon()
+  return self.m_Weapon
+end
+
 function Sweeper:startFire()
   triggerClientEvent(root, "startSweeperFire", root, self:getId())
 end
@@ -69,8 +79,9 @@ function Sweeper:stopFire()
   triggerClientEvent(root, "stopSweeperFire", root, self:getId())
 end
 
-function Sweeper:onAttack(AttackerId)
-  self.m_LastAttacker = DatabasePlayer.getFromId(AttackerId)
+function Sweeper:onAttack(Attacker)
+  self.m_LastAttacker = Attacker
+  outputChatBox(Attacker:getName().." attacked "..self.m_Owner:getName().."'s Sweeper")
 end
 
 -- "Export" to SuperS

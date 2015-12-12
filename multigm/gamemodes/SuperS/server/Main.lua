@@ -46,6 +46,7 @@ end
 
 function SuperS:onPlayerJoin(player)
   player:triggerEvent("onSuperSStartDownload", player)
+  SuperS.SweeperManager:getSingleton():syncClientData(player)
 end
 
 function SuperS:onPlayerLeft(player)
