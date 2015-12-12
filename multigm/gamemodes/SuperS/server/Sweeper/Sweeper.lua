@@ -8,6 +8,7 @@ function Sweeper:constructor(player)
   self.m_Id = SuperS.SweeperManager:getSingleton():addRef(self)
   self.m_Owner = player
   self.m_Vehicle = Vehicle(574, SuperS.SweeperManager:getSingleton():getRandomSpawnPoint())
+  self.m_Vehicle:setDimension(SuperS.getInstance():getDimension())
 
   player.m_SweeperId = self:getId()
   player:warpIntoVehicle(self.m_Vehicle)

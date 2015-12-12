@@ -1,4 +1,7 @@
 function SuperS:constructor()
+  -- Export instance to SuperS.m_Instance
+  SuperS.m_Instance = self
+
   addRemoteEvents{"onSuperSStartDownload"}
   addEventHandler("onSuperSStartDownload", root, bind(SuperS.onDownloadStart, self))
 
@@ -36,4 +39,8 @@ function SuperS:onDownloadFinish()
   self.m_LobbyShader:setTexture("gamemodes/SuperS/res/images/sign_tresspass2.png")
   self.m_LobbyShader:applyShaderValue("swap")
   self.m_LobbyShader:applyToWorldTexture("sign_tresspass2")
+end
+
+function SuperS.getInstance()
+  return SuperS.m_Instance
 end
