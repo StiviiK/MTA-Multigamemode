@@ -44,8 +44,8 @@ function SweeperManager:isSweeper(veh)
 end
 
 function SweeperManager:getRandomSpawnPoint()
-  --return table.random(SuperS.m_Instance:get("SpawnPoints"))
-  return SuperS.m_Instance:get("SpawnPoints")[4]
+  return table.random(SuperS.m_Instance:get("SpawnPoints"))
+  --return SuperS.m_Instance:get("SpawnPoints")[4]
 end
 
 -- Event Zone

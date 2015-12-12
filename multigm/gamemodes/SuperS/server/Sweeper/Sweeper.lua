@@ -2,7 +2,7 @@ local Sweeper = inherit(Object)
 
 function Sweeper:constructor(player)
   if player.m_SweeperId then
-    --delete(SuperS.SweeperManager:getSingleton().getFromId(player.m_SweeperId))
+    delete(SuperS.SweeperManager:getSingleton().getFromId(player.m_SweeperId))
   end
 
   self.m_Id = SuperS.SweeperManager:getSingleton():addRef(self)
