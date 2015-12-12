@@ -1,10 +1,17 @@
 local Sweeper = inherit(Object)
 
-function Sweeper:constructor(Id, owner, vehicle)
+function Sweeper:constructor(Id, owner, vehicle, sweeperTexture)
   self.m_Id = Id
   self.m_Owner = owner
   self.m_Vehicle = vehicle
   self.m_Weapon = SuperS.Sweeper.Weapon:new(self, 23)
+  self.m_Shader = SuperS.Shader:new("gamemodes/SuperS/res/shader/swap.fx")
+  self.m_Shader:setTexture(sweeperTexture or "gamemodes/SuperS/res/images/Logos/default.png")
+  self.m_Shader:applyShaderValue("swap")
+  self.m_Shader:applyToWorldTexture("sweeper92decal128", self:getVehicle())
+
+  -- Events
+  addEventHandler("onClientVehicleDamage", self:getVehicle(), bind(self.onAttack, self))
 end
 
 function Sweeper:destructor()
@@ -16,6 +23,10 @@ end
 
 function Sweeper:getId()
   return self.m_Id
+end
+
+function Sweeper:getOwner()
+  return self.m_Owner
 end
 
 function Sweeper:getVehicle()
@@ -30,26 +41,21 @@ function Sweeper:stopFire(...)
   self.m_Weapon:stopFire(...)
 end
 
-function renderWall()
-    local x,y,w,h=-2301.47265625,697,800,800
-    local r,g,b,a=255,0,0,200
-    local s=10
-	dxSetBlendMode("modulate_add")
-    for z=0,130,4 do
-        dxDrawLine3D(x,y,z,x,y+h,z,tocolor(r,g,b,a),s,false)
-        dxDrawLine3D(x,y+h,z,x+w,y+w,z ,tocolor(r,g,b,a),s,false)
-        dxDrawLine3D(x+w,y+w,z,x+w,y,z ,tocolor(r,g,b,a),s,false)
-        dxDrawLine3D(x+w,y,z,x,y,z ,tocolor(r,g,b,a),s,false)
+function Sweeper:onAttack(attacker)
+  local driver = source:getController()
+  if attacker ~= nil and driver == localPlayer then
+    if attacker ~= driver then
+      if attacker:getType() == "weapon" then -- Convert attacker (if it is the weapon) to a player
+        attacker = attacker.m_Sweeper:getOwner():getId()
+      elseif attacker:getType() == "player" then
+        attacker = attacker:getId()
+      end
+      if type(attacker) == "number" then
+        triggerServerEvent("onSweeperAttack", root, SuperS.SweeperManager.getFromVehicle(source):getId(), attacker)
+      end
     end
-		-- 4 krasse Linien am Ende
-		dxDrawLine3D(x,y,0,x,y,130,tocolor(r,g,b,a),15,false)
-        dxDrawLine3D(x,y+h,0,x,y+h,130,tocolor(r,g,b,a),15,false)
-        dxDrawLine3D(x+w,y,0,x+w,y,130,tocolor(r,g,b,a),15,false)
-        dxDrawLine3D(x+w,y+h,0,x+w,y+h,130,tocolor(r,g,b,a),15,false)
-	dxSetBlendMode("blend")
+  end
 end
-addEventHandler("onClientPreRender",getRootElement(),renderWall)
-
 
 -- "Export" to SuperS
 SuperS.Sweeper = Sweeper

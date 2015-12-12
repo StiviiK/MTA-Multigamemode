@@ -27,6 +27,16 @@ function SweeperManager.getFromId(Id)
   return SweeperManager.Map[Id]
 end
 
+function SweeperManager.getFromVehicle(veh)
+  for i, v in pairs(SweeperManager.Map) do
+    if v:getVehicle() == veh then
+      return v
+    end
+  end
+
+  return false
+end
+
 -- EVENT ZONE
 function SweeperManager:Event_CreateClientSweeper(...)
   self:addRef(SuperS.Sweeper:new(...))

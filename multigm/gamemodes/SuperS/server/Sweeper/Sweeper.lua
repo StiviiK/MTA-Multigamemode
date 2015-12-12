@@ -2,13 +2,14 @@ local Sweeper = inherit(Object)
 
 function Sweeper:constructor(player)
   if player.m_SweeperId then
-    delete(SuperS.SweeperManager:getSingleton().getFromId(player.m_SweeperId))
+    --delete(SuperS.SweeperManager:getSingleton().getFromId(player.m_SweeperId))
   end
 
   self.m_Id = SuperS.SweeperManager:getSingleton():addRef(self)
   self.m_Owner = player
   self.m_Vehicle = Vehicle(574, SuperS.SweeperManager:getSingleton():getRandomSpawnPoint())
   self.m_Vehicle:setDimension(SuperS.getInstance():getDimension())
+  self.m_LastAttacker = false
 
   player.m_SweeperId = self:getId()
   player:warpIntoVehicle(self.m_Vehicle)
@@ -28,6 +29,16 @@ function Sweeper:constructor(player)
 end
 
 function Sweeper:destructor()
+  if self.m_LastAttacker then
+    if self.m_LastAttacker ~= self.m_Owner then
+      -- Reward for the LastAttacker
+      outputChatBox(self.m_LastAttacker:getName().." destroyed "..self.m_Owner:getName().."'s Sweeper!")
+    end
+  end
+  if self.m_Owner then
+    -- Respawn the owner
+  end
+
   SuperS.SweeperManager:getSingleton():destroyClient(self)
   SuperS.SweeperManager:getSingleton():removeRef(self)
 
@@ -56,6 +67,10 @@ end
 
 function Sweeper:stopFire()
   triggerClientEvent(root, "stopSweeperFire", root, self:getId())
+end
+
+function Sweeper:onAttack(AttackerId)
+  self.m_LastAttacker = DatabasePlayer.getFromId(AttackerId)
 end
 
 -- "Export" to SuperS

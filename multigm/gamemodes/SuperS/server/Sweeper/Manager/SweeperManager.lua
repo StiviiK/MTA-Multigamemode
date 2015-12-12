@@ -1,7 +1,10 @@
 local SweeperManager = inherit(Singleton)
 SweeperManager.Map = {}
+addRemoteEvents{"onSweeperAttack"}
 
 function SweeperManager:constructor()
+  -- Events
+  addEventHandler("onSweeperAttack", root, bind(self.Event_OnSweeperAttack, self))
 end
 
 function SweeperManager:destructor()
@@ -41,9 +44,15 @@ function SweeperManager:isSweeper(veh)
 end
 
 function SweeperManager:getRandomSpawnPoint()
-  return table.random(SuperS.m_Instance:get("SpawnPoints"))
+  --return table.random(SuperS.m_Instance:get("SpawnPoints"))
+  return SuperS.m_Instance:get("SpawnPoints")[4]
 end
 
+-- Event Zone
+function SweeperManager:Event_OnSweeperAttack(SweeperId, AttackerId)
+  if not self.getFromId(SweeperId) then return end
+  self.getFromId(SweeperId):onAttack(AttackerId)
+end
 
 -- "Export" to SuperS
 SuperS.SweeperManager = SweeperManager
