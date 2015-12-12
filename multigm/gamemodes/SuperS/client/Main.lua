@@ -17,12 +17,6 @@ end
 function SuperS:onPlayerJoin()
   -- Change HelpBar Text
   HelpBar:getSingleton():setText(HelpTexts.Gamemodes.SuperS)
-
-  -- Create Lobby Shader
-  self.m_LobbyShader = SuperS.Shader:new("gamemodes/SuperS/res/shader/swap.fx")
-  self.m_LobbyShader:setTexture("gamemodes/SuperS/res/images/sign_tresspass2.png")
-  self.m_LobbyShader:applyShaderValue("swap")
-  self.m_LobbyShader:applyToWorldTexture("sign_tresspass2")
 end
 
 function SuperS:onPlayerLeft()
@@ -36,4 +30,10 @@ end
 
 function SuperS:onDownloadFinish()
   triggerServerEvent("onSuperSDownloadFinished", localPlayer)
+
+  -- Create Lobby Shader
+  self.m_LobbyShader = SuperS.Shader:new("gamemodes/SuperS/res/shader/swap.fx")
+  self.m_LobbyShader:setTexture("gamemodes/SuperS/res/images/sign_tresspass2.png")
+  self.m_LobbyShader:applyShaderValue("swap")
+  self.m_LobbyShader:applyToWorldTexture("sign_tresspass2")
 end
