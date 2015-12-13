@@ -7,6 +7,13 @@ Gamemode.destructor = pure_virtual
 Gamemode.onPlayerJoin = pure_virtual
 Gamemode.onPlayerLeft = pure_virtual
 
+function Gamemode:new(...)
+  local inst = new(self, ...)
+
+  self.m_Instance = inst
+  return inst
+end
+
 function Gamemode:virtual_constructor(name, desc, maxPlayers)
   self.m_Name = name or ""
   self.m_Description = desc or ""
@@ -108,3 +115,4 @@ function Gamemode:getId() return self.m_Id end
 function Gamemode:getName() return self.m_Name end
 function Gamemode:getDescription() return self.m_Description end
 function Gamemode:getDimension() return self.m_Dimension end
+function Gamemode:getInstance() return self.m_Instance end
