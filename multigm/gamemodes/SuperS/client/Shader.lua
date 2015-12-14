@@ -27,13 +27,13 @@ function Shader:setTexture(filePath)
   end
 end
 
-function Shader:applyShaderValue(key, value)
+function Shader:applyShaderValue(key, value, ...)
   local value = value or self.m_Texture
-  dxSetShaderValue(self.m_Shader, key, value)
+  dxSetShaderValue(self.m_Shader, key, value, ...)
 end
 
-function Shader:applyToWorldTexture(worldTex)
-  engineApplyShaderToWorldTexture(self.m_Shader, worldTex)
+function Shader:applyToWorldTexture(...)
+  engineApplyShaderToWorldTexture(self.m_Shader, ...)
 end
 
 -- "Export" to SuperS

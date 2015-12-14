@@ -2,7 +2,7 @@ local Border = inherit(Object)
 
 function Border:constructor(...)
   self.m_ColRectangle = ColShape.Rectangle(...)
-  self.m_ColRectangle:setDimension(GamemodeManager.getFromId(SuperS.getInstance():getId()):getDimension())
+  self.m_ColRectangle:setDimension(SuperS:getInstance():getDimension())
 
   -- Event Zone
   addEventHandler("onColShapeLeave", self.m_ColRectangle, bind(self.Event_OnColShapeLeave, self))

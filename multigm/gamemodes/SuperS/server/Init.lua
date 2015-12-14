@@ -2,8 +2,8 @@ SuperS = inherit(Gamemode)
 
 SuperS.ms_Settings = {
   Spawn = {
-    --Position  = Vector3(-1917, 946, 46);
-    Position = Vector3(-1903.998, 926.297, 35.016);
+    Position  = Vector3(-1917, 946, 46);
+    --Position = Vector3(-1903.998, 926.297, 35.016);
     Rotation  = 0;
     Interior  = 0;
   };

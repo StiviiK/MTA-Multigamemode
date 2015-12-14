@@ -11,6 +11,7 @@
 			<script src="shared/classes/Singleton.lua" type="shared"/>
 			<script src="shared/classes/MTAElement.lua" type="shared"/>
 			<script src="shared/classes/Package.lua" type="shared"/>
+			<script src="shared/classes/Stack.lua" type="shared"/>
 			<script src="shared/classes/Hook.lua" type="shared"/>
 			<script src="shared/Cache.lua" type="shared"/>
 			<script src="shared/crc32lua.lua" type="shared"/>
@@ -250,9 +251,11 @@
 			<script src="gamemodes/SuperS/server/Main.lua" type="server"/>
 
 			<!-- Sweeper -->
+			<script src="gamemodes/SuperS/server/Lobby/Lobby.lua" type="server"/>
 			<script src="gamemodes/SuperS/server/Border/Border.lua" type="server"/>
 			<script src="gamemodes/SuperS/server/Sweeper/Manager/SweeperManager.lua" type="server"/>
 			<script src="gamemodes/SuperS/server/Sweeper/Sweeper.lua" type="server"/>
+			<script src="gamemodes/SuperS/server/Sweeper/Item.lua" type="server"/>
 
 		<!-- Client -->
 			<script src="gamemodes/SuperS/client/Init.lua" type="client"/>
@@ -260,6 +263,7 @@
 			<script src="gamemodes/SuperS/client/Shader.lua" type="client"/>
 
 			<!-- Sweeper -->
+			<script src="gamemodes/SuperS/client/Lobby/Lobby.lua" type="client"/>
 			<script src="gamemodes/SuperS/client/Sweeper/Manager/SweeperManager.lua" type="client"/>
 			<script src="gamemodes/SuperS/client/Sweeper/Sweeper.lua" type="client"/>
 			<script src="gamemodes/SuperS/client/Sweeper/Weapon.lua" type="client"/>

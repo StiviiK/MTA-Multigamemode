@@ -1,20 +1,27 @@
 function SuperS:constructor()
-  -- Export instance to SuperS.m_Instance
-  SuperS.m_Instance = self
-
   addRemoteEvents{"onSuperSStartDownload"}
   addEventHandler("onSuperSStartDownload", root, bind(SuperS.onDownloadStart, self))
 
   -- Load translation file
   TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
 
-  --
+  -- Instantiate classes
   self.SweeperManager:new()
+
+  -- Update Lobby dim (when it is ready)
+  self:addSyncChangeHandler("Dimension", function (dim)
+    SuperS.Lobby:getSingleton():updateDimension(dim)
+  end)
 end
 
 function SuperS:destructor()
   -- Delete SweeperManager at last postion
   delete(SuperS.SweeperManager:getSingleton())
+end
+
+function SuperS:onGamemodesLoaded()
+  -- Instantiate Lobby
+  SuperS.Lobby:new()
 end
 
 function SuperS:onPlayerJoin()
@@ -39,8 +46,4 @@ function SuperS:onDownloadFinish()
   self.m_LobbyShader:setTexture("gamemodes/SuperS/res/images/sign_tresspass2.png")
   self.m_LobbyShader:applyShaderValue("swap")
   self.m_LobbyShader:applyToWorldTexture("sign_tresspass2")
-end
-
-function SuperS.getInstance()
-  return SuperS.m_Instance
 end

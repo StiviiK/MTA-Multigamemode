@@ -10,3 +10,9 @@ end
 
 -- Shorten function
 function SuperS:get(...) return self:getSetting(...) end
+
+
+-- CONSTANTS
+WEAPON_STATE_READY = "ready"
+WEAPON_STATE_FIRING = "firing"
+WEAPON_STATE_RELOADING = "reloading"

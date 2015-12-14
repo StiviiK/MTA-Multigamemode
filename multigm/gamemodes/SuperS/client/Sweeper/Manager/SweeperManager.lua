@@ -1,6 +1,6 @@
 local SweeperManager = inherit(Singleton)
 SweeperManager.Map = {}
-addRemoteEvents{"createClientSweeper", "destroyClientSweeper", "startSweeperFire", "stopSweeperFire", "changeSweeperWeapon"}
+addRemoteEvents{"createClientSweeper", "destroyClientSweeper", "startSweeperFire", "stopSweeperFire", "changeSweeperWeapon", "fireSweeperRocket"}
 
 function SweeperManager:constructor()
   addEventHandler("createClientSweeper", root, bind(self.Event_CreateClientSweeper, self))
@@ -8,6 +8,7 @@ function SweeperManager:constructor()
   addEventHandler("startSweeperFire", root, bind(self.Event_StartSweeperFire, self))
   addEventHandler("stopSweeperFire", root, bind(self.Event_StopSweeperFire, self))
   addEventHandler("changeSweeperWeapon", root, bind(self.Event_ChangeSweeperWeapon, self))
+  addEventHandler("fireSweeperRocket", root, bind(self.Event_FireSweeperRocket, self))
 end
 
 function SweeperManager:destructor()
@@ -61,6 +62,11 @@ end
 function SweeperManager:Event_ChangeSweeperWeapon(Id, ...)
   if not self.getFromId(Id) then return end
   self.getFromId(Id):changeWeapon(...)
+end
+
+function SweeperManager:Event_FireSweeperRocket(Id, ...)
+  if not self.getFromId(Id) then return end
+  self.getFromId(Id):fireRocket(...)
 end
 
 -- "Export" to SuperS

@@ -18,7 +18,7 @@ function Weapon:constructor(sInstance, Id)
   self.m_Name = WEAPONS[self.m_WeaponId].Name
   self.m_Weapon = createWeapon(self.m_WeaponId, 0, 0, 0)
   self.m_Weapon:setProperty("fire_rotation", Vector3(self.m_OffSet.fx, self.m_OffSet.fy, self.m_OffSet.fz))
-  self.m_Weapon:setDimension(SuperS.getInstance():getDimension())
+  self.m_Weapon:setDimension(SuperS:getInstance():getDimension())
   self.m_Weapon.m_Sweeper = self.m_Sweeper
 
   -- Attach to the Sweeper
@@ -36,8 +36,8 @@ function Weapon:destructor()
 end
 
 function Weapon:startFire()
-  if self.m_Weapon:getState() == WEAPON_STATE_RELOADING --[[and getVehicleController(self.m_Sweeper:getVehicle() [Maybe so? TODO: Fix later) == localPlayer]] then
-
+  if self.m_Weapon:getState() == WEAPON_STATE_RELOADING and getVehicleController(self.m_Sweeper:getVehicle()) == localPlayer then
+    outputChatBox("Your Weapon have to reload!")
   else
     self.m_Weapon:setState(WEAPON_STATE_FIRING)
   end

@@ -1,7 +1,4 @@
 function SuperS:constructor()
-  -- Export instance to SuperS.m_Instance
-  SuperS.m_Instance = self
-
   -- Add events
   addRemoteEvents{"onSuperSDownloadFinished"}
   addEventHandler("onSuperSDownloadFinished", root, bind(SuperS.onDownloadComplete, self))
@@ -40,13 +37,23 @@ function SuperS:destructor()
 end
 
 function SuperS:onGamemodesLoaded()
+  -- Instantiate Lobby
+  SuperS.Lobby:new()
+
   -- Instantiate extra classes
   self.m_Border = SuperS.Border:new(unpack(self:get("BorderData")))
 end
 
 function SuperS:onPlayerJoin(player)
   player:triggerEvent("onSuperSStartDownload", player)
+
+  -- Sync SweeperData
   SuperS.SweeperManager:getSingleton():syncClientData(player)
+
+  -- Disable some controls
+  player:toggleControl("fire", false)
+  player:toggleControl("jump", false)
+  player:toggleControl("aim_weapon", false)
 end
 
 function SuperS:onPlayerLeft(player)
@@ -62,8 +69,4 @@ function SuperS:onDownloadComplete()
   client:setPosition(spawn.Position)
   client:setRotation(0, 0, spawn.Rotation)
   client:setInterior(spawn.Interior)
-end
-
-function SuperS.getInstance()
-  return SuperS.m_Instance
 end

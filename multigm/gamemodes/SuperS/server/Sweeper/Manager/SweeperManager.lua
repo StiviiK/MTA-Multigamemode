@@ -29,7 +29,7 @@ end
 
 function SweeperManager:createClient(ref)
   self.m_ClientData[ref:getId()] = ref
-  triggerClientEvent(root, "createClientSweeper", root, ref:getId(), ref.m_Owner, ref:getVehicle(), ref:getWeapon())
+  triggerClientEvent(root, "createClientSweeper", root, ref:getId(), ref.m_Owner, ref:getVehicle(), ref:getWeapon(), ref:getImage())
 end
 
 function SweeperManager:destroyClient(ref)
@@ -38,8 +38,8 @@ function SweeperManager:destroyClient(ref)
 end
 
 function SweeperManager:syncClientData(p)
-  for Id, ref in pairs(self.m_ClientData) do
-    triggerClientEvent(p, "createClientSweeper", p, Id, ref.m_Owner, ref:getVehicle(), ref:getWeapon())
+  for _, ref in pairs(self.m_ClientData) do
+    self:createClient(ref)
   end
 end
 
@@ -54,8 +54,8 @@ function SweeperManager:isSweeper(veh)
 end
 
 function SweeperManager:getRandomSpawnPoint()
-  --return table.random(SuperS.getInstance():get("SpawnPoints"))
-  return SuperS.m_Instance:get("SpawnPoints")[4]
+  return table.random(SuperS:getInstance():get("SpawnPoints"))
+  --return SuperS.m_Instance:get("SpawnPoints")[4]
 end
 
 -- Event Zone
