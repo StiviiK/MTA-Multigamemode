@@ -5,26 +5,12 @@ function Sweeper:constructor(Id, owner, vehicle, weapon, sweeperTexture)
   self.m_Owner = owner
   self.m_Vehicle = vehicle
   self.m_Vehicle.m_Sweeper = self
+  self.m_SweeperLights = {}
   self.m_Weapon = SuperS.Sweeper.Weapon:new(self, weapon)
   self.m_Shader = SuperS.Shader:new("gamemodes/SuperS/res/shader/swap.fx")
   self.m_Shader:setTexture(sweeperTexture or "gamemodes/SuperS/res/images/Logos/default.png")
   self.m_Shader:applyShaderValue("swap")
   self.m_Shader:applyToWorldTexture("sweeper92decal128", self.m_Vehicle)
-
-  -- Apply spawn-protection
-  for i, v in pairs(Element.getAllByType("vehicle")) do
-    v:setCollidableWith(self.m_Vehicle, false)
-  end
-  self.m_Vehicle:setDamageProof(true)
-  self.m_Vehicle:setAlpha(150)
-
-  setTimer(function ()
-    for i, v in pairs(Element.getAllByType("vehicle")) do
-      v:setCollidableWith(self.m_Vehicle, true)
-    end
-    self.m_Vehicle:setDamageProof(false)
-    self.m_Vehicle:setAlpha(255)
-  end, 3000, 1)
 
   -- Events
   addEventHandler("onClientVehicleDamage", self:getVehicle(), bind(self.onAttack, self))
@@ -35,6 +21,9 @@ function Sweeper:destructor()
   if self.m_Weapon then
     delete(self.m_Weapon)
   end
+
+  -- Stop Sweeper Lights
+  self:disableSweeperLights()
 end
 
 function Sweeper:getId()
@@ -87,6 +76,65 @@ function Sweeper:fireRocket()
   local rot = self:getVehicle():getRotation()
   pos.x, pos.y = pos.x+4*math.cos(math.rad(rot.z+90)), pos.y+4*math.sin(math.rad(rot.z+90))
   Projectile(self:getVehicle(), 19, pos, 1.0, nil)
+end
+
+function Sweeper:toggleSweeperLights()
+  if isTimer(self.m_SweeperLightTimer) then
+    self:disableSweeperLights()
+  else
+    self:enableSweeperLights()
+  end
+end
+
+function Sweeper:enableSweeperLights()
+  self.m_SweeperLights = {}
+  self.m_SweeperLightStep = 1
+  self.m_SweeperLightTimer = Timer(bind(self.animateSweeperLights, self), 250, -1)
+end
+
+function Sweeper:disableSweeperLights()
+  if isTimer(self.m_SweeperLightTimer) then
+    killTimer(self.m_SweeperLightTimer)
+  end
+
+  for i, v in pairs(self.m_SweeperLights) do
+    if isElement(v) then
+      destroyElement(v)
+    end
+  end
+end
+
+function Sweeper:animateSweeperLights()
+  local dim = SuperS:getInstance():getDimension()
+  if self.m_SweeperLightStep == 1 then
+    self.m_SweeperLights[1] = Marker(0, 0, 0, "corona", 0.2, 255, 0, 0, 255)
+    self.m_SweeperLights[1]:setDimension(dim)
+    self.m_SweeperLights[2] = Marker(0, 0, 0, "corona", 0.2, 255, 0, 0, 255)
+    self.m_SweeperLights[2]:setDimension(dim)
+    attachElements(self.m_SweeperLights[1], self.m_Vehicle, 0.4, 0.45, 1.35)
+    attachElements(self.m_SweeperLights[2], self.m_Vehicle, -0.4, 0.45, 1.35)
+
+    self.m_SweeperLightStep = 2
+  elseif self.m_SweeperLightStep == 2 then
+    if isElement(self.m_SweeperLights[1]) then
+      destroyElement(self.m_SweeperLights[1])
+      destroyElement(self.m_SweeperLights[2])
+    end
+
+    self.m_SweeperLightStep = 3
+  elseif self.m_SweeperLightStep == 3 then
+    self.m_SweeperLights[3] = Marker(0, 0, 0, "corona", 0.2, 255, 255, 255, 255)
+    self.m_SweeperLights[3]:setDimension(dim)
+    attachElements(self.m_SweeperLights[3], self.m_Vehicle, 0, 0.45, 1.35)
+
+    self.m_SweeperLightStep = 4
+  elseif self.m_SweeperLightStep == 4 then
+    if isElement(self.m_SweeperLights[3]) then
+      destroyElement(self.m_SweeperLights[3])
+    end
+
+    self.m_SweeperLightStep = 1
+  end
 end
 
 -- "Export" to SuperS

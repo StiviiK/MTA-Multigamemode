@@ -35,7 +35,7 @@ function Lobby:onPlayerJoin()
 
   if localPlayer:getLocale() then
     -- Change HelpBar Text
-    HelpBar:getSingleton():setText(HelpTexts.General.Main)
+    HelpBar:getSingleton():setText(HelpTexts.General.Main, false, self:getColor())
   end
 end
 

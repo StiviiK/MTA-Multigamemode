@@ -26,7 +26,7 @@ end
 
 function SuperS:onPlayerJoin()
   -- Change HelpBar Text
-  HelpBar:getSingleton():setText(HelpTexts.Gamemodes.SuperS)
+  HelpBar:getSingleton():setText(HelpTexts.Gamemodes.SuperS, false, self:getColor())
 end
 
 function SuperS:onPlayerLeft()

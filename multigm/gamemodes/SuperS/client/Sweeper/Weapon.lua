@@ -1,15 +1,4 @@
 local Weapon = inherit(Object)
-WEAPONS = {
-  [22] = {Name="colt 45", x=0, y=1.7, z=0, rx=0, ry=10, rz=90, fx=0, fy=-10, fz=0},
-  [23] = {Name="silenced", x=0, y=1.7, z=0, rx=0, ry=10, rz=90, fx=0, fy=-10, fz=0},
-  [24] = {Name="deagle", x=0, y=1.6, z=0, rx=0, ry=5, rz=95, fx=0, fy=-4, fz=-5},
-  [28] = {Name="uzi", x=0, y=1.6, z=0, rx=0, ry=5, rz=93, fx=0, fy=-5, fz=-3},
-  [29] = {Name="mp5", x=0, y=1.5, z=0, rx=0, ry=10, rz=90, fx=0, fy=-10, fz=0},
-  [30] = {Name="ak-47", x=0, y=1.6, z=0, rx=0, ry=5, rz=93, fx=0, fy=-5, fz=-3},
-  [31] = {Name="m4", x=0, y=1.6, z=0, rx=0, ry=5, rz=93, fx=0, fy=-5, fz=-3},
-  [32] = {Name="tec-9", x=0, y=1.6, z=0, rx=0, ry=5, rz=93, fx=0, fy=-5, fz=-3},
-  [38] = {Name="minigun", x=0, y=1.4, z=0, rx=-3, ry=30, rz=93, fx=0, fy=-30, fz=-3},
-}
 
 function Weapon:constructor(sInstance, Id)
   self.m_Sweeper = sInstance

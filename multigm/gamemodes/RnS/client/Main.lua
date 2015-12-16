@@ -11,7 +11,7 @@ end
 
 function RenegadeSquad:onPlayerJoin()
   -- Change HelpBar Text
-  HelpBar:getSingleton():setText(HelpTexts.Gamemodes.RnS)
+  HelpBar:getSingleton():setText(HelpTexts.Gamemodes.RnS, false, self:getColor())
 end
 
 function RenegadeSquad:onPlayerLeft()

@@ -291,3 +291,8 @@ function getElementSpeed(theElement, unit)
     -- Return the speed by calculating the length of the velocity vector, after converting the velocity to the specified unit
     return (Vector3(getElementVelocity(theElement)) * mult).length
 end
+
+function chance(chance)
+	assert(chance >= 0 and chance <= 100, "Bad Chance (Range 0-100)")
+	return math.random(0, 100) <= chance
+end

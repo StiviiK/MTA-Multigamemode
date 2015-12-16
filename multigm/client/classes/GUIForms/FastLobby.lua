@@ -78,7 +78,7 @@ function FastLobby:constructor()
       self.m_Gamemodes[currGamemode].Label:setAlignY("center")
       self.m_Gamemodes[currGamemode].Label.onHover = function (element)
         if self.m_Gamemodes[currGamemode].Active then
-          element:setColor(Color.Orange)
+          element:setColor(self.m_Gamemodes[currGamemode].Gamemode:getColor())
 
           Animation.Move:new(element.m_Parent, 100, posX - 5, posY - 5)
           Animation.Size:new(element.m_Parent, 100, width + 10, height + 10)

@@ -255,6 +255,7 @@
 			<script src="gamemodes/SuperS/server/Border/Border.lua" type="server"/>
 			<script src="gamemodes/SuperS/server/Sweeper/Manager/SweeperManager.lua" type="server"/>
 			<script src="gamemodes/SuperS/server/Sweeper/Sweeper.lua" type="server"/>
+			<script src="gamemodes/SuperS/server/Sweeper/Manager/ItemManager.lua" type="server"/>
 			<script src="gamemodes/SuperS/server/Sweeper/Item.lua" type="server"/>
 
 		<!-- Client -->

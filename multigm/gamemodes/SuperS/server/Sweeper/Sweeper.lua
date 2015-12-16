@@ -9,6 +9,7 @@ function Sweeper:constructor(player, sweeperTexture)
   self.m_Owner = player
   self.m_Vehicle = Vehicle(574, SuperS.SweeperManager:getSingleton():getRandomSpawnPoint())
   self.m_Vehicle:setDimension(SuperS:getInstance():getDimension())
+  self.m_Vehicle:setPlateText(self.m_Owner:getName())
   self.m_LastAttacker = false
   self.m_Weapon = 23
   self.m_Image = sweeperTexture or "gamemodes/SuperS/res/images/Logos/default.png"
@@ -21,9 +22,11 @@ function Sweeper:constructor(player, sweeperTexture)
   self.m_FireFunc = bind(self.startFire, self)
   self.m_StopFunc = bind(self.stopFire, self)
   self.m_ItemFunc = bind(self.useItem, self)
+  self.m_LightsFunc = bind(self.toggleSweeperLights, self)
   bindKey(self.m_Owner, "mouse1", "down", self.m_FireFunc)
   bindKey(self.m_Owner, "mouse1", "up", self.m_StopFunc)
   bindKey(self.m_Owner, "mouse2", "up", self.m_ItemFunc)
+  bindKey(self.m_Owner, "n", "down", self.m_LightsFunc)
 
   -- Create Sweeper client instance
   SuperS.SweeperManager:getSingleton():createClient(self)
@@ -39,6 +42,9 @@ function Sweeper:destructor()
       if self.m_LastAttacker:getGamemode() == SuperS:getInstance() then
         -- Reward for the LastAttacker
         outputChatBox(self.m_LastAttacker:getName().." destroyed "..self.m_Owner:getName().."'s Sweeper!")
+
+        -- Give him a reward
+        self.m_LastAttacker:incrementJobPoints()
       end
     end
   end
@@ -51,9 +57,11 @@ function Sweeper:destructor()
 
   self.m_Owner.m_SweeperId = nil
 
-  -- Remove fire bindings
+  -- Remove bindings
   unbindKey(self.m_Owner, "mouse1", "down", self.m_FireFunc)
   unbindKey(self.m_Owner, "mouse1", "up", self.m_StopFunc)
+  unbindKey(self.m_Owner, "mouse2", "up", self.m_ItemFunc)
+  unbindKey(self.m_Owner, "n", "down", self.m_LightsFunc)
 
   if isElement(self.m_Vehicle) then
     destroyElement(self.m_Vehicle)
@@ -108,6 +116,10 @@ function Sweeper:useItem()
     item:use(self)
     delete(item)
   end
+end
+
+function Sweeper:toggleSweeperLights()
+  triggerClientEvent(root, "toggleSweeperLights", root, self:getId())
 end
 
 -- "Export" to SuperS

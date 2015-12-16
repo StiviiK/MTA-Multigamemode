@@ -41,6 +41,7 @@ function SuperS:onGamemodesLoaded()
   SuperS.Lobby:new()
 
   -- Instantiate extra classes
+  SuperS.Sweeper.ItemManager:new()
   self.m_Border = SuperS.Border:new(unpack(self:get("BorderData")))
 end
 

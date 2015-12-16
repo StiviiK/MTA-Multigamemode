@@ -87,11 +87,15 @@ function HelpBar:fadeOut()
   end, 500, 1)
 end
 
-function HelpBar:setText(tbl, temporary)
+function HelpBar:setText(tbl, temporary, color)
+  if not color then color = self.m_HelpLabel:getColor() end
   if not tbl then return false end
   if temporary then
     self.m_TemporaryText = {title = self.m_SubTitleLabel:getText(), text = self.m_TextLabel:getText()}
   end
+
+  self.m_HelpLabel:setColor(color)
+  self.m_HelpLabel.onUnhover = function () self.m_HelpLabel:setColor(color) end
 
   -- Set the translated text
   self.m_SubTitleLabel:setText(_(tbl.title))
