@@ -162,7 +162,7 @@ function ItemManager:changePickup(index, ItemType)
     model = 1337
   end
 
-  self.m_Items[index].Item:setType(ItemType)
+  self.m_Items[index].Item:setType(ItemType, weaponId)
   self.m_Items[index].Pickup:setType(3, model)
 end
 
