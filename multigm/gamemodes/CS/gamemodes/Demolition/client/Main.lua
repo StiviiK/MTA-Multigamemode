@@ -1,7 +1,7 @@
 function CS_DEMOLITION:constructor()
 --Handler--
 
-  outputChatBox("CS_DEMOLITION:constructor CLIENT")
+  -- outputChatBox("CS_DEMOLITION:constructor CLIENT")
 
    -- Load translation file
   TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))

@@ -12,7 +12,9 @@ function CS:constructor()
 end
 
 function CS:destructor()
-
+  delete(CS_GamemodeManager:getSingleton())
+  delete(CS_MapLoader:getSingleton())
+  delete(CS_Lobby_Menu:getSingleton())
 end
 
 function CS:onPlayerJoin()
@@ -29,7 +31,7 @@ end
 function CS:onPlayerLeft()
 -- showChat(true)
 -- FirstPerson:getSingleton():RemoveFirstPerson()
--- delete(CS_Lobby_Menu:getSingleton())
+delete(CS_Lobby_Menu:getSingleton())
 
 end
 
@@ -39,12 +41,12 @@ end
 
 function CS:onDownloadFinish()
   triggerServerEvent("onCSDownloadFinished", localPlayer)
-  -- CS_Lobby_Menu:new(self)
-  CS_MapLoader:getSingleton():LoadMap(self,1)
+  CS_Lobby_Menu:new(self)
+  -- CS_MapLoader:getSingleton():LoadMap(self,1)
   
-  localPlayer:setPosition(
-  CS_MapLoader:getSingleton().MapSettings["T_Spawn"][1]["position"]
-  )
+  -- localPlayer:setPosition(
+  -- CS_MapLoader:getSingleton().MapSettings["T_Spawn"][1]["position"]
+  -- )
 end
 
 

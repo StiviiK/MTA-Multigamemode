@@ -15,7 +15,7 @@ function CS:constructor()
  self.Bombdefusal = self.CS_GamemodeManager:CreateNewGamemode(CS_BOMB_DEFUSAL)
 
  
- self:AutoLogin ()
+ -- self:AutoLogin ()
 end
 
 function CS:destructor()

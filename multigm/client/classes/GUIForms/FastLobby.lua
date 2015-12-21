@@ -15,7 +15,7 @@ function FastLobby:constructor()
   self.m_Gamemodes = {
     {Gamemode = GamemodeManager.getFromId(1), Active = true};
     {Gamemode = GamemodeManager.getFromId(2), Active = true, Background = "res/images/backgrounds/cnr/cnr-bg.jpg"};
-    {Gamemode = GamemodeManager.getFromId(3), Active = true, Background = "res/images/backgrounds/rns/rns-bg.png"}
+    {Gamemode = GamemodeManager.getFromId(3), Active = true, Background = "res/images/backgrounds/rns/rns-bg.png"};
     {Gamemode = GamemodeManager.getFromId(4), Active = true, Background = "res/images/backgrounds/supers/supers-bg.png"};
     {Gamemode = GamemodeManager.getFromId(5), Active = true, Background = "res/images/backgrounds/cs/cs-bg.jpg"};
   }

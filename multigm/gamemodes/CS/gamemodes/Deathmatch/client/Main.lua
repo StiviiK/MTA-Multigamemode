@@ -1,6 +1,6 @@
 function CS_Deathmath:constructor()
 --Handler--
-  outputChatBox("CS_Deathmath:constructor CLIENT")
+  -- outputChatBox("CS_Deathmath:constructor CLIENT")
 
    -- Load translation file
   TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))

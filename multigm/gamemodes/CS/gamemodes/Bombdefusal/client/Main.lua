@@ -1,7 +1,7 @@
 function CS_BOMB_DEFUSAL:constructor()
 --Handler--
 
-  outputChatBox("CS_BOMB_DEFUSAL:constructor CLIENT")
+  -- outputChatBox("CS_BOMB_DEFUSAL:constructor CLIENT")
 
    -- Load translation file
   TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
