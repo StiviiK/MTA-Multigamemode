@@ -58,3 +58,4 @@ addEventHandler("PlayerPublicSync", root, function(public) source:onUpdateSync(n
 -- Short getters
 function Player:getLocale() return self:getPublicSync("Locale") end
 function Player:getJobPoints() return self:getPublicSync("JobPoints") end
+function Player:getGamemode() return GamemodeManager.getFromId(self:getPublicSync("Gamemode")) end

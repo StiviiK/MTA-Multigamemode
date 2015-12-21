@@ -36,9 +36,6 @@ end
 function Map:AsyncCreateObjects(piority)
   for i = 1, #self.m_LoadedObjects, 1 do
     local v = self.m_LoadedObjects[i]
-    if v.doublesided == nil then v.doublesided = false end
-    if v.scale == nil then v.scale = 1 end
-
     local obj = createObject(v.model, v.position, v.rotation)
     obj:setDimension(self.m_Gamemode:getDimension())
     obj:setID(v.id)

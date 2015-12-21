@@ -56,10 +56,10 @@ function MapManager.parseMapXML(filePath)
         ["position"] = Vector3(attributes["posX"], attributes["posY"], attributes["posZ"]),
         ["rotation"] = Vector3(attributes["rotX"], attributes["rotY"], attributes["rotZ"]),
         ["id"] = attributes["id"],
-        ["collisions"] = (attributes["collisions"] == "true" and true) or (attributes["collisions"] == "false" and false),
+        ["collisions"] = (attributes["collisions"] == "true" and true) or (attributes["collisions"] == "false" and false) or true,
         ["alpha"] = attributes["alpha"],
-        ["doublesided"] = (attributes["doublesided"] == "true" and true) or (attributes["doublesided"] == "false" and false),
-        ["scale"] = attributes["scale"],
+        ["doublesided"] = (attributes["doublesided"] == "true" and true) or (attributes["doublesided"] == "false" and false) or false,
+        ["scale"] = attributes["scale"] or 1,
       })
     end
   end

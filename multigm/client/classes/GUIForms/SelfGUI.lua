@@ -61,9 +61,9 @@ function SelfGUI:constructor()
   localPlayer:setPublicSyncChangeHandler("JobPoints", function (jp) self:adjustGeneralTab(false, false, jp) end)
 
   -- Account
-  local tabPoints = self.m_TabPanel:addTab(_"Punkte")
+  local tabPoints = self.m_TabPanel:addTab(_"Shop")
   self.m_TabPoints = tabPoints
-  GUILabel:new(self.m_Width*0.02, self.m_Height*0.016, self.m_Width*0.225, self.m_Height*0.12, _"Punkte", tabPoints)
+  GUILabel:new(self.m_Width*0.02, self.m_Height*0.016, self.m_Width*0.225, self.m_Height*0.12, _"Shop", tabPoints)
 
   -- Session
   local tabSession = self.m_TabPanel:addTab(_"Sitzung")
@@ -84,7 +84,7 @@ function SelfGUI:constructor()
   self.m_SessionGrid:addColumn(_"Index", 0.5)
   self.m_SessionGrid:addColumn(_"Wert", 0.5)
   localPlayer:setPrivateSyncChangeHandler("SessionInfo", bind(self.adjustSessionTab, self))
-  GUILabel:new(self.m_Width*0.6, self.m_Height*0.2, self.m_Width*0.35, self.m_Height*0.525, LOREM_IPSUM:sub(1, 296), tabSession)
+  GUILabel:new(self.m_Width*0.6, self.m_Height*0.2, self.m_Width*0.35, self.m_Height*0.525, HelpTexts.SelfGUI.TabSession.text --[[LOREM_IPSUM:sub(1, 296)]], tabSession)
     :setFont(VRPFont((self.m_Height*0.525)/10))
   self.m_UpdateSessionButton = VRPButton:new(self.m_Width*0.6, self.m_Height*0.75, self.m_Width*0.35, self.m_Height*0.07, _"Session updaten", true, tabSession)
   self.m_UpdateSessionButton.lastUpdate = 0
@@ -98,35 +98,10 @@ function SelfGUI:constructor()
   self.m_DisableSessionButton = VRPButton:new(self.m_Width*0.6, self.m_Height*0.84, self.m_Width*0.35, self.m_Height*0.07, _"Session deaktivieren", true, tabSession)
   self.m_DisableSessionButton:setEnabled(false)
 
-  -- Friends
-  local tabFriends = self.m_TabPanel:addTab(_"Freunde")
-  self.m_TabFriends = tabFriends
-  self.m_FriendsTitleLabel = GUILabel:new(self.m_Width*0.02, self.m_Height*0.016, self.m_Width*0.225, self.m_Height*0.12, _"Freunde", tabFriends)
-  self.m_FriendsGrid = GUIGridList:new(self.m_Width*0.02, self.m_Height*0.2, self.m_Width*0.525, self.m_Height*0.71, tabFriends)
-  self.m_FriendsGrid:addColumn(_"Name", 0.28)
-  self.m_FriendsGrid:addColumn(_"Gamemode", 0.4)
-  self.m_FriendsGrid:addColumn(_"Status", 0.3)
-  self.m_FriendIDLabel = GUILabel:new(self.m_Width*0.02, self.m_Height*0.12, self.m_Width*0.672, self.m_Height*0.06, "", tabFriends)
-  self.m_FriendIDCopyLabel = GUILabel:new(self.m_Width*0.02, self.m_Height*0.12, self.m_Width*0.125, self.m_Height*0.06, _"(kopieren)", tabFriends):setColor(Color.Orange)
-  self.m_FriendIDCopyLabel.onHover = function () self.m_FriendIDCopyLabel:setColor(Color.White) end
-  self.m_FriendIDCopyLabel.onUnhover = function () self.m_FriendIDCopyLabel:setColor(Color.Orange) end
-  self.m_FriendIDCopyLabel.onLeftClick = function()
-    if setClipboard(localPlayer:getPrivateSync("FriendId")) then
-      InfoBox:new(_"uID wurde erfolgreich kopiert!")
-    else
-      ErrorBox:new(_"uID konnte nicht kopiert werden!")
-    end
-  end
-  GUILabel:new(self.m_Width*0.6, self.m_Height*0.2, self.m_Width*0.35, self.m_Height*0.445, LOREM_IPSUM:sub(1, 252), tabFriends)
-    :setFont(VRPFont((self.m_Height*0.445)/8))
-  self.m_AddFriendButton = VRPButton:new(self.m_Width*0.6, self.m_Height*0.675, self.m_Width*0.35, self.m_Height*0.07, _"Freund hinzufügen", true, tabFriends)
-    :setBarColor(Color.Green)
-  self.m_RemoveFriendButton = VRPButton:new(self.m_Width*0.6, self.m_Height*0.75, self.m_Width*0.35, self.m_Height*0.07, _"Freund löschen", true, tabFriends)
-    :setBarColor(Color.Red)
-    :setEnabled(false)
-  self.m_FriendsGrid.onSelectItem = function () self.m_RemoveFriendButton:setEnabled(true) end
-  self.m_DeleteFriendListButton = VRPButton:new(self.m_Width*0.6, self.m_Height*0.84, self.m_Width*0.35, self.m_Height*0.07, _"Freundesliste löschen", true, tabFriends)
-    :setEnabled(false)
+  -- Group
+  local tabGroup = self.m_TabPanel:addTab(_"Gruppe")
+  self.m_TabGroups = tabGroup
+  self.m_GroupsTitleLabel = GUILabel:new(self.m_Width*0.02, self.m_Height*0.016, self.m_Width*0.225, self.m_Height*0.12, _"Gruppe", tabGroup)
 
   -- Settings
   local tabSettings = self.m_TabPanel:addTab(_"Einstellungen")
@@ -156,7 +131,7 @@ function SelfGUI:onShow()
   -- Update the Tabs
   self:TabPanel_TabChanged(self.m_TabGeneral.TabIndex)
   self:TabPanel_TabChanged(self.m_TabSession.TabIndex)
-  self:TabPanel_TabChanged(self.m_TabFriends.TabIndex)
+  self:TabPanel_TabChanged(self.m_TabGroups.TabIndex)
 end
 
 function SelfGUI:TabPanel_TabChanged(tabId)
@@ -164,8 +139,8 @@ function SelfGUI:TabPanel_TabChanged(tabId)
     self:adjustGeneralTab(localPlayer:getAccountType(), localPlayer:getRank(), localPlayer:getJobPoints())
   elseif tabId == self.m_TabSession.TabIndex then
     self:adjustSessionTab()
-  elseif tabId == self.m_TabFriends.TabIndex then
-    self:adjustFriendsTab(localPlayer:getPrivateSync("FriendId"))
+  elseif tabId == self.m_TabGroups.TabIndex then
+    self:adjustGroupTab()
   end
 end
 
@@ -208,48 +183,5 @@ function SelfGUI:adjustSessionTab()
   end
 end
 
-function SelfGUI:adjustFriendsTab(friendID)
-  if friendID then
-    for i, v in pairs(self.m_TabFriends.m_Children) do
-      if not v.m_Visible then
-        v:setVisible(true)
-      end
-    end
-
-    -- Hide all which are not neccessary
-    --[[
-    if self.m_FriendIDCopyLabel.onLeftClickOLD then
-      self.m_FriendIDCopyLabel.onLeftClick = self.m_FriendIDCopyLabel.onLeftClickOLD
-    end
-    --]]
-
-    -- Update FriendId Label
-    self.m_FriendIDLabel:setText(_("uID: %s", friendID))
-    self.m_FriendIDCopyLabel:setPosition(self.m_Width*0.015 + dxGetTextWidth(_("uID: %s", friendID), self.m_FriendIDLabel:getFontSize(), self.m_FriendIDLabel:getFont()) + 10, self.m_Height*0.12)
-  else
-    -- At first hide all elements
-    for i, v in pairs(self.m_TabFriends.m_Children) do
-      if v.m_Visible and v ~= self.m_FriendsTitleLabel then
-        v:setVisible(false)
-      end
-    end
-
-    -- Show only elements when the player has no "FriendId"
-    if localPlayer:isGuest() then
-      self.m_FriendIDLabel:setText(_"Diese Funktion ist im Gast-Modus nicht verfügbar!")
-      --[[
-      self.m_FriendIDCopyLabel:setText(_"(?)")
-      self.m_FriendIDCopyLabel:setPosition(self.m_Width*0.015 + dxGetTextWidth(_"Diese Funktion ist im Gast-Modus nicht verfügbar!", self.m_FriendIDLabel:getFontSize(), self.m_FriendIDLabel:getFont()) + 10, self.m_Height*0.12)
-      self.m_FriendIDCopyLabel:setVisible(true)
-
-      -- Update m_FriendIDCopyLabel click function
-      self.m_FriendIDCopyLabel.onLeftClickOLD = self.m_FriendIDCopyLabel.onLeftClick
-      self.m_FriendIDCopyLabel.onLeftClick = function ()
-      end
-      --]]
-    else
-      self.m_FriendIDLabel:setText(_"Es ist ein unbekannter Fehler aufgetreten!")
-    end
-    self.m_FriendIDLabel:setVisible(true)
-  end
+function SelfGUI:adjustGroupTab()
 end

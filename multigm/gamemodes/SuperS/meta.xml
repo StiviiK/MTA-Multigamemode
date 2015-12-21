@@ -1,0 +1,19 @@
+<meta>
+  <!-- Translation -->
+    <transferfile src="gamemodes/SuperS/res/translation/en/client.po"/>
+
+  <!-- Shader -->
+    <transferfile src="gamemodes/SuperS/res/shader/swap.fx"/>
+
+  <!-- Textures -->
+    <transferfile src="gamemodes/SuperS/res/images/sign_tresspass2.png"/>
+    <transferfile src="gamemodes/SuperS/res/images/Logos/default.png"/>
+    <transferfile src="gamemodes/SuperS/res/images/Logos/CBell.png"/>
+    <transferfile src="gamemodes/SuperS/res/images/Logos/Heinrich.png"/>
+    <transferfile src="gamemodes/SuperS/res/images/Logos/Hustla.png"/>
+    <transferfile src="gamemodes/SuperS/res/images/Logos/MasterM.png"/>
+    <transferfile src="gamemodes/SuperS/res/images/Logos/StiviK.png"/>
+    <transferfile src="gamemodes/SuperS/res/images/Logos/Toxsi.png"/>
+    <transferfile src="gamemodes/SuperS/res/images/Logos/WSP.png"/>
+    <transferfile src="gamemodes/SuperS/res/images/Logos/NSA.png"/>
+</meta>

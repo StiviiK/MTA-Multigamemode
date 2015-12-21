@@ -6,7 +6,8 @@ function GamemodeManager:constructor()
     self:addRef(Lobby:new("Lobby", "This is the Lobby."):setId(1));
     self:addRef(CopsnRobbers:new("Cops'n'Robbers", "Cops'n'Robbers Gamemode"):setId(2));
     self:addRef(RenegadeSquad:new("Renegade Squad", "RenegadeSquad Gamemode"):setId(3));
-	self:addRef(CS:new("Counter-Strike", "Counter-Strike Gamemode"):setId(4));
+    self:addRef(SuperS:new("Super Sweeper", "SuperSweeper Gamemode"):setId(4));
+    self:addRef(CS:new("Counter-Strike", "Counter-Strike Gamemode"):setId(5));
   }
   for k, v in ipairs(Gamemodes) do
     if v.onGamemodesLoaded then

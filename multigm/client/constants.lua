@@ -39,5 +39,15 @@ HelpTexts = {
       title = "Renegade Squad";
       text = LOREM_IPSUM;
     };
+    SuperS = {
+      title = "Super Sweeper";
+      text = LOREM_IPSUM;
+    };
+  };
+  SelfGUI = {
+    TabSession = {
+      title = "";
+      text = "Dieser Tab dient legedlich dazu Information, welche in deiner Session gespeichert werden anzuzeigen. Die Session dient dazu um Live-Informationen im ControlPanel abzufragen und anzuzeigen! Aber dies ermöglicht dir auch, detailierte Statistiken anzuzeigen lassen.";
+    }
   }
 }

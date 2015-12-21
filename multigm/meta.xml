@@ -11,6 +11,7 @@
 			<script src="shared/classes/Singleton.lua" type="shared"/>
 			<script src="shared/classes/MTAElement.lua" type="shared"/>
 			<script src="shared/classes/Package.lua" type="shared"/>
+			<script src="shared/classes/Stack.lua" type="shared"/>
 			<script src="shared/classes/Hook.lua" type="shared"/>
 			<script src="shared/Cache.lua" type="shared"/>
 			<script src="shared/crc32lua.lua" type="shared"/>
@@ -33,6 +34,7 @@
 			<script src="server/utils.lua" type="server"/>
 			<script src="server/API.lua" type="server"/>
 			<script src="server/classes/Debugging.lua" type="server"/>
+			<script src="server/classes/Performance.lua" type="server"/>
 			<script src="server/classes/Storage/SQL.lua" type="server"/>
 			<script src="server/classes/Storage/MySQL.lua" type="server"/>
 			<script src="server/classes/Provider.lua" type="server"/>
@@ -58,6 +60,7 @@
 			<script src="client/classes/Player/Player.lua" type="client"/>
 			<script src="client/classes/Player/LocalPlayer.lua" type="client"/>
 			<script src="client/classes/Debugging.lua" type="client"/>
+			<script src="client/classes/Performance.lua" type="client"/>
 			<script src="client/classes/Version.lua" type="client"/>
 			<script src="client/classes/Gamemode/Manager/GamemodeManager.lua" type="client"/>
 			<script src="client/classes/Gamemode/Gamemode.lua" type="client"/>
@@ -132,6 +135,7 @@
 
 				<!-- GUI Forms -->
 				<script src="client/classes/GUIForms/HelpBar.lua" type="client"/>
+				<script src="client/classes/GUIForms/DebugPanel.lua" type="client"/>
 				<script src="client/classes/GUIForms/SelfGUI.lua" type="client"/>
 				<script src="client/classes/GUIForms/QuestionBox.lua" type="client"/>
 				<script src="client/classes/GUIForms/PasswordBox.lua" type="client"/>
@@ -261,7 +265,7 @@
 			<script src="gamemodes/CnR/server/SaveSystem.lua" type="server"/>
 			<script src="gamemodes/CnR/server/Weapon_Shop.lua" type="server"/>
 			<script src="gamemodes/CnR/server/Weapon_Shop_List.lua" type="server"/>
-						<script src="gamemodes/CnR/server/PedRobberySystem.lua" type="server"/>
+			<script src="gamemodes/CnR/server/PedRobberySystem.lua" type="server"/>
 			<script src="gamemodes/CnR/server/24_7_Shop.lua" type="server"/>
 			<script src="gamemodes/CnR/server/24_7_Shop_List.lua" type="server"/>
 
@@ -274,7 +278,7 @@
 			<script src="gamemodes/CnR/client/Weapon_Shop.lua" type="client"/>
 			<script src="gamemodes/CnR/client/PedRobberySystem.lua" type="client"/>
 			<script src="gamemodes/CnR/client/24_7_Shop.lua" type="client"/>
-			
+
 
 		<!-- USEFULL -->
 			<script src="gamemodes/CnR/Usefull/TeleportMaker/server.lua" type="server"/>
@@ -291,10 +295,10 @@
 
 			<script src="gamemodes/CnR/Usefull/Develop/server.lua" type="server"/>
 			<script src="gamemodes/CnR/Usefull/Develop/client.lua" type="client"/>
-			
+
 			<script src="gamemodes/CnR/shared/Fraction.lua" type="shared"/>
 
-	<!-- Lobby -->
+	<!-- Renegade Squad -->
 		<!-- Meta -->
 			<metafile src="gamemodes/RnS/meta.xml"/>
 
@@ -309,12 +313,40 @@
 			<script src="gamemodes/RnS/client/Init.lua" type="client"/>
 			<script src="gamemodes/RnS/client/Main.lua" type="client"/>
 
+	<!-- SuperSweeper -->
+		<!-- Meta -->
+			<metafile src="gamemodes/SuperS/meta.xml"/>
 
+		<!-- Shared -->
+			<script src="gamemodes/SuperS/constants.lua" type="shared"/>
 
+		<!-- Server -->
+			<script src="gamemodes/SuperS/server/Init.lua" type="server"/>
+			<script src="gamemodes/SuperS/server/Main.lua" type="server"/>
+
+			<!-- Sweeper -->
+			<script src="gamemodes/SuperS/server/Lobby/Lobby.lua" type="server"/>
+			<script src="gamemodes/SuperS/server/Border/Border.lua" type="server"/>
+			<script src="gamemodes/SuperS/server/Sweeper/Manager/SweeperManager.lua" type="server"/>
+			<script src="gamemodes/SuperS/server/Sweeper/Sweeper.lua" type="server"/>
+			<script src="gamemodes/SuperS/server/Sweeper/Manager/ItemManager.lua" type="server"/>
+			<script src="gamemodes/SuperS/server/Sweeper/Item.lua" type="server"/>
+
+		<!-- Client -->
+			<script src="gamemodes/SuperS/client/Init.lua" type="client"/>
+			<script src="gamemodes/SuperS/client/Main.lua" type="client"/>
+			<script src="gamemodes/SuperS/client/Shader.lua" type="client"/>
+
+			<!-- Sweeper -->
+			<script src="gamemodes/SuperS/client/Lobby/Lobby.lua" type="client"/>
+			<script src="gamemodes/SuperS/client/Sweeper/Manager/SweeperManager.lua" type="client"/>
+			<script src="gamemodes/SuperS/client/Sweeper/Sweeper.lua" type="client"/>
+			<script src="gamemodes/SuperS/client/Sweeper/Weapon.lua" type="client"/>
 
 	<!-- Files -->
 		<!-- Translation -->
 			<file src="res/translation/en/client.po"/>
+			<file src="res/translation/sk/client.po"/>
 
 		<!-- Images -->
 			<!-- GUI -->
@@ -638,9 +670,8 @@
 				<transferfile src="res/images/backgrounds/lobby/lobby-bg.jpg"/>
 				<transferfile src="res/images/backgrounds/cnr/cnr-bg.jpg"/>
 				<transferfile src="res/images/backgrounds/rns/rns-bg.png"/>
+				<transferfile src="res/images/backgrounds/supers/supers-bg.png"/>
 				<transferfile src="res/images/backgrounds/cs/cs-bg.jpg"/>
-				
-
 			<!-- Backgrounds -->
 
 		<!-- Fonts -->

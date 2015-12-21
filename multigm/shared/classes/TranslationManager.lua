@@ -13,6 +13,7 @@ function TranslationManager:constructor()
 
 	-- Load standard translations
 	self:loadTranslation("en")
+	self:loadTranslation("sk")
 end
 
 function TranslationManager:loadTranslation(locale, poFile)
@@ -60,7 +61,7 @@ function TranslationManager:translate(message, locale)
 					if translatedMsg then
 						return translatedMsg
 					end
-				end	
+				end
 			end
 
 			outputDebug("There's a missing translation. Please update the .po files. ("..locale..")")

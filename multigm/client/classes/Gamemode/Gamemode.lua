@@ -14,6 +14,13 @@ Gamemode.destructor = pure_virtual
 Gamemode.onPlayerJoin = pure_virtual
 Gamemode.onPlayerLeft = pure_virtual
 
+function Gamemode:new(...)
+  local inst = new(self, ...)
+
+  self.m_Instance = inst
+  return inst
+end
+
 function Gamemode:virtual_constructor(color)
   self.m_SyncInfo = {}
   self.m_SyncChangeHandler = {}
@@ -48,3 +55,4 @@ function Gamemode:getSyncInfo(key) return self.m_SyncInfo[key] end
 function Gamemode:getDescription() return self:getSyncInfo("Description") end
 function Gamemode:getDimension() return self:getSyncInfo("Dimension") end
 function Gamemode:getColor() return self.m_Color end
+function Gamemode:getInstance() return self.m_Instance end

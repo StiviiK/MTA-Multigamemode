@@ -18,10 +18,12 @@ function GamemodeManager:constructor()
   addEventHandler("DeleteGamemodePed", root, bind(GamemodeManager.Event_DeleteGamemodePed, self))
 
   local Gamemodes = {
-    self:addRef(Lobby:new():setId(1));
+    self:addRef(Lobby:new(Color.Orange):setId(1));
     self:addRef(CopsnRobbers:new(Color.Green):setId(2));
     self:addRef(RenegadeSquad:new(Color.Yellow):setId(3));
-	self:addRef(CS:new(Color.Orange):setId(4));
+    self:addRef(SuperS:new(Color.LightBlue):setId(4));
+    self:addRef(CS:new(Color.Orange):setId(5));
+
   }
   for k, v in ipairs(Gamemodes) do
     if v.onGamemodesLoaded then

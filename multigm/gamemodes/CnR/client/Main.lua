@@ -31,7 +31,7 @@ function CopsnRobbers:constructor()
 
   addEventHandler("addEventOnPlayerClickPed"    , root, bind(CopsnRobbers.addEventOnPlayerClickPed, self))
   addEventHandler("removeEventOnPlayerClickPed" , root, bind(CopsnRobbers.removeEventOnPlayerClickPed, self))
-  
+
   addEventHandler("CreateMoneyDeliveryCheckpoint" , root, bind(CopsnRobbers.CreateMoneyDeliveryCheckpoint, self))
  ----------
 
@@ -82,7 +82,7 @@ self:ShopGUI_Event ()
 -----------------------------------
 
   -- Change HelpBar Text
-  HelpBar:getSingleton():setText(HelpTexts.Gamemodes.CnR)
+  HelpBar:getSingleton():setText(HelpTexts.Gamemodes.CnR, false, self:getColor())
 end
 
 

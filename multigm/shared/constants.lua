@@ -51,6 +51,7 @@ ACCOUNTTYPE = r2
 LOCALE = {}
 LOCALE[1] = "de"
 LOCALE[2] = "en"
+LOCALE[3] = "sk"
 
 local r2 = {}
 for k, v in pairs(LOCALE) do
@@ -63,6 +64,7 @@ LOCALE = r2
 LANG = {}
 LANG[1] = "Deutsch"
 LANG[2] = "Englisch"
+LANG[3] = "Sakasto"
 
 local r2 = {}
 for k, v in pairs(LANG) do

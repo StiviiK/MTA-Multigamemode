@@ -9,8 +9,8 @@
 -- ****************************************************************************
 GUIScrollableText = inherit(GUIScrollableArea)
 
-function GUIScrollableText:constructor(posX, posY, width, height, text, textSize, scrollbarStart, parent)
-    GUIScrollableArea.constructor(self, posX, posY, width, height, 1, 1, true, false, parent, scrollbarStart or 40)
+function GUIScrollableText:constructor(posX, posY, width, height, text, textSize, parent)
+    GUIScrollableArea.constructor(self, posX, posY, width, height, 1, 1, true, false, parent, posY)
 
     self.m_Label = GUILabel:new(0, 0, width, textSize, text, self)
     self.m_Label:setFont(VRPFont(textSize))

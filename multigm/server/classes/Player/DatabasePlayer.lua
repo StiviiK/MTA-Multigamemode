@@ -49,7 +49,6 @@ function DatabasePlayer:virtual_constructor()
 	self.m_Rank         = RANK.Gast
 	self.m_JoinTime     = 0
 	self.m_LastPlayTime = 0
-	self.m_FriendId     = ""
 end
 
 function DatabasePlayer:virtual_destructor()
@@ -63,7 +62,7 @@ function DatabasePlayer:load()
     return false
   end
 
-  local row = sql:queryFetchSingle("SELECT Locale, Skin, XP, Money, Rank, PlayTime, FriendId FROM ??_character WHERE Id = ?;", sql:getPrefix(), self:getId())
+  local row = sql:queryFetchSingle("SELECT Locale, Skin, XP, Money, Rank, PlayTime FROM ??_character WHERE Id = ?;", sql:getPrefix(), self:getId())
 	if not row then
 		return false
 	end
@@ -83,7 +82,6 @@ function DatabasePlayer:load()
 	self:setSkin(row.Skin)
   self:setMoney(row.Money)
 	self:setRank(row.Rank)
-	self:setFriendId(row.FriendId)
 end
 
 function DatabasePlayer:save()
@@ -104,7 +102,6 @@ function DatabasePlayer:loadGuest()
 	self:setXP(self.m_XP)
 	self:setMoney(self.m_Money)
 	self:setRank(self.m_Rank)
-	self:setFriendId(false)
 end
 
 -- Short getters

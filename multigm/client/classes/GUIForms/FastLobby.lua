@@ -15,8 +15,9 @@ function FastLobby:constructor()
   self.m_Gamemodes = {
     {Gamemode = GamemodeManager.getFromId(1), Active = true};
     {Gamemode = GamemodeManager.getFromId(2), Active = true, Background = "res/images/backgrounds/cnr/cnr-bg.jpg"};
-    {Gamemode = GamemodeManager.getFromId(3), Active = true, Background = "res/images/backgrounds/rns/rns-bg.png"};
-	{Gamemode = GamemodeManager.getFromId(4), Active = true, Background = "res/images/backgrounds/cs/cs-bg.jpg"};
+    {Gamemode = GamemodeManager.getFromId(3), Active = true, Background = "res/images/backgrounds/rns/rns-bg.png"}
+    {Gamemode = GamemodeManager.getFromId(4), Active = true, Background = "res/images/backgrounds/supers/supers-bg.png"};
+    {Gamemode = GamemodeManager.getFromId(5), Active = true, Background = "res/images/backgrounds/cs/cs-bg.jpg"};
   }
   for i, v in pairs(self.m_Gamemodes) do
     if v.Gamemode then
@@ -77,7 +78,7 @@ function FastLobby:constructor()
       self.m_Gamemodes[currGamemode].Label:setAlignY("center")
       self.m_Gamemodes[currGamemode].Label.onHover = function (element)
         if self.m_Gamemodes[currGamemode].Active then
-          element:setColor(Color.Orange)
+          element:setColor(self.m_Gamemodes[currGamemode].Gamemode:getColor())
 
           Animation.Move:new(element.m_Parent, 100, posX - 5, posY - 5)
           Animation.Size:new(element.m_Parent, 100, width + 10, height + 10)

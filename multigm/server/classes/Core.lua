@@ -24,8 +24,13 @@ function Core:constructor ()
   end
 
   -- Establish database connection
-	sql = MySQL:new(MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PW, MYSQL_DB, "")
-	sql:setPrefix("multigm")
+  if not IS_TESTSERVER then
+    MYSQL_PW = ""
+	MYSQL_DB = "multigm_develop"
+  end
+  
+  sql = MySQL:new(MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PW, MYSQL_DB, "")
+  sql:setPrefix("multigm")
 
   -- Instantiate TranslationManager
   TranslationManager:new()
@@ -36,6 +41,7 @@ function Core:constructor ()
   MapManager:getSingleton():registerMap("gamemodes/CnR/res/maps/LSPolice.map")
 
 	-- Instantiate classes
+  Performance:new()
   Provider:new()
   PlayerManager:new()
   GamemodeManager:new()
@@ -52,8 +58,8 @@ function Core:constructor ()
     {"Lobby", "gamemodes/Lobby/", "lobby.data"};
     {"Cops'n'Robbers", "gamemodes/CnR/", "cnr.data"};
     {"Renegade Squad", "gamemodes/RnS/", "rns.data"};
-	{"Counter-Strike", "gamemodes/CS/", "CS.data"};
-  }
+    {"Super Sweeper", "gamemodes/SuperS/", "supers.data"};
+    {"Counter-Strike", "gamemodes/CS/", "CS.data"};  }
   for _, v in ipairs(gamemodes) do
     outputDebug(("Generating Package for %s..."):format(v[1]))
 
@@ -95,6 +101,10 @@ function Core:onInternalError(error)
   end
 
   stopResource(getThisResource())
+end
+
+function Core:getStartTime()
+  return Main.coreStartTime
 end
 
 function Core:setAPIStatements()
