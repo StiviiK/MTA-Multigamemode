@@ -31,6 +31,10 @@ HelpTexts = {
       title = "Cops'n'Robbers";
       text = LOREM_IPSUM;
     };
+	CS = {
+      title = "CS";
+      text = LOREM_IPSUM;
+    };
     RnS = {
       title = "Renegade Squad";
       text = LOREM_IPSUM;

@@ -52,6 +52,7 @@ function Core:constructor ()
     {"Lobby", "gamemodes/Lobby/", "lobby.data"};
     {"Cops'n'Robbers", "gamemodes/CnR/", "cnr.data"};
     {"Renegade Squad", "gamemodes/RnS/", "rns.data"};
+	{"Counter-Strike", "gamemodes/CS/", "CS.data"};
   }
   for _, v in ipairs(gamemodes) do
     outputDebug(("Generating Package for %s..."):format(v[1]))

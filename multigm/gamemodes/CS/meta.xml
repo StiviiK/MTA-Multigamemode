@@ -1,0 +1,27 @@
+<meta>
+<!-- Maps -->
+						<!-- de_dust2 -->
+<transferfile src="gamemodes/CS/res/maps/de_dust2/de_dust2.col"/>
+<transferfile src="gamemodes/CS/res/maps/de_dust2/de_dust2.dff"/>
+<transferfile src="gamemodes/CS/res/maps/de_dust2/de_dust2.txd"/>
+<transferfile src="gamemodes/CS/res/maps/de_dust2/Info.map"/>
+<transferfile src="gamemodes/CS/res/maps/de_dust2/Objects.map"/>
+	
+<!-- Shader files -->
+	
+<!-- Images files -->	
+	
+<!-- Counter-Strike -->	
+			<transferfile src="gamemodes/CS/res/images/empty.png"/>
+			<transferfile src="gamemodes/CS/res/images/cs_lobby_bg.jpg"/>
+			<transferfile src="gamemodes/CS/res/txd/FirstPersonHands.txd"/>
+<!-- Counter-Strike Bomb defusal-->	
+			<transferfile src="gamemodes/CS/res/images/Bombdefusal_bg.jpg"/>
+<!-- Counter-Strike Demolition-->
+			<transferfile src="gamemodes/CS/res/images/Demolition_bg.jpg"/>
+<!-- Counter-Strike Deathmatch-->	
+			<transferfile src="gamemodes/CS/res/images/cs_deathmatch.png"/>
+			
+			
+	
+</meta>

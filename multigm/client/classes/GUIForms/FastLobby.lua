@@ -16,6 +16,7 @@ function FastLobby:constructor()
     {Gamemode = GamemodeManager.getFromId(1), Active = true};
     {Gamemode = GamemodeManager.getFromId(2), Active = true, Background = "res/images/backgrounds/cnr/cnr-bg.jpg"};
     {Gamemode = GamemodeManager.getFromId(3), Active = true, Background = "res/images/backgrounds/rns/rns-bg.png"};
+	{Gamemode = GamemodeManager.getFromId(4), Active = true, Background = "res/images/backgrounds/cs/cs-bg.jpg"};
   }
   for i, v in pairs(self.m_Gamemodes) do
     if v.Gamemode then
@@ -29,7 +30,6 @@ function FastLobby:constructor()
     self.m_ScreenSource = DxScreenSource(self.m_Width, self.m_Height)
     self.m_ScreenSource:update()
     self.m_Gamemodes[localPlayer:getGamemode():getId()].Current = true
-
     self.m_UpdateScreenSource = bind(self.updateScreenSource, self)
     addEventHandler("onClientRender", root, self.m_UpdateScreenSource)
   end

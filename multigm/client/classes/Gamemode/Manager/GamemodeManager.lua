@@ -21,6 +21,7 @@ function GamemodeManager:constructor()
     self:addRef(Lobby:new():setId(1));
     self:addRef(CopsnRobbers:new(Color.Green):setId(2));
     self:addRef(RenegadeSquad:new(Color.Yellow):setId(3));
+	self:addRef(CS:new(Color.Orange):setId(4));
   }
   for k, v in ipairs(Gamemodes) do
     if v.onGamemodesLoaded then

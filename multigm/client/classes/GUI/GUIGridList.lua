@@ -17,6 +17,7 @@ function GUIGridList:constructor(posX, posY, width, height, parent)
 	self.m_Columns = {}
 	self.m_ScrollArea = GUIScrollableArea:new(0, ITEM_HEIGHT, self.m_Width, self.m_Height-ITEM_HEIGHT, self.m_Width, 1, true, false, self, ITEM_HEIGHT)
 	self.m_SelectedItem = nil
+	self.m_BackgroundColor = tocolor(0, 0, 0, 180)
 end
 
 function GUIGridList:addItem(...)
@@ -111,10 +112,14 @@ function GUIGridList:onInternalSelectItem(item)
 	self:anyChange()
 end
 
+function GUIGridList:setGridBackground(Color)
+self.m_BackgroundColor = Color
+end
+
 function GUIGridList:draw(incache) -- Swap render order
 	if self.m_Visible then
 		-- Draw background
-		dxDrawRectangle(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, self.m_Height, tocolor(0, 0, 0, 180))
+		dxDrawRectangle(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, self.m_Height, self.m_BackgroundColor)
 
 		-- Draw items
 		for k, v in ipairs(self.m_Children) do

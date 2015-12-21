@@ -280,27 +280,21 @@ local BlipVisibleDistance =  getBlipVisibleDistance ( Blip )
 				
 	   		if blipicon == 0 then 
 						if Distance < 110 then
-						outputChatBox(("xg,yg = %s,%s"):format(xg,yg))
+						-- outputChatBox(("xg,yg = %s,%s"):format(xg,yg))
 							dxDrawImage(xg,yg, blipsize, blipsize, self.Blip[blipicon], -camRotZ, 0, 0,tocolor(r, g, b)	)
 							BlipDrawAtedge[Blip] = false
 						else
 						
 							BlipDrawAtedge[Blip] = true
 							
-						local bx,by = getPointFromDistanceRotation(PlayerX, PlayerY, self.Diagonal/2, Winkel)
-						
-				-- local bpx = math.max(Left, math.min(Right, x))
-				-- local bpy = math.max(Top, math.min(Bottem, y))
-				
-						local Left		= PlayerX-100
-						local Right 	= PlayerX+100
-						local Bottem 	= PlayerY+100
-						local Top 		= PlayerY-100
-						
-						local bx = math.max(Left, math.min(Right, bx))
-						local by = math.max(Top, math.min(Bottem, by))
-						
-						-- outputChatBox(("x2,y2 = %s,%s,%s"):format(bx,by,self.Diagonal))
+						local VecMax = 250-blipsize
+						local VecMin = 100
+						local Vec = 50
+						local VecDis = (-self.w*math.tan(math.rad(-Winkel+camRotZ)))/10
+						-- outputChatBox(("VecDis = %s"):format(VecDis))
+						local bx,by = getPointFromDistanceRotation(PlayerX, PlayerY, VecDis, Winkel)
+								
+						-- outputChatBox(("Vec = %s"):format(Vec))
 						-- dxDrawImage(bx-blipsize/2,by-blipsize/2, blipsize,blipsize, self.Blip[blipicon], -camRotZ, 0, 0	)
 						-- dxDrawLine(PlayerX, PlayerY, bx,by, tocolor(255, 0, 0))
 						end
@@ -467,11 +461,11 @@ function MiniMap:render()
 										if BlipDrawAtedge[Blip] then
 												
 													local rot = findRotation(PlayerX,PlayerY,xg,yg)-camRotZ
-													local bpx, bpy = getPointFromDistanceRotation(mitteX,mitteY, 300,rot+270)
-													local bpx = math.max(self.x, math.min(self.x+self.w, bpx))
-													local bpy = math.max(self.y, math.min(self.y+self.h, bpy))		
+													local bpx, bpy = getPointFromDistanceRotation(mitteX,mitteY, 300,rot+30+180)
+													local bpx = math.max(self.x, math.min(self.x+self.w-(blipsize*2), bpx))
+													local bpy = math.max(self.y, math.min(self.y+self.h-(blipsize*2), bpy))		
 							
-															
+															dxDrawLine(bpx+(blipsize),bpy+(blipsize), mitteX,mitteY, tocolor(255, 0, 0))	
 															dxDrawImage(bpx ,bpy, blipsize*2,blipsize*2, self.Blip[10], 0, 0, 0)
 								
 															

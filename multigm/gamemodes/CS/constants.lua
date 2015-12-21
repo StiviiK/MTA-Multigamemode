@@ -1,0 +1,1 @@
+CS_DOWNLOAD_FILE = "gamemodes/CS/CS.data"
