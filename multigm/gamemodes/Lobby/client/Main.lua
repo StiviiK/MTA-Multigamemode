@@ -21,7 +21,9 @@ end
 
 function Lobby:onGamemodesLoaded(numLoadedGamemodes)
   for i = 2, numLoadedGamemodes, 1 do
-    GamemodePed:new(table.random(self:get("GamemodePedSkins")[i-1]), self:get("GamemodePedPositions")[i-1], self:get("GamemodePedRotations")[i-1], 0, self:getSetting("Spawn").Interior, GamemodeManager.getFromId(i))
+    if GamemodeManager.getFromId(i) then
+      GamemodePed:new(table.random(self:get("GamemodePedSkins")[i-1]), self:get("GamemodePedPositions")[i-1], self:get("GamemodePedRotations")[i-1], 0, self:getSetting("Spawn").Interior, GamemodeManager.getFromId(i))
+    end
   end
 end
 

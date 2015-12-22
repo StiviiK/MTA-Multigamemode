@@ -8,7 +8,7 @@
 -- ****************************************************************************
 PasswordBox = inherit(GUIForm)
 
-function PasswordBox:constructor(password, yesCallback, noCallback)
+function PasswordBox:constructor(password, yesCallback, noCallback, wrongCallback)
 	GUIForm.constructor(self, screenWidth/2 - screenWidth*0.4/2, screenHeight/2 - screenHeight*0.18/2, screenWidth*0.4, screenHeight*0.18)
 
 	self.m_Window = GUIWindow:new(0, 0, self.m_Width, self.m_Height, _"Passwort", true, true, self)
@@ -23,6 +23,9 @@ function PasswordBox:constructor(password, yesCallback, noCallback)
 			yesCallback()
 		else
 			ErrorBox:new(_"Das eingegebene Passwort ist falsch!")
+			if wrongCallback then
+				wrongCallback()
+			end
 		end
 
 		delete(self)

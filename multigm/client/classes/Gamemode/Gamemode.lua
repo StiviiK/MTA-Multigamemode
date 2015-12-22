@@ -48,6 +48,34 @@ function Gamemode:addSyncChangeHandler(key, handler)
   return self
 end
 
+function Gamemode:checkPassword(yesCallback, noCallback, wrongCallback)
+  Camera.setMatrix(0, 0, 0, 0, 0, 0)
+  PasswordBox:new(self.m_Password or self:getName(),
+    function ()
+      if yesCallback then
+        yesCallback()
+      end
+      Camera.setTarget(localPlayer)
+    end,
+    function ()
+      if noCallback then
+        noCallback()
+      else
+        triggerServerEvent("Event_JoinGamemode", localPlayer, 1, true)
+      end
+      Camera.setTarget(localPlayer)
+    end,
+    function ()
+      if wrongCallback then
+        wrongCallback()
+      else
+        triggerServerEvent("Event_JoinGamemode", localPlayer, 1, true)
+      end
+      Camera.setTarget(localPlayer)
+    end
+  )
+end
+
 -- Short getters
 function Gamemode:getId() return self.m_Id end
 function Gamemode:getName() return self:getSyncInfo("Name") end

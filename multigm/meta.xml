@@ -119,6 +119,7 @@
 				<script src="client/classes/GUI/Animations/Move.lua" type="client"/>
 				<script src="client/classes/GUI/Animations/FadeAlpha.lua" type="client"/>
 				<script src="client/classes/GUI/Animations/Size.lua" type="client"/>
+				<script src="client/classes/GUI/Animations/FontSize.lua" type="client"/>
 
 				<!-- Special GUI elements -->
 				<script src="client/classes/GUI/MessageBoxes/MessageBox.lua" type="client"/>
@@ -166,13 +167,13 @@
 			<script src="gamemodes/Lobby/client/Init.lua" type="client"/>
 			<script src="gamemodes/Lobby/client/Main.lua" type="client"/>
 
-			
-			
-			
-			
-			
-			
-			
+
+
+
+
+
+
+
 
 <!-- Counter-Strike Main -->
 		<!-- Meta -->
@@ -190,7 +191,7 @@
 			<script src="gamemodes/CS/FirstPerson/server.lua" type="server"/>
 			<script src="gamemodes/CS/CS_MapManager/server/CS_MapManager_s.lua" type="server"/>
 		<!-- Client -->
-		
+
 			<script src="gamemodes/CS/client/Init.lua" type="client"/>
 			<script src="gamemodes/CS/client/Main.lua" type="client"/>
 			<script src="gamemodes/CS/client/CS_Lobby_Menu.lua" type="client"/>
@@ -198,50 +199,50 @@
 			<script src="gamemodes/CS/FirstPerson/client.lua" type="client"/>
 			<script src="gamemodes/CS/CS_MapManager/client/CS_MapManager_c.lua" type="client"/>
 
-			
-	<!-- Counter-Strike Deathmatch-->		
+
+	<!-- Counter-Strike Deathmatch-->
 			<!-- Server -->
 
 			<script src="gamemodes/CS/gamemodes/Deathmatch/server/Init.lua" type="server"/>
 			<script src="gamemodes/CS/gamemodes/Deathmatch/server/Main.lua" type="server"/>
-			
+
 
 			<!-- Client -->
-	
+
 			<script src="gamemodes/CS/gamemodes/Deathmatch/client/Init.lua" type="client"/>
 			<script src="gamemodes/CS/gamemodes/Deathmatch/client/Main.lua" type="client"/>
-			
-			
-		<!-- Counter-Strike Bomb defusal-->		
+
+
+		<!-- Counter-Strike Bomb defusal-->
 			<!-- Server -->
 
 			<script src="gamemodes/CS/gamemodes/Bombdefusal/server/Init.lua" type="server"/>
 			<script src="gamemodes/CS/gamemodes/Bombdefusal/server/Main.lua" type="server"/>
-			
+
 
 			<!-- Client -->
-	
+
 			<script src="gamemodes/CS/gamemodes/Bombdefusal/client/Init.lua" type="client"/>
-			<script src="gamemodes/CS/gamemodes/Bombdefusal/client/Main.lua" type="client"/>		
-			
-		
-			
-	 <!-- Counter-Strike Demolition-->		
+			<script src="gamemodes/CS/gamemodes/Bombdefusal/client/Main.lua" type="client"/>
+
+
+
+	 <!-- Counter-Strike Demolition-->
 			<!-- Server -->
 
 			<script src="gamemodes/CS/gamemodes/Demolition/server/Init.lua" type="server"/>
 			<script src="gamemodes/CS/gamemodes/Demolition/server/Main.lua" type="server"/>
-			
+
 
 			<!-- Client -->
-	
+
 			<script src="gamemodes/CS/gamemodes/Demolition/client/Init.lua" type="client"/>
-			<script src="gamemodes/CS/gamemodes/Demolition/client/Main.lua" type="client"/>	
-			
-			
-			
-			
-			
+			<script src="gamemodes/CS/gamemodes/Demolition/client/Main.lua" type="client"/>
+
+
+
+
+
 	<!-- Cops'n'Robbers -->
 		<!-- Meta -->
 			<metafile src="gamemodes/CnR/meta.xml"/>
@@ -342,6 +343,21 @@
 			<script src="gamemodes/SuperS/client/Sweeper/Manager/SweeperManager.lua" type="client"/>
 			<script src="gamemodes/SuperS/client/Sweeper/Sweeper.lua" type="client"/>
 			<script src="gamemodes/SuperS/client/Sweeper/Weapon.lua" type="client"/>
+
+	<!-- Blood Money -->
+		<!-- Meta -->
+			<metafile src="gamemodes/BloodMoney/meta.xml"/>
+
+		<!-- Shared -->
+			<script src="gamemodes/BloodMoney/constants.lua" type="shared"/>
+
+		<!-- Server -->
+			<script src="gamemodes/BloodMoney/server/Init.lua" type="server"/>
+			<script src="gamemodes/BloodMoney/server/Main.lua" type="server"/>
+
+		<!-- Client -->
+			<script src="gamemodes/BloodMoney/client/Init.lua" type="client"/>
+			<script src="gamemodes/BloodMoney/client/Main.lua" type="client"/>
 
 	<!-- Files -->
 		<!-- Translation -->
@@ -664,6 +680,7 @@
 				<transferfile src="res/images/HeaderDefaultGamemode.png"/>
 				<transferfile src="gamemodes/Lobby/res/images/HeaderLobby.png" />
 				<transferfile src="gamemodes/CnR/res/images/HeaderCnR.png" />
+				<transferfile src="gamemodes/BloodMoney/res/images/HeaderBLM.jpg"/>
 
 			<!-- Background Images -->
 				<transferfile src="res/images/backgrounds/user.png"/>
@@ -672,6 +689,8 @@
 				<transferfile src="res/images/backgrounds/rns/rns-bg.png"/>
 				<transferfile src="res/images/backgrounds/supers/supers-bg.png"/>
 				<transferfile src="res/images/backgrounds/cs/cs-bg.jpg"/>
+				<transferfile src="res/images/backgrounds/blm/blm-bg.jpg"/>
+
 			<!-- Backgrounds -->
 
 		<!-- Fonts -->

@@ -1,0 +1,1 @@
+BLM_DOWNLOAD_FILE = "gamemodes/BloodMoney/blm.data"

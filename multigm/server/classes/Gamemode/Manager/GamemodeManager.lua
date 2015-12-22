@@ -8,7 +8,9 @@ function GamemodeManager:constructor()
     self:addRef(RenegadeSquad:new("Renegade Squad", "RenegadeSquad Gamemode"):setId(3));
     self:addRef(SuperS:new("Super Sweeper", "SuperSweeper Gamemode"):setId(4));
     self:addRef(CS:new("Counter-Strike", "Counter-Strike Gamemode"):setId(5));
+    self:addRef(BloodMoney:new("Blood Money", "BloodMoney Gamemode"):setId(6));
   }
+  
   for k, v in ipairs(Gamemodes) do
     if v.onGamemodesLoaded then
       v:onGamemodesLoaded(#Gamemodes)
@@ -60,22 +62,22 @@ function GamemodeManager:Event_DisableGamemode(Id)
 end
 
 function GamemodeManager:Event_JoinGamemode(Id, fLobby)
-  if source:getGamemode() == self.getFromId(Id) then
-    source:fadeCamera(true, 0.5)
+  if client:getGamemode() == self.getFromId(Id) then
+    client:fadeCamera(true, 0.5)
     if fLobby ~= true then
-      source:triggerEvent("errorBox", source, _("Du bist bereits in diesem Gamemode!", source))
+      client:triggerEvent("errorBox", client, _("Du bist bereits in diesem Gamemode!", client))
     end
     return
   end
 
-  if source:getGamemode() then
-    source:getGamemode():removePlayer(source)
+  if client:getGamemode() then
+    client:getGamemode():removePlayer(client)
   end
 
-  source:fadeCamera(true, 0.75)
-  self.getFromId(Id):addPlayer(source)
+  client:fadeCamera(true, 0.75)
+  self.getFromId(Id):addPlayer(client)
   if fLobby ~= true then
-    source:triggerEvent("successBox", source, _("Du bist dem Gamemode erfolgreich beigetreten!", source))
+    client:triggerEvent("successBox", source, _("Du bist dem Gamemode erfolgreich beigetreten!", client))
   end
 end
 

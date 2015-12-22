@@ -5,6 +5,9 @@ function SuperS:constructor()
   -- Load translation file
   TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
 
+  -- Add a password
+  self.m_Password = "Kuchengeschmack"
+
   -- Instantiate classes
   self.SweeperManager:new()
 
@@ -35,7 +38,8 @@ function SuperS:onPlayerLeft()
 end
 
 function SuperS:onDownloadStart()
-  Provider:getSingleton():requestFile(RNS_DOWNLOAD_FILE, bind(SuperS.onDownloadFinish, self))
+  --Provider:getSingleton():requestFile(RNS_DOWNLOAD_FILE, bind(SuperS.onDownloadFinish, self))
+  Gamemode.checkPassword(self, function () Provider:getSingleton():requestFile(RNS_DOWNLOAD_FILE, bind(SuperS.onDownloadFinish, self)) end)
 end
 
 function SuperS:onDownloadFinish()

@@ -28,7 +28,7 @@ function Core:constructor ()
     MYSQL_PW = ""
 	MYSQL_DB = "multigm_develop"
   end
-  
+
   sql = MySQL:new(MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PW, MYSQL_DB, "")
   sql:setPrefix("multigm")
 
@@ -59,7 +59,10 @@ function Core:constructor ()
     {"Cops'n'Robbers", "gamemodes/CnR/", "cnr.data"};
     {"Renegade Squad", "gamemodes/RnS/", "rns.data"};
     {"Super Sweeper", "gamemodes/SuperS/", "supers.data"};
-    {"Counter-Strike", "gamemodes/CS/", "CS.data"};  }
+    {"Counter-Strike", "gamemodes/CS/", "CS.data"};
+    {"Blood Money", "gamemodes/BloodMoney/", "blm.data"};
+  }
+
   for _, v in ipairs(gamemodes) do
     outputDebug(("Generating Package for %s..."):format(v[1]))
 

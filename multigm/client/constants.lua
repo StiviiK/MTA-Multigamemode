@@ -43,6 +43,10 @@ HelpTexts = {
       title = "Super Sweeper";
       text = LOREM_IPSUM;
     };
+    BLM = {
+      title = "Blood Money";
+      text = LOREM_IPSUM;
+    };
   };
   SelfGUI = {
     TabSession = {

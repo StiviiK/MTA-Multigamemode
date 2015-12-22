@@ -23,8 +23,9 @@ function GamemodeManager:constructor()
     self:addRef(RenegadeSquad:new(Color.Yellow):setId(3));
     self:addRef(SuperS:new(Color.LightBlue):setId(4));
     self:addRef(CS:new(Color.Orange):setId(5));
-
+    self:addRef(BloodMoney:new(Color.Red):setId(6));
   }
+  
   for k, v in ipairs(Gamemodes) do
     if v.onGamemodesLoaded then
       v:onGamemodesLoaded(#Gamemodes)
