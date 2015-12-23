@@ -77,6 +77,9 @@ function GUIWindow:CloseButton_Click()
 		(self.m_Parent or self):setVisible(false) -- Todo: if self.m_Parent == cacheroot then problem() end
 		Cursor:hide()
 	end
+	if self.onClose then
+		self.onClose()
+	end
 end
 
 function GUIWindow:setTitleBarText (text)

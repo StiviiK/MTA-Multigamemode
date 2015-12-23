@@ -52,7 +52,7 @@ function TranslationManager:translate(message, locale)
 
 	if self.m_Translations[locale] or self.m_AddonTranslations[locale] then
 		local translatedMsg = self.m_Translations[locale]:translate(message)
-		if  translatedMsg then
+		if translatedMsg then
 			return translatedMsg
 		else
 			if self.m_AddonTranslations[locale] then

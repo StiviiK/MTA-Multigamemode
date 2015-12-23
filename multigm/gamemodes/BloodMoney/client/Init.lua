@@ -10,3 +10,9 @@ end
 
 -- Shorten function
 function BloodMoney:get(...) return self:getSetting(...) end
+
+-- Add Help Text
+HelpTexts.Gamemodes.BLM = {
+  title = "Blood Money";
+  text = LOREM_IPSUM;
+}

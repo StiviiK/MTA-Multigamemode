@@ -26,28 +26,7 @@ HelpTexts = {
       text = LOREM_IPSUM
     };
   };
-  Gamemodes = {
-    CnR = {
-      title = "Cops'n'Robbers";
-      text = LOREM_IPSUM;
-    };
-	CS = {
-      title = "CS";
-      text = LOREM_IPSUM;
-    };
-    RnS = {
-      title = "Renegade Squad";
-      text = LOREM_IPSUM;
-    };
-    SuperS = {
-      title = "Super Sweeper";
-      text = LOREM_IPSUM;
-    };
-    BLM = {
-      title = "Blood Money";
-      text = LOREM_IPSUM;
-    };
-  };
+  Gamemodes = {--[[The Gamemodes are adding their help text by it self]]};
   SelfGUI = {
     TabSession = {
       title = "";

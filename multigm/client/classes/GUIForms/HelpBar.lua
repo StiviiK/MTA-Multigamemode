@@ -105,3 +105,7 @@ end
 function HelpBar:getText()
   return {title = self.m_SubTitleLabel:getText(), text = self.m_TextLabel:getText()}
 end
+
+function HelpBar:getCurrentColor()
+  return self.m_HelpLabel:getColor()
+end

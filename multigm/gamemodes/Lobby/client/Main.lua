@@ -3,9 +3,6 @@ function Lobby:constructor()
   addRemoteEvents{"onLobbyStartDownload"}
   addEventHandler("onLobbyStartDownload", root, bind(Lobby.onDownloadStart, self))
 
-  -- Load translation file
-  TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
-
   -- Reset GamemodePed dimension
 	self:addSyncChangeHandler("Dimension", function (dim)
     for _, gamemode in pairs(GamemodeManager.Map) do
@@ -34,11 +31,6 @@ function Lobby:onPlayerJoin()
   toggleControl("fire", false)
   toggleControl("jump", false)
   toggleControl("aim_weapon", false)
-
-  if localPlayer:getLocale() then
-    -- Change HelpBar Text
-    HelpBar:getSingleton():setText(HelpTexts.General.Main, false, self:getColor())
-  end
 end
 
 function Lobby:onPlayerLeft()
@@ -56,4 +48,12 @@ end
 
 function Lobby:onDownloadFinish()
   triggerServerEvent("onLobbyDownloadFinished", localPlayer)
+
+  -- Load translation file
+  TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
+
+  -- Change HelpBar Text
+  localPlayer:setPublicSyncChangeHandler("locale", function ()
+    HelpBar:getSingleton():setText(HelpTexts.General.Main, false, self:getColor())
+  end)
 end

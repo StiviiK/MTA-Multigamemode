@@ -4,17 +4,12 @@ function BloodMoney:constructor()
 
   -- Add an password
   self.m_Password = "blm"
-
-  -- Load translation file
-  TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
 end
 
 function BloodMoney:destructor()
 end
 
 function BloodMoney:onPlayerJoin()
-  -- Change HelpBar Text
-  HelpBar:getSingleton():setText(HelpTexts.Gamemodes.BLM, false, self:getColor())
 end
 
 function BloodMoney:onPlayerLeft()
@@ -27,4 +22,10 @@ end
 
 function BloodMoney:onDownloadFinish()
   triggerServerEvent("onBLMDownloadFinished", localPlayer)
+
+  -- Load translation file
+  TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
+
+  -- Change HelpBar Text
+  HelpBar:getSingleton():setText(HelpTexts.Gamemodes.BLM, false, self:getColor())
 end

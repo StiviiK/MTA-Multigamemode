@@ -10,3 +10,9 @@ end
 
 -- Shorten function
 function CS:get(...) return self:getSetting(...) end
+
+-- Add Help Text
+HelpTexts.Gamemodes.CS = {
+  title = "CS";
+  text = LOREM_IPSUM;
+}
