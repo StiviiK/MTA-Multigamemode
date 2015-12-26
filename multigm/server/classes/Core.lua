@@ -110,6 +110,10 @@ function Core:getStartTime()
   return Main.coreStartTime
 end
 
+function Core:logError(RayID, errHash, debugInfo, player)
+  sql:queryExec("INSERT INTO ??_errlog (sRayID, lRayID, Type, Timestamp, AccountId, ErrHash, ErrSource) VALUES (?, ?, ?, NOW(), ?, ?, ?);", sql:getPrefix(), RayID:sub(1,8), RayID, 1, player:getId(), errHash, toJSON(debugInfo))
+end
+
 function Core:setAPIStatements()
   if (not self.ms_API) or (not instanceof(self.ms_API, API, true)) then return end
 

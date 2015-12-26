@@ -64,8 +64,11 @@ function Player:loadCharacter()
   GamemodeManager:getSingleton().getFromId(1):addPlayer(self)
 end
 
-function Player:onInternalError(error)
-  self:kick("System - Player", ("Internal Error occured! Hash: %s"):format(error))
+function Player:onInternalError(error, debugInfo)
+  local RayID = hash("sha1", getRealTime().timestamp)
+  --("%s->%s:%s(%s)"):format(debugInfo.what, debugInfo.source, debugInfo.currentline, debugInfo.linedefined)
+  core:logError(RayID, error, debugInfo or debug.getinfo(2), self)
+  self:kick("System - Player", ("Internal Error! Hash: %s - Ray ID: %s"):format(error, RayID:sub(1,8)))
 end
 
 function Player:setPrivateSync(key, value)

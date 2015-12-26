@@ -19,6 +19,10 @@ end
 function Lobby:onGamemodesLoaded(numLoadedGamemodes)
 end
 
+function Lobby:onPlayerPreJoin()
+  return false
+end
+
 function Lobby:onPlayerJoin(player)
   player:triggerEvent("onLobbyStartDownload", player)
   player:setAlpha(200)

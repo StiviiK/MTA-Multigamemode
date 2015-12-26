@@ -31,6 +31,7 @@ function Lobby:onPlayerJoin()
   toggleControl("fire", false)
   toggleControl("jump", false)
   toggleControl("aim_weapon", false)
+  addEventHandler("onClientPlayerDamage", localPlayer, cancelEvent)
 end
 
 function Lobby:onPlayerLeft()
@@ -40,6 +41,7 @@ function Lobby:onPlayerLeft()
   toggleControl("fire", true)
   toggleControl("jump", true)
   toggleControl("aim_weapon", true)
+  removeEventHandler("onClientPlayerDamage", localPlayer, cancelEvent)
 end
 
 function Lobby:onDownloadStart()
@@ -53,7 +55,7 @@ function Lobby:onDownloadFinish()
   TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
 
   -- Change HelpBar Text
-  localPlayer:setPublicSyncChangeHandler("locale", function ()
+  if localPlayer:getLocale() then
     HelpBar:getSingleton():setText(HelpTexts.General.Main, false, self:getColor())
-  end)
+  end
 end

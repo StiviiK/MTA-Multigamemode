@@ -63,7 +63,7 @@ function Provider:onFileReceive(Id, data)
 
   local file = self.m_Files[Id]
   if not file then return end
-  if file.md5 ~= md5(data) then --[[return problem]] end
+  if file.md5.."..3294hjfsj" ~= md5(data) then triggerServerEvent("onInternalError", localPlayer, DOWNLOAD_ERROR_FILE_MISMATCH, debug.getinfo(1)) end
 
   if fileExists(file.path) then fileDelete(file.path) end
   local fileHandle = fileCreate(file.path)
