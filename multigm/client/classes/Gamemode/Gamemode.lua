@@ -73,7 +73,8 @@ function Gamemode:checkPassword(yesCallback, noCallback, wrongCallback)
       if noCallback then
         noCallback()
       else
-        triggerServerEvent("Event_JoinGamemode", localPlayer, 1, true)
+        --triggerServerEvent("Event_JoinGamemode", localPlayer, 1, true)
+        RPC:call("Event_JoinGamemode", 1, true)
       end
       delete(background)
     end,
@@ -85,7 +86,8 @@ function Gamemode:checkPassword(yesCallback, noCallback, wrongCallback)
       if wrongCallback then
         wrongCallback()
       else
-        triggerServerEvent("Event_JoinGamemode", localPlayer, 1, true)
+        --triggerServerEvent("Event_JoinGamemode", localPlayer, 1, true)
+        RPC:call("Event_JoinGamemode", 1, true)
       end
       delete(background)
     end

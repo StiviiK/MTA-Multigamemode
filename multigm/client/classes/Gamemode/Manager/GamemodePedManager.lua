@@ -34,6 +34,11 @@ end
 function GamemodePedManager:Event_DrawNametags()
   if localPlayer:getGamemode() == GamemodeManager.getFromId(1) then
     if localPlayer:getDimension() == GamemodeManager.getFromId(1):getDimension() then
+      if FastLobby:isInstantiated() then
+        if FastLobby:getSingleton():isVisible() then
+          return
+        end
+      end
       for i, v in pairs(GamemodePedManager.Map) do
         local ped = v.m_Ped
         local lx, ly, lz = localPlayer:getBonePosition(8)

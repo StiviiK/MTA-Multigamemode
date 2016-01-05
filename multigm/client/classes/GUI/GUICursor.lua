@@ -68,13 +68,11 @@ end
 
 function GUICursor:show()
 	self.m_Counter = self.m_Counter + 1
-	outputDebug(self.m_Counter)
 	self:check()
 end
 
 function GUICursor:hide(force)
 	self.m_Counter = self.m_Counter - 1
-	outputDebug(self.m_Counter)
 	if force then
 		self.m_Counter = 0
 	end

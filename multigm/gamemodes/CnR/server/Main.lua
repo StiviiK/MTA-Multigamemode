@@ -4,7 +4,7 @@ function CopsnRobbers:constructor()
   addEventHandler("onPlayerSelectTeam", root, bind(CopsnRobbers.onPlayerSelectTeam, self))
   addEventHandler("onTazerShot", root, bind(CopsnRobbers.onTazerShot, self))
 
-  
+
    -- Load translation file
   TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
 
@@ -29,13 +29,13 @@ function CopsnRobbers:constructor()
   self:CreateAmmunationShops ()
   self.WastedHandler = function() self:Wasted() end
   addEventHandler ( "onPlayerWasted", self:getRoot(), self.WastedHandler )
-  
-  
+
+
   ----------TESTTESTSET---
 if CNR_DEBUG then
 AutoLogin ()---Weg machen
 end
-  
+
 end
 
 
@@ -56,7 +56,7 @@ function CopsnRobbers:onPlayerJoin(player)
 -----------------------------------
   player:triggerEvent("onCNRStartDownload", player)
 
-  
+
 
   ZumTesten (self,player)
 end
@@ -66,11 +66,11 @@ function CopsnRobbers:onPlayerLeft(player)
   ---Player Blip---
   local AllPlayer = self:getRoot():getAllByType("player")
   for theKey,thePlayer in ipairs(AllPlayer) do
-	--  if not thePlayer == player then  
+	--  if not thePlayer == player then
 		thePlayer:triggerEvent("DestroyPlayerBlip", player)
 	 -- end
   end
-  
+
 local Pos = player:getPosition()
 -- outputChatBox(("onPlayerLeft Position: %s,%s,%s"):format(Pos.x,Pos.y,Pos.z),player,255,0,0)
 -----------CNR_DEBUG---------------
@@ -88,11 +88,11 @@ function CopsnRobbers:onDownloadComplete()
 -- DebugOutPut( "CopsnRobbers:onDownloadComplete" )
 -----------------------------------
   self:Load_Player(client)
-  
+
   ---Player Blip---
   local AllPlayer = self:getRoot():getAllByType("player")
 	  for theKey,thePlayer in ipairs(AllPlayer) do
-		 if thePlayer ~= client then  
+		 if thePlayer ~= client then
 			-- outputChatBox("Attach PlayerBlip to : "..client:getName().." #Allplayer:"..#AllPlayer)
 			thePlayer:triggerEvent("CreatePlayerBlip", thePlayer,client)
 		end
@@ -119,7 +119,7 @@ end
   if CNR_DEBUG then
 	LoadPosition (client)
   end
-  
+
 
 end
 
@@ -144,15 +144,15 @@ function CopsnRobbers:SpawnPlayer(player,x,y,z,rot,int,dim,skin,fraction)
 		  player:setCameraTarget(player)
 		  player:setModel(skin)
 		  self:setPlayerFraction(player,fraction)
-		  
+
 		  self:GivePlayerFractionWeapons(player,CNR_Cops,3)---YYXXXXXXXXXy
-		  
+
 		  player:setInterior(int)
-		  if int ~= 0 then 
+		  if int ~= 0 then
 			 player:setDimension(dim)
 		  else
 			 player:setDimension(self:getDimension())
-		  end 
+		  end
 		 self:ShowRadar(player)
 end
 
@@ -172,11 +172,11 @@ function ZumTesten (self,player)
 			  outputChatBox("Give wanteds to "..playername.." :"..wtds)
 	  end)
 
-	  addCommandHandler("gf",function(player,cmd,playername) 
+	  addCommandHandler("gf",function(player,cmd,playername)
 			  outputChatBox("Fraktion of "..playername.." :"..tostring(self:getPlayerFraction(getPlayerFromName(playername))))
 	  end)
 
-	  addCommandHandler("sf",function(player,cmd,playername,frak) 
+	  addCommandHandler("sf",function(player,cmd,playername,frak)
 		if getPlayerFromName(playername) and frak then
 			 self:setPlayerFraction(getPlayerFromName(playername),frak)
 		end
@@ -188,20 +188,20 @@ end
 function AutoLogin ()
 
 										  setTimer(function()
-										  
+
 											for i, player in pairs(getElementsByType ( "player" )) do
 										  if i == 1 then
 										   Namex = "StiviK"
 										  else
 										   Namex = "Hans"
 										  end
-											
+
 											Async.create(Account.login)(player, Namex, hash("sha256", teaEncode("krassespasswort", "mta")))
 											  setTimer(function()
 											JoinGamemodeTEST (player)
 											  end,1000,1)
 										  end
-										  
+
 										  end,1000,1)
 end
 

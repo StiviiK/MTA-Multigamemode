@@ -19,8 +19,8 @@
 			<script src="shared/classes/ConfigXML.lua" type="shared"/>
 
 			<script src="shared/constants.lua" type="shared"/>
-			<script src="shared/async.lua" type="shared"/>
 			<script src="shared/debug.lua" type="shared"/>
+			<script src="shared/async.lua" type="shared"/>
 			<script src="shared/classes/TimedPulse.lua" type="shared"/>
 			<script src="shared/classes/POParser.lua" type="shared"/>
 			<script src="shared/classes/TranslationManager.lua" type="shared"/>
@@ -28,6 +28,7 @@
 			<script src="shared/classes/Gamemode/Element/GamemodeElement.lua" type="shared"/>
 			<script src="shared/classes/DimensionManager.lua" type="shared"/>
 			<script src="shared/classes/Command.lua" type="shared"/>
+			<script src="shared/classes/RPC.lua" type="shared"/>
 
 		<!-- Server -->
 			<script src="server/constants.lua" type="server"/>

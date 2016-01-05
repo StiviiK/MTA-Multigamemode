@@ -41,6 +41,7 @@ function Core:constructor ()
   MapManager:getSingleton():registerMap("gamemodes/CnR/res/maps/LSPolice.map")
 
 	-- Instantiate classes
+  RPC = RPC:new()
   Performance:new()
   Provider:new()
   PlayerManager:new()
@@ -89,6 +90,7 @@ function Core:destructor ()
   delete(GamemodeManager:getSingleton())
   delete(MapManager:getSingleton())
   delete(PlayerManager:getSingleton())
+  delete(RPC)
 
   -- Delete this at last position
   delete(sql)

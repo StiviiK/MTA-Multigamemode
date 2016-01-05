@@ -24,10 +24,10 @@ function Core:constructor()
 	TranslationManager:new()
 
 	-- Instantiate classes
+	RPC = RPC:new()
   if DEBUG then
 		Debugging:new()
 	end
-
 	Performance:new()
 	Version:new()
 	Cursor = GUICursor:new()

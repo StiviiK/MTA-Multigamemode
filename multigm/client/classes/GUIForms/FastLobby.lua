@@ -21,7 +21,7 @@ function FastLobby:constructor()
     {Gamemode = GamemodeManager.getFromId(5), Active = true, Background = "res/images/backgrounds/cs/cs-bg.jpg"};
     {Gamemode = GamemodeManager.getFromId(6), Active = true, Background = "res/images/backgrounds/blm/blm-bg.jpg"};
   }
-  
+
   for i, v in pairs(self.m_Gamemodes) do
     if v.Gamemode then
       v.Name = ("%s\n(%s / %s)"):format(v.Gamemode:getName(), v.Gamemode:getSyncInfo("CurrPlayers"), v.Gamemode:getSyncInfo("MaxPlayers")) or "ERR_UNKOWN_NAME"
@@ -103,7 +103,8 @@ function FastLobby:constructor()
       self.m_Gamemodes[currGamemode].Label.onLeftClick = function (element)
         if self.m_Gamemodes[currGamemode].Active then
           outputDebug(element.m_Parent.m_GamemodeId)
-          triggerServerEvent("Event_JoinGamemode", localPlayer, element.m_Parent.m_GamemodeId, true)
+          --triggerServerEvent("Event_JoinGamemode", localPlayer, element.m_Parent.m_GamemodeId, true)
+          RPC:call("Event_JoinGamemode", element.m_Parent.m_GamemodeId, true)
 
           Camera.fade(false, 0)
           delete(self)
