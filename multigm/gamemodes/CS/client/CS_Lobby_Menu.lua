@@ -25,7 +25,7 @@ function CS_Lobby_Menu:constructor(CS_SELF)
 		for colum = 1, 3, 1 do
 			  for row = 1, 3, 1 do
 				GamemodeLoadCount = GamemodeLoadCount + 1 
-				
+				outputChatBox(#GamemodeList)
 				if GamemodeLoadCount <= #GamemodeList then
 					self.GamemodeImagleUrl  = GamemodeList[GamemodeLoadCount]:get("GamemodeLobbyMenu_BG")
 					self.GamemodeColor      = GamemodeList[GamemodeLoadCount]:get("GamemodeLobbyMenu_Color")
@@ -127,7 +127,7 @@ RightWindow = GUIElement:new(0, 0, screenWidth, screenHeight, self)
 	:setHoverColor(tocolor(0,0,0))
 	self.JoinButton.onLeftClick = function(element)
 		if SelectGamemodeID then
-			self:PutPlayerInToGM (tonumber(SelectGamemodeID))
+			self:PutPlayerInToGM (tonumber(SelectGamemodeID+SUBGAMEMODE))
 		end
 	end
 	self.GamemodePlayerList = GUIGridList:new(self.m_Width*0.68, self.m_Height*0.4, self.m_Width*0.25, self.m_Height*0.35, RightWindow)

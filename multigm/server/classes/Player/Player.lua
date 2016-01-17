@@ -140,12 +140,14 @@ function Player:isActive() return true end
 function Player:getAccount() return self.m_Account end
 function Player:isLoggedIn() return self.m_Id ~= -1	end
 function Player:getGamemode() return self.m_Gamemode end
+function Player:getSubGamemode() return self.m_SubGamemode end
 function Player:getSession() return (self:getAccount() and self:getAccount():getSession()) end
 function Player:isClientReady() return self.m_ClientReady end
 function Player:getJobPoints() return self.m_JobPoints end
 
 -- Short setters
 function Player:setGamemode(instance) self.m_Gamemode = instance if self:isActive() then self:setPublicSync("Gamemode", (self.m_Gamemode and self.m_Gamemode:getId()) or 0) end end
+function Player:setSubGamemode(instance) self.m_SubGamemode = instance if self:isActive() then self:setPublicSync("SubGamemode", (self.m_SubGamemode and self.m_SubGamemode:getId()) or 0) end end
 function Player:setJobPoints(jpoints) self.m_JobPoints = jpoints if self:isActive() then self:setPublicSync("JobPoints", self.m_JobPoints) end end
 
 -- Increment functions

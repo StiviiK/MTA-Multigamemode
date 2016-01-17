@@ -1,19 +1,18 @@
-CS_MapLoader = inherit(Singleton)
+CS_MapLoader = inherit(Object)
 CS_MapLoader.Map = {}
 
-function CS_MapLoader:constructor()
+function CS_MapLoader:constructor(GM)
+self.Gamemode = GM
 self.GameMaps = {
 [1] = {["Name"] = "de_dust2",["path"] = "gamemodes/CS/res/maps/de_dust2/"}
 }
-
-
 end
 
 function CS_MapLoader:destructor()
 self:RestoreMap()
 end
 
-function CS_MapLoader:LoadMap(Gamemode,MapID)
+function CS_MapLoader:LoadMap(MapID)
 	self.MapName = self.GameMaps[MapID]["Name"]
 	self.MapPath = self.GameMaps[MapID]["path"]
 	
@@ -36,12 +35,12 @@ function CS_MapLoader:LoadMap(Gamemode,MapID)
 
 	
 	 self.Map = createObject ( 13051, self.MapSettings["MapPos"][1]["position"],self.MapSettings["MapPos"][1]["rotation"] )
-	 setElementDimension(self.Map,Gamemode:getDimension())
-	
+	 setElementDimension(self.Map,self.Gamemode:getDimension())
+	outputChatBox("DIM ändern")
 ---LoadMap Objects	
 	self:LoadMapObjects(MapID)
 
-return true
+ self.Gamemode:MapIsReady(self.MapSettings)
 end
 
 
@@ -52,8 +51,8 @@ end
 function CS_MapLoader:LoadMapSettings(MapID)
 self.MapSettings = {}
 	-- self.MapName 
-local Items = {"Camera_CT_Spawn","Camera_T_Spawn","Bomb_Place_A","Bomb_Place_B","CT_Spawn","T_Spawn","MapPos"}	 
-local xml = XML.load(self.MapPath.."Info.map")
+local Items = {"Camera_CT_Spawn","Camera_T_Spawn","Bomb_Place_A","Bomb_Place_B","CT_Spawn","T_Spawn","MapPos","WaitForPlayer_Camera"}	 
+local xml = XML.load(self.MapPath.."Info.xml")
 
 	for i= 1,#Items do
 		for k in pairs(xml:getChildren()) do
@@ -72,12 +71,14 @@ local xml = XML.load(self.MapPath.."Info.map")
 	end
 end
 
-
+function CS_MapLoader:getSettings(item)
+return self.MapSettings[item]
+end
 
 
 function CS_MapLoader:RestoreMap()
 		self.MapSettings = false
-
+		
 		self.Map:destroy()
 		self.Map_dff:destroy()
 		self.Map_col:destroy()

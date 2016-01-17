@@ -175,68 +175,69 @@
 			
 
 <!-- Counter-Strike Main -->
+
+<script src="gamemodes/CS/SubGamemode/SubGamemode_Manager/SubGamemode_Manager_c.lua" type="client"/>
+<script src="gamemodes/CS/SubGamemode/SubGamemode_Manager/SubGamemode_Manager_s.lua" type="server"/>
+
+<script src="gamemodes/CS/SubGamemode/SubGamemode_c.lua" type="client"/>
+<script src="gamemodes/CS/SubGamemode/SubGamemode_s.lua" type="server"/>
+
+
 		<!-- Meta -->
 			<metafile src="gamemodes/CS/meta.xml"/>
 
 		<!-- Shared -->
-			<script src="gamemodes/CS/constants.lua" type="shared"/>
-
+			<script src="gamemodes/CS/CS_constants.lua" type="shared"/>
+			<!-- Map Info Shared -->
+			<file src="gamemodes/CS/res/maps/de_dust2/Info.xml" type="shared"/>
 		<!-- Server -->
 
-			<script src="gamemodes/CS/server/Init.lua" type="server"/>
-			<script src="gamemodes/CS/server/Main.lua" type="server"/>
-			<script src="gamemodes/CS/CS_Manager/server/CS_GamemodeManager_s.lua" type="server"/>
+			<script src="gamemodes/CS/server/CS_Init_S.lua" type="server"/>
+			<script src="gamemodes/CS/server/CS_Main_S.lua" type="server"/>
+			<script src="gamemodes/CS/CS_Gamemode_Manager/server/CS_GamemodeManager_s.lua" type="server"/>
 			<script src="gamemodes/CS/WeaponCore/server.lua" type="server"/>
 			<script src="gamemodes/CS/FirstPerson/server.lua" type="server"/>
 			<script src="gamemodes/CS/CS_MapManager/server/CS_MapManager_s.lua" type="server"/>
+			<script src="gamemodes/CS/CS_TeamManager/server/CS_TeamManager_s.lua" type="server"/>
+			<script src="gamemodes/CS/CS_GamePlay_Manager/server/CS_GamePlayManager_s.lua" type="server"/>
 		<!-- Client -->
 		
-			<script src="gamemodes/CS/client/Init.lua" type="client"/>
-			<script src="gamemodes/CS/client/Main.lua" type="client"/>
+			<script src="gamemodes/CS/client/CS_Init_C.lua" type="client"/>
+			<script src="gamemodes/CS/client/CS_Main_C.lua" type="client"/>
 			<script src="gamemodes/CS/client/CS_Lobby_Menu.lua" type="client"/>
-			<script src="gamemodes/CS/CS_Manager/client/CS_GamemodeManager_c.lua" type="client"/>
+			<script src="gamemodes/CS/CS_Gamemode_Manager/client/CS_GamemodeManager_c.lua" type="client"/>
 			<script src="gamemodes/CS/FirstPerson/client.lua" type="client"/>
 			<script src="gamemodes/CS/CS_MapManager/client/CS_MapManager_c.lua" type="client"/>
+			<script src="gamemodes/CS/CS_TeamManager/client/CS_TeamManager_c.lua" type="client"/>
+			<script src="gamemodes/CS/client/CS_Team_Select_Menu.lua" type="client"/>
+		    <script src="gamemodes/CS/CS_GamePlay_Manager/client/CS_GamePlayManager_c.lua" type="client"/>
+			<script src="gamemodes/CS/client/LoadingScreen.lua" type="client"/>
+			<script src="gamemodes/CS/client/Game_HUD.lua" type="client"/>
+			<script src="gamemodes/CS/client/TEST_GUI.lua" type="client"/>
 
+		
+	<!-- Counter-Strike Deathmatch-->
+			<!-- Shared -->
 			
-	<!-- Counter-Strike Deathmatch-->		
+			<script src="gamemodes/CS/gamemodes/Deathmatch/DM_constants.lua" type="shared"/>
+			
 			<!-- Server -->
 
-			<script src="gamemodes/CS/gamemodes/Deathmatch/server/Init.lua" type="server"/>
-			<script src="gamemodes/CS/gamemodes/Deathmatch/server/Main.lua" type="server"/>
+			<script src="gamemodes/CS/gamemodes/Deathmatch/server/DM_Init_S.lua" type="server"/>
+			<script src="gamemodes/CS/gamemodes/Deathmatch/server/DM_Main_S.lua" type="server"/>
 			
 
 			<!-- Client -->
 	
-			<script src="gamemodes/CS/gamemodes/Deathmatch/client/Init.lua" type="client"/>
-			<script src="gamemodes/CS/gamemodes/Deathmatch/client/Main.lua" type="client"/>
+			<script src="gamemodes/CS/gamemodes/Deathmatch/client/DM_Init_C.lua" type="client"/>
+			<script src="gamemodes/CS/gamemodes/Deathmatch/client/DM_Main_C.lua" type="client"/>
 			
 			
-		<!-- Counter-Strike Bomb defusal-->		
-			<!-- Server -->
-
-			<script src="gamemodes/CS/gamemodes/Bombdefusal/server/Init.lua" type="server"/>
-			<script src="gamemodes/CS/gamemodes/Bombdefusal/server/Main.lua" type="server"/>
 			
-
-			<!-- Client -->
-	
-			<script src="gamemodes/CS/gamemodes/Bombdefusal/client/Init.lua" type="client"/>
-			<script src="gamemodes/CS/gamemodes/Bombdefusal/client/Main.lua" type="client"/>		
+			
+			
 			
 		
-			
-	 <!-- Counter-Strike Demolition-->		
-			<!-- Server -->
-
-			<script src="gamemodes/CS/gamemodes/Demolition/server/Init.lua" type="server"/>
-			<script src="gamemodes/CS/gamemodes/Demolition/server/Main.lua" type="server"/>
-			
-
-			<!-- Client -->
-	
-			<script src="gamemodes/CS/gamemodes/Demolition/client/Init.lua" type="client"/>
-			<script src="gamemodes/CS/gamemodes/Demolition/client/Main.lua" type="client"/>	
 			
 			
 			
