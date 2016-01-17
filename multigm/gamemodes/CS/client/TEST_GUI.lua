@@ -42,4 +42,4 @@ if x < 0 then x = 0 end
 return x
 end
 
-addEventHandler ( "onClientRender", root, Test__GUI )
+-- addEventHandler ( "onClientRender", root, Test__GUI )
