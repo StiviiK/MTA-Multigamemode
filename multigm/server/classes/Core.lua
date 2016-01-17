@@ -28,7 +28,7 @@ function Core:constructor ()
     MYSQL_PW = ""
 	MYSQL_DB = "multigm_develop"
   end
-  
+
   sql = MySQL:new(MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PW, MYSQL_DB, "")
   sql:setPrefix("multigm")
 
@@ -41,6 +41,7 @@ function Core:constructor ()
   MapManager:getSingleton():registerMap("gamemodes/CnR/res/maps/LSPolice.map")
 
 	-- Instantiate classes
+  RPC = RPC:new()
   Performance:new()
   Provider:new()
   PlayerManager:new()
@@ -59,7 +60,10 @@ function Core:constructor ()
     {"Cops'n'Robbers", "gamemodes/CnR/", "cnr.data"};
     {"Renegade Squad", "gamemodes/RnS/", "rns.data"};
     {"Super Sweeper", "gamemodes/SuperS/", "supers.data"};
-    {"Counter-Strike", "gamemodes/CS/", "CS.data"};  }
+    {"Counter-Strike", "gamemodes/CS/", "CS.data"};
+    {"Blood Money", "gamemodes/BloodMoney/", "blm.data"};
+  }
+
   for _, v in ipairs(gamemodes) do
     outputDebug(("Generating Package for %s..."):format(v[1]))
 
@@ -86,6 +90,7 @@ function Core:destructor ()
   delete(GamemodeManager:getSingleton())
   delete(MapManager:getSingleton())
   delete(PlayerManager:getSingleton())
+  delete(RPC)
 
   -- Delete this at last position
   delete(sql)
@@ -105,6 +110,10 @@ end
 
 function Core:getStartTime()
   return Main.coreStartTime
+end
+
+function Core:logError(RayID, errHash, debugInfo, player)
+  sql:queryExec("INSERT INTO ??_errlog (sRayID, lRayID, Type, Timestamp, AccountId, ErrHash, ErrSource) VALUES (?, ?, ?, NOW(), ?, ?, ?);", sql:getPrefix(), RayID:sub(1,8), RayID, 1, player:getId(), errHash, toJSON(debugInfo))
 end
 
 function Core:setAPIStatements()

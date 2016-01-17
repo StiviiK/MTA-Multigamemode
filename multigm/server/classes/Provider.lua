@@ -1,9 +1,8 @@
 Provider = inherit(Singleton)
 
 function Provider:constructor()
-  addRemoteEvents{"onClientRequestFile", "onClientDownlaodComplete"}
-  addEventHandler("onClientRequestFile", root, bind(Provider.onClientRequestFile, self))
-  addEventHandler("onClientDownlaodComplete", root, bind(Provider.onFileDownloadComplete, self))
+  RPC:registerFunc("onClientRequestFile", bind(Provider.onClientRequestFile, self))
+  RPC:registerFunc("onClientDownloadComplete", bind(Provider.onFileDownloadComplete, self))
   addEventHandler("onPlayerQuit", root, bind(Provider.onPlayerDisconnect, self))
 
   --self.m_FilesInstant = {}
@@ -45,20 +44,20 @@ function Provider:updateProgress()
 			local status = getLatentEventStatus(v.player, handle)
 
 			if status and status.percentComplete < 100 then
-				v.player:triggerEvent("onFileProgressUpdate", resourceRoot, k, status)
+        RPC:callCustom("onFileProgressUpdate", v.player, k, status)
 			end
 		end
 	end
 end
 
-function Provider:onClientRequestFile(file, fileHash) -- this function can only be called when type = PROVIDER_ON_DEMAND
+function Provider:onClientRequestFile(client, file, fileHash) -- this function can only be called when type = PROVIDER_ON_DEMAND
   if not self.m_FilesOnDemand[file] then
-    client:triggerEvent("onFileDonwloadStart", resourceRoot, DOWNLOAD_ERROR_UNKOWN_FILE, file)
+    RPC:callCustom("onFileDonwloadStart", client, DOWNLOAD_ERROR_UNKOWN_FILE, file)
     return
   end
   if fileHash == self.m_FilesOnDemand[file].md5 then
-    client:triggerEvent("onFileDonwloadStart", resourceRoot, file, file, self.m_FilesOnDemand[file].md5, self.m_FilesOnDemand[file].size)
-    client:triggerEvent("onFileReceive", resourceRoot, file, true)
+    RPC:callCustom("onFileDonwloadStart", client, file, file, self.m_FilesOnDemand[file].md5, self.m_FilesOnDemand[file].size)
+    RPC:callCustom("onFileReceive", client, file, true)
     return
   end
 
@@ -69,10 +68,10 @@ function Provider:onClientRequestFile(file, fileHash) -- this function can only 
     player = client;
     handle = getLatentEventHandles(client)[#getLatentEventHandles(client)]
   }
-  client:triggerEvent("onFileDonwloadStart", resourceRoot, Id, file, self.m_FilesOnDemand[file].md5, self.m_FilesOnDemand[file].size)
+  RPC:callCustom("onFileDonwloadStart", client, Id, file, self.m_FilesOnDemand[file].md5, self.m_FilesOnDemand[file].size)
 end
 
-function Provider:onFileDownloadComplete(Id)
+function Provider:onFileDownloadComplete(client, Id)
   self.m_ActiveDL[Id] = nil
 end
 

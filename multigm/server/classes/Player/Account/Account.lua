@@ -28,8 +28,9 @@ function Account.login(player, username, password)
     player.m_Account = Account:new(row.Id, row.Name, row.Type, player, false)
     player:loadCharacter()
 end
-addEvent("accountlogin", true)
-addEventHandler("accountlogin", root, function(...) Async.create(Account.login)(client, ...) end)
+RPC:registerFunc("accountlogin", function (client, ...) Async.create(Account.login)(client, ...) end)
+--addEvent("accountlogin", true)
+--addEventHandler("accountlogin", root, function(...) Async.create(Account.login)(client, ...) end)
 
 --[[
 CLIENT:
@@ -69,8 +70,9 @@ function Account.register(player, accountname, password)
   -- Log into the Account
   return Account.login(player, accountname, password)
 end
-addEvent("accountregister", true)
-addEventHandler("accountregister", root, function (...) Async.create(Account.register)(client, ...) end)
+RPC:registerFunc("accountregister", function (client, ...) Async.create(Account.register)(client, ...) end)
+--addEvent("accountregister", true)
+--addEventHandler("accountregister", root, function (...) Async.create(Account.register)(client, ...) end)
 
 function Account.guest(player)
   if player:getAccount() then return false end

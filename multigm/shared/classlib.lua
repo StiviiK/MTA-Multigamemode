@@ -114,6 +114,7 @@ function new(class, ...)
 end
 
 function delete(self, ...)
+	if not self then outputDebug(debug.traceback()) return end
 	if self.destructor then --if rawget(self, "destructor") then
 		self:destructor(...)
 	end

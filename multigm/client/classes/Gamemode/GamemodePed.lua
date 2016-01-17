@@ -21,8 +21,8 @@ function GamemodePed:constructor(model, position, rotation, dimension, interior,
   self.m_Ped:setDimension(self.m_Dimension)
   self.m_Ped:setInterior(self.m_Interior)
   self.m_Ped:setRotation(self.m_Rotation)
-
   self.m_Ped:setFrozen(true)
+  addEventHandler("onClientPedDamage", self.m_Ped, cancelEvent)
 
   if self:getGamemode().m_GamemodePeds then
     table.insert(self:getGamemode().m_GamemodePeds, self.m_Id, self)

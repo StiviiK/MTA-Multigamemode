@@ -17,14 +17,22 @@ function GamemodeManager:constructor()
   addEventHandler("RespawnGamemodePed", root, bind(GamemodeManager.Event_RespawnGamemodePed, self))
   addEventHandler("DeleteGamemodePed", root, bind(GamemodeManager.Event_DeleteGamemodePed, self))
 
+  RPC:registerFunc("onPlayerGamemodeJoin", bind(GamemodeManager.Event_OnPlayerGamemodeJoin, self))
+  RPC:registerFunc("onPlayerGamemodeLeft", bind(GamemodeManager.Event_OnPlayerGamemodeLeft, self))
+  RPC:registerFunc("onGamemodeDestruct", bind(GamemodeManager.Event_OnGamemodeDestruct, self))
+  RPC:registerFunc("UpdateGamemodeSync", bind(GamemodeManager.Event_UpdateGamemodeSync, self))
+  RPC:registerFunc("RespawnGamemodePed", bind(GamemodeManager.Event_RespawnGamemodePed, self))
+  RPC:registerFunc("DeleteGamemodePed", bind(GamemodeManager.Event_DeleteGamemodePed, self))
+
   local Gamemodes = {
     self:addRef(Lobby:new(Color.Orange):setId(1));
     self:addRef(CopsnRobbers:new(Color.Green):setId(2));
     self:addRef(RenegadeSquad:new(Color.Yellow):setId(3));
     self:addRef(SuperS:new(Color.LightBlue):setId(4));
     self:addRef(CS:new(Color.Orange):setId(5));
-
+    self:addRef(BloodMoney:new(Color.Red):setId(6));
   }
+
   for k, v in ipairs(Gamemodes) do
     if v.onGamemodesLoaded then
       v:onGamemodesLoaded(#Gamemodes)

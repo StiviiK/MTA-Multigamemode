@@ -6,6 +6,7 @@ Gamemode.constructor = pure_virtual
 Gamemode.destructor = pure_virtual
 Gamemode.onPlayerJoin = pure_virtual
 Gamemode.onPlayerLeft = pure_virtual
+Gamemode.onPlayerPreJoin = pure_virtual
 
 function Gamemode:new(...)
   local inst = new(self, ...)
@@ -53,6 +54,13 @@ function Gamemode:addPlayer(player)
     if (type(self:getSetting("DownloadPath")) == "string") and (not fileExists(self:getSetting("DownloadPath"))) then
       player:onInternalError(DOWNLOAD_ERROR_UNKOWN_FILE)
       return
+    end
+
+    if self.onPlayerPreJoin ~= pure_virtual then
+      if self:onPlayerPreJoin(player) == false then
+        player:onInternalError(RUNTIME_ERROR_JOIN_DENIED)
+        return false
+      end
     end
 
     table.insert(self.m_Players, player)

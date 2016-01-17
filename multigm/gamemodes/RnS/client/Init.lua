@@ -10,3 +10,9 @@ end
 
 -- Shorten function
 function RenegadeSquad:get(...) return self:getSetting(...) end
+
+-- Add Help Text
+HelpTexts.Gamemodes.RnS = {
+  title = "Renegade Squad";
+  text = LOREM_IPSUM;
+};

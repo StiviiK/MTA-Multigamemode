@@ -2,7 +2,7 @@ function CS:constructor()
 --Handler--
   addRemoteEvents{"onCSStartDownload"}
   addEventHandler("onCSStartDownload", root, bind(CS.onDownloadStart, self))
-  
+
   -- CS_GamemodeManager:new()
   
   -- FirstPerson:new()
@@ -22,8 +22,6 @@ end
 function CS:onPlayerJoin()
 -- showChat(false)
 -- FirstPerson:getSingleton():CreateFirstPerson()
-  -- Change HelpBar Text
-  -- HelpBar:getSingleton():setText(HelpTexts.Gamemodes.CnR)
 end
 
 
@@ -48,6 +46,3 @@ function CS:onDownloadFinish()
   -- CS_MapLoader:getSingleton().MapSettings["T_Spawn"][1]["position"]
   -- )
 end
-
-
-	

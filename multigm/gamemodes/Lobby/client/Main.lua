@@ -3,9 +3,6 @@ function Lobby:constructor()
   addRemoteEvents{"onLobbyStartDownload"}
   addEventHandler("onLobbyStartDownload", root, bind(Lobby.onDownloadStart, self))
 
-  -- Load translation file
-  TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
-
   -- Reset GamemodePed dimension
 	self:addSyncChangeHandler("Dimension", function (dim)
     for _, gamemode in pairs(GamemodeManager.Map) do
@@ -21,7 +18,9 @@ end
 
 function Lobby:onGamemodesLoaded(numLoadedGamemodes)
   for i = 2, numLoadedGamemodes, 1 do
-    GamemodePed:new(table.random(self:get("GamemodePedSkins")[i-1]), self:get("GamemodePedPositions")[i-1], self:get("GamemodePedRotations")[i-1], 0, self:getSetting("Spawn").Interior, GamemodeManager.getFromId(i))
+    if GamemodeManager.getFromId(i) then
+      GamemodePed:new(table.random(self:get("GamemodePedSkins")[i-1]), self:get("GamemodePedPositions")[i-1], self:get("GamemodePedRotations")[i-1], 0, self:getSetting("Spawn").Interior, GamemodeManager.getFromId(i))
+    end
   end
 end
 
@@ -32,11 +31,7 @@ function Lobby:onPlayerJoin()
   toggleControl("fire", false)
   toggleControl("jump", false)
   toggleControl("aim_weapon", false)
-
-  if localPlayer:getLocale() then
-    -- Change HelpBar Text
-    HelpBar:getSingleton():setText(HelpTexts.General.Main, false, self:getColor())
-  end
+  addEventHandler("onClientPlayerDamage", localPlayer, cancelEvent)
 end
 
 function Lobby:onPlayerLeft()
@@ -46,6 +41,7 @@ function Lobby:onPlayerLeft()
   toggleControl("fire", true)
   toggleControl("jump", true)
   toggleControl("aim_weapon", true)
+  removeEventHandler("onClientPlayerDamage", localPlayer, cancelEvent)
 end
 
 function Lobby:onDownloadStart()
@@ -54,4 +50,12 @@ end
 
 function Lobby:onDownloadFinish()
   triggerServerEvent("onLobbyDownloadFinished", localPlayer)
+
+  -- Load translation file
+  TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
+
+  -- Change HelpBar Text
+  if localPlayer:getLocale() then
+    HelpBar:getSingleton():setText(HelpTexts.General.Main, false, self:getColor())
+  end
 end

@@ -48,6 +48,52 @@ function Gamemode:addSyncChangeHandler(key, handler)
   return self
 end
 
+function Gamemode:checkPassword(yesCallback, noCallback, wrongCallback)
+  local background = GUIImage:new(0, 0, screenWidth, screenHeight, "res/images/backgrounds/lobby/lobby-bg.jpg")
+  if HelpBar:isInstantiated() then
+    HelpBar:getSingleton().m_HelpLabel:setVisible(false)
+  end
+
+  PasswordBox:new(self.m_Password or self:getName(),
+    function ()
+      if HelpBar:isInstantiated() then
+        HelpBar:getSingleton().m_HelpLabel:setVisible(true)
+      end
+
+      if yesCallback then
+        yesCallback()
+      end
+      delete(background)
+    end,
+    function ()
+      if HelpBar:isInstantiated() then
+        HelpBar:getSingleton().m_HelpLabel:setVisible(true)
+      end
+
+      if noCallback then
+        noCallback()
+      else
+        --triggerServerEvent("Event_JoinGamemode", localPlayer, 1, true)
+        RPC:call("Event_JoinGamemode", 1, true)
+      end
+      delete(background)
+    end,
+    function ()
+      if HelpBar:isInstantiated() then
+        HelpBar:getSingleton().m_HelpLabel:setVisible(true)
+      end
+
+      if wrongCallback then
+        wrongCallback()
+      else
+        --triggerServerEvent("Event_JoinGamemode", localPlayer, 1, true)
+        RPC:call("Event_JoinGamemode", 1, true)
+      end
+      delete(background)
+    end
+  )
+end
+
 -- Short getters
 function Gamemode:getId() return self.m_Id end
 function Gamemode:getName() return self:getSyncInfo("Name") end

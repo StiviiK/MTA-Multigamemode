@@ -101,3 +101,11 @@ function HelpBar:setText(tbl, temporary, color)
   self.m_SubTitleLabel:setText(_(tbl.title))
   self.m_TextLabel:setText(_(tbl.text, unpack(tbl.format or {})):gsub("/n/", "\n"))
 end
+
+function HelpBar:getText()
+  return {title = self.m_SubTitleLabel:getText(), text = self.m_TextLabel:getText()}
+end
+
+function HelpBar:getCurrentColor()
+  return self.m_HelpLabel:getColor()
+end

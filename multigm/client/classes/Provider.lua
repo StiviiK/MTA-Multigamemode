@@ -8,10 +8,12 @@
 Provider = inherit(Singleton)
 
 function Provider:constructor()
-  addRemoteEvents{"onFileReceive", "onFileDonwloadStart", "onFileProgressUpdate"}
+  addRemoteEvents{"onFileReceive"}
   addEventHandler("onFileReceive", root, bind(Provider.onFileReceive, self))
-  addEventHandler("onFileDonwloadStart", root, bind(Provider.onFileDonwloadStart, self))
-  addEventHandler("onFileProgressUpdate", root, bind(Provider.onProgessUpdate, self))
+
+  RPC:registerFunc("onFileReceive", bind(Provider.onFileReceive, self))
+  RPC:registerFunc("onFileDonwloadStart", bind(Provider.onFileDonwloadStart, self))
+  RPC:registerFunc("onFileProgressUpdate", bind(Provider.onProgessUpdate, self))
 
   self.m_Files = {}
   self.m_RequestedFiles = {}
@@ -32,7 +34,7 @@ function Provider:requestFile(file, callback, callbackargs)
     hash = md5(fileHandle:read(fileHandle:getSize()))
     fileHandle:close()
   end
-  triggerServerEvent("onClientRequestFile", resourceRoot, file, hash)
+  RPC:call("onClientRequestFile", file, hash)
 end
 
 function Provider:onFileDonwloadStart(Id, path, md5, size)
@@ -51,7 +53,7 @@ end
 function Provider:onFileReceive(Id, data)
   if type(Id) == "string" then
     if data == true then
-      triggerServerEvent("onClientDownlaodComplete", resourceRoot, Id)
+      RPC:call("onClientDownloadComplete", Id)
 
       delete(self.m_Files[Id].loadingBar)
 
@@ -63,14 +65,14 @@ function Provider:onFileReceive(Id, data)
 
   local file = self.m_Files[Id]
   if not file then return end
-  if file.md5 ~= md5(data) then --[[return problem]] end
+  if file.md5 ~= md5(data) then triggerServerEvent("onInternalError", localPlayer, DOWNLOAD_ERROR_FILE_MISMATCH, debug.getinfo(1)) end
 
   if fileExists(file.path) then fileDelete(file.path) end
   local fileHandle = fileCreate(file.path)
   fileHandle:write(data)
   fileHandle:close()
 
-  triggerServerEvent("onClientDownlaodComplete", resourceRoot, Id)
+  RPC:call("onClientDownloadComplete", Id)
 
   if file.path:find(".data") then
     Package.load(file.path)

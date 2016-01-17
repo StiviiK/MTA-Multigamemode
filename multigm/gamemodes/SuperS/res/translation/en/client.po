@@ -9,3 +9,15 @@
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: gamemodes/supers/client/init.lua:0
+msgid "Super Sweeper"
+msgstr "Super-Sweeper"
+
+#: gamemodes/supers/client/init.lua:0
+msgid "Willkommen bei Super-Sweeper! Hier erlebst du eine völlig neue Art von Spaß und Entertainment! Schau dich am besten erst einmal in der Lobby um, bevor du mit Hilfe von zahlreichen Waffen und Items in den Kampf gegen andere Sweeper trittst. Nach der erfolgreichen Schlacht kannst du deine hart verdienten Sweeper-Punkte in sinnvolle Tunings und optische Feinheiten für deinen fahrbaren Untersatz umwandeln. Also los, hör auf die Hilfe zu lesen und werde der neue Super Sweeper!/n//n/Developer:/n/Source Code: MasterM/n/Code Edit: StiviK"
+msgstr "Welcome to Super Sweeper! Please feel free to check out the lobby area before entering a whole new level of fun and entertainment. All you have to do is to join the war zone with your personal sweeper and prepare yourself to fight against other sweepers with the help of numerous weapons and special items. After a successful battle, you can invest your hard-earned sweeper points into upgrades for your ride to tune it up to the top and become the Super Sweeper!/n//n/Developer:/n/Source Code: MasterM/n/Code Edit: StiviK"
+
+#: DUE AN BUG - LEAVE THIS AT THE LAST LINE
+msgid ""
+msgstr ""

@@ -10,3 +10,9 @@ end
 
 -- Shorten function
 function CopsnRobbers:get(...) return self:getSetting(...) end
+
+-- Add Help Text
+HelpTexts.Gamemodes.CnR = {
+  title = "Cops'n'Robbers";
+  text = LOREM_IPSUM;
+};

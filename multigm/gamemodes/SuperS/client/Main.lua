@@ -2,8 +2,8 @@ function SuperS:constructor()
   addRemoteEvents{"onSuperSStartDownload"}
   addEventHandler("onSuperSStartDownload", root, bind(SuperS.onDownloadStart, self))
 
-  -- Load translation file
-  TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
+  -- Add a password
+  self.m_Password = "Kuchengeschmack"
 
   -- Instantiate classes
   self.SweeperManager:new()
@@ -25,21 +25,28 @@ function SuperS:onGamemodesLoaded()
 end
 
 function SuperS:onPlayerJoin()
-  -- Change HelpBar Text
-  HelpBar:getSingleton():setText(HelpTexts.Gamemodes.SuperS, false, self:getColor())
 end
 
 function SuperS:onPlayerLeft()
   -- Destroy Lobby Shader
-  delete(self.m_LobbyShader)
+  if self.m_LobbyShader then
+    delete(self.m_LobbyShader)
+  end
 end
 
 function SuperS:onDownloadStart()
-  Provider:getSingleton():requestFile(RNS_DOWNLOAD_FILE, bind(SuperS.onDownloadFinish, self))
+  --Provider:getSingleton():requestFile(RNS_DOWNLOAD_FILE, bind(SuperS.onDownloadFinish, self))
+  Gamemode.checkPassword(self, function () Provider:getSingleton():requestFile(RNS_DOWNLOAD_FILE, bind(SuperS.onDownloadFinish, self)) end)
 end
 
 function SuperS:onDownloadFinish()
   triggerServerEvent("onSuperSDownloadFinished", localPlayer)
+
+  -- Load translation file
+  TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
+
+  -- Change HelpBar Text
+  HelpBar:getSingleton():setText(HelpTexts.Gamemodes.SuperS, false, self:getColor())
 
   -- Create Lobby Shader
   self.m_LobbyShader = SuperS.Shader:new("gamemodes/SuperS/res/shader/swap.fx")

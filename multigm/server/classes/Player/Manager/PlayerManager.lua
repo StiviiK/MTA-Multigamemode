@@ -5,13 +5,14 @@ function PlayerManager:constructor()
 	self.m_ReadyPlayers = {}
 
 	-- Register events
-	addRemoteEvents{"onPlayerReady", "Player_changeLanguage", "Event_UpdatePlayerSession"}
+	addRemoteEvents{"onPlayerReady", "Player_changeLanguage", "Event_UpdatePlayerSession", "onInternalError"}
   addEventHandler("onPlayerConnect", root, bind(PlayerManager.playerConnect, self))
   addEventHandler("onPlayerJoin", root, bind(PlayerManager.playerJoin, self))
 	addEventHandler("onPlayerWasted", root, bind(self.playerWasted, self))
 	addEventHandler("onPlayerReady", root, bind(PlayerManager.playerReady, self))
 	addEventHandler("Player_changeLanguage", root, bind(PlayerManager.Event_ChangeLocale, self))
 	addEventHandler("Event_UpdatePlayerSession", root, bind(PlayerManager.Event_UpdatePlayerSession, self))
+	addEventHandler("onInternalError", root, function (...) source:onInternalError(...) end)
 
 	self.m_SyncPulse = TimedPulse:new(500)
 	self.m_SyncPulse:registerHandler(bind(PlayerManager.updatePlayerSync, self))

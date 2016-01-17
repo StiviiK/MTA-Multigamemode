@@ -8,7 +8,9 @@ function GamemodeManager:constructor()
     self:addRef(RenegadeSquad:new("Renegade Squad", "RenegadeSquad Gamemode"):setId(3));
     self:addRef(SuperS:new("Super Sweeper", "SuperSweeper Gamemode"):setId(4));
     self:addRef(CS:new("Counter-Strike", "Counter-Strike Gamemode"):setId(5));
+    self:addRef(BloodMoney:new("Blood Money", "BloodMoney Gamemode"):setId(6));
   }
+
   for k, v in ipairs(Gamemodes) do
     if v.onGamemodesLoaded then
       v:onGamemodesLoaded(#Gamemodes)
@@ -22,11 +24,18 @@ function GamemodeManager:constructor()
 
 
   -- Manager Events
+  RPC:registerFunc("Event_DisableGamemode", bind(GamemodeManager.Event_DisableGamemode, self))
+  RPC:registerFunc("Event_JoinGamemode", bind(GamemodeManager.Event_JoinGamemode, self))
+  RPC:registerFunc("Event_RespawnGamemodePed", bind(GamemodeManager.Event_RespawnGamemodePed, self))
+  RPC:registerFunc("Event_DeleteGamemodePed", bind(GamemodeManager.Event_DeleteGamemodePed, self))
+
+  --[[
   addRemoteEvents{"Event_DisableGamemode", "Event_JoinGamemode", "Event_RespawnGamemodePed", "Event_DeleteGamemodePed"}
   addEventHandler("Event_DisableGamemode",    root, bind(GamemodeManager.Event_DisableGamemode   , self))
   addEventHandler("Event_JoinGamemode", 	  root, bind(GamemodeManager.Event_JoinGamemode      , self))
   addEventHandler("Event_RespawnGamemodePed", root, bind(GamemodeManager.Event_RespawnGamemodePed, self))
   addEventHandler("Event_DeleteGamemodePed",  root, bind(GamemodeManager.Event_DeleteGamemodePed , self))
+  --]]
 end
 
 function GamemodeManager:destructor()
@@ -48,34 +57,34 @@ function GamemodeManager:removeRef(ref)
   GamemodeManager.Map[ref:getId()] = nil
 end
 
-function GamemodeManager:Event_DisableGamemode(Id)
-  if source:getRank() >= RANK.Developer then
-    outputDebug(("[GamemodeManager] %s forced Gamemode destruction! [Id: %d]"):format(source:getAccount():getName(), Id))
+function GamemodeManager:Event_DisableGamemode(client, Id)
+  if client:getRank() >= RANK.Developer then
+    outputDebug(("[GamemodeManager] %s forced Gamemode destruction! [Id: %d]"):format(client:getAccount():getName(), Id))
 
     delete(self.getFromId(Id))
-    source:triggerEvent("successBox", source, _("Aktion erfolgreich ausgeführt!", source))
+    client:triggerEvent("successBox", client, _("Aktion erfolgreich ausgeführt!", client))
   else
-    source:triggerEvent("errorBox", source, _("Zugriff verweigert.", source))
+    client:triggerEvent("errorBox", client, _("Zugriff verweigert.", client))
   end
 end
 
-function GamemodeManager:Event_JoinGamemode(Id, fLobby)
-  if source:getGamemode() == self.getFromId(Id) then
-    source:fadeCamera(true, 0.5)
+function GamemodeManager:Event_JoinGamemode(client, Id, fLobby)
+  if client:getGamemode() == self.getFromId(Id) then
+    client:fadeCamera(true, 0.5)
     if fLobby ~= true then
-      source:triggerEvent("errorBox", source, _("Du bist bereits in diesem Gamemode!", source))
+      client:triggerEvent("errorBox", client, _("Du bist bereits in diesem Gamemode!", client))
     end
     return
   end
 
-  if source:getGamemode() then
-    source:getGamemode():removePlayer(source)
+  if client:getGamemode() then
+    client:getGamemode():removePlayer(client)
   end
 
-  source:fadeCamera(true, 0.75)
-  self.getFromId(Id):addPlayer(source)
+  client:fadeCamera(true, 0.75)
+  self.getFromId(Id):addPlayer(client)
   if fLobby ~= true then
-    source:triggerEvent("successBox", source, _("Du bist dem Gamemode erfolgreich beigetreten!", source))
+    client:triggerEvent("successBox", source, _("Du bist dem Gamemode erfolgreich beigetreten!", client))
   end
 end
 
@@ -92,7 +101,8 @@ function GamemodeManager.updateSync()
   if table.size(SyncData, true) > 0 then
     for i, v in pairs(getElementsByType("player")) do -- Todo: Improve?
       if v:isClientReady() then
-        v:triggerEvent("UpdateGamemodeSync", v, SyncData)
+        --v:triggerEvent("UpdateGamemodeSync", v, SyncData)
+        RPC:callCustom("UpdateGamemodeSync", v, SyncData)
       end
     end
   end
@@ -110,30 +120,31 @@ function GamemodeManager.sendInitialSync(player)
   if table.size(SyncData) ~= GamemodeManager.Map then
     if player then
       if player:isClientReady() then
-        player:triggerEvent("UpdateGamemodeSync", player, SyncData)
+        --player:triggerEvent("UpdateGamemodeSync", player, SyncData)
+        RPC:callCustom("UpdateGamemodeSync", player, SyncData)
       end
     end
   end
 end
 
-function GamemodeManager:Event_RespawnGamemodePed(Id)
-  if source:getRank() >= RANK.Administrator then
-    outputDebug(("[GamemodeManager] %s respawned GamemodePed! [Id: %d]"):format(source:getAccount():getName(), Id))
+function GamemodeManager:Event_RespawnGamemodePed(client, Id)
+  if client:getRank() >= RANK.Administrator then
+    outputDebug(("[GamemodeManager] %s respawned GamemodePed! [Id: %d]"):format(client:getAccount():getName(), Id))
 
-    triggerClientEvent("RespawnGamemodePed", source, Id)
-    source:triggerEvent("successBox", source, _("Aktion erfolgreich ausgeführt!", source))
+    triggerClientEvent("RespawnGamemodePed", client, Id)
+    client:triggerEvent("successBox", client, _("Aktion erfolgreich ausgeführt!", client))
   else
-    source:triggerEvent("errorBox", source, _("Zugriff verweigert.", source))
+    client:triggerEvent("errorBox", client, _("Zugriff verweigert.", client))
   end
 end
 
-function GamemodeManager:Event_DeleteGamemodePed(Id)
-  if source:getRank() >= RANK.Administrator then
-    outputDebug(("[GamemodeManager] %s deleted GamemodePed! [Id: %d]"):format(source:getAccount():getName(), Id))
+function GamemodeManager:Event_DeleteGamemodePed(client, Id)
+  if client:getRank() >= RANK.Administrator then
+    outputDebug(("[GamemodeManager] %s deleted GamemodePed! [Id: %d]"):format(client:getAccount():getName(), Id))
 
-    triggerClientEvent("DeleteGamemodePed", source, Id)
-    source:triggerEvent("successBox", source, _("Aktion erfolgreich ausgeführt!", source))
+    triggerClientEvent("DeleteGamemodePed", client, Id)
+    client:triggerEvent("successBox", client, _("Aktion erfolgreich ausgeführt!", client))
   else
-    source:triggerEvent("errorBox", source, _("Zugriff verweigert.", source))
+    client:triggerEvent("errorBox", client, _("Zugriff verweigert.", client))
   end
 end

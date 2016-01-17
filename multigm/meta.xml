@@ -19,8 +19,8 @@
 			<script src="shared/classes/ConfigXML.lua" type="shared"/>
 
 			<script src="shared/constants.lua" type="shared"/>
-			<script src="shared/async.lua" type="shared"/>
 			<script src="shared/debug.lua" type="shared"/>
+			<script src="shared/async.lua" type="shared"/>
 			<script src="shared/classes/TimedPulse.lua" type="shared"/>
 			<script src="shared/classes/POParser.lua" type="shared"/>
 			<script src="shared/classes/TranslationManager.lua" type="shared"/>
@@ -28,6 +28,7 @@
 			<script src="shared/classes/Gamemode/Element/GamemodeElement.lua" type="shared"/>
 			<script src="shared/classes/DimensionManager.lua" type="shared"/>
 			<script src="shared/classes/Command.lua" type="shared"/>
+			<script src="shared/classes/RPC.lua" type="shared"/>
 
 		<!-- Server -->
 			<script src="server/constants.lua" type="server"/>
@@ -119,6 +120,7 @@
 				<script src="client/classes/GUI/Animations/Move.lua" type="client"/>
 				<script src="client/classes/GUI/Animations/FadeAlpha.lua" type="client"/>
 				<script src="client/classes/GUI/Animations/Size.lua" type="client"/>
+				<script src="client/classes/GUI/Animations/FontSize.lua" type="client"/>
 
 				<!-- Special GUI elements -->
 				<script src="client/classes/GUI/MessageBoxes/MessageBox.lua" type="client"/>
@@ -166,13 +168,13 @@
 			<script src="gamemodes/Lobby/client/Init.lua" type="client"/>
 			<script src="gamemodes/Lobby/client/Main.lua" type="client"/>
 
-			
-			
-			
-			
-			
-			
-			
+
+
+
+
+
+
+
 
 <!-- Counter-Strike Main -->
 
@@ -201,7 +203,7 @@
 			<script src="gamemodes/CS/CS_TeamManager/server/CS_TeamManager_s.lua" type="server"/>
 			<script src="gamemodes/CS/CS_GamePlay_Manager/server/CS_GamePlayManager_s.lua" type="server"/>
 		<!-- Client -->
-		
+
 			<script src="gamemodes/CS/client/CS_Init_C.lua" type="client"/>
 			<script src="gamemodes/CS/client/CS_Main_C.lua" type="client"/>
 			<script src="gamemodes/CS/client/CS_Lobby_Menu.lua" type="client"/>
@@ -225,10 +227,10 @@
 
 			<script src="gamemodes/CS/gamemodes/Deathmatch/server/DM_Init_S.lua" type="server"/>
 			<script src="gamemodes/CS/gamemodes/Deathmatch/server/DM_Main_S.lua" type="server"/>
-			
+
 
 			<!-- Client -->
-	
+
 			<script src="gamemodes/CS/gamemodes/Deathmatch/client/DM_Init_C.lua" type="client"/>
 			<script src="gamemodes/CS/gamemodes/Deathmatch/client/DM_Main_C.lua" type="client"/>
 			
@@ -343,6 +345,21 @@
 			<script src="gamemodes/SuperS/client/Sweeper/Manager/SweeperManager.lua" type="client"/>
 			<script src="gamemodes/SuperS/client/Sweeper/Sweeper.lua" type="client"/>
 			<script src="gamemodes/SuperS/client/Sweeper/Weapon.lua" type="client"/>
+
+	<!-- Blood Money -->
+		<!-- Meta -->
+			<metafile src="gamemodes/BloodMoney/meta.xml"/>
+
+		<!-- Shared -->
+			<script src="gamemodes/BloodMoney/constants.lua" type="shared"/>
+
+		<!-- Server -->
+			<script src="gamemodes/BloodMoney/server/Init.lua" type="server"/>
+			<script src="gamemodes/BloodMoney/server/Main.lua" type="server"/>
+
+		<!-- Client -->
+			<script src="gamemodes/BloodMoney/client/Init.lua" type="client"/>
+			<script src="gamemodes/BloodMoney/client/Main.lua" type="client"/>
 
 	<!-- Files -->
 		<!-- Translation -->
@@ -665,6 +682,7 @@
 				<transferfile src="res/images/HeaderDefaultGamemode.png"/>
 				<transferfile src="gamemodes/Lobby/res/images/HeaderLobby.png" />
 				<transferfile src="gamemodes/CnR/res/images/HeaderCnR.png" />
+				<transferfile src="gamemodes/BloodMoney/res/images/HeaderBLM.jpg"/>
 
 			<!-- Background Images -->
 				<transferfile src="res/images/backgrounds/user.png"/>
@@ -673,6 +691,8 @@
 				<transferfile src="res/images/backgrounds/rns/rns-bg.png"/>
 				<transferfile src="res/images/backgrounds/supers/supers-bg.png"/>
 				<transferfile src="res/images/backgrounds/cs/cs-bg.jpg"/>
+				<transferfile src="res/images/backgrounds/blm/blm-bg.jpg"/>
+
 			<!-- Backgrounds -->
 
 		<!-- Fonts -->
