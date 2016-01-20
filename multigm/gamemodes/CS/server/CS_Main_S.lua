@@ -30,9 +30,12 @@ player:triggerEvent("onCSStartDownload", player)
 
 player:setPosition(0,0,3)
 setTimer(function()
-SubGamemodeManager:getSingleton().Map[1]:addPlayer(player)
+-- SubGamemodeManager:getSingleton().Map[1]:addPlayer(player)
 end,2000,1)
 
+HudComponentVisible(player,true)
+WeaponsCore:getSingleton():givePlayerWeapon(player,"Primary"  ,"AK-47")
+WeaponsCore:getSingleton():givePlayerWeapon(player,"Secondary","Desert Eagle")
 end
 
 
@@ -53,7 +56,13 @@ end
 
 
 
-
+function HudComponentVisible(player,State)
+setPlayerHudComponentVisible (  player,"all", State )
+setPlayerHudComponentVisible (  player,"radar", false )
+setPlayerHudComponentVisible ( player, "radio", false )
+setPlayerHudComponentVisible ( player, "area_name", false )
+setPlayerHudComponentVisible ( player, "vehicle_name", false )
+end
 
 
 

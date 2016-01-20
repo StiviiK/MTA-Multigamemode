@@ -202,6 +202,7 @@
 			<script src="gamemodes/CS/CS_MapManager/server/CS_MapManager_s.lua" type="server"/>
 			<script src="gamemodes/CS/CS_TeamManager/server/CS_TeamManager_s.lua" type="server"/>
 			<script src="gamemodes/CS/CS_GamePlay_Manager/server/CS_GamePlayManager_s.lua" type="server"/>
+			<script src="gamemodes/CS/CS_GamePlay_Manager/server/Round_Manager_s.lua" type="server"/>
 		<!-- Client -->
 
 			<script src="gamemodes/CS/client/CS_Init_C.lua" type="client"/>

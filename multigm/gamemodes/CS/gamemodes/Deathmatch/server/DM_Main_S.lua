@@ -48,14 +48,15 @@ function CS_Deathmath:onPlayerLeft(player)
 outputChatBox("CS_Deathmath:onPlayerLeft server",player,0,255,0)
 -- player:setFrozen(true)
 -- toggleAllControls (player, true ) 
--- self.CS_TeamManager:RemovePlayerTeam (player)
+ 
 -- outputChatBox("leave:"..self.CS_TeamManager:GetPlayerCountInTeam())
+	self.CS_TeamManager:RemovePlayerTeam (player)
     self.GamePlay_MG:CheckPlayer(player,self.CS_TeamManager:GetPlayerCountInTeam())
 
 end
 
 function CS_Deathmath:PlayerTeamSelected (player,Team)
-     self.GamePlay_MG:CheckPlayer(player,0)
+     self.GamePlay_MG:CheckPlayer(player,self.CS_TeamManager:GetPlayerCountInTeam())
 outputChatBox("Player Select Team: "..Team)
 end
 

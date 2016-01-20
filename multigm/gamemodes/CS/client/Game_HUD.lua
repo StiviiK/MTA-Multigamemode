@@ -6,7 +6,7 @@ Health_HUD = inherit(GUIForm)
 inherit(Singleton, Health_HUD)
 
 function Health_HUD:constructor()
-GUIForm.constructor(self, 0, 0, screenWidth, screenHeight)
+GUIForm.constructor(self, 0, 0, screenWidth, screenHeight,false)
 self.Background_Url = "gamemodes/CS/res/images/Health_HUD.png"
 local AbStand = self.m_Width*0.01
 local B_W,B_H = self.m_Width*0.3, self.m_Height*0.08
@@ -49,7 +49,7 @@ Weapon_HUD = inherit(GUIForm)
 inherit(Singleton, Weapon_HUD)
 
 function Weapon_HUD:constructor()
-GUIForm.constructor(self, 0, 0, screenWidth, screenHeight)
+GUIForm.constructor(self, 0, 0, screenWidth, screenHeight,false)
 self.Background_Url = "gamemodes/CS/res/images/Weapon_HUD.png"
 local B_W,B_H = self.m_Width*0.2, self.m_Height*0.08
 local AbStand = self.m_Width*0.01
@@ -78,7 +78,7 @@ inherit(Singleton, Timer_HUD)
 
 function Timer_HUD:constructor(GM)
 self.Self_GM = GM
-GUIForm.constructor(self, 0, 0, screenWidth, screenHeight)
+GUIForm.constructor(self, 0, 0, screenWidth, screenHeight,false)
 self.Background_Url = "gamemodes/CS/res/images/Time_HUD.png"
 local B_W,B_H = self.m_Width*0.06, self.m_Height*0.08
 local AbStand = self.m_Width*0.01
@@ -108,7 +108,9 @@ self.TimeUpdatePulse:registerHandler(self.TimerFunction)
 end
 
 function Timer_HUD:UpdateTimer()
+
 local GameTime = self.Self_GM:getSyncInfo("GameTime")
+
 local s = 0
 	 if GameTime then
 		  s = TimeHud_Rechner(GameTime)
@@ -116,6 +118,7 @@ local s = 0
 		  s = 0
 	 end
 if s < 0 then s = 0 end
+
 self.Time:setText(string.format("%.2d:%.2d", s/60%60, s%60))
 
 end

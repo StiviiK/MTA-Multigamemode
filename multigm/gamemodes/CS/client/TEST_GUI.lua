@@ -11,9 +11,8 @@ GM = CS_Deathmath:getInstance()
              dxDrawRectangle ( 0, 0, x,y, tocolor(255,255,255,100) ) 
 			  --tostring()
 			 dxDrawText("GameStatus = "..tostring(GM:getSyncInfo("GameStatus")), 0, 0, x, i, tocolor ( 0, 0, 0, 255 ), 1.02, "arial","center","center" )
-			 if GM:getSyncInfo("GameTime") then
-			 dxDrawText ("GameTime  = "..tostring(GM:getSyncInfo("GameTime").Time), 0, 0, x, i*2, tocolor ( 0, 0, 0, 255 ), 1.02, "arial","center","center" )
-			 RealTimeRechner (GM:getSyncInfo("GameTime"))
+			 if lp.Weapons then
+			 dxDrawText ("Primary  = "..tostring(lp.Weapons["Primary"]), 0, 0, x, i*2, tocolor ( 0, 0, 0, 255 ), 1.02, "arial","center","center" )
 			 end
 			 -- dxDrawText ("TEST", 0, 0, x, i*3, tocolor ( 0, 0, 0, 255 ), 1.02, "arial","center","center" )
 			 -- dxDrawText ("TEST", 0, 0, x, i*4, tocolor ( 0, 0, 0, 255 ), 1.02, "arial","center","center" )
