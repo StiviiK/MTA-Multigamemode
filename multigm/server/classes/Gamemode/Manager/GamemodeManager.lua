@@ -31,10 +31,10 @@ function GamemodeManager:constructor()
 
   --[[
   addRemoteEvents{"Event_DisableGamemode", "Event_JoinGamemode", "Event_RespawnGamemodePed", "Event_DeleteGamemodePed"}
-  addEventHandler("Event_DisableGamemode", root, bind(GamemodeManager.Event_DisableGamemode, self))
-  addEventHandler("Event_JoinGamemode", root, bind(GamemodeManager.Event_JoinGamemode, self))
+  addEventHandler("Event_DisableGamemode",    root, bind(GamemodeManager.Event_DisableGamemode   , self))
+  addEventHandler("Event_JoinGamemode", 	  root, bind(GamemodeManager.Event_JoinGamemode      , self))
   addEventHandler("Event_RespawnGamemodePed", root, bind(GamemodeManager.Event_RespawnGamemodePed, self))
-  addEventHandler("Event_DeleteGamemodePed", root, bind(GamemodeManager.Event_DeleteGamemodePed, self))
+  addEventHandler("Event_DeleteGamemodePed",  root, bind(GamemodeManager.Event_DeleteGamemodePed , self))
   --]]
 end
 

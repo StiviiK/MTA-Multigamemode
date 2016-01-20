@@ -1,0 +1,26 @@
+<map edf:definitions="de_dust2">
+<MapPos id="1" posX="115.69" posY="2611.87" posZ="201.91" rotX="0" rotY="0" rotZ="0" />
+
+<Camera_CT_Spawn id="1" posX="115.69" posY="2611.87" posZ="201.91" rotX="0" rotY="0" rotZ="0" />
+<Camera_T_Spawn  id="2" posX="105.55" posY="2598.51" posZ="209.6" rotX="105.6" rotY="2597.5" rotZ="209.255" />
+
+<WaitForPlayer_Camera  id="1" posX="105.55" posY="2598.51" posZ="209.6" rotX="105.6" rotY="2597.5" rotZ="209.255" />
+
+<Bomb_Place_A id="1" posX="115.69" posY="2611.87" posZ="201.91" rotX="0" rotY="0" rotZ="0" />
+<Bomb_Place_B  id="2" posX="115.69" posY="2611.87" posZ="201.91" rotX="0" rotY="0" rotZ="0" />
+
+
+<T_Spawn   id="1" posX="104.45" posY="2590" posZ="205.06" rotX="0" rotY="0" rotZ="0" />
+<T_Spawn   id="2" posX="104.45" posY="2590" posZ="205.06" rotX="0" rotY="0" rotZ="0" />
+<T_Spawn   id="3" posX="104.45" posY="2590" posZ="205.06" rotX="0" rotY="0" rotZ="0" />
+<T_Spawn   id="4" posX="104.45" posY="2590" posZ="205.06" rotX="0" rotY="0" rotZ="0" />
+<T_Spawn   id="5" posX="104.45" posY="2590" posZ="205.06" rotX="0" rotY="0" rotZ="0" />
+
+<CT_Spawn  id="1" posX="125.17" posY="2675.97" posZ="199.46" rotX="0" rotY="0" rotZ="0" />
+<CT_Spawn  id="2" posX="125.17" posY="2675.97" posZ="199.46" rotX="0" rotY="0" rotZ="0" />
+<CT_Spawn  id="3" posX="125.17" posY="2675.97" posZ="199.46" rotX="0" rotY="0" rotZ="0" />
+<CT_Spawn  id="4" posX="125.17" posY="2675.97" posZ="199.46" rotX="0" rotY="0" rotZ="0" />
+<CT_Spawn  id="5" posX="125.17" posY="2675.97" posZ="199.46" rotX="0" rotY="0" rotZ="0" />
+
+
+</map>

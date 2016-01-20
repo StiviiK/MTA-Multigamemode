@@ -12,3 +12,6 @@ multigm_build/*
 
 # Ignore Version file
 multigm/version.txt
+/.tgitconfig
+/multigm/client/classes/ClickHandler_backup.lua
+/*.md
