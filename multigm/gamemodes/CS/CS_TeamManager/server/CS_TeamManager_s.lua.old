@@ -72,7 +72,7 @@ function CS_TeamManager:RemovePlayerTeam (player)
 				outputChatBox(thePlayer:getName().."Player Remove Team SPEC",player,255,0,0)
 			end
 		end
-		killPed(player)
+		killPlayer(player)
 end
 
 function CS_TeamManager:GetPlayerCountInTeam () -- T and CT

@@ -51,7 +51,7 @@ function ItemManager:constructor()
     for i, v in pairs(self.m_Items) do
       self:changePickup(i, ItemManager.getRandomType())
     end
-  end, 60*1000, -1)
+  end, 60*1000, 0)
 
   -- Spawn the pickups
   self:spawnItems()

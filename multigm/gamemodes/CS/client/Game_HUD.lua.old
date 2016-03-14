@@ -31,7 +31,7 @@ end
 function Health_HUD:UpdateHealth_HUD (attacker, attackerweapon ,bodypart, loss)
 outputChatBox("tttttttttt")
 local Health = tostring(math.ceil(getElementHealth(lp))).."%"
-local Armor  = tostring(math.ceil(getPedArmor(lp))).."%"
+local Armor  = tostring(math.ceil(getPlayerArmor(lp))).."%"
 self.Health_Label:setText(Health)
 self.Armor_Label:setText(Armor)
 end

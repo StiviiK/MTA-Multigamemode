@@ -25,7 +25,7 @@ end
 
 function ArrestSystem:CreateCheckTimer()
 if isTimer(self.CheckTimer) then return end
-self.CheckTimer = setTimer(bind(ArrestSystem.CheckTime,self),1000,-1)
+self.CheckTimer = setTimer(bind(ArrestSystem.CheckTime,self),1000,0)
 end
 
 function ArrestSystem:StopTimer()

@@ -11,7 +11,7 @@ function Performance:constructor()
   }
 
   -- Create update timer
-  setTimer(bind(self.update, self), 500, -1)
+  setTimer(bind(self.update, self), 500, 0)
 
   -- Event Zone
   addEventHandler("Event_CleanMemoryUp", root, bind(self.Event_CleanMemoryUp, self))
@@ -62,7 +62,7 @@ function Performance:sendPerformanceData()
   for i, v in pairs(Element.getAllByType("player") --[[self.m_Players]]) do
     if v:isClientReady() then
       triggerClientEvent(v, "receivePerformanceStats", v, self.m_PerformanceData)
-    end  
+    end
   end
 end
 

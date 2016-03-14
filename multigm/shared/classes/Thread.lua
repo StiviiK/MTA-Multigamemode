@@ -34,7 +34,7 @@ function Thread:start(...)
     elseif self:getStatus() == COROUTINE_STATUS_DEAD then
       delete(self)
     end
-  end, self:getPriority(), -1)
+  end, self:getPriority(), 0)
 end
 
 function Thread:resume(...)
