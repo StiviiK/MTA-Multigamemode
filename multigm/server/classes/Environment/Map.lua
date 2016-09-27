@@ -11,6 +11,7 @@ end
 
 function Map:destructor()
   self:unload()
+  MapManager:getSingleton():removeRef(self)
 end
 
 function Map:load(priority)

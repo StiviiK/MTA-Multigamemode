@@ -72,7 +72,7 @@ function FastLobby:constructor()
         end
       else
         self.m_Gamemodes[currGamemode].Image = GUIRectangle:new(posX, posY, width, height, tocolor(0, 0, 0, 150), self)
-        self.m_Gamemodes[currGamemode].Label = GUILabel:new(0, 0, width, height, ("%s %s"):format(FontAwesomeSymbols.Lock, "Coming soon"), self.m_Gamemodes[currGamemode].Image)
+        self.m_Gamemodes[currGamemode].Label = GUILabel:new(0, 0, width, height, ("%s %s"):format(FontAwesomeSymbols.Lock, "Comming soon"), self.m_Gamemodes[currGamemode].Image)
         self.m_Gamemodes[currGamemode].Label:setFont(FontAwesome(height/6))
       end
 
@@ -123,14 +123,14 @@ function FastLobby:constructor()
   -- Git Info
   self.m_GeneralInfo = GUILabel:new(self.m_Width*0.01, self.m_Height*0.935, self.m_Width*0.075, self.m_Height*0.03, _("%s About us.", FontAwesomeSymbols.Heart), self)
   self.m_GeneralInfo:setFont(FontAwesome(self.m_Height*0.03))
-  self.m_GeneralInfo.onHover = function () self.m_GeneralInfo:setColor(Color.Orange) end
+  self.m_GeneralInfo.onHover = function () self.m_GeneralInfo:setColor(localPlayer:getGamemode():getColor()) end
   self.m_GeneralInfo.onUnhover = function () self.m_GeneralInfo:setColor(Color.White) end
   self.m_GeneralInfo.onLeftClick = function () InfoBox:new("Not implemented!") end
 
   -- Facebook Info
   self.m_FacebookInfo = GUILabel:new(self.m_Width*0.01, self.m_Height*0.965, self.m_Width*0.15, self.m_Height*0.03, _("%s Visit us on Facebook.", FontAwesomeSymbols.Facebook), self)
   self.m_FacebookInfo:setFont(FontAwesome(self.m_Height*0.03))
-  self.m_FacebookInfo.onHover = function () self.m_FacebookInfo:setColor(Color.Orange) end
+  self.m_FacebookInfo.onHover = function () self.m_FacebookInfo:setColor(localPlayer:getGamemode():getColor()) end
   self.m_FacebookInfo.onUnhover = function () self.m_FacebookInfo:setColor(Color.White) end
   self.m_FacebookInfo.onLeftClick = function () InfoBox:new("Not implemented!") end
 

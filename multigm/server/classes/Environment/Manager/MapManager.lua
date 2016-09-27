@@ -37,8 +37,7 @@ function MapManager:loadMap(gamemode, name)
     self.m_LoadedMaps[name] = {Objects = MapManager.parseMapXML(name), Parsed = true}
   end
 
-  MapManager.Map[name] = Map:new(gamemode, self.m_LoadedMaps[name].Objects)
-  return MapManager.Map[name]
+  return Map:new(gamemode, self.m_LoadedMaps[name].Objects)
 end
 
 function MapManager.parseMapXML(filePath)

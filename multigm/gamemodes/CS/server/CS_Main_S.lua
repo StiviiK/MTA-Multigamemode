@@ -9,7 +9,7 @@ function CS:constructor()
   -- TranslationManager:getSingleton():loadTranslation("en", self:get("TranslationFile"))
   self.SubGamemodeManager = SubGamemodeManager:new(self)
   
-  self:AutoLogin ()
+  --self:AutoLogin ()
 end
 
 function CS:destructor()
