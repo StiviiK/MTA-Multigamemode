@@ -59,6 +59,11 @@ function GUIEdit:onInternalEditInput(caret)
 		return
 	end
 	self.m_Caret = caret
+
+	if self.onChange then
+		self.onChange(self:getDrawnText())
+	end
+
 end
 
 function GUIEdit:onInternalLeftClick(absoluteX, absoluteY)
@@ -129,7 +134,12 @@ function GUIEdit:isNumeric()
 	return self.m_Numeric
 end
 
-function GUIEdit:setNumeric(numeric)
+function GUIEdit:setNumeric(numeric, integerOnly)
 	self.m_Numeric = numeric
+	self.m_IntegerOnly = integerOnly or false
 	return self
+end
+
+function GUIEdit:isIntegerOnly()
+	return self.m_IntegerOnly
 end

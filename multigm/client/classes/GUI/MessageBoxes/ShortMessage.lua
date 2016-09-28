@@ -6,12 +6,20 @@
 -- *  PURPOSE:     Short message box class
 -- *
 -- ****************************************************************************
-ShortMessage = inherit(DxElement)
+ShortMessage = inherit(GUIElement)
 inherit(GUIFontContainer, ShortMessage)
 
 ShortMessage.MessageBoxes = {}
 
-function ShortMessage:constructor(text, timeout)
+function ShortMessage:new(text, title, tcolor, timeout, callback, timeoutFunc)
+	if type(title) == "number" then
+		return new(ShortMessage, text, nil, nil, title)
+	else
+		return new(ShortMessage, text, title, tcolor, timeout, callback, timeoutFunc)
+	end
+end
+
+function ShortMessage:constructor(text, title, tcolor, timeout, callback, timeoutFunc)
 	local x, y, w
 	if HUDRadar:getSingleton().m_Visible then
 		x, y, w = 20, screenHeight - screenHeight*0.265, 340*screenWidth/1600+6
@@ -19,27 +27,44 @@ function ShortMessage:constructor(text, timeout)
 		x, y, w = 20, screenHeight - 5, 340*screenWidth/1600+6
 	end
 
-	-- Calculate heigth
-	local fontSize = 1.4
-	local h = textHeight(text, w - 8, "default", fontSize) + 4
+	-- Title Bar
+	self.m_HasTitleBar = title ~= nil
+	self.m_Title = title
+	self.m_TitleColor = (type(tcolor) == "table" and tcolor) or (type(tcolor) == "number" and {fromcolor(tcolor)}) or {125, 0, 0}
+
+	self.m_Callback = callback or nil
+	self.m_TimeoutFunc = timeoutFunc or nil
+
+	-- Font
+	GUIFontContainer.constructor(self, text, 1, VRPFont(24))
+	local h = textHeight(self.m_Text, w - 8, self.m_Font, self.m_FontSize) + (self.m_HasTitleBar and 24 or 4)
 
 	-- Calculate y position
 	y = y - h - 20
 
-	if timeout and type(timeout) == "number" then
-		if timeout > 50 then
-			timeout = timeout
-		else
-			timeout = 5000
+	-- Instantiate GUIElement
+	GUIElement.constructor(self, x, y, w, h)
+	self.onLeftClick = function ()
+		if self.m_Callback then
+			self:m_Callback()
 		end
-	else
-		timeout = 5000
+		if core:get("HUD", "shortMessageCTC", false) then
+			delete(self)
+		end
 	end
-	setTimer(function () delete(self) end, timeout + 500, 1)
 
-	DxElement.constructor(self, x, y, w, h)
-	GUIFontContainer.constructor(self, text, fontSize, "default")
+	-- Calculate timeout
+	if timeout ~= -1 then
+		self.m_Timeout = setTimer(
+		function ()
+			if self.m_TimeoutFunc then
+				self:m_TimeoutFunc()
+			end
+			delete(self)
+		end, ((type(timeout) == "number" and timeout > 50 and timeout) or 5000) + 500, 1)
+	end
 
+	-- Alpha
 	self:setAlpha(0)
 	self.m_AlphaFaded = false
 
@@ -48,33 +73,39 @@ function ShortMessage:constructor(text, timeout)
 end
 
 function ShortMessage:destructor()
-	Animation.FadeAlpha:new(self, 200, 200, 0)
-	setTimer(function ()
-		DxElement.destructor(self)
-	end, 500, 1)
-	table.removevalue(ShortMessage.MessageBoxes, self)
+	if self.m_Timeout and isTimer(self.m_Timeout) then
+		killTimer(self.m_Timeout)
+	end
 
-	ShortMessage.resortPositions()
+	Animation.FadeAlpha:new(self, 200, 200, 0).onFinish = function ()
+		GUIElement.destructor(self)
+		table.removevalue(ShortMessage.MessageBoxes, self)
+		ShortMessage.resortPositions()
+	end
 end
 
 function ShortMessage:drawThis()
 	local x, y, w, h = self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, self.m_Height
 
 	-- Draw background
-	dxDrawRectangle(x, y, w, h, tocolor(0, 0, 0, self.m_Alpha))
+	if self.m_HasTitleBar then
+		dxDrawRectangle(x, y, w, 20, tocolor(self.m_TitleColor[1], self.m_TitleColor[2], self.m_TitleColor[3], self.m_Alpha))
+		dxDrawRectangle(x, y + 20, w, h - 20, tocolor(0, 0, 0, self.m_Alpha))
+	else
+		dxDrawRectangle(x, y, w, h, tocolor(0, 0, 0, self.m_Alpha))
+	end
 
 	-- Center the text
 	x = x + 4
-	w = w - 4
-
-	-- Draw the text bounding box (DEBUG)
-	--[[dxDrawLine(x, y, x + w, y, Color.White, 1)
-	dxDrawLine(x, y, x, y + h, Color.White, 1)
-	dxDrawLine(x, y + h, x + w, y + h, Color.White, 1)
-	dxDrawLine(x + w, y, x + w, y + h, Color.White, 1)]]
+	w = w - 8
 
 	-- Draw message text
-	dxDrawText(self.m_Text, x, y, x + w, y + h, tocolor(255, 255, 255, self.m_Alpha), self.m_FontSize, self.m_Font, "left", "top", false, true)
+	if self.m_HasTitleBar then
+		dxDrawText(self.m_Title, x, y - 2, x + w, y + 16, tocolor(255, 255, 255, self.m_Alpha), self.m_FontSize, self.m_Font, "left", "top", true, false)
+		dxDrawText(self.m_Text, x, y + 20, x + w, y + (h - 20), tocolor(255, 255, 255, self.m_Alpha), self.m_FontSize, self.m_Font, "left", "top", false, true)
+	else
+		dxDrawText(self.m_Text, x, y, x + w, y + h, tocolor(255, 255, 255, self.m_Alpha), self.m_FontSize, self.m_Font, "left", "top", false, true)
+	end
 end
 
 function ShortMessage.resortPositions ()
@@ -129,4 +160,19 @@ function ShortMessage.recalculatePositions ()
 end
 
 addEvent("shortMessageBox", true)
-addEventHandler("shortMessageBox", root, function(...) ShortMessage:new(...) end)
+addEventHandler("shortMessageBox", root,
+	function(text, title, tcolor, timeout, callback, onTimeout, ...)
+		local additionalParameters = {...}
+		ShortMessage:new(text, title, tcolor, timeout,
+		function()
+			if callback then
+				triggerServerEvent(callback, root, unpack(additionalParameters))
+			end
+		end,
+		function()
+			if onTimeout then
+				triggerServerEvent(onTimeout, root, unpack(additionalParameters))
+			end
+		end)
+	end
+)

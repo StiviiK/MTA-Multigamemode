@@ -11,7 +11,7 @@ GUIWebView = inherit(GUIElement)
 function GUIWebView:constructor(posX, posY, width, height, url, transparent, parent)
     GUIElement.constructor(self, posX, posY, width, height, parent)
 
-    self.m_IsLocal = url:sub(0, 7) ~= "http://" and url:sub(0, 8) ~= "https://"
+    self.m_IsLocal = url:sub(0, 10) == "http://mta"
     self.m_Browser = Browser.create(width, height, self.m_IsLocal, transparent)
     self.m_PauseOnHide = true
 
@@ -33,12 +33,19 @@ function GUIWebView:destructor()
 end
 
 function GUIWebView:drawThis()
+    if GUI_DEBUG then
+        dxDrawRectangle(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, self.m_Height, tocolor(math.random(0, 255), math.random(0, 255), math.random(0, 255), 150))
+    end
     dxDrawImage(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, self.m_Height, self.m_Browser)
 end
 
 function GUIWebView:update()
     -- Request redraw
     self:anyChange()
+end
+
+function GUIWebView:loadURL(url)
+    self.m_Browser:loadURL(url)
 end
 
 function GUIWebView:setVisible(state, ...)

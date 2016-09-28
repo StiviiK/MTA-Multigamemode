@@ -12,12 +12,11 @@ local ITEM_HEIGHT = 30
 
 function GUIGridList:constructor(posX, posY, width, height, parent)
 	GUIElement.constructor(self, posX, posY, width, height, parent)
-	GUIColorable.constructor(self, Color.LightBlue)
+	GUIColorable.constructor(self, tocolor(0, 0, 0, 180))
 
 	self.m_Columns = {}
 	self.m_ScrollArea = GUIScrollableArea:new(0, ITEM_HEIGHT, self.m_Width, self.m_Height-ITEM_HEIGHT, self.m_Width, 1, true, false, self, ITEM_HEIGHT)
 	self.m_SelectedItem = nil
-	self.m_BackgroundColor = tocolor(0, 0, 0, 180)
 end
 
 function GUIGridList:addItem(...)
@@ -97,6 +96,7 @@ function GUIGridList:getSelectedItem()
 end
 
 function GUIGridList:clear()
+	self.m_SelectedItem = nil
 	delete(self.m_ScrollArea)
 	self.m_ScrollArea = GUIScrollableArea:new(0, ITEM_HEIGHT, self.m_Width, self.m_Height-ITEM_HEIGHT, self.m_Width, 1, true, false, self, ITEM_HEIGHT)
 end
@@ -108,18 +108,16 @@ function GUIGridList:onInternalSelectItem(item)
 		item:setBackgroundColor(Color.Clear)
 	end
 
-	item:setBackgroundColor(self.m_Color)
+	item:setBackgroundColor(Color.LightBlue)
 	self:anyChange()
-end
-
-function GUIGridList:setGridBackground(Color)
-self.m_BackgroundColor = Color
 end
 
 function GUIGridList:draw(incache) -- Swap render order
 	if self.m_Visible then
+		dxSetBlendMode("modulate_add")
+
 		-- Draw background
-		dxDrawRectangle(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, self.m_Height, self.m_BackgroundColor)
+		dxDrawRectangle(self.m_AbsoluteX, self.m_AbsoluteY, self.m_Width, self.m_Height, self.m_Color)
 
 		-- Draw items
 		for k, v in ipairs(self.m_Children) do
@@ -130,6 +128,8 @@ function GUIGridList:draw(incache) -- Swap render order
 
 		-- Draw i.a. the header line
 		self:drawThis()
+
+		dxSetBlendMode("blend")
 	end
 end
 
@@ -140,5 +140,5 @@ function GUIGridList:drawThis()
 		dxDrawText(column.text, self.m_AbsoluteX + currentXPos + 4, self.m_AbsoluteY + 1, self.m_AbsoluteX + currentXPos + column.width*self.m_Width, self.m_AbsoluteY + 10, Color.White, 1, VRPFont(28))
 		currentXPos = currentXPos + column.width*self.m_Width + 5
 	end
-	dxDrawRectangle(self.m_AbsoluteX, self.m_AbsoluteY + ITEM_HEIGHT - 2, self.m_Width, 2, Color.Orange) -- tocolor(255, 255, 255, 150)
+	dxDrawRectangle(self.m_AbsoluteX, self.m_AbsoluteY + ITEM_HEIGHT - 2, self.m_Width, 2, Color.LightBlue) -- tocolor(255, 255, 255, 150)
 end

@@ -6,24 +6,35 @@
 -- *  PURPOSE:     GUI 3D form class (base class)
 -- *
 -- ****************************************************************************
-GUIForm3D = inherit(CacheArea3D)
+GUIForm3D = inherit(Object)
 
 function GUIForm3D:constructor(position, rotation, size, resolution, streamdistance)
-	-- Calculate Euler angles from plain normals (since Euler angles are easier to handle than line pos + normals)
-	local startpos, endpos, normal = math.getPlainInfoFromEuler(position, rotation, size)
+	-- Calculate Euler angles from plane normals (since Euler angles are easier to handle than line pos + normals)
+	self.m_StartPosition, self.m_EndPosition, self.m_Normal = math.getPlaneInfoFromEuler(position, rotation, size)
+	self.m_CacheArea = false
+	self.m_Resolution, self.m_Size = resolution, size
 
-	CacheArea3D.constructor(self, startpos, endpos, normal, math.abs(endpos.y-startpos.y), resolution.x, resolution.y, true)
-
-	-- Remove CacheArea3D immediately from the render queue (or do it already in CacheArea3D)
-	GUIRenderer.remove3DGUI(self)
-
+	-- Create streaming stuff
 	self.m_StreamArea = createColSphere(position, streamdistance or 150)
 	addEventHandler("onClientColShapeHit", self.m_StreamArea, bind(self.StreamArea_Hit, self))
 	addEventHandler("onClientColShapeLeave", self.m_StreamArea, bind(self.StreamArea_Leave, self))
+
+	-- Remove CacheArea3D immediately from the render queue (or do it already in CacheArea3D) a bit delayed
+	nextframe(
+		function()
+			if localPlayer:isWithinColShape(self.m_StreamArea) then
+				self:StreamArea_Hit(localPlayer, true)
+			end
+		end
+	)
 end
 
 function GUIForm3D:destructor()
-	CacheArea3D.destructor(self)
+	self.m_StreamArea:destroy()
+
+	if self.m_CacheArea then
+		delete(self.m_CacheArea)
+	end
 end
 
 function GUIForm3D:StreamArea_Hit(hitElement, matchingDimension)
@@ -31,8 +42,11 @@ function GUIForm3D:StreamArea_Hit(hitElement, matchingDimension)
 		return
 	end
 
-	-- Dynamically add the 3D GUI to the renderer
-	GUIRenderer.add3DGUI(self)
+	-- Dynamically create cache area
+	if not self.m_CacheArea then
+		self.m_CacheArea = CacheArea3D:new(self.m_StartPosition, self.m_EndPosition, self.m_Normal, self.m_Size.x, self.m_Resolution.x, self.m_Resolution.y, true)
+		self:onStreamIn(self.m_CacheArea)
+	end
 end
 
 function GUIForm3D:StreamArea_Leave(hitElement, matchingDimension)
@@ -40,6 +54,15 @@ function GUIForm3D:StreamArea_Leave(hitElement, matchingDimension)
 		return
 	end
 
-	-- Dynamically add the 3D GUI to the renderer
-	GUIRenderer.remove3DGUI(self)
+	-- Dynamically delete cache area
+	if self.m_CacheArea then
+		delete(self.m_CacheArea)
+		self.m_CacheArea = false
+	end
 end
+
+function GUIForm3D:getSurface()
+	return self.m_CacheArea
+end
+
+GUIForm3D.onStreamIn = pure_virtual
