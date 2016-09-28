@@ -21,11 +21,11 @@ end
 
 function ShortMessage:constructor(text, title, tcolor, timeout, callback, timeoutFunc)
 	local x, y, w
-	if HUDRadar:getSingleton().m_Visible then
-		x, y, w = 20, screenHeight - screenHeight*0.265, 340*screenWidth/1600+6
-	else
+	--if HUDRadar:getSingleton().m_Visible then
+	--	x, y, w = 20, screenHeight - screenHeight*0.265, 340*screenWidth/1600+6
+	--else
 		x, y, w = 20, screenHeight - 5, 340*screenWidth/1600+6
-	end
+	--end
 
 	-- Title Bar
 	self.m_HasTitleBar = title ~= nil
@@ -129,11 +129,11 @@ function ShortMessage.resortPositions ()
 			Animation.FadeAlpha:new(obj, 500, 0, 200)
 			obj.m_AlphaFaded = true
 		else
-			if HUDRadar:getSingleton().m_Visible then
-				obj.m_Animation = Animation.Move:new(obj, 250, obj.m_AbsoluteX, (screenHeight - screenHeight*0.265) - 20 - obj.m_Height)
-			else
+			--if HUDRadar:getSingleton().m_Visible then
+			--	obj.m_Animation = Animation.Move:new(obj, 250, obj.m_AbsoluteX, (screenHeight - screenHeight*0.265) - 20 - obj.m_Height)
+			--else
 				obj.m_Animation = Animation.Move:new(obj, 250, obj.m_AbsoluteX, screenHeight - 25 - obj.m_Height)
-			end
+			--end
 		end
 	end
 end
@@ -150,11 +150,11 @@ function ShortMessage.recalculatePositions ()
 		if prevObj then
 			obj.m_Animation = Animation.Move:new(obj, 250, obj.m_AbsoluteX, prevObj.m_Animation.m_TY - obj.m_Height - 5)
 		else
-			if HUDRadar:getSingleton().m_Visible then
-				obj.m_Animation = Animation.Move:new(obj, 250, obj.m_AbsoluteX, (screenHeight - screenHeight*0.265) - 20 - obj.m_Height)
-			else
+			--if HUDRadar:getSingleton().m_Visible then
+			--	obj.m_Animation = Animation.Move:new(obj, 250, obj.m_AbsoluteX, (screenHeight - screenHeight*0.265) - 20 - obj.m_Height)
+			--else
 				obj.m_Animation = Animation.Move:new(obj, 250, obj.m_AbsoluteX, screenHeight - 5 - obj.m_Height)
-			end
+			--end
 		end
 	end
 end
