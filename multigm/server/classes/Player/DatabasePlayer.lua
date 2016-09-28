@@ -19,7 +19,7 @@ function DatabasePlayer.saveGet(Id)
 end
 
 function DatabasePlayer.getFromId(id)
-  return DatabasePlayer.Map[id]
+	return DatabasePlayer.Map[id]
 end
 
 function DatabasePlayer:constructor(id)
@@ -58,11 +58,11 @@ function DatabasePlayer:virtual_destructor()
 end
 
 function DatabasePlayer:load()
-  if self:isGuest() then
-    return false
-  end
+	if self:isGuest() then
+		return false
+	end
 
-  local row = sql:queryFetchSingle("SELECT Locale, Skin, XP, Money, Rank, PlayTime FROM ??_character WHERE Id = ?;", sql:getPrefix(), self:getId())
+	local row = sql:queryFetchSingle("SELECT Locale, Skin, XP, Money, Rank, PlayTime FROM ??_character WHERE Id = ?;", sql:getPrefix(), self:getId())
 	if not row then
 		return false
 	end
@@ -80,7 +80,7 @@ function DatabasePlayer:load()
 	self:setLocale(row.Locale)
 	self:setXP(row.XP)
 	self:setSkin(row.Skin)
-  self:setMoney(row.Money)
+	self:setMoney(row.Money)
 	self:setRank(row.Rank)
 end
 
@@ -89,7 +89,7 @@ function DatabasePlayer:save()
 		return false
 	end
 
-  return sql:queryExec("UPDATE ??_character SET Locale=?, Skin=?, XP=?, Money=?, Rank=?, PlayTime=? WHERE Id=?;", sql:getPrefix(), self:getLocale(), self:getSkin(), self:getXP(), self:getMoney(), self:getRank(), self:getPlayTime(), self:getId())
+	return sql:queryExec("UPDATE ??_character SET Locale=?, Skin=?, XP=?, Money=?, Rank=?, PlayTime=? WHERE Id=?;", sql:getPrefix(), self:getLocale(), self:getSkin(), self:getXP(), self:getMoney(), self:getRank(), self:getPlayTime(), self:getId())
 end
 
 function DatabasePlayer:loadGuest()

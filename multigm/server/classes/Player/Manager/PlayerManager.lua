@@ -6,8 +6,8 @@ function PlayerManager:constructor()
 
 	-- Register events
 	addRemoteEvents{"onPlayerReady", "Player_changeLanguage", "Event_UpdatePlayerSession", "onInternalError"}
-  addEventHandler("onPlayerConnect", root, bind(PlayerManager.playerConnect, self))
-  addEventHandler("onPlayerJoin", root, bind(PlayerManager.playerJoin, self))
+	addEventHandler("onPlayerConnect", root, bind(PlayerManager.playerConnect, self))
+	addEventHandler("onPlayerJoin", root, bind(PlayerManager.playerJoin, self))
 	addEventHandler("onPlayerWasted", root, bind(self.playerWasted, self))
 	addEventHandler("onPlayerReady", root, bind(PlayerManager.playerReady, self))
 	addEventHandler("Player_changeLanguage", root, bind(PlayerManager.Event_ChangeLocale, self))
@@ -31,11 +31,11 @@ function PlayerManager:updatePlayerSync()
 end
 
 function PlayerManager:playerConnect(name)
-  enew(getPlayerFromName(name), Player)
+	enew(getPlayerFromName(name), Player)
 end
 
 function PlayerManager:playerJoin()
-  source:setName(getRandomUniqueNick())
+	source:setName(getRandomUniqueNick())
 
 	-- While download
 	source:fadeCamera(true)

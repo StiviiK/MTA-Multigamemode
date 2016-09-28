@@ -3,72 +3,72 @@ inherit(DatabasePlayer, Player)
 registerElementClass("player", Player)
 
 function Player:constructor()
-  self:setDimension(PRIVATE_DIMENSION_SERVER)
-  self:setCameraTarget(self)
-  self:fadeCamera(true)
-  self:setFrozen(true)
-  self:setHudComponentVisible("all", false)
+	self:setDimension(PRIVATE_DIMENSION_SERVER)
+	self:setCameraTarget(self)
+	self:fadeCamera(true)
+	self:setFrozen(true)
+	self:setHudComponentVisible("all", false)
 
-  self.m_PrivateSync = {}
+	self.m_PrivateSync = {}
 	self.m_PrivateSyncUpdate = {}
-  self.m_SyncListener = {}
+	self.m_SyncListener = {}
 	self.m_PublicSync = {}
 	self.m_PublicSyncUpdate = {}
-  self.m_JoinTime = getTickCount()
-  self.m_ClientReady = false
-  self.m_JobPoints = 0
+	self.m_JoinTime = getTickCount()
+	self.m_ClientReady = false
+	self.m_JobPoints = 0
 end
 
 function Player:destructor()
-  if self:isLoggedIn() then
-    if not self:isGuest() then
-      self:save()
-    end
+	if self:isLoggedIn() then
+		if not self:isGuest() then
+			self:save()
+		end
 
-    if self:getGamemode() then
-      self:getGamemode():removePlayer(self)
-    end
+		if self:getGamemode() then
+			self:getGamemode():removePlayer(self)
+		end
 
-    delete(self.m_Account)
-  end
+		delete(self.m_Account)
+	end
 end
 
 function Player:loadCharacter()
 	if not self:getAccount() then return false end -- player is not loggedin
 
-  -- Reset Name
+	-- Reset Name
 	self:setName(self:getAccount():getName())
 
-  -- load stuff from DB
-  if not self:isGuest() then
-    self:load()
-  else
-    self:loadGuest()
-  end
+	-- load stuff from DB
+	if not self:isGuest() then
+		self:load()
+	else
+		self:loadGuest()
+	end
 
-  -- Load element related stuff
-  self:setHealth(self.m_Health)
-  self:setArmor(self.m_Armor)
-  self.m_Health, self.m_Armor = nil
+	-- Load element related stuff
+	self:setHealth(self.m_Health)
+	self:setArmor(self.m_Armor)
+	self.m_Health, self.m_Armor = nil
 
-  -- Sync important stuff
-  self:setPrivateSync("Id", self:getId())
-  self:setPrivateSync("joinTime", self:getJoinTime())
-  self:setPrivateSync("LastPlayTime", self.m_LastPlayTime)
-  self:setPrivateSync("isGuest", self.m_IsGuest)
+	-- Sync important stuff
+	self:setPrivateSync("Id", self:getId())
+	self:setPrivateSync("joinTime", self:getJoinTime())
+	self:setPrivateSync("LastPlayTime", self.m_LastPlayTime)
+	self:setPrivateSync("isGuest", self.m_IsGuest)
 
-  -- unfreeze the player
-  self:setFrozen(false)
+	-- unfreeze the player
+	self:setFrozen(false)
 
-  -- add the player to the lobby
-  GamemodeManager:getSingleton().getFromId(1):addPlayer(self)
+	-- add the player to the lobby
+	GamemodeManager:getSingleton().getFromId(1):addPlayer(self)
 end
 
 function Player:onInternalError(error, debugInfo)
-  local RayID = hash("sha1", getRealTime().timestamp)
-  --("%s->%s:%s(%s)"):format(debugInfo.what, debugInfo.source, debugInfo.currentline, debugInfo.linedefined)
-  core:logError(RayID, error, debugInfo or debug.getinfo(2), self)
-  self:kick("System - Player", ("Internal Error! Hash: %s - Ray ID: %s"):format(error, RayID:sub(1,8)))
+	local RayID = hash("sha1", getRealTime().timestamp)
+	--("%s->%s:%s(%s)"):format(debugInfo.what, debugInfo.source, debugInfo.currentline, debugInfo.linedefined)
+	core:logError(RayID, error, debugInfo or debug.getinfo(2), self)
+	self:kick("System - Player", ("Internal Error! Hash: %s - Ray ID: %s"):format(error, RayID:sub(1,8)))
 end
 
 function Player:setPrivateSync(key, value)
@@ -135,7 +135,7 @@ function Player:sendInitialSync()
 end
 
 function Player:triggerLatentEvent(...)
-  return triggerLatentClientEvent(self, ...)
+	return triggerLatentClientEvent(self, ...)
 end
 
 -- Short getters
@@ -155,6 +155,6 @@ function Player:setJobPoints(jpoints) self.m_JobPoints = jpoints if self:isActiv
 
 -- Increment functions
 function Player:incrementJobPoints(incrementAmount)
-  self.m_JobPoints = self.m_JobPoints + (incrementAmount or 1)
-  if self:isActive() then self:setPublicSync("JobPoints", self.m_JobPoints) end
+	self.m_JobPoints = self.m_JobPoints + (incrementAmount or 1)
+	if self:isActive() then self:setPublicSync("JobPoints", self.m_JobPoints) end
 end
