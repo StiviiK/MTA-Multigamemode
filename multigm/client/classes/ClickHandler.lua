@@ -18,54 +18,54 @@ function ClickHandler:constructor()
 	self.m_DrawCursor = false
 
 	addEventHandler("onClientClick", root,
-		function(button, state, absoluteX, absoluteY, worldX, worldY, worldZ, element)
-			if state == "up" then
-				self.m_ClickInfo = {button = button, absoluteX = absoluteX, absoluteY = absoluteY, element = element}
-			end
+	function(button, state, absoluteX, absoluteY, worldX, worldY, worldZ, element)
+		if state == "up" then
+			self.m_ClickInfo = {button = button, absoluteX = absoluteX, absoluteY = absoluteY, element = element}
 		end
+	end
 	)
 
 	addEventHandler("onClientCursorMove", root,
-		function(cursorX, cursorY, absX, absY, worldX, worldY, worldZ)
-			-- Do not draw if cursor is not visible and is not on top of any GUI element
-			if not isCursorShowing() or GUIElement.getHoveredElement() then
-				self.m_DrawCursor = false
-				Cursor.m_DrawCursor = true
-				return
-			end
-
-			local element = getElementBehindCursor(worldX, worldY, worldZ)
-			if not element then
-				self.m_DrawCursor = false
-				Cursor.m_DrawCursor = true
-				return
-			end
-
-			local clickInfo = {button = "left", absoluteX = absX, absoluteY = absY, element = element}
-
-			-- ClickHandler:dispatchClick returns true if there is a special mouse event available, false otherwise
-			self.m_DrawCursor = self:dispatchClick(clickInfo)
-			if self.m_DrawCursor then
-				Cursor.m_DrawCursor = false
-			else
-				Cursor.m_DrawCursor = true
-			end
+	function(cursorX, cursorY, absX, absY, worldX, worldY, worldZ)
+		-- Do not draw if cursor is not visible and is not on top of any GUI element
+		if not isCursorShowing() or GUIElement.getHoveredElement() then
+			self.m_DrawCursor = false
+			Cursor.m_DrawCursor = true
+			return
 		end
+
+		local element = getElementBehindCursor(worldX, worldY, worldZ)
+		if not element then
+			self.m_DrawCursor = false
+			Cursor.m_DrawCursor = true
+			return
+		end
+
+		local clickInfo = {button = "left", absoluteX = absX, absoluteY = absY, element = element}
+
+		-- ClickHandler:dispatchClick returns true if there is a special mouse event available, false otherwise
+		self.m_DrawCursor = self:dispatchClick(clickInfo)
+		if self.m_DrawCursor then
+			Cursor.m_DrawCursor = false
+		else
+			Cursor.m_DrawCursor = true
+		end
+	end
 	)
 
 	addEventHandler("onClientRender", root,
-		function()
-			if self.m_DrawCursor then
-				local cx, cy = getCursorPosition()
+	function()
+		if self.m_DrawCursor then
+			local cx, cy = getCursorPosition()
 
-				if cx then
-					-- Convert relative coordinates to absolute ones
-					cx, cy = cx * screenWidth, cy * screenHeight
+			if cx then
+				-- Convert relative coordinates to absolute ones
+				cx, cy = cx * screenWidth, cy * screenHeight
 
-					dxDrawImage(cx-18/2, cy-32/2, 24, 24, "res/images/GUI/Mouse.png", 0, 0, 0, Color.White, true)
-				end
+				dxDrawImage(cx-18/2, cy-32/2, 24, 24, "res/images/GUI/Mouse.png", 0, 0, 0, Color.White, true)
 			end
 		end
+	end
 	)
 end
 
@@ -149,7 +149,7 @@ function ClickHandler:dispatchClick(clickInfo, trigger)
 		return true
 	end
 
-		-- Phase 4: 
+	-- Phase 4:
 
 	if self.m_ElementMenu[element]  then
 		if self.m_ElementMenu[element]["Gamemode"] == localPlayer:getGamemode() then
@@ -161,8 +161,8 @@ function ClickHandler:dispatchClick(clickInfo, trigger)
 			return true
 		end
 	end
-	
-	
+
+
 	return false
 end
 
@@ -172,11 +172,11 @@ function ClickHandler:addMouseMenu(menu, element)
 end
 
 function ClickHandler:addElementMenu(Gamemode,menu, element)
-self.m_ElementMenu[element] = {["Gamemode"] = Gamemode,["Menu"] = menu}
+	self.m_ElementMenu[element] = {["Gamemode"] = Gamemode,["Menu"] = menu}
 end
 
 function ClickHandler:RemoveElementMenu(Gamemode,element)
-self.m_ElementMenu[element] = false
+	self.m_ElementMenu[element] = false
 end
 
 
@@ -185,8 +185,8 @@ function ClickHandler:clearMouseMenus()
 		delete(menu)
 	end
 	self.m_OpenMenus = {}
-		
-	    for k, Element in ipairs(self.m_ElementMenu) do
-         ----TODO
-        end
+
+	for k, Element in ipairs(self.m_ElementMenu) do
+		----TODO
+	end
 end

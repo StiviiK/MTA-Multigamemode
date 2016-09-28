@@ -5,32 +5,32 @@ ASPECT_RATIO_MULTIPLIER = (screenWidth/screenHeight)/1.8
 LOREM_IPSUM = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
 
 HelpTexts = {
-  General = {
-    Main = {
-      title = "vMultigamemode";
-      text = "vMultigamemode ist ein moderner Multigamemode, dieser wird von StiviK geschrieben und/n/administriert. Das Ziel dieses MG ist es viele verschiedene und aber auch im Typ verschiedene Gamemodes zusammen zu bringen, somit ist von Race bis DM alles dabei! Die einzelnen Gamemodes werden aber auch von anderen Spielern aus der Community, geschrieben und/n/administriert! Dieses Projekt wird verwaltet via GIT auf GitLab.com. Das Projekt befindet sich seit ca. September 2015 in Entwicklung, und wird auch immernoch weiterhin weiter Entwickelt. Die aktuelle Version ist derzeit %s./n//n/Beteiligte Entwickler:/n/vMG-Kern: StiviK/n/Cops'n'Robbers: Piccolo/n/Renegade Squad: StiviK";
-      format = {VERSION_LABEL:gsub("vMultigamemode ", "")};
+    General = {
+        Main = {
+            title = "vMultigamemode";
+            text = "vMultigamemode ist ein moderner Multigamemode, dieser wird von StiviK geschrieben und/n/administriert. Das Ziel dieses MG ist es viele verschiedene und aber auch im Typ verschiedene Gamemodes zusammen zu bringen, somit ist von Race bis DM alles dabei! Die einzelnen Gamemodes werden aber auch von anderen Spielern aus der Community, geschrieben und/n/administriert! Dieses Projekt wird verwaltet via GIT auf GitLab.com. Das Projekt befindet sich seit ca. September 2015 in Entwicklung, und wird auch immernoch weiterhin weiter Entwickelt. Die aktuelle Version ist derzeit %s./n//n/Beteiligte Entwickler:/n/vMG-Kern: StiviK/n/Cops'n'Robbers: Piccolo/n/Renegade Squad: StiviK";
+            format = {VERSION_LABEL:gsub("vMultigamemode ", "")};
+        };
+        FastLobby = {
+            title = "Quick-Lobby";
+            text = LOREM_IPSUM;
+        };
     };
-    FastLobby = {
-      title = "Quick-Lobby";
-      text = LOREM_IPSUM;
+    Game = {
+        AccountType = {
+            title = "Account-Typ";
+            text = LOREM_IPSUM
+        };
+        JobPoints = {
+            title = "Job-Points";
+            text = LOREM_IPSUM
+        };
     };
-  };
-  Game = {
-    AccountType = {
-      title = "Account-Typ";
-      text = LOREM_IPSUM
-    };
-    JobPoints = {
-      title = "Job-Points";
-      text = LOREM_IPSUM
-    };
-  };
-  Gamemodes = {--[[The Gamemodes are adding their help text by it self]]};
-  SelfGUI = {
-    TabSession = {
-      title = "";
-      text = "Dieser Tab dient legedlich dazu Information, welche in deiner Session gespeichert werden anzuzeigen. Die Session dient dazu um Live-Informationen im ControlPanel abzufragen und anzuzeigen! Aber dies ermöglicht dir auch, detailierte Statistiken anzuzeigen lassen.";
+    Gamemodes = {--[[The Gamemodes are adding their help text by it self]]};
+    SelfGUI = {
+        TabSession = {
+            title = "";
+            text = "Dieser Tab dient legedlich dazu Information, welche in deiner Session gespeichert werden anzuzeigen. Die Session dient dazu um Live-Informationen im ControlPanel abzufragen und anzuzeigen! Aber dies ermöglicht dir auch, detailierte Statistiken anzuzeigen lassen.";
+        }
     }
-  }
 }
