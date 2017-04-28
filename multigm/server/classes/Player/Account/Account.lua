@@ -3,32 +3,81 @@ Account.Map = {}
 
 function Account.login(player, username, password)
 	if player:getAccount() then return false end
-  	if (not username or not password) then return false end
+	if (not username or not password) then return false end
 
-    local row = sql:asyncQueryFetchSingle("SELECT Id, PublicKey FROM ??_account WHERE Name = ? ", sql:getPrefix(), username)
-    if not row or not row.Id then
-  		-- Error: Invalid username
-  		return false
-  	end
+	if not username:match("^[a-zA-Z0-9_.%[%]]*$") then
+		--player:triggerEvent("loginfailed", "Ungültiger Nickname. Bitte melde dich bei einem Admin!")
+		outputDebug("Ungültiger Nickname. Bitte melde dich bei einem Admin!")
+		return false
+	end
 
-    local row = sql:asyncQueryFetchSingle("SELECT Id, Name, Type FROM ??_account WHERE Id = ? AND Password = ?;", sql:getPrefix(), row.Id, hash("sha256", teaEncode(password, row.PublicKey)))
-    if not row or not row.Id then
-    	-- Error: Wrong Password
-    	return false
-    end
+	-- Ask SQL to fetch ForumID
+	vrp:queryFetchSingle(Async.waitFor(self), ("SELECT Id, ForumID, Name, RegisterDate FROM ??_account WHERE %s = ?"):format(username:find("@") and "email" or "Name"), vrp:getPrefix(), username)
+	local row = Async.wait()
+	if not row or not row.Id then
+		--player:triggerEvent("loginfailed", "Fehler: Spieler nicht gefunden!")
 
-    if DatabasePlayer.getFromId(row.Id) then
-      -- Error: Already in use
-    	return false
-  	end
+		-- NO VRP Account!
+		outputDebug("Fehler: Spieler nicht gefunden!")
+		return
+	end
 
-    -- Update last serial and last login
-  	sql:queryExec("UPDATE ??_account SET LastSerial = ?, LastLogin = NOW() WHERE Id = ?", sql:getPrefix(), player:getSerial(), row.Id)
+	local Id = row.Id
+	local ForumID = row.ForumID
+	local Username = row.Name
+	local RegisterDate = row.RegisterDate
 
-    player.m_Account = Account:new(row.Id, row.Name, row.Type, player, false)
-    player:loadCharacter()
+	-- Ask SQL to fetch the password from forum
+	board:queryFetchSingle(Async.waitFor(self), "SELECT password, registrationDate FROM wcf1_user WHERE userID = ?", ForumID)
+	local row = Async.wait()
+	if not row or not row.password then
+		--player:triggerEvent("loginfailed", "Fehler: Falscher Name oder Passwort") -- "Error: Invalid username or password"
+		outputDebug("Fehler: Falscher Name oder Passwort")
+		return false
+	end
+
+	if false --[[pwhash]] then
+		if pwhash == row.password then
+			Account.loginSuccess(player, Id, Username, ForumID, RegisterDate, pwhash)
+		else
+			player:triggerEvent("loginfailed", "Fehler: Falscher Name oder Passwort") -- Error: Invalid username or password2
+			return false
+		end
+	else
+		local param = {["userId"] = ForumID; ["password"] = password;}
+		local data, errno = Account.asyncCallAPI("checkPassword", toJSON(param))
+		if errno == 0 then
+			local returnData = fromJSON(data)
+			if not returnData then outputConsole(data, player) return end
+			if returnData.error then
+				--player:triggerEvent("loginfailed", "Fehler: "..returnData.error)
+				outputDebug("Fehler: "..returnData.error)
+				return false
+			end
+			if returnData.login == true then
+				--Account.loginSuccess(player, Id, Username, ForumID, RegisterDate, row.password)
+				sql:queryFetchSingle(Async.waitFor(self), "SELECT * FROM ??_character WHERE Id = ?", sql:getPrefix(), Id)
+				local row = Async.wait()
+				if not row then
+					Account.createCharacter(Id)
+				end
+
+				player.m_Account = Account:new(Id, Username, ACCOUNTTYPE.GOD, player, false)
+    			player:loadCharacter()
+				outputDebug("LOGIN SUCCESS!")
+			else
+				--player:triggerEvent("loginfailed", "Fehler: Unbekannter Fehler")
+				outputDebug("Fehler: Unbekannter Fehler")
+			end
+		else
+			outputDebugString("Error@FetchRemote: "..errno)
+		end
+	end
+
+    --player.m_Account = Account:new(row.Id, row.Name, row.Type, player, false)
+    --player:loadCharacter()
 end
-RPC:registerFunc("accountlogin", function (client, ...) Async.create(Account.login)(client, ...) end)
+RPC:registerFunc("accountlogin", Async.create(Account.login))
 --addEvent("accountlogin", true)
 --addEventHandler("accountlogin", root, function(...) Async.create(Account.login)(client, ...) end)
 
@@ -42,6 +91,7 @@ triggerServerEvent("accountlogin", localPlayer, "ACCOUNT", hash("sha256", teaEnc
 drun Async.create(function () Account.login(getRandomPlayer(), "StiviK", hash("sha256", teaEncode("krassespasswort", "mta"))) end)()
 ]]
 
+--[[
 function Account.register(player, accountname, password)
 	if player:getAccount() then return false end
 	if (not accountname or not password) then return false end
@@ -75,13 +125,13 @@ RPC:registerFunc("accountregister", function (client, ...) Async.create(Account.
 --addEvent("accountregister", true)
 --addEventHandler("accountregister", root, function (...) Async.create(Account.register)(client, ...) end)
 
---[[
+
 CLIENT: (client sends already hashed (with PRIVATE_KEY) password!)
 
 local password = "krassespasswort"
 local PRIVATE_KEY = "mta"
 triggerServerEvent("accountregister", localPlayer, "ACCOUNT", hash("sha256", teaEncode(password, PRIVATE_KEY)))
-]]
+--]]
 
 function Account.guest(player)
 	if player:getAccount() then return false end
@@ -94,11 +144,22 @@ function Account.getFromId(id)
 	return Account.Map[id]
 end
 
+function Account.createCharacter(id)
+	-- Create Character
+	sql:queryExec("INSERT INTO ??_character (Id, Rank, Locale, Skin, XP, Money, PlayTime) VALUES (?, ?, 'en', 0, 0, 1, 0);", sql:getPrefix(), id, RANK.User)
+
+	-- Create FriendId
+	--local FriendId = genFriendId(id, accountname)
+	--sql:queryExec("INSERT INTO ??_friends (Id, Name, Friends) VALUES (?, ?, '[ [ ] ]');", sql:getPrefix(), FriendId, accountname)
+	--sql:queryExec("UPDATE ??_character SET FriendId = ? WHERE Id = ?;", sql:getPrefix(), FriendId, id)
+end
+
 function Account:constructor(id, username, type, player, guest)
 	-- Account Information
 	self.m_Id = id
 	self.m_Username = username
 	self.m_Player = player
+	outputDebug(type)
 	self.m_Type = type
 	player.m_Account = self
 	player.m_IsGuest = guest
@@ -136,4 +197,9 @@ end
 
 function Account:getType()
 	return self.m_Type
+end
+
+function Account.asyncCallAPI(func, postData)
+	fetchRemote(("https://exo-reallife.de/ingame/userApi/api.php?func=%s"):format(func), 1, Async.waitFor(), postData, false)
+	return Async.wait()
 end

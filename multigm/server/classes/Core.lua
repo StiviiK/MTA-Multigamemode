@@ -29,8 +29,11 @@ function Core:constructor ()
 		MYSQL_DB = "multigm_develop"
 	end
 
-	sql = MySQL:new(MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PW, MYSQL_DB, "")
+	sql = MySQL:new(MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PW, MYSQL_DB, MYSQL_SOCKET)
 	sql:setPrefix("multigm")
+	vrp = MySQL:new(MYSQL_HOST, MYSQL_PORT, "vRP", "kmd1581adf%%f", "vRP", MYSQL_SOCKET)
+	vrp:setPrefix("vrp")
+	board = MySQL:new(MYSQL_HOST, MYSQL_PORT, "vRP", "kmd1581adf%%f", "exo_wbb_vrp", MYSQL_SOCKET)
 
 	-- Instantiate TranslationManager
 	TranslationManager:new()
