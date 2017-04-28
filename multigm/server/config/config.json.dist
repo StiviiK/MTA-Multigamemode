@@ -1,0 +1,31 @@
+{
+  "mysql": {
+    "main": {
+      "host": "87.98.241.93",
+      "port": 6033,
+      "username": "multigm",
+      "password": "multigm",
+      "database": "multigm",
+      "socket": "/var/run/mysqld/mysqld.sock",
+	  "prefix": "multigm"
+    },
+    "board": {
+      "host": "87.98.241.93",
+      "port": 6033,
+      "username": "vRP",
+      "password": "kmd1581adf%%f",
+      "database": "exo_wbb_vrp",
+      "socket": "/var/run/mysqld/mysqld.sock",
+	  "prefix": null
+    },
+    "vrp": {
+      "host": "87.98.241.93",
+      "port": 6033,
+      "username": "vrp_public",
+      "password": "8!Q3PYP&z@?WZg&X",
+      "database": "vrp_public",
+      "socket": "/var/run/mysqld/mysqld.sock",
+	  "prefix": "vrp"
+    }
+  }
+}

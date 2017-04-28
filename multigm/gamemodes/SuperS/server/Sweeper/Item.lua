@@ -1,8 +1,8 @@
 local Item = inherit(Object)
 
-function Item:constructor(type, ...)
+function Item:constructor(type)
   self.m_Type = type
-  self.m_Args = {...}
+  self.m_Data = {}
 end
 
 function Item:destructor()
@@ -22,7 +22,7 @@ function Item:use(sweeperInstance)
   elseif self.m_Type == SUPERS_ITEM_TYPE_ROCKET then
     triggerClientEvent(root, "fireSweeperRocket", root, sweeperInstance:getId())
   elseif self.m_Type == SUPERS_ITEM_TYPE_WEAPON then
-    sweeperInstance:changeWeapon(self.m_Args[1])
+    sweeperInstance:changeWeapon(self.m_Data["weapon"])
   elseif self.m_Type == SUPERS_ITEM_TYPE_MAGICCHEST then
     local magicItem = Item.getMagicItem()
     if magicItem == SUPERS_ITEM_MAGICCHEST_BURN_SELF then
@@ -34,7 +34,11 @@ function Item:use(sweeperInstance)
 end
 
 function Item:setType(type)
-  self.m_Type = type
+  	self.m_Type = type
+end
+
+function Item:setData(index, value)
+	self.m_Data[index] = value
 end
 
 function Item.getMagicItem()

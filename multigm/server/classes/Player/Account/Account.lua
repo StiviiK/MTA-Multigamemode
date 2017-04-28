@@ -55,14 +55,13 @@ function Account.login(player, username, password)
 				return false
 			end
 			if returnData.login == true then
-				--Account.loginSuccess(player, Id, Username, ForumID, RegisterDate, row.password)
-				sql:queryFetchSingle(Async.waitFor(self), "SELECT * FROM ??_character WHERE Id = ?", sql:getPrefix(), Id)
+				sql:queryFetchSingle(Async.waitFor(self), "SELECT 1 FROM ??_character WHERE Id = ?", sql:getPrefix(), Id)
 				local row = Async.wait()
 				if not row then
 					Account.createCharacter(Id)
 				end
 
-				player.m_Account = Account:new(Id, Username, ACCOUNTTYPE.GOD, player, false)
+				player.m_Account = Account:new(Id, Username, ACCOUNTTYPE.God, player, false)
     			player:loadCharacter()
 				outputDebug("LOGIN SUCCESS!")
 			else

@@ -21,6 +21,9 @@ function Sweeper:destructor()
   if self.m_Weapon then
     delete(self.m_Weapon)
   end
+  if self.m_Shader then
+  	delete(self.m_Shader)
+  end
 
   -- Stop Sweeper Lights
   self:disableSweeperLights()

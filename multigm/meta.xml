@@ -34,6 +34,7 @@
 			<script src="server/constants.lua" type="server"/>
 			<script src="server/utils.lua" type="server"/>
 			<script src="server/API.lua" type="server"/>
+			<script src="server/classes/Config.lua" type="server"/>
 			<script src="server/classes/Debugging.lua" type="server"/>
 			<script src="server/classes/Performance.lua" type="server"/>
 			<script src="server/classes/Storage/SQL.lua" type="server"/>
@@ -218,12 +219,12 @@
 			<script src="gamemodes/CS/client/Game_HUD.lua" type="client"/>
 			<script src="gamemodes/CS/client/TEST_GUI.lua" type="client"/>
 
-		
+
 	<!-- Counter-Strike Deathmatch-->
 			<!-- Shared -->
-			
+
 			<script src="gamemodes/CS/gamemodes/Deathmatch/DM_constants.lua" type="shared"/>
-			
+
 			<!-- Server -->
 
 			<script src="gamemodes/CS/gamemodes/Deathmatch/server/DM_Init_S.lua" type="server"/>
@@ -234,18 +235,18 @@
 
 			<script src="gamemodes/CS/gamemodes/Deathmatch/client/DM_Init_C.lua" type="client"/>
 			<script src="gamemodes/CS/gamemodes/Deathmatch/client/DM_Main_C.lua" type="client"/>
-			
-			
-			
-			
-			
-			
-		
-			
-			
-			
-			
-			
+
+
+
+
+
+
+
+
+
+
+
+
 	<!-- Cops'n'Robbers -->
 		<!-- Meta -->
 			<metafile src="gamemodes/CnR/meta.xml"/>

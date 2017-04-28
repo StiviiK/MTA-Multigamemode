@@ -9,6 +9,8 @@ function Core:constructor ()
 	self.ms_StartTime = getRealTime().timestamp
 	self.ms_StartTick = getTickCount()
 
+	-- Load config
+	Config:new()
 
 	if USE_REMOTE_API then
 		-- Instantiate API
@@ -24,16 +26,12 @@ function Core:constructor ()
 	end
 
 	-- Establish database connection
-	if not IS_TESTSERVER then
-		MYSQL_PW = ""
-		MYSQL_DB = "multigm_develop"
-	end
-
-	sql = MySQL:new(MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PW, MYSQL_DB, MYSQL_SOCKET)
-	sql:setPrefix("multigm")
-	vrp = MySQL:new(MYSQL_HOST, MYSQL_PORT, "vRP", "kmd1581adf%%f", "vRP", MYSQL_SOCKET)
-	vrp:setPrefix("vrp")
-	board = MySQL:new(MYSQL_HOST, MYSQL_PORT, "vRP", "kmd1581adf%%f", "exo_wbb_vrp", MYSQL_SOCKET)
+	sql = MySQL:new(Config.get('mysql')['main']['host'], Config.get('mysql')['main']['port'], Config.get('mysql')['main']['username'], Config.get('mysql')['main']['password'], Config.get('mysql')['main']['database'], Config.get('mysql')['main']['socket'])
+	sql:setPrefix(Config.get('mysql')['main']['prefix'])
+	vrp = MySQL:new(Config.get('mysql')['vrp']['host'], Config.get('mysql')['vrp']['port'], Config.get('mysql')['vrp']['username'], Config.get('mysql')['vrp']['password'], Config.get('mysql')['vrp']['database'], Config.get('mysql')['vrp']['socket'])
+	vrp:setPrefix(Config.get('mysql')['vrp']['prefix'])
+	board = MySQL:new(Config.get('mysql')['board']['host'], Config.get('mysql')['vrp']['port'], Config.get('mysql')['board']['username'], Config.get('mysql')['board']['password'], Config.get('mysql')['board']['database'], Config.get('mysql')['board']['socket'])
+	board:setPrefix(Config.get('mysql')['board']['prefix'])
 
 	-- Instantiate TranslationManager
 	TranslationManager:new()

@@ -68,21 +68,21 @@ function ItemManager:destructor()
 end
 
 function ItemManager.getRandomType()
-  if chance(50) then
-    return SUPERS_ITEM_TYPE_BOOST
-  elseif chance(50) then
-    return SUPERS_ITEM_TYPE_JUMP
-  elseif chance(50) then
-    return SUPERS_ITEM_TYPE_REPAIR
-  elseif chance(25) then
-    return SUPERS_ITEM_TYPE_ROCKET
-  elseif chance(25) then
+  --if chance(50) then
+  --  return SUPERS_ITEM_TYPE_BOOST
+  --elseif chance(50) then
+  --  return SUPERS_ITEM_TYPE_JUMP
+  --elseif chance(50) then
+  --  return SUPERS_ITEM_TYPE_REPAIR
+  --elseif chance(25) then
+  --  return SUPERS_ITEM_TYPE_ROCKET
+  --elseif chance(25) then
     return SUPERS_ITEM_TYPE_WEAPON
-  elseif chance(25) then
-    return SUPERS_ITEM_TYPE_MAGICCHEST
-  end
+  --elseif chance(25) then
+  --  return SUPERS_ITEM_TYPE_MAGICCHEST
+  --end
 
-  return SUPERS_ITEM_TYPE_NOTHING
+  --return SUPERS_ITEM_TYPE_NOTHING
 end
 
 function ItemManager:spawnItems()
@@ -96,25 +96,26 @@ function ItemManager:createPickup(index, pos, ItemType)
   local model = 1337
   local weaponId = 0
 
-  if ItemType == SUPERS_ITEM_TYPE_BOOST then -- 25% (25%)
+  if ItemType == SUPERS_ITEM_TYPE_BOOST then
     model = 2977
-  elseif ItemType == SUPERS_ITEM_TYPE_JUMP then -- 25% (50%)
+  elseif ItemType == SUPERS_ITEM_TYPE_JUMP then
     model = 2977
-  elseif ItemType == SUPERS_ITEM_TYPE_REPAIR then -- 25% (75%)
+  elseif ItemType == SUPERS_ITEM_TYPE_REPAIR then
     model = 2977
-  elseif ItemType == SUPERS_ITEM_TYPE_ROCKET then -- 10% (85%)
+  elseif ItemType == SUPERS_ITEM_TYPE_ROCKET then
     model = 359
-  elseif ItemType == SUPERS_ITEM_TYPE_WEAPON then -- 7.5% (92.5%)
+  elseif ItemType == SUPERS_ITEM_TYPE_WEAPON then
     local weapon = table.random(WEAPONS)
     model = weapon.Model
     weaponId = weapon.Id
-  elseif ItemType == SUPERS_ITEM_TYPE_MAGICCHEST then -- 7.5% (100%)
+  elseif ItemType == SUPERS_ITEM_TYPE_MAGICCHEST then
     model = 980
-  elseif ItemType == SUPERS_ITEM_TYPE_NOTHING then -- create no item
+  elseif ItemType == SUPERS_ITEM_TYPE_NOTHING then
     model = 1337
   end
 
-  self.m_Items[index].Item = SuperS.Sweeper.Item:new(ItemType, weaponId)
+  self.m_Items[index].Item = SuperS.Sweeper.Item:new(ItemType)
+  self.m_Items[index].Item:setData("weapon", weaponId)
   self.m_Items[index].Pickup = createPickup(pos, 3, model, 99999999)
   self.m_Items[index].Pickup:setDimension(SuperS:getInstance():getDimension())
   self.m_Items[index].Pickup.index = index
@@ -139,31 +140,40 @@ end
 
 function ItemManager:changePickup(index, ItemType)
   if not self.m_Items[index] then return end
-  if not isElement(self.m_Items[index].Pickup) then return end
+  local pos = self.m_Items[index].Pickup:getPosition()
+
+  -- delete old item
+  self:destroyPickup(index)
+
+  -- create new item
+  self:createPickup(index, pos, ItemType)
+
+  --[[
   local item = self.m_Items[index]
   local model = 1337
   local weaponId = 0
 
-  if ItemType == SUPERS_ITEM_TYPE_BOOST then -- 25% (25%)
+  if ItemType == SUPERS_ITEM_TYPE_BOOST then
     model = 2977
-  elseif ItemType == SUPERS_ITEM_TYPE_JUMP then -- 25% (50%)
+  elseif ItemType == SUPERS_ITEM_TYPE_JUMP then
     model = 2977
-  elseif ItemType == SUPERS_ITEM_TYPE_REPAIR then -- 25% (75%)
+  elseif ItemType == SUPERS_ITEM_TYPE_REPAIR then
     model = 2977
-  elseif ItemType == SUPERS_ITEM_TYPE_ROCKET then -- 10% (85%)
+  elseif ItemType == SUPERS_ITEM_TYPE_ROCKET then
     model = 359
-  elseif ItemType == SUPERS_ITEM_TYPE_WEAPON then -- 7.5% (92.5%)
+  elseif ItemType == SUPERS_ITEM_TYPE_WEAPON then
     local weapon = table.random(WEAPONS)
     model = weapon.Model
     weaponId = weapon.Id
-  elseif ItemType == SUPERS_ITEM_TYPE_MAGICCHEST then -- 7.5% (100%)
+  elseif ItemType == SUPERS_ITEM_TYPE_MAGICCHEST then
     model = 980
-  elseif ItemType == SUPERS_ITEM_TYPE_NOTHING then -- create no item
+  elseif ItemType == SUPERS_ITEM_TYPE_NOTHING then
     model = 1337
   end
 
   self.m_Items[index].Item:setType(ItemType, weaponId)
   self.m_Items[index].Pickup:setType(3, model)
+  --]]
 end
 
 function ItemManager:Event_OnPickupHit(hitElement)
