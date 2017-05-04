@@ -45,6 +45,9 @@ function Core:ready()
 end
 
 function Core:afterLogin()
+	-- Load 3DGUIs
+	GUIForm3D.load()
+
 	-- Instantiate classes
 	HelpBar:new()
 

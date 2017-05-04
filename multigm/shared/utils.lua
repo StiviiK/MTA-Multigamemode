@@ -296,3 +296,7 @@ function chance(chance)
 	assert(chance >= 0 and chance <= 100, "Bad Chance (Range 0-100)")
 	return math.random(0, 100) <= chance
 end
+
+function nextframe(fn, ...)
+	setTimer(fn, 50, 1, ...)
+end

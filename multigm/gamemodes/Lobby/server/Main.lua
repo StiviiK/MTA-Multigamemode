@@ -31,6 +31,7 @@ end
 function Lobby:onDownloadComplete()
   -- spawn the player
   local spawn = self:getSetting("Spawn")
+  --client:setPosition(111.102, 1041.046, 13.609)
   client:setPosition(spawn.Position)
   client:setRotation(0, 0, spawn.Rotation)
   client:setInterior(spawn.Interior)

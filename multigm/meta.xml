@@ -5,6 +5,7 @@
 
 	<!-- Main -->
 		<!-- Shared -->
+			<script src="MTATD.bundle.lua" type="shared"/>
 			<script src="shared/classlib.lua" type="shared"/>
 			<script src="shared/utils.lua" type="shared"/>
 			<script src="shared/classes/Object.lua" type="shared"/>
@@ -21,6 +22,7 @@
 			<script src="shared/constants.lua" type="shared"/>
 			<script src="shared/debug.lua" type="shared"/>
 			<script src="shared/async.lua" type="shared"/>
+			<script src="shared/math.lua" type="shared"/>
 			<script src="shared/classes/TimedPulse.lua" type="shared"/>
 			<script src="shared/classes/POParser.lua" type="shared"/>
 			<script src="shared/classes/TranslationManager.lua" type="shared"/>
@@ -145,6 +147,7 @@
 				<script src="client/classes/GUIForms/DownloadBar.lua" type="client"/>
 				<script src="client/classes/GUIForms/GamemodeInfo.lua" type="client"/>
 				<script src="client/classes/GUIForms/FastLobby.lua" type="client"/>
+				<script src="client/classes/GUIForms/3DGUITest.lua" type="client"/>
 
 					<!-- Mouse Menus -->
 					<script src="client/classes/GUIForms/MouseMenu/GamemodePedMouseMenu.lua" type="client"/>
